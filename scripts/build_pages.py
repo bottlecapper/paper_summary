@@ -3,19 +3,42 @@
 
 import argparse
 from html import escape
+from html.parser import HTMLParser
 from pathlib import Path
-import re
 import shutil
 
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def link_target(cell):
-    match = re.search(r"\[[^\]]+\]\(([^)]+)\)", cell)
-    if match is None:
-        raise ValueError(f"Expected a Markdown link in {cell!r}")
-    return match.group(1)
+class PaperTable(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.rows = []
+        self.row = []
+        self.cell = None
+
+    def handle_starttag(self, tag, attrs):
+        if tag == "tr":
+            self.row = []
+        elif tag == "td":
+            self.cell = {"text": "", "href": None}
+        elif tag == "a" and self.cell is not None:
+            self.cell["href"] = dict(attrs).get("href")
+        elif tag == "br" and self.cell is not None:
+            self.cell["text"] += "\n"
+
+    def handle_data(self, data):
+        if self.cell is not None:
+            self.cell["text"] += data
+
+    def handle_endtag(self, tag):
+        if tag == "td" and self.cell is not None:
+            self.cell["text"] = self.cell["text"].strip()
+            self.row.append(self.cell)
+            self.cell = None
+        elif tag == "tr" and self.row:
+            self.rows.append(self.row)
 
 
 def anchor(url, label):
@@ -24,14 +47,15 @@ def anchor(url, label):
 
 def build(output):
     readme = (ROOT / "README.md").read_text()
-    table = readme.split("## Existing Paper Summaries\n\n", 1)[1].split("\n\n", 1)[0]
+    table = readme.split("## Existing Paper Summaries\n\n", 1)[1].split("</table>", 1)[0] + "</table>"
+    parsed = PaperTable()
+    parsed.feed(table)
+    if not parsed.rows:
+        raise ValueError("No papers found in the README summary table")
     rows = []
     files = set()
-    for line in table.splitlines()[2:]:
-        benchmark, author, published, paper, summary = (
-            cell.strip() for cell in line.strip().strip("|").split("|")
-        )
-        markdown_path = Path(link_target(summary))
+    for benchmark, author, published, paper, summary, _ in parsed.rows:
+        markdown_path = Path(summary["href"])
         if markdown_path.parent != Path("summary") or markdown_path.suffix != ".md":
             raise ValueError(f"Expected a Markdown summary path: {markdown_path}")
         summary_path = Path("html") / markdown_path.with_suffix(".html").name
@@ -41,10 +65,11 @@ def build(output):
         if (ROOT / audit_path).is_file():
             files.add(audit_path)
             audit = anchor(audit_path.as_posix(), "Audit")
-        institutions = "<br>".join(escape(part.strip()) for part in re.split(r"<br\s*/?>", author, flags=re.IGNORECASE))
-        cells = [escape(benchmark), institutions, escape(published),
-                 anchor(link_target(paper), re.search(r"\[([^\]]+)\]", paper).group(1)),
-                 anchor(summary_path.as_posix(), "Read summary"), audit]
+        institutions = "<br>".join(escape(part.strip()) for part in author["text"].splitlines())
+        markdown_url = "https://github.com/bottlecapper/paper_summary/blob/main/" + markdown_path.as_posix()
+        cells = [escape(benchmark["text"]), institutions, escape(published["text"]),
+                 anchor(paper["href"], paper["text"]),
+                 anchor(markdown_url, "Markdown"), anchor(summary_path.as_posix(), "HTML"), audit]
         rows.append("<tr>" + "".join(f"<td>{cell}</td>" for cell in cells) + "</tr>")
 
     extras = [
@@ -96,7 +121,7 @@ def build(output):
     <p>Concise summaries of AI benchmark papers, with source excerpts and highlight audits.</p>
     <div class="table-scroll">
       <table>
-        <thead><tr><th>Benchmark</th><th>Author Lab</th><th>Published</th><th>Paper</th><th>Summary</th><th>Highlights</th></tr></thead>
+        <thead><tr><th>Benchmark</th><th>Author Lab</th><th>Published</th><th>Paper</th><th colspan="2">Summary</th><th>Highlights</th></tr></thead>
         <tbody>__ROWS__</tbody>
       </table>
     </div>

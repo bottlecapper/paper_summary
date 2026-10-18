@@ -2,13 +2,16 @@
 
 ## Existing Paper Summaries
 
-| Benchmark | Author Lab | Published | Paper | Summary |
-| --- | --- | --- | --- | --- |
-| DeepSWE | Datacurve | Jul 2026 | [312](https://arxiv.org/abs/2607.07946v1) | [Markdown](summary/312_deepswe.md) · [HTML](https://bottlecapper.github.io/paper_summary/html/312_deepswe.html) |
-| AutomationBench | Zapier | Apr 2026 | [313](https://arxiv.org/abs/2604.18934) | [Markdown](summary/313_automationbench.md) · [HTML](https://bottlecapper.github.io/paper_summary/html/313_automationbench.html) |
-| Terminal-Bench 2.0 | Stanford University, Laude Institute | Jan 2026 | [314](https://arxiv.org/abs/2601.11868) | [Markdown](summary/314_terminal_bench.md) · [HTML](https://bottlecapper.github.io/paper_summary/html/314_terminal_bench.html) |
-| GDPval | OpenAI | Oct 2025 | [315](https://arxiv.org/abs/2510.04374v1) | [Markdown](summary/315_gdpval.md) · [HTML](https://bottlecapper.github.io/paper_summary/html/315_gdpval.html) |
-| OSWorld 2.0 | XLANG Lab | Jun 2026 | [316](https://arxiv.org/abs/2606.29537v2) | [Markdown](summary/316_osworld_2_0.md) · [HTML](https://bottlecapper.github.io/paper_summary/html/316_osworld_2_0.html) |
+<table>
+<thead><tr><th>Benchmark</th><th>Author Lab</th><th>Published</th><th>Paper</th><th colspan="2">Summary</th></tr></thead>
+<tbody>
+<tr><td>DeepSWE</td><td>Datacurve</td><td>Jul 2026</td><td><a href="https://arxiv.org/abs/2607.07946v1">312</a></td><td><a href="summary/312_deepswe.md">Markdown</a></td><td><a href="https://bottlecapper.github.io/paper_summary/html/312_deepswe.html">HTML</a></td></tr>
+<tr><td>AutomationBench</td><td>Zapier</td><td>Apr 2026</td><td><a href="https://arxiv.org/abs/2604.18934">313</a></td><td><a href="summary/313_automationbench.md">Markdown</a></td><td><a href="https://bottlecapper.github.io/paper_summary/html/313_automationbench.html">HTML</a></td></tr>
+<tr><td>Terminal-Bench 2.0</td><td>Stanford University, Laude Institute</td><td>Jan 2026</td><td><a href="https://arxiv.org/abs/2601.11868">314</a></td><td><a href="summary/314_terminal_bench.md">Markdown</a></td><td><a href="https://bottlecapper.github.io/paper_summary/html/314_terminal_bench.html">HTML</a></td></tr>
+<tr><td>GDPval</td><td>OpenAI</td><td>Oct 2025</td><td><a href="https://arxiv.org/abs/2510.04374v1">315</a></td><td><a href="summary/315_gdpval.md">Markdown</a></td><td><a href="https://bottlecapper.github.io/paper_summary/html/315_gdpval.html">HTML</a></td></tr>
+<tr><td>OSWorld 2.0</td><td>XLANG Lab</td><td>Jun 2026</td><td><a href="https://arxiv.org/abs/2606.29537v2">316</a></td><td><a href="summary/316_osworld_2_0.md">Markdown</a></td><td><a href="https://bottlecapper.github.io/paper_summary/html/316_osworld_2_0.html">HTML</a></td></tr>
+</tbody>
+</table>
 
 Published month refers to the paper's first arXiv submission. Paper links point to the versions used by the summaries, where specified.
 
