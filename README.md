@@ -38,25 +38,13 @@ Review [highlight_preferences.json](highlight_preferences.json) for highlight-co
 
 ### 3. Ask Codex to Create a Summary
 
-Start a chat in Codex with the repository open and paste the following prompt, replacing the PDF path and paper slug:
+Start a chat in Codex with the repository open and paste this prompt, replacing the PDF path:
 
 ```text
-Read and follow skills/summarize-benchmark-paper/SKILL.md.
-Use highlight_preferences.json and only the overrides for this paper.
-Summarize the annotated benchmark paper at
-.artifacts/input/317_new_benchmark.pdf using slug 317_new_benchmark.
-If needed, create a Python environment under .dependencies/ and install
-skills/summarize-benchmark-paper/scripts/requirements.txt there.
-Preserve the source PDF. Save the summary in summary/317_new_benchmark.md,
-its matching HTML in html/317_new_benchmark.html, and companion highlight
-audits in summary/ and html/. Keep internal provenance in
-.artifacts/317_new_benchmark/. Check highlight coverage and Markdown/HTML
-consistency, then add this paper to the README table, using the live
-GitHub Pages URL for its HTML link. Run python3 scripts/build_pages.py
-to refresh the website in docs/.
+Summarize .artifacts/input/317_new_benchmark.pdf following
+skills/summarize-benchmark-paper/SKILL.md and this repo's preferences.
+Update the README and website.
 ```
-
-The prompt explicitly loads the skill from its current location. For automatic skill discovery, Codex uses `.agents/skills/`; see the [official skill documentation](https://learn.chatgpt.com/docs/build-skills).
 
 ### 4. Review and Refine
 
