@@ -4,23 +4,23 @@
 
 | Benchmark | Author | Published | Paper | Summary | HTML |
 | --- | --- | --- | --- | --- | --- |
-| DeepSWE | Datacurve | Jul 2026 | [Paper](https://arxiv.org/abs/2607.07946v1) | [Markdown](summary/312_deepswe.md) | [HTML](html/312_deepswe.html) |
-| AutomationBench | Zapier | Apr 2026 | [Paper](https://arxiv.org/abs/2604.18934) | [Markdown](summary/313_automationbench.md) | [HTML](html/313_automationbench.html) |
-| Terminal-Bench 2.0 | Stanford University, Laude Institute | Jan 2026 | [Paper](https://arxiv.org/abs/2601.11868) | [Markdown](summary/314_terminal_bench.md) | [HTML](html/314_terminal_bench.html) |
-| GDPval | OpenAI | Oct 2025 | [Paper](https://arxiv.org/abs/2510.04374v1) | [Markdown](summary/315_gdpval.md) | [HTML](html/315_gdpval.html) |
-| OSWorld 2.0 | XLANG Lab | Jun 2026 | [Paper](https://arxiv.org/abs/2606.29537v2) | [Markdown](summary/316_osworld_2_0.md) | [HTML](html/316_osworld_2_0.html) |
+| DeepSWE | Datacurve | Jul 2026 | [Paper](https://arxiv.org/abs/2607.07946v1) | [Markdown](summary/312_deepswe.md) | [HTML](https://bottlecapper.github.io/paper_summary/html/312_deepswe.html) |
+| AutomationBench | Zapier | Apr 2026 | [Paper](https://arxiv.org/abs/2604.18934) | [Markdown](summary/313_automationbench.md) | [HTML](https://bottlecapper.github.io/paper_summary/html/313_automationbench.html) |
+| Terminal-Bench 2.0 | Stanford University, Laude Institute | Jan 2026 | [Paper](https://arxiv.org/abs/2601.11868) | [Markdown](summary/314_terminal_bench.md) | [HTML](https://bottlecapper.github.io/paper_summary/html/314_terminal_bench.html) |
+| GDPval | OpenAI | Oct 2025 | [Paper](https://arxiv.org/abs/2510.04374v1) | [Markdown](summary/315_gdpval.md) | [HTML](https://bottlecapper.github.io/paper_summary/html/315_gdpval.html) |
+| OSWorld 2.0 | XLANG Lab | Jun 2026 | [Paper](https://arxiv.org/abs/2606.29537v2) | [Markdown](summary/316_osworld_2_0.md) | [HTML](https://bottlecapper.github.io/paper_summary/html/316_osworld_2_0.html) |
 
 Published month refers to the paper's first arXiv submission. Paper links point to the versions used by the summaries, where specified.
 
-Additional GDPval materials: [regenerated summary](summary/315_gdpval_regenerated.md), [regenerated HTML](html/315_gdpval_regenerated.html), [highlight audit](summary/315_gdpval_regenerated_highlights.md), and [skill reproduction review](summary/315_gdpval_reproduction_review.md).
+Additional GDPval materials: [regenerated summary](summary/315_gdpval_regenerated.md), [regenerated HTML](https://bottlecapper.github.io/paper_summary/html/315_gdpval_regenerated.html), [highlight audit](summary/315_gdpval_regenerated_highlights.md), and [skill reproduction review](summary/315_gdpval_reproduction_review.md).
 
-Read the Markdown summaries directly on GitHub. To view the formatted HTML, download or clone the repository and open an HTML file in a browser.
+Read the Markdown summaries directly on GitHub, or visit the [summary website](https://bottlecapper.github.io/paper_summary/) for formatted HTML. The HTML links above open rendered web pages. Standalone files in [html/](html/) can also be opened locally after downloading or cloning the repository.
 
 ## Use This Repository with Codex in VS Code
 
 ### 1. Open the Project
 
-Install the official Codex extension in VS Code and sign in, following the [OpenAI IDE setup guide](https://learn.chatgpt.com/docs/codex/ide). Clone this private repository using a GitHub account with access:
+Install the official Codex extension in VS Code and sign in, following the [OpenAI IDE setup guide](https://learn.chatgpt.com/docs/codex/ide). Clone this repository:
 
 ```bash
 git clone https://github.com/bottlecapper/paper_summary.git
@@ -51,7 +51,9 @@ Preserve the source PDF. Save the summary in summary/317_new_benchmark.md,
 its matching HTML in html/317_new_benchmark.html, and companion highlight
 audits in summary/ and html/. Keep internal provenance in
 .artifacts/317_new_benchmark/. Check highlight coverage and Markdown/HTML
-consistency, then add this paper to the README table.
+consistency, then add this paper to the README table, using the live
+GitHub Pages URL for its HTML link. Run python3 scripts/build_pages.py
+to refresh the website in docs/.
 ```
 
 The prompt explicitly loads the skill from its current location. For automatic skill discovery, Codex uses `.agents/skills/`; see the [official skill documentation](https://learn.chatgpt.com/docs/build-skills).
@@ -64,6 +66,7 @@ Preview the Markdown in VS Code and open the generated HTML in a browser. Check 
 Revise summary/317_new_benchmark.md to make the dataset quality checks
 clearer. Follow the benchmark skill, verify the edits against the source
 PDF, update the highlight audit, and regenerate the matching HTML.
+Run python3 scripts/build_pages.py to refresh docs/ too.
 ```
 
 Review the Git diff in VS Code's Source Control view before committing and pushing the summary, HTML, audits, and README update.
@@ -80,6 +83,8 @@ The workflow follows the reader's highlight priorities and keeps source evidence
 | --- | --- |
 | [summary/](summary/) | Paper summaries, highlight audits, and the GDPval reproduction review. |
 | [html/](html/) | Standalone HTML versions of summaries, audits, and reference documents. |
+| [docs/](docs/) | Generated summary website published through GitHub Pages. |
+| [scripts/build_pages.py](scripts/build_pages.py) | Rebuilds the website from the README index and summary HTML. |
 | [skills/summarize-benchmark-paper/](skills/summarize-benchmark-paper/) | Reusable summarization instructions, default preferences, topic guidance, and Python scripts. |
 | [highlight_preferences.json](highlight_preferences.json) | Project preferences for highlight colors, summary structure, formatting, and paper-specific overrides. |
 | [paper_profiles/](paper_profiles/) | Paper-specific editorial choices, including the GDPval profile. |
@@ -108,3 +113,13 @@ python3 skills/summarize-benchmark-paper/scripts/check_summary.py \
 ```
 
 Markdown is the source of truth for its paired HTML. Cached PDFs, internal working artifacts, local dependencies, and Python caches are excluded from version control.
+
+## Publishing the Website
+
+GitHub Pages serves [the summary website](https://bottlecapper.github.io/paper_summary/) from `docs/` on the `main` branch. After updating summaries or the README table, rebuild the site from the repository root:
+
+```bash
+python3 scripts/build_pages.py
+```
+
+Review and commit the updated source files together with `docs/`, then push to `main`. GitHub Pages automatically publishes the committed `docs/` contents. Edit the originals in `html/` or the README table rather than editing generated files in `docs/`.
