@@ -2,13 +2,13 @@
 
 ## Existing Paper Summaries
 
-| Benchmark | Author | Published | Paper | Summary | HTML |
+| Benchmark | Author Institude | Published | Paper | Summary | HTML |
 | --- | --- | --- | --- | --- | --- |
-| DeepSWE | Datacurve | Jul 2026 | [Paper](https://arxiv.org/abs/2607.07946v1) | [Markdown](summary/312_deepswe.md) | [HTML](https://bottlecapper.github.io/paper_summary/html/312_deepswe.html) |
-| AutomationBench | Zapier | Apr 2026 | [Paper](https://arxiv.org/abs/2604.18934) | [Markdown](summary/313_automationbench.md) | [HTML](https://bottlecapper.github.io/paper_summary/html/313_automationbench.html) |
-| Terminal-Bench 2.0 | Stanford University, Laude Institute | Jan 2026 | [Paper](https://arxiv.org/abs/2601.11868) | [Markdown](summary/314_terminal_bench.md) | [HTML](https://bottlecapper.github.io/paper_summary/html/314_terminal_bench.html) |
-| GDPval | OpenAI | Oct 2025 | [Paper](https://arxiv.org/abs/2510.04374v1) | [Markdown](summary/315_gdpval.md) | [HTML](https://bottlecapper.github.io/paper_summary/html/315_gdpval.html) |
-| OSWorld 2.0 | XLANG Lab | Jun 2026 | [Paper](https://arxiv.org/abs/2606.29537v2) | [Markdown](summary/316_osworld_2_0.md) | [HTML](https://bottlecapper.github.io/paper_summary/html/316_osworld_2_0.html) |
+| DeepSWE | Datacurve | Jul 2026 | [Paper](https://arxiv.org/abs/2607.07946v1) | [Markdown](summary/312_deepswe.md) | [312](https://bottlecapper.github.io/paper_summary/html/312_deepswe.html) |
+| AutomationBench | Zapier | Apr 2026 | [Paper](https://arxiv.org/abs/2604.18934) | [Markdown](summary/313_automationbench.md) | [313](https://bottlecapper.github.io/paper_summary/html/313_automationbench.html) |
+| Terminal-Bench 2.0 | Stanford University<br>Laude Institute | Jan 2026 | [Paper](https://arxiv.org/abs/2601.11868) | [Markdown](summary/314_terminal_bench.md) | [314](https://bottlecapper.github.io/paper_summary/html/314_terminal_bench.html) |
+| GDPval | OpenAI | Oct 2025 | [Paper](https://arxiv.org/abs/2510.04374v1) | [Markdown](summary/315_gdpval.md) | [315](https://bottlecapper.github.io/paper_summary/html/315_gdpval.html) |
+| OSWorld 2.0 | XLANG Lab | Jun 2026 | [Paper](https://arxiv.org/abs/2606.29537v2) | [Markdown](summary/316_osworld_2_0.md) | [316](https://bottlecapper.github.io/paper_summary/html/316_osworld_2_0.html) |
 
 Published month refers to the paper's first arXiv submission. Paper links point to the versions used by the summaries, where specified.
 

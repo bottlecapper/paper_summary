@@ -41,7 +41,8 @@ def build(output):
         if (ROOT / audit_path).is_file():
             files.add(audit_path)
             audit = anchor(audit_path.as_posix(), "Audit")
-        cells = [escape(benchmark), escape(author), escape(published),
+        institutions = "<br>".join(escape(part.strip()) for part in re.split(r"<br\s*/?>", author, flags=re.IGNORECASE))
+        cells = [escape(benchmark), institutions, escape(published),
                  anchor(link_target(paper), "Paper"),
                  anchor(summary_path.as_posix(), "Read summary"), audit]
         rows.append("<tr>" + "".join(f"<td>{cell}</td>" for cell in cells) + "</tr>")
@@ -95,7 +96,7 @@ def build(output):
     <p>Concise summaries of AI benchmark papers, with source excerpts and highlight audits.</p>
     <div class="table-scroll">
       <table>
-        <thead><tr><th>Benchmark</th><th>Author</th><th>Published</th><th>Paper</th><th>Summary</th><th>Highlights</th></tr></thead>
+        <thead><tr><th>Benchmark</th><th>Author Institude</th><th>Published</th><th>Paper</th><th>Summary</th><th>Highlights</th></tr></thead>
         <tbody>__ROWS__</tbody>
       </table>
     </div>
