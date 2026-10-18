@@ -1,0 +1,2276 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Highlight Audit</title><style>
+:root {color-scheme:light; --paper:#fff; --bg:#f3f5f2; --ink:#21312c; --muted:#5b6e65; --line:#dce4de; --accent:#24634b}
+* {box-sizing:border-box} body {margin:0;background:var(--bg);color:var(--ink);font:17px/1.7 system-ui,-apple-system,sans-serif}
+.layout {max-width:1280px;margin:auto;display:grid;grid-template-columns:235px minmax(0,1fr);gap:32px;padding:36px 24px}
+aside {align-self:start;position:sticky;top:24px;max-height:90vh;overflow:auto;font-size:13px}
+.brand {font-weight:750;letter-spacing:.08em;text-transform:uppercase;margin-bottom:24px;color:var(--accent)}
+.toc ul {padding-left:17px}.toc li {margin:8px 0}.toc a {color:var(--muted);text-decoration:none}
+main {background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:40px 48px;min-width:0}
+h1 {font-size:clamp(26px,3.5vw,40px);line-height:1.2;letter-spacing:-.035em;margin-top:0}
+h2 {font-size:25px;line-height:1.25;margin:28px 0 2px;padding:0} h3 {font-size:19px;line-height:1.3;margin:16px 0 2px;padding:0}
+h4 {font-size:17px;line-height:1.3;margin:10px 0 2px;padding:0}
+main > p, main > ul, main > ol {margin-top:0;margin-bottom:0}
+main li > p {margin-top:0;margin-bottom:0}
+main ul {list-style-type:disc;padding-left:1.5em}
+main ul ul {list-style-type:circle;margin-top:0;margin-bottom:0}
+p,li {max-width:78ch} a {color:var(--accent);text-underline-offset:3px} strong {font-weight:700}
+.verbatim {color:#175cd3}
+.source-excerpts {margin:0}.source-excerpts > summary {font-size:13px;color:var(--muted);cursor:pointer}
+.source-excerpts ul, .source-excerpts ol {margin-top:0;margin-bottom:0}
+blockquote {margin:24px 0;border-left:4px solid #8eb79b;padding:12px 20px;background:#f0f6f0}
+table {width:100%;border-collapse:collapse;font-size:14px;display:block;overflow-x:auto} th,td {text-align:left;vertical-align:top;padding:12px 14px;border-bottom:1px solid var(--line)} th {background:#edf3ee}
+code {background:#eef2ed;border-radius:4px;padding:2px 5px;font-size:.9em} pre {overflow:auto;padding:16px;background:#eef2ed;border-radius:8px} pre code {padding:0}
+button {font:inherit;font-size:13px;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:7px;padding:8px 12px;cursor:pointer}
+.color-swatch {display:inline-block;width:14px;height:14px;vertical-align:-2px;border:1px solid #9ba99f;border-radius:3px;margin-right:5px}
+.tools {display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}.footer {margin-top:40px;font-size:12px;color:var(--muted)}
+@media(max-width:850px) {.layout {display:block;padding:16px} aside {position:static;max-height:none;margin-bottom:20px}.toc {display:none}main {padding:26px 22px}.tools {margin:8px 0}}
+@media print {body {background:white;font-size:11pt}.layout {display:block;padding:0}aside {display:none}main {border:0;padding:0}h2 {break-after:avoid}a {color:inherit}table {display:table;font-size:10pt}}
+</style></head><body>
+<div class="layout"><aside><div class="brand">Paper summary</div><nav aria-label="Contents"><div class="toc">
+<ul>
+<li><a href="#highlighted-sections">highlighted-sections</a></li>
+<li><a href="#model-in-the-loop-task-review">Model-in-the-Loop Task Review</a></li>
+<li><a href="#highlighted-review-section">highlighted-review-section</a></li>
+<li><a href="#iterative-review">Iterative Review</a></li>
+<li><a href="#under-contextualized-gdpval">Under-Contextualized GDPval</a></li>
+<li><a href="#expert-sourcing">Expert Sourcing</a></li>
+<li><a href="#scope">Scope</a></li>
+<li><a href="#evaluation-method">Evaluation Method</a></li>
+<li><a href="#economic-relevance">Economic Relevance</a></li>
+<li><a href="#task-design">Task Design</a></li>
+<li><a href="#representative-breadth">Representative Breadth</a></li>
+<li><a href="#human-expert-grading">Human Expert Grading</a></li>
+<li><a href="#difficulty">difficulty</a></li>
+<li><a href="#representativeness">representativeness</a></li>
+<li><a href="#automated-grading">Automated Grading</a></li>
+<li><a href="#speed-and-cost-comparison">Speed and Cost Comparison</a></li>
+<li><a href="#model-strengths-and-weaknesses">Model Strengths and Weaknesses</a></li>
+<li><a href="#increasing-reasoning-effort-and-scaffolding">Increasing Reasoning Effort and Scaffolding</a></li>
+<li><a href="#limitations">Limitations</a></li>
+<li><a href="#task-duration">Task Duration</a></li>
+<li><a href="#files-and-attachments">Files and Attachments</a></li>
+<li><a href="#prompt-specificity">prompt-specificity</a></li>
+<li><a href="#validating-the-digital-tasks-measure">Validating the Digital Tasks Measure</a></li>
+<li><a href="#excluded-and-unclassified">Excluded and Unclassified</a></li>
+</ul>
+</div>
+</nav>
+<div class="tools"><button onclick="window.print()">Print / save PDF</button><button id="expand">Show contents</button></div>
+</aside><main><h1 id="highlight-audit">Highlight Audit</h1>
+<p>All 117 included highlights are mapped to the revised summary. Topics are ordered by their highest highlight priority; selections within each topic are ordered by priority, then paper order.</p>
+<p>Prior-coverage judgments are a manual semantic review. Annotation accounting is checked programmatically. Raw selections retain PDF extraction artifacts; mathematical selections are explained in context in the summary.</p>
+<p>Previous statuses: <strong>Covered</strong>, <strong>Partial</strong>, <strong>Title only</strong>, or <strong>Missing</strong>. New coverage means the highlighted information is represented by a topic lead, source excerpt, definition, or merged equivalent passage—not that every duplicate fragment is repeated verbatim.</p>
+<h2 id="highlighted-sections">highlighted-sections</h2>
+<p><strong>Priority 1 · Important Sections</strong></p>
+<p>A.4.4 Task Representativeness</p>
+<ul>
+<li>
+<p><strong>H080 · Light cyan · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>A.4.4 TASK REPRESENTATIVENESS</code></li>
+<li>
+<p>Now represented under <strong>Important Sections → highlighted-sections</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - A.4.4 Task Representativeness</p>
+</li>
+<li>
+<p>Meaning: The actual highlighted section title and identifier are retained in Title Case; changed capitalization stays default color.</p>
+</li>
+<li>
+<p>Transformation reason: The actual highlighted section title and identifier are retained in Title Case; changed capitalization stays default color.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="model-in-the-loop-task-review">Model-in-the-Loop Task Review</h2>
+<p><strong>Priority 1 · Quality Control · Auto Judge</strong></p>
+<p><strong>Model-in-the-Loop Task Review:</strong> OpenAI models flagged occupational mismatch, non-computer work, overly simple tasks, and missing files; experts retained final responsibility.</p>
+<ul>
+<li>
+<p><strong>H099 · Light cyan · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Because models can make mistakes, experts were instructed to take model feedback as a suggestion rather than a direction. Experts retained final responsibility for task accuracy and completeness; the model did not autonomously alter tasks.</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Auto Judge → Model-in-the-Loop Task Review</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <span class="verbatim">Because models can make mistakes, experts were instructed to take model feedback as a suggestion rather than a direction. Experts retained final responsibility for task accuracy and completeness; the model did not autonomously alter tasks.</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: Because models can make mistakes, experts were instructed to take model feedback as a suggestion rather than a direction. Experts retained final responsibility for task accuracy and completeness; the model did not autonomously alter tasks.</li>
+</ul>
+</li>
+<li>
+<p><strong>H094 · Bright green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>automatically screen each task submission</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Auto Judge → Model-in-the-Loop Task Review</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Model-in-the-Loop Task Review:</strong> OpenAI models flagged occupational mismatch, non-computer work, overly simple tasks, and missing files; experts retained final responsibility.</p>
+</li>
+<li>Each submission was screened for <span class="verbatim">ensuring the task is relevant to the selected O*NET occupation, verifying the request involved tasks performed primarily on a computer, flagging if the task complexity was too simple (e.g., if the task seemed like 5 minutes of work instead of a longer-term piece of work), and indicating if there were no deliverable and reference files attached.</span></li>
+<li><span class="verbatim">Because models can make mistakes, experts were instructed to take model feedback as a suggestion rather than a direction. Experts retained final responsibility for task accuracy and completeness; the model did not autonomously alter tasks.</span></li>
+<li>
+<p>Meaning: Automatic screening of each task submission is expressed in passive neutral voice, with the four original screening criteria quoted.</p>
+</li>
+<li>
+<p>Transformation reason: Automatic screening of each task submission is expressed in passive neutral voice, with the four original screening criteria quoted.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H095 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>if there were no deliverable and reference files attached.</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Auto Judge → Model-in-the-Loop Task Review</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - Each submission was screened for <span class="verbatim">ensuring the task is relevant to the selected O*NET occupation, verifying the request involved tasks performed primarily on a computer, flagging if the task complexity was too simple (e.g., if the task seemed like 5 minutes of work instead of a longer-term piece of work), and indicating if there were no deliverable and reference files attached.</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: if there were no deliverable and reference files attached.</li>
+</ul>
+</li>
+<li>
+<p><strong>H096 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>if the task complexity was too simple</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Auto Judge → Model-in-the-Loop Task Review</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - Each submission was screened for <span class="verbatim">ensuring the task is relevant to the selected O*NET occupation, verifying the request involved tasks performed primarily on a computer, flagging if the task complexity was too simple (e.g., if the task seemed like 5 minutes of work instead of a longer-term piece of work), and indicating if there were no deliverable and reference files attached.</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: if the task complexity was too simple</li>
+</ul>
+</li>
+<li>
+<p><strong>H097 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>ensuring the task is relevant to the selected O*NET occupation,</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Auto Judge → Model-in-the-Loop Task Review</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - Each submission was screened for <span class="verbatim">ensuring the task is relevant to the selected O*NET occupation, verifying the request involved tasks performed primarily on a computer, flagging if the task complexity was too simple (e.g., if the task seemed like 5 minutes of work instead of a longer-term piece of work), and indicating if there were no deliverable and reference files attached.</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: ensuring the task is relevant to the selected O*NET occupation,</li>
+</ul>
+</li>
+<li>
+<p><strong>H098 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>tasks performed primarily on a computer,</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Auto Judge → Model-in-the-Loop Task Review</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - Each submission was screened for <span class="verbatim">ensuring the task is relevant to the selected O*NET occupation, verifying the request involved tasks performed primarily on a computer, flagging if the task complexity was too simple (e.g., if the task seemed like 5 minutes of work instead of a longer-term piece of work), and indicating if there were no deliverable and reference files attached.</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: tasks performed primarily on a computer,</li>
+</ul>
+</li>
+</ul>
+<h2 id="highlighted-review-section">highlighted-review-section</h2>
+<p><strong>Priority 1 · Important Sections</strong></p>
+<p>A.5.2 Human Expert Reviewers</p>
+<ul>
+<li>
+<p><strong>H104 · Light cyan · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>A.5.2 HUMAN EXPERT REVIEWERS</code></li>
+<li>
+<p>Now represented under <strong>Important Sections → highlighted-review-section</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - A.5.2 Human Expert Reviewers</p>
+</li>
+<li>
+<p>Meaning: The actual highlighted section title and identifier are retained in Title Case; changed capitalization stays default color.</p>
+</li>
+<li>
+<p>Transformation reason: The actual highlighted section title and identifier are retained in Title Case; changed capitalization stays default color.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="iterative-review">Iterative Review</h2>
+<p><strong>Priority 2 · Quality Control · Human Review · Review Approach</strong></p>
+<p><strong>Review Approach</strong></p>
+<ul>
+<li>
+<p><strong>H022 · Bright green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>an iterative review pipeline involving both automated model-based screening and multiple stages of human expert review.</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Review Approach → Iterative Review</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Review Approach</strong></p>
+</li>
+<li>Iterative Review: all tasks underwent automated screening and human review, with <span class="verbatim">an average of five human reviews (with a minimum of three reviews).</span><ul>
+<li><span class="verbatim">Across all stages of review, experts provided detailed comments, and tasks were iteratively revised before subsequent reviews to enhance quality and representativeness,</span></li>
+</ul>
+</li>
+<li>Generalist Initial Review: <span class="verbatim">A generalist reviewer confirmed the task adhered to project requirements.</span></li>
+<li>Occupation-Specific Expert Review: <span class="verbatim">An occupation-specific reviewer assessed the representativeness of the task for the occupation, and confirmed that the task was possible for another member of the occupation to complete with the provided context.</span></li>
+<li>Final Iterative Reviewer Feedback Loop: <span class="verbatim">A third expert reviewer provided iterative feedback and worked with experts</span> until quality standards were met.</li>
+<li>
+<p>Reviewer Selection: researchers manually reviewed all tasks to train and promote strong creators as reviewers; lead reviewers mentored others, with ongoing research-team checks.</p>
+<ul>
+<li><span class="verbatim">The most skilled reviewers were further trained to become lead reviewers, responsible for identifying, mentoring, and promoting additional qualified reviewers from within the expert pool. Throughout the review process, the research team regularly performed quality-control checks on tasks signed off by reviewers, ensuring ongoing alignment and quality standards.</span></li>
+</ul>
+</li>
+<li>
+<p>Meaning: The iterative automated-screening and multistage human-review pipeline is shown directly through the visible named review methods and average/minimum review counts.</p>
+</li>
+<li>
+<p>Transformation reason: The iterative automated-screening and multistage human-review pipeline is shown directly through the visible named review methods and average/minimum review counts.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H023 · Bright green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Each task received an average of five human reviews (with a minimum of three reviews).</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Review Approach → Iterative Review</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Review Approach</strong></p>
+</li>
+<li>Iterative Review: all tasks underwent automated screening and human review, with <span class="verbatim">an average of five human reviews (with a minimum of three reviews).</span><ul>
+<li><span class="verbatim">Across all stages of review, experts provided detailed comments, and tasks were iteratively revised before subsequent reviews to enhance quality and representativeness,</span></li>
+</ul>
+</li>
+<li>Generalist Initial Review: <span class="verbatim">A generalist reviewer confirmed the task adhered to project requirements.</span></li>
+<li>Occupation-Specific Expert Review: <span class="verbatim">An occupation-specific reviewer assessed the representativeness of the task for the occupation, and confirmed that the task was possible for another member of the occupation to complete with the provided context.</span></li>
+<li>Final Iterative Reviewer Feedback Loop: <span class="verbatim">A third expert reviewer provided iterative feedback and worked with experts</span> until quality standards were met.</li>
+<li>
+<p>Reviewer Selection: researchers manually reviewed all tasks to train and promote strong creators as reviewers; lead reviewers mentored others, with ongoing research-team checks.</p>
+<ul>
+<li><span class="verbatim">The most skilled reviewers were further trained to become lead reviewers, responsible for identifying, mentoring, and promoting additional qualified reviewers from within the expert pool. Throughout the review process, the research team regularly performed quality-control checks on tasks signed off by reviewers, ensuring ongoing alignment and quality standards.</span></li>
+</ul>
+</li>
+<li>
+<p>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: Each task received an average of five human reviews (with a minimum of three reviews).</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H100 · Bright green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Initially, our researchers manually reviewed all tasks to identify experts who produced consistently high- quality tasks; these individuals were trained and promoted to reviewers.</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Review Approach → Iterative Review</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Review Approach</strong></p>
+</li>
+<li>Iterative Review: all tasks underwent automated screening and human review, with <span class="verbatim">an average of five human reviews (with a minimum of three reviews).</span><ul>
+<li><span class="verbatim">Across all stages of review, experts provided detailed comments, and tasks were iteratively revised before subsequent reviews to enhance quality and representativeness,</span></li>
+</ul>
+</li>
+<li>Generalist Initial Review: <span class="verbatim">A generalist reviewer confirmed the task adhered to project requirements.</span></li>
+<li>Occupation-Specific Expert Review: <span class="verbatim">An occupation-specific reviewer assessed the representativeness of the task for the occupation, and confirmed that the task was possible for another member of the occupation to complete with the provided context.</span></li>
+<li>Final Iterative Reviewer Feedback Loop: <span class="verbatim">A third expert reviewer provided iterative feedback and worked with experts</span> until quality standards were met.</li>
+<li>
+<p>Reviewer Selection: researchers manually reviewed all tasks to train and promote strong creators as reviewers; lead reviewers mentored others, with ongoing research-team checks.</p>
+<ul>
+<li><span class="verbatim">The most skilled reviewers were further trained to become lead reviewers, responsible for identifying, mentoring, and promoting additional qualified reviewers from within the expert pool. Throughout the review process, the research team regularly performed quality-control checks on tasks signed off by reviewers, ensuring ongoing alignment and quality standards.</span></li>
+</ul>
+</li>
+<li>
+<p>Meaning: Author framing our researchers is changed to researchers; reviewing all tasks, selecting strong task creators, training, and promotion remain visible.</p>
+</li>
+<li>
+<p>Transformation reason: Author framing our researchers is changed to researchers; reviewing all tasks, selecting strong task creators, training, and promotion remain visible.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H024 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Across all stages of review, experts provided detailed comments, and tasks were iteratively revised before subsequent reviews to enhance quality and representativeness,</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Review Approach → Iterative Review</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <span class="verbatim">Across all stages of review, experts provided detailed comments, and tasks were iteratively revised before subsequent reviews to enhance quality and representativeness,</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: Across all stages of review, experts provided detailed comments, and tasks were iteratively revised before subsequent reviews to enhance quality and representativeness,</li>
+</ul>
+</li>
+<li>
+<p><strong>H101 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>The most skilled reviewers were further trained to become lead reviewers, responsible for identifying, mentoring, and promoting additional qualified reviewers from within the expert pool.</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Review Approach → Iterative Review</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <span class="verbatim">The most skilled reviewers were further trained to become lead reviewers, responsible for identifying, mentoring, and promoting additional qualified reviewers from within the expert pool. Throughout the review process, the research team regularly performed quality-control checks on tasks signed off by reviewers, ensuring ongoing alignment and quality standards.</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: The most skilled reviewers were further trained to become lead reviewers, responsible for identifying, mentoring, and promoting additional qualified reviewers from within the expert pool.</li>
+</ul>
+</li>
+<li>
+<p><strong>H102 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Throughout the review process, the research team regularly performed quality-control checks on tasks signed off by reviewers, ensuring ongoing alignment and quality standards.</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Review Approach → Iterative Review</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <span class="verbatim">The most skilled reviewers were further trained to become lead reviewers, responsible for identifying, mentoring, and promoting additional qualified reviewers from within the expert pool. Throughout the review process, the research team regularly performed quality-control checks on tasks signed off by reviewers, ensuring ongoing alignment and quality standards.</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: Throughout the review process, the research team regularly performed quality-control checks on tasks signed off by reviewers, ensuring ongoing alignment and quality standards.</li>
+</ul>
+</li>
+<li>
+<p><strong>H103 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Human reviewers conducted multiple rounds of review on each task.</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Review Approach → Iterative Review</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Review Approach</strong></p>
+</li>
+<li>Iterative Review: all tasks underwent automated screening and human review, with <span class="verbatim">an average of five human reviews (with a minimum of three reviews).</span><ul>
+<li><span class="verbatim">Across all stages of review, experts provided detailed comments, and tasks were iteratively revised before subsequent reviews to enhance quality and representativeness,</span></li>
+</ul>
+</li>
+<li>Generalist Initial Review: <span class="verbatim">A generalist reviewer confirmed the task adhered to project requirements.</span></li>
+<li>Occupation-Specific Expert Review: <span class="verbatim">An occupation-specific reviewer assessed the representativeness of the task for the occupation, and confirmed that the task was possible for another member of the occupation to complete with the provided context.</span></li>
+<li>Final Iterative Reviewer Feedback Loop: <span class="verbatim">A third expert reviewer provided iterative feedback and worked with experts</span> until quality standards were met.</li>
+<li>
+<p>Reviewer Selection: researchers manually reviewed all tasks to train and promote strong creators as reviewers; lead reviewers mentored others, with ongoing research-team checks.</p>
+<ul>
+<li><span class="verbatim">The most skilled reviewers were further trained to become lead reviewers, responsible for identifying, mentoring, and promoting additional qualified reviewers from within the expert pool. Throughout the review process, the research team regularly performed quality-control checks on tasks signed off by reviewers, ensuring ongoing alignment and quality standards.</span></li>
+</ul>
+</li>
+<li>
+<p>Meaning: Multiple review rounds are represented by the explicit average/minimum review counts, three named stages, and iterative-feedback source excerpt.</p>
+</li>
+<li>
+<p>Transformation reason: Multiple review rounds are represented by the explicit average/minimum review counts, three named stages, and iterative-feedback source excerpt.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H105 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>occupation-specific reviewer</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Review Approach → Iterative Review</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - Occupation-Specific Expert Review: <span class="verbatim">An occupation-specific reviewer assessed the representativeness of the task for the occupation, and confirmed that the task was possible for another member of the occupation to complete with the provided context.</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: occupation-specific reviewer</li>
+</ul>
+</li>
+<li>
+<p><strong>H106 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>generalist reviewer</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Review Approach → Iterative Review</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - Generalist Initial Review: <span class="verbatim">A generalist reviewer confirmed the task adhered to project requirements.</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: generalist reviewer</li>
+</ul>
+</li>
+<li>
+<p><strong>H107 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>third expert reviewer</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Review Approach → Iterative Review</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - Final Iterative Reviewer Feedback Loop: <span class="verbatim">A third expert reviewer provided iterative feedback and worked with experts</span> until quality standards were met.</p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: third expert reviewer</li>
+</ul>
+</li>
+</ul>
+<h2 id="under-contextualized-gdpval">Under-Contextualized GDPval</h2>
+<p><strong>Priority 2 · Key Findings</strong></p>
+<p><strong>Under-Contextualized GDPval:</strong> Lower-context prompts impaired GPT-5’s ability to identify requisite context.</p>
+<ul>
+<li>
+<p><strong>H069 · Bright green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>To assess how models handle task ambiguity, we created a modified version of GDPval with de- liberately lower-context prompts.</code></li>
+<li>
+<p>Now represented under <strong>Key Findings → Under-Contextualized GDPval</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Under-Contextualized GDPval:</strong> Lower-context prompts impaired GPT-5’s ability to identify requisite context.</p>
+</li>
+<li><span class="verbatim">These shorter prompts omitted additional context such as where to locate specific data within reference files, how to approach the problem, or detailed formatting expectations for the final deliverable; the models had to “figure it out.”</span></li>
+<li>Prompts averaged 42% of the original token count; occupational experts graded GPT-5 completions. The experiment measured <span class="verbatim">navigating ambiguity by figuring out what to work on and where to get the necessary inputs.</span> The <span class="verbatim">model’s performance was worse on under-specified prompts. In particular, the models struggled to figure out context.</span> It used an earlier gold subset, so its win rates differ from main results.</li>
+<li>
+<p>Meaning: Author framing is removed; the deliberately lower-context prompt intervention and task-ambiguity purpose remain explicit in the topic.</p>
+</li>
+<li>
+<p>Transformation reason: Author framing is removed; the deliberately lower-context prompt intervention and task-ambiguity purpose remain explicit in the topic.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H070 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>These shorter prompts omitted additional context such as where to locate specific data within reference files, how to approach the problem, or detailed formatting expectations for the final deliverable; the models had to “figure it out.”</code></li>
+<li>
+<p>Now represented under <strong>Key Findings → Under-Contextualized GDPval</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <span class="verbatim">These shorter prompts omitted additional context such as where to locate specific data within reference files, how to approach the problem, or detailed formatting expectations for the final deliverable; the models had to “figure it out.”</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: These shorter prompts omitted additional context such as where to locate specific data within reference files, how to approach the problem, or detailed formatting expectations for the final deliverable; the models had to “figure it out.”</li>
+</ul>
+</li>
+<li>
+<p><strong>H071 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>navigating ambiguity by figuring out what to work on and where to get the necessary inputs.</code></li>
+<li>
+<p>Now represented under <strong>Key Findings → Under-Contextualized GDPval</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - Prompts averaged 42% of the original token count; occupational experts graded GPT-5 completions. The experiment measured <span class="verbatim">navigating ambiguity by figuring out what to work on and where to get the necessary inputs.</span> The <span class="verbatim">model’s performance was worse on under-specified prompts. In particular, the models struggled to figure out context.</span> It used an earlier gold subset, so its win rates differ from main results.</p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: navigating ambiguity by figuring out what to work on and where to get the necessary inputs.</li>
+</ul>
+</li>
+<li>
+<p><strong>H072 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>model’s performance was worse on under-specified prompts. In particular, the models struggled to figure out context.</code></li>
+<li>
+<p>Now represented under <strong>Key Findings → Under-Contextualized GDPval</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - Prompts averaged 42% of the original token count; occupational experts graded GPT-5 completions. The experiment measured <span class="verbatim">navigating ambiguity by figuring out what to work on and where to get the necessary inputs.</span> The <span class="verbatim">model’s performance was worse on under-specified prompts. In particular, the models struggled to figure out context.</span> It used an earlier gold subset, so its win rates differ from main results.</p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: model’s performance was worse on under-specified prompts. In particular, the models struggled to figure out context.</li>
+</ul>
+</li>
+</ul>
+<h2 id="expert-sourcing">Expert Sourcing</h2>
+<p><strong>Priority 2 · Dataset Creation</strong></p>
+<p><strong>Expert Sourcing:</strong> Professionals averaged <span class="verbatim">14 years of experience</span>; fewer than 10% of applicants were selected, with ≥5 qualified professionals per occupation.</p>
+<ul>
+<li>
+<p><strong>H093 · Bright green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Experts for each occupation were required to have previous experience in that specific occupation and sector</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Expert Sourcing</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <span class="verbatim">The industry experts also brought occupational diversity, representing different company sizes, locations, and sub-specialties. Each occupation had a minimum of 5 qualified professionals. Experts for each occupation were required to have previous experience in that specific occupation and sector based on the O*NET occupation definitions (U.S. Bureau of Labor Statistics, 2025a).</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: Experts for each occupation were required to have previous experience in that specific occupation and sector</li>
+</ul>
+</li>
+<li>
+<p><strong>H002 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>industry professionals with an average of 14 years of experience.</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Expert Sourcing</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Expert Sourcing:</strong> Professionals averaged <span class="verbatim">14 years of experience</span>; fewer than 10% of applicants were selected, with ≥5 qualified professionals per occupation.</p>
+</li>
+<li>Experts created <span class="verbatim">realistic tasks based on their professional work experience.</span> Minimum experience was four years, with demonstrated recognition, promotion, and management responsibilities.</li>
+<li><span class="verbatim">pass a video interview, a background check, a training and a quiz to participate in the project.</span></li>
+<li><span class="verbatim">The industry experts also brought occupational diversity, representing different company sizes, locations, and sub-specialties. Each occupation had a minimum of 5 qualified professionals. Experts for each occupation were required to have previous experience in that specific occupation and sector based on the O*NET occupation definitions (U.S. Bureau of Labor Statistics, 2025a).</span></li>
+<li><span class="verbatim">Professional Services Qualification: Technology and intellectual property attorney with partner roles at multiple AmLaw 100 firms in New York and California, and 15+ years of experience advising clients on emerging technologies, advertising, antitrust, and cross-border disputes and transactions.</span></li>
+<li><span class="verbatim">Healthcare Qualification: Nursing professional with 18+ years of expertise in emergency medicine, renal management, care coordination, and healthcare operations. Skilled in quality assurance, case management, and professional education.</span></li>
+<li><span class="verbatim">Retail Trade Qualification: Strategic retail executive with 15 years of experience growing prestige and niche beauty brands through national account leadership, $1B+ P&amp;L ownership, and data-driven omnichannel strategies.</span></li>
+<li><span class="verbatim">Finance Qualification: Fintech and Wall Street leader with 20+ years of experience in wealth management, asset management, and capital markets across global institutions and startups.</span></li>
+<li><span class="verbatim">Wholesale Trade Qualification: National Accounts Sales Manager for US, China, and Sweden based brands/factories with over 25 years of experience selling to US based retailers.</span></li>
+<li><span class="verbatim">Manufacturing Qualification: Lead Industrial Engineer with 5+ years of experience managing large-scale projects and leading teams of 10+ engineers in industrial operations.</span></li>
+<li><span class="verbatim">Government Qualification: Executive leader with 15+ years working at strategic and operational levels in government and non-profit sectors in housing, human service and labor market programs.</span></li>
+<li><span class="verbatim">Real Estate and Leasing Qualification: Seasoned commercial real estate broker with 10 years of experience in investment sales, leasing, and managing real estate offices and agents.</span></li>
+<li><span class="verbatim">Information Qualification: An experienced senior journalist and content leader with over 20 years in top-tier media, global corporations, and high-growth startups.</span></li>
+<li>
+<p>Meaning: Average experience is merged with the duplicate complete sentence H018; professional provenance is explicit in Expert Sourcing.</p>
+</li>
+<li>
+<p>Transformation reason: Average experience is merged with the duplicate complete sentence H018; professional provenance is explicit in Expert Sourcing.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H017 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>We recruited expert industry professionals to create realistic tasks based on their professional work experience.</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Expert Sourcing</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Expert Sourcing:</strong> Professionals averaged <span class="verbatim">14 years of experience</span>; fewer than 10% of applicants were selected, with ≥5 qualified professionals per occupation.</p>
+</li>
+<li>Experts created <span class="verbatim">realistic tasks based on their professional work experience.</span> Minimum experience was four years, with demonstrated recognition, promotion, and management responsibilities.</li>
+<li><span class="verbatim">pass a video interview, a background check, a training and a quiz to participate in the project.</span></li>
+<li><span class="verbatim">The industry experts also brought occupational diversity, representing different company sizes, locations, and sub-specialties. Each occupation had a minimum of 5 qualified professionals. Experts for each occupation were required to have previous experience in that specific occupation and sector based on the O*NET occupation definitions (U.S. Bureau of Labor Statistics, 2025a).</span></li>
+<li><span class="verbatim">Professional Services Qualification: Technology and intellectual property attorney with partner roles at multiple AmLaw 100 firms in New York and California, and 15+ years of experience advising clients on emerging technologies, advertising, antitrust, and cross-border disputes and transactions.</span></li>
+<li><span class="verbatim">Healthcare Qualification: Nursing professional with 18+ years of expertise in emergency medicine, renal management, care coordination, and healthcare operations. Skilled in quality assurance, case management, and professional education.</span></li>
+<li><span class="verbatim">Retail Trade Qualification: Strategic retail executive with 15 years of experience growing prestige and niche beauty brands through national account leadership, $1B+ P&amp;L ownership, and data-driven omnichannel strategies.</span></li>
+<li><span class="verbatim">Finance Qualification: Fintech and Wall Street leader with 20+ years of experience in wealth management, asset management, and capital markets across global institutions and startups.</span></li>
+<li><span class="verbatim">Wholesale Trade Qualification: National Accounts Sales Manager for US, China, and Sweden based brands/factories with over 25 years of experience selling to US based retailers.</span></li>
+<li><span class="verbatim">Manufacturing Qualification: Lead Industrial Engineer with 5+ years of experience managing large-scale projects and leading teams of 10+ engineers in industrial operations.</span></li>
+<li><span class="verbatim">Government Qualification: Executive leader with 15+ years working at strategic and operational levels in government and non-profit sectors in housing, human service and labor market programs.</span></li>
+<li><span class="verbatim">Real Estate and Leasing Qualification: Seasoned commercial real estate broker with 10 years of experience in investment sales, leasing, and managing real estate offices and agents.</span></li>
+<li><span class="verbatim">Information Qualification: An experienced senior journalist and content leader with over 20 years in top-tier media, global corporations, and high-growth startups.</span></li>
+<li>
+<p>Meaning: The author recruitment clause is removed; realistic tasks based on professional work experience remains exact in context, with screening in the same topic.</p>
+</li>
+<li>
+<p>Transformation reason: The author recruitment clause is removed; realistic tasks based on professional work experience remains exact in context, with screening in the same topic.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H018 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>The average expert had 14 years of experience.</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Expert Sourcing</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Expert Sourcing:</strong> Professionals averaged <span class="verbatim">14 years of experience</span>; fewer than 10% of applicants were selected, with ≥5 qualified professionals per occupation.</p>
+</li>
+<li>Experts created <span class="verbatim">realistic tasks based on their professional work experience.</span> Minimum experience was four years, with demonstrated recognition, promotion, and management responsibilities.</li>
+<li><span class="verbatim">pass a video interview, a background check, a training and a quiz to participate in the project.</span></li>
+<li><span class="verbatim">The industry experts also brought occupational diversity, representing different company sizes, locations, and sub-specialties. Each occupation had a minimum of 5 qualified professionals. Experts for each occupation were required to have previous experience in that specific occupation and sector based on the O*NET occupation definitions (U.S. Bureau of Labor Statistics, 2025a).</span></li>
+<li><span class="verbatim">Professional Services Qualification: Technology and intellectual property attorney with partner roles at multiple AmLaw 100 firms in New York and California, and 15+ years of experience advising clients on emerging technologies, advertising, antitrust, and cross-border disputes and transactions.</span></li>
+<li><span class="verbatim">Healthcare Qualification: Nursing professional with 18+ years of expertise in emergency medicine, renal management, care coordination, and healthcare operations. Skilled in quality assurance, case management, and professional education.</span></li>
+<li><span class="verbatim">Retail Trade Qualification: Strategic retail executive with 15 years of experience growing prestige and niche beauty brands through national account leadership, $1B+ P&amp;L ownership, and data-driven omnichannel strategies.</span></li>
+<li><span class="verbatim">Finance Qualification: Fintech and Wall Street leader with 20+ years of experience in wealth management, asset management, and capital markets across global institutions and startups.</span></li>
+<li><span class="verbatim">Wholesale Trade Qualification: National Accounts Sales Manager for US, China, and Sweden based brands/factories with over 25 years of experience selling to US based retailers.</span></li>
+<li><span class="verbatim">Manufacturing Qualification: Lead Industrial Engineer with 5+ years of experience managing large-scale projects and leading teams of 10+ engineers in industrial operations.</span></li>
+<li><span class="verbatim">Government Qualification: Executive leader with 15+ years working at strategic and operational levels in government and non-profit sectors in housing, human service and labor market programs.</span></li>
+<li><span class="verbatim">Real Estate and Leasing Qualification: Seasoned commercial real estate broker with 10 years of experience in investment sales, leasing, and managing real estate offices and agents.</span></li>
+<li><span class="verbatim">Information Qualification: An experienced senior journalist and content leader with over 20 years in top-tier media, global corporations, and high-growth startups.</span></li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: The average expert had 14 years of experience.</li>
+</ul>
+</li>
+<li>
+<p><strong>H019 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>pass a video interview, a background check, a training and a quiz to partici- pate in the project.</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Expert Sourcing</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <span class="verbatim">pass a video interview, a background check, a training and a quiz to participate in the project.</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: pass a video interview, a background check, a training and a quiz to participate in the project.</li>
+</ul>
+</li>
+<li>
+<p><strong>H081 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>15+ years</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Expert Sourcing</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <span class="verbatim">Government Qualification: Executive leader with 15+ years working at strategic and operational levels in government and non-profit sectors in housing, human service and labor market programs.</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: 15+ years</li>
+</ul>
+</li>
+<li>
+<p><strong>H082 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>18+ years</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Expert Sourcing</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <span class="verbatim">Healthcare Qualification: Nursing professional with 18+ years of expertise in emergency medicine, renal management, care coordination, and healthcare operations. Skilled in quality assurance, case management, and professional education.</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: 18+ years</li>
+</ul>
+</li>
+<li>
+<p><strong>H083 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>15 years</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Expert Sourcing</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <span class="verbatim">Retail Trade Qualification: Strategic retail executive with 15 years of experience growing prestige and niche beauty brands through national account leadership, $1B+ P&amp;L ownership, and data-driven omnichannel strategies.</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: 15 years</li>
+</ul>
+</li>
+<li>
+<p><strong>H084 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>20+ years</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Expert Sourcing</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <span class="verbatim">Finance Qualification: Fintech and Wall Street leader with 20+ years of experience in wealth management, asset management, and capital markets across global institutions and startups.</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: 20+ years</li>
+</ul>
+</li>
+<li>
+<p><strong>H085 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>25 years</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Expert Sourcing</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <span class="verbatim">Wholesale Trade Qualification: National Accounts Sales Manager for US, China, and Sweden based brands/factories with over 25 years of experience selling to US based retailers.</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: 25 years</li>
+</ul>
+</li>
+<li>
+<p><strong>H086 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>5+ years</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Expert Sourcing</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <span class="verbatim">Manufacturing Qualification: Lead Industrial Engineer with 5+ years of experience managing large-scale projects and leading teams of 10+ engineers in industrial operations.</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: 5+ years</li>
+</ul>
+</li>
+<li>
+<p><strong>H087 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>teams of 10+ engineers</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Expert Sourcing</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <span class="verbatim">Manufacturing Qualification: Lead Industrial Engineer with 5+ years of experience managing large-scale projects and leading teams of 10+ engineers in industrial operations.</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: teams of 10+ engineers</li>
+</ul>
+</li>
+<li>
+<p><strong>H088 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>15+ years</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Expert Sourcing</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <span class="verbatim">Government Qualification: Executive leader with 15+ years working at strategic and operational levels in government and non-profit sectors in housing, human service and labor market programs.</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: 15+ years</li>
+</ul>
+</li>
+<li>
+<p><strong>H089 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>10 years</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Expert Sourcing</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <span class="verbatim">Real Estate and Leasing Qualification: Seasoned commercial real estate broker with 10 years of experience in investment sales, leasing, and managing real estate offices and agents.</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: 10 years</li>
+</ul>
+</li>
+<li>
+<p><strong>H090 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>20 years</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Expert Sourcing</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <span class="verbatim">Information Qualification: An experienced senior journalist and content leader with over 20 years in top-tier media, global corporations, and high-growth startups.</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: 20 years</li>
+</ul>
+</li>
+<li>
+<p><strong>H091 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Less than 10% of applicants were selected to con- tribute tasks to our full set.</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Expert Sourcing</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Expert Sourcing:</strong> Professionals averaged <span class="verbatim">14 years of experience</span>; fewer than 10% of applicants were selected, with ≥5 qualified professionals per occupation.</p>
+</li>
+<li>Experts created <span class="verbatim">realistic tasks based on their professional work experience.</span> Minimum experience was four years, with demonstrated recognition, promotion, and management responsibilities.</li>
+<li><span class="verbatim">pass a video interview, a background check, a training and a quiz to participate in the project.</span></li>
+<li><span class="verbatim">The industry experts also brought occupational diversity, representing different company sizes, locations, and sub-specialties. Each occupation had a minimum of 5 qualified professionals. Experts for each occupation were required to have previous experience in that specific occupation and sector based on the O*NET occupation definitions (U.S. Bureau of Labor Statistics, 2025a).</span></li>
+<li><span class="verbatim">Professional Services Qualification: Technology and intellectual property attorney with partner roles at multiple AmLaw 100 firms in New York and California, and 15+ years of experience advising clients on emerging technologies, advertising, antitrust, and cross-border disputes and transactions.</span></li>
+<li><span class="verbatim">Healthcare Qualification: Nursing professional with 18+ years of expertise in emergency medicine, renal management, care coordination, and healthcare operations. Skilled in quality assurance, case management, and professional education.</span></li>
+<li><span class="verbatim">Retail Trade Qualification: Strategic retail executive with 15 years of experience growing prestige and niche beauty brands through national account leadership, $1B+ P&amp;L ownership, and data-driven omnichannel strategies.</span></li>
+<li><span class="verbatim">Finance Qualification: Fintech and Wall Street leader with 20+ years of experience in wealth management, asset management, and capital markets across global institutions and startups.</span></li>
+<li><span class="verbatim">Wholesale Trade Qualification: National Accounts Sales Manager for US, China, and Sweden based brands/factories with over 25 years of experience selling to US based retailers.</span></li>
+<li><span class="verbatim">Manufacturing Qualification: Lead Industrial Engineer with 5+ years of experience managing large-scale projects and leading teams of 10+ engineers in industrial operations.</span></li>
+<li><span class="verbatim">Government Qualification: Executive leader with 15+ years working at strategic and operational levels in government and non-profit sectors in housing, human service and labor market programs.</span></li>
+<li><span class="verbatim">Real Estate and Leasing Qualification: Seasoned commercial real estate broker with 10 years of experience in investment sales, leasing, and managing real estate offices and agents.</span></li>
+<li><span class="verbatim">Information Qualification: An experienced senior journalist and content leader with over 20 years in top-tier media, global corporations, and high-growth startups.</span></li>
+<li>
+<p>Meaning: The selected percentage is retained in the visible sourcing lead; the author possessive our full set is removed.</p>
+</li>
+<li>
+<p>Transformation reason: The selected percentage is retained in the visible sourcing lead; the author possessive our full set is removed.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H092 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Each occupation had a minimum of 5 quali- fied professionals.</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Expert Sourcing</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <span class="verbatim">The industry experts also brought occupational diversity, representing different company sizes, locations, and sub-specialties. Each occupation had a minimum of 5 qualified professionals. Experts for each occupation were required to have previous experience in that specific occupation and sector based on the O*NET occupation definitions (U.S. Bureau of Labor Statistics, 2025a).</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: Each occupation had a minimum of 5 qualified professionals.</li>
+</ul>
+</li>
+</ul>
+<h2 id="scope">Scope</h2>
+<p><strong>Priority 3 · Summary</strong></p>
+<p><strong>Scope:</strong> Full set: <span class="verbatim">1,320 tasks</span>; gold subset: <span class="verbatim">220 tasks</span>. Coverage: <span class="verbatim">44 occupations across the top 9 sectors contributing to U.S. GDP (Gross Domestic Product).</span> Thirty tasks per occupation in the full set; five in the gold subset.</p>
+<ul>
+<li>
+<p><strong>H001 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>44 occupations across the top 9 sectors contributing to U.S. GDP (Gross Domestic Product).</code></li>
+<li>
+<p>Now represented under <strong>Summary → Scope</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Scope:</strong> Full set: <span class="verbatim">1,320 tasks</span>; gold subset: <span class="verbatim">220 tasks</span>. Coverage: <span class="verbatim">44 occupations across the top 9 sectors contributing to U.S. GDP (Gross Domestic Product).</span> Thirty tasks per occupation in the full set; five in the gold subset.</p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: 44 occupations across the top 9 sectors contributing to U.S. GDP (Gross Domestic Product).</li>
+</ul>
+</li>
+<li>
+<p><strong>H003 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>220 tasks</code></li>
+<li>
+<p>Now represented under <strong>Summary → Scope</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Scope:</strong> Full set: <span class="verbatim">1,320 tasks</span>; gold subset: <span class="verbatim">220 tasks</span>. Coverage: <span class="verbatim">44 occupations across the top 9 sectors contributing to U.S. GDP (Gross Domestic Product).</span> Thirty tasks per occupation in the full set; five in the gold subset.</p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: 220 tasks</li>
+</ul>
+</li>
+<li>
+<p><strong>H005 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>at least 30 tasks per occupation in the full set (and 5 tasks per occupation in the gold subset), across 44 occupations.</code></li>
+<li>
+<p>Now represented under <strong>Summary → Scope</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Scope:</strong> Full set: <span class="verbatim">1,320 tasks</span>; gold subset: <span class="verbatim">220 tasks</span>. Coverage: <span class="verbatim">44 occupations across the top 9 sectors contributing to U.S. GDP (Gross Domestic Product).</span> Thirty tasks per occupation in the full set; five in the gold subset.</p>
+</li>
+<li>
+<p>Meaning: The full-set minimum and gold-subset per-occupation counts are combined with total counts in a default-color sentence; thirty is written as a word.</p>
+</li>
+<li>
+<p>Transformation reason: The full-set minimum and gold-subset per-occupation counts are combined with total counts in a default-color sentence; thirty is written as a word.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H010 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>1,320 tasks</code></li>
+<li>
+<p>Now represented under <strong>Summary → Scope</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Scope:</strong> Full set: <span class="verbatim">1,320 tasks</span>; gold subset: <span class="verbatim">220 tasks</span>. Coverage: <span class="verbatim">44 occupations across the top 9 sectors contributing to U.S. GDP (Gross Domestic Product).</span> Thirty tasks per occupation in the full set; five in the gold subset.</p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: 1,320 tasks</li>
+</ul>
+</li>
+</ul>
+<h2 id="evaluation-method">Evaluation Method</h2>
+<p><strong>Priority 3 · Summary</strong></p>
+<p><strong>Evaluation Method:</strong> Head-to-head human expert comparison against a <span class="verbatim">human expert baseline,</span> plus <span class="verbatim">an experimental automated grader</span> and a public grading service.</p>
+<ul>
+<li>
+<p><strong>H004 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>a pub- lic automated grading service</code></li>
+<li>
+<p>Now represented under <strong>Summary → Evaluation Method</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Evaluation Method:</strong> Head-to-head human expert comparison against a <span class="verbatim">human expert baseline,</span> plus <span class="verbatim">an experimental automated grader</span> and a public grading service.</p>
+</li>
+<li>The primary evaluation metric is head-to-head human expert comparison; the primary metric is win rate.</li>
+<li>The gold subset has an experimental automated grading service.</li>
+<li>
+<p>Meaning: The line-hyphenated public-service phrase is expressed as a public grading service in the lead and experimental automated service in context.</p>
+</li>
+<li>
+<p>Transformation reason: The line-hyphenated public-service phrase is expressed as a public grading service in the lead and experimental automated service in context.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H006 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>our primary evaluation metric is head-to-head human expert comparison.</code></li>
+<li>
+<p>Now represented under <strong>Summary → Evaluation Method</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Evaluation Method:</strong> Head-to-head human expert comparison against a <span class="verbatim">human expert baseline,</span> plus <span class="verbatim">an experimental automated grader</span> and a public grading service.</p>
+</li>
+<li>The primary evaluation metric is head-to-head human expert comparison; the primary metric is win rate.</li>
+<li>The gold subset has an experimental automated grading service.</li>
+<li>
+<p>Meaning: The possessive author framing is removed from the primary-evaluation-method statement.</p>
+</li>
+<li>
+<p>Transformation reason: The possessive author framing is removed from the primary-evaluation-method statement.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H007 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>an experimental automated grader</code></li>
+<li>
+<p>Now represented under <strong>Summary → Evaluation Method</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Evaluation Method:</strong> Head-to-head human expert comparison against a <span class="verbatim">human expert baseline,</span> plus <span class="verbatim">an experimental automated grader</span> and a public grading service.</p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: an experimental automated grader</li>
+</ul>
+</li>
+<li>
+<p><strong>H013 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>our primary metric is win rate,</code></li>
+<li>
+<p>Now represented under <strong>Summary → Evaluation Method</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Evaluation Method:</strong> Head-to-head human expert comparison against a <span class="verbatim">human expert baseline,</span> plus <span class="verbatim">an experimental automated grader</span> and a public grading service.</p>
+</li>
+<li>The primary evaluation metric is head-to-head human expert comparison; the primary metric is win rate.</li>
+<li>The gold subset has an experimental automated grading service.</li>
+<li>
+<p>Meaning: Author framing is removed; the source context still explicitly names win rate as the primary metric.</p>
+</li>
+<li>
+<p>Transformation reason: Author framing is removed; the source context still explicitly names win rate as the primary metric.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H015 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>compare model outputs against a human expert baseline,</code></li>
+<li>
+<p>Now represented under <strong>Summary → Evaluation Method</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Evaluation Method:</strong> Head-to-head human expert comparison against a <span class="verbatim">human expert baseline,</span> plus <span class="verbatim">an experimental automated grader</span> and a public grading service.</p>
+</li>
+<li>The primary evaluation metric is head-to-head human expert comparison; the primary metric is win rate.</li>
+<li>The gold subset has an experimental automated grading service.</li>
+<li>
+<p>Meaning: The comparison baseline is integrated with the human-comparison lead; the exact baseline fragment remains blue.</p>
+</li>
+<li>
+<p>Transformation reason: The comparison baseline is integrated with the human-comparison lead; the exact baseline fragment remains blue.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="economic-relevance">Economic Relevance</h2>
+<p><strong>Priority 3 · Impact</strong></p>
+<p><strong>Economic Relevance:</strong> Capability measurement offers evidence relevant to labor-market effects ahead of widespread adoption.</p>
+<ul>
+<li>
+<p><strong>H008 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>how increasingly capable AI models could affect the labor market—</code></li>
+<li>
+<p>Now represented under <strong>Impact → Economic Relevance</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - The paper considers <span class="verbatim">how increasingly capable AI models could affect the labor market—</span> automating tasks, replacing occupations, or creating new kinds of work.</p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: how increasingly capable AI models could affect the labor market—</li>
+</ul>
+</li>
+</ul>
+<h2 id="task-design">Task Design</h2>
+<p><strong>Priority 3 · Dataset Creation</strong></p>
+<p><strong>Task Design:</strong> Requests derive from <span class="verbatim">actual work product from industry experts,</span> and are classified against O*NET occupational tasks.</p>
+<ul>
+<li>
+<p><strong>H009 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>tasks are based on actual work product from industry experts,</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Task Design</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Task Design:</strong> Requests derive from <span class="verbatim">actual work product from industry experts,</span> and are classified against O*NET occupational tasks.</p>
+</li>
+<li><span class="verbatim">Experts classified their requests against O*NET occupational tasks for their occupation to ensure broad and representative coverage across tasks (U.S. Bureau of Labor Statistics, 2025a).</span></li>
+<li>Original Request — Administrative Services Manager:</li>
+<li><span class="verbatim">You are the Administrative Services Manager of the Administrative Support Branch. You are responsible for the Administrative Support Teams in the Regional Branches of the Department of Civilian Services.</span></li>
+<li><span class="verbatim">At the January Regional Administrative Support Supervisors and Team Leads Forum, the attendees identified that reporting by staff for unscheduled absences or lateness has become inconsistent. The HR representative in attendance stated that this has resulted in errors in the HR time tracking system, resulting in select staff receiving pay for time not worked and improper reporting on time off for staff with open Medical or Family Assistance (MFA) case files.</span></li>
+<li><span class="verbatim">Specific issues identified at the Forum are:</span></li>
+<li><span class="verbatim">a) increased incidences of lateness with no notification from the staff member;</span></li>
+<li><span class="verbatim">b) when informing of an unscheduled absence or lateness, some staff call, while others text or email, inform a co-worker to pass the message on, or leave a voicemail;</span></li>
+<li><span class="verbatim">c) staff members reporting unscheduled absences long after their start times result in coverage problems at the Regional Branches;</span></li>
+<li><span class="verbatim">d) Team Leads and Supervisors not being able to ask questions or offer employee support in situations where more details are needed, especially when there is an attendance issue; and</span></li>
+<li><span class="verbatim">e) MFA case file information not being communicated to human resources.</span></li>
+<li><span class="verbatim">There is need for a new “Reporting of Unscheduled Absence or Lateness Policy” procedure.  Create a one-page Word document outlining procedures for staff to report unplanned absence or late start with a phone call to the appropriate person.</span></li>
+<li><span class="verbatim">The document should include the purpose, scope, relevant definitions, and procedures that address the issues identified above.</span></li>
+<li><span class="verbatim">This new procedure will help create a clear process, improve accuracy in reporting and tracking time away &amp; MFA case information, and ensure Supervisors and Team Leads in Regional Branches are informed ahead of time to arrange for coverage when needed.</span></li>
+<li>Original Human Deliverable — Reporting of Unscheduled Absence or Lateness:</li>
+<li><span class="verbatim">Regional Branch(es) Policy Procedure</span></li>
+<li><span class="verbatim">Name: Reporting of Unscheduled Absence or Lateness</span></li>
+<li><span class="verbatim">Policy No.:331.202.01</span></li>
+<li><span class="verbatim">Effective Date:  March 14, 2025</span></li>
+<li><span class="verbatim">Purpose: To report an unscheduled absence or lateness</span></li>
+<li><span class="verbatim">Scope: This policy applies to all Regional Branch employees</span></li>
+<li><span class="verbatim">Definition(s):Absence: Time off from work. An absence may be scheduled or unscheduled.</span></li>
+<li><span class="verbatim">Lateness: When an employee reports for duty after the scheduled starting time or returns late from a scheduled meal or break period. Lateness is defined by eight minutes after their shift starts.</span></li>
+<li><span class="verbatim">Procedure:</span></li>
+<li>1. <span class="verbatim">Employees must report an unscheduled absence at least one hour before their shift starts.</span></li>
+<li>2. <span class="verbatim">Employees must report lateness as soon as possible.</span></li>
+<li>3. <span class="verbatim">Administrative Assistants must call the on-site Supervisor to inform them of an unscheduled absence or lateness.</span></li>
+<li>4. <span class="verbatim">Supervisors report their unscheduled absences or lateness to their immediate Supervisor or their one up’s delegate.</span></li>
+<li>5. <span class="verbatim">Any Employee that has an open Medical or Family Assistance (MFA) case file must contact a Supervisor or Manager to report an unscheduled absence or lateness. It must be indicated whether or not the absence is related to the open case file. If no indication is made, the unscheduled absence or lateness will be noted as NOT MFA related in the time tracking system.</span></li>
+<li>6. <span class="verbatim">Unacceptable forms of notification of unscheduled absence or lateness are voicemail, calling a fellow co-worker, text message, or email. Phone calls are the only acceptable form of notification.</span></li>
+<li>7. <span class="verbatim">The procedure does not relate to planned absences or lateness.</span></li>
+<li>
+<p>Meaning: The selected task-provenance clause is condensed to Requests derive from the exact work-product fragment; expert provenance is unchanged.</p>
+</li>
+<li>
+<p>Transformation reason: The selected task-provenance clause is condensed to Requests derive from the exact work-product fragment; expert provenance is unchanged.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H020 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Each GDPval task consists of two primary components: a request (often with reference files) and a deliverable (work product).</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Task Design</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Task Design:</strong> Requests derive from <span class="verbatim">actual work product from industry experts,</span> and are classified against O*NET occupational tasks.</p>
+</li>
+<li><span class="verbatim">Experts classified their requests against O*NET occupational tasks for their occupation to ensure broad and representative coverage across tasks (U.S. Bureau of Labor Statistics, 2025a).</span></li>
+<li>Original Request — Administrative Services Manager:</li>
+<li><span class="verbatim">You are the Administrative Services Manager of the Administrative Support Branch. You are responsible for the Administrative Support Teams in the Regional Branches of the Department of Civilian Services.</span></li>
+<li><span class="verbatim">At the January Regional Administrative Support Supervisors and Team Leads Forum, the attendees identified that reporting by staff for unscheduled absences or lateness has become inconsistent. The HR representative in attendance stated that this has resulted in errors in the HR time tracking system, resulting in select staff receiving pay for time not worked and improper reporting on time off for staff with open Medical or Family Assistance (MFA) case files.</span></li>
+<li><span class="verbatim">Specific issues identified at the Forum are:</span></li>
+<li><span class="verbatim">a) increased incidences of lateness with no notification from the staff member;</span></li>
+<li><span class="verbatim">b) when informing of an unscheduled absence or lateness, some staff call, while others text or email, inform a co-worker to pass the message on, or leave a voicemail;</span></li>
+<li><span class="verbatim">c) staff members reporting unscheduled absences long after their start times result in coverage problems at the Regional Branches;</span></li>
+<li><span class="verbatim">d) Team Leads and Supervisors not being able to ask questions or offer employee support in situations where more details are needed, especially when there is an attendance issue; and</span></li>
+<li><span class="verbatim">e) MFA case file information not being communicated to human resources.</span></li>
+<li><span class="verbatim">There is need for a new “Reporting of Unscheduled Absence or Lateness Policy” procedure.  Create a one-page Word document outlining procedures for staff to report unplanned absence or late start with a phone call to the appropriate person.</span></li>
+<li><span class="verbatim">The document should include the purpose, scope, relevant definitions, and procedures that address the issues identified above.</span></li>
+<li><span class="verbatim">This new procedure will help create a clear process, improve accuracy in reporting and tracking time away &amp; MFA case information, and ensure Supervisors and Team Leads in Regional Branches are informed ahead of time to arrange for coverage when needed.</span></li>
+<li>Original Human Deliverable — Reporting of Unscheduled Absence or Lateness:</li>
+<li><span class="verbatim">Regional Branch(es) Policy Procedure</span></li>
+<li><span class="verbatim">Name: Reporting of Unscheduled Absence or Lateness</span></li>
+<li><span class="verbatim">Policy No.:331.202.01</span></li>
+<li><span class="verbatim">Effective Date:  March 14, 2025</span></li>
+<li><span class="verbatim">Purpose: To report an unscheduled absence or lateness</span></li>
+<li><span class="verbatim">Scope: This policy applies to all Regional Branch employees</span></li>
+<li><span class="verbatim">Definition(s):Absence: Time off from work. An absence may be scheduled or unscheduled.</span></li>
+<li><span class="verbatim">Lateness: When an employee reports for duty after the scheduled starting time or returns late from a scheduled meal or break period. Lateness is defined by eight minutes after their shift starts.</span></li>
+<li><span class="verbatim">Procedure:</span></li>
+<li>1. <span class="verbatim">Employees must report an unscheduled absence at least one hour before their shift starts.</span></li>
+<li>2. <span class="verbatim">Employees must report lateness as soon as possible.</span></li>
+<li>3. <span class="verbatim">Administrative Assistants must call the on-site Supervisor to inform them of an unscheduled absence or lateness.</span></li>
+<li>4. <span class="verbatim">Supervisors report their unscheduled absences or lateness to their immediate Supervisor or their one up’s delegate.</span></li>
+<li>5. <span class="verbatim">Any Employee that has an open Medical or Family Assistance (MFA) case file must contact a Supervisor or Manager to report an unscheduled absence or lateness. It must be indicated whether or not the absence is related to the open case file. If no indication is made, the unscheduled absence or lateness will be noted as NOT MFA related in the time tracking system.</span></li>
+<li>6. <span class="verbatim">Unacceptable forms of notification of unscheduled absence or lateness are voicemail, calling a fellow co-worker, text message, or email. Phone calls are the only acceptable form of notification.</span></li>
+<li>7. <span class="verbatim">The procedure does not relate to planned absences or lateness.</span></li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: Each GDPval task consists of two primary components: a request (often with reference files) and a deliverable (work product).</li>
+</ul>
+</li>
+</ul>
+<h2 id="representative-breadth">Representative Breadth</h2>
+<p><strong>Priority 3 · Special Design</strong></p>
+<p><strong>Representative Breadth:</strong> Top-down occupation selection extends beyond current model adoption.</p>
+<ul>
+<li>
+<p><strong>H011 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>production AI usage analyses</code></li>
+<li>
+<p>Now represented under <strong>Special Design → Representative Breadth</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <span class="verbatim">production AI usage analyses</span> also guided coverage of areas where model adoption is still emerging.</p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: production AI usage analyses</li>
+</ul>
+</li>
+<li>
+<p><strong>H016 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>highest-earning knowledge work occupations</code></li>
+<li>
+<p>Now represented under <strong>Special Design → Representative Breadth</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <span class="verbatim">highest-earning knowledge work occupations within those sectors.</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: highest-earning knowledge work occupations</li>
+</ul>
+</li>
+</ul>
+<h2 id="human-expert-grading">Human Expert Grading</h2>
+<p><strong>Priority 3 · Model Evaluation · Human Review</strong></p>
+<p><strong>Human Expert Grading:</strong> Blinded experts ranked <span class="verbatim">two or more unlabeled work deliverables</span>; comparisons took <span class="verbatim">over an hour</span> on average.</p>
+<ul>
+<li>
+<p><strong>H012 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>In addition to correctness, expert graders often consider subjective factors such as structure, style, format, aesthetics, and relevance.</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Human Review → Human Expert Grading</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <span class="verbatim">In addition to correctness, expert graders often consider subjective factors such as structure, style, format, aesthetics, and relevance.</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: In addition to correctness, expert graders often consider subjective factors such as structure, style, format, aesthetics, and relevance.</li>
+</ul>
+</li>
+<li>
+<p><strong>H025 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>blinded expert pairwise comparisons,</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Human Review → Human Expert Grading</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Human Expert Grading:</strong> Blinded experts ranked <span class="verbatim">two or more unlabeled work deliverables</span>; comparisons took <span class="verbatim">over an hour</span> on average.</p>
+</li>
+<li><span class="verbatim">In addition to correctness, expert graders often consider subjective factors such as structure, style, format, aesthetics, and relevance.</span></li>
+<li>Experts saw the request and reference files, ranked deliverables, and justified decisions. Three samples × three graders yielded nine comparisons per prompt/model across 220 tasks.</li>
+<li><span class="verbatim">model samples may still have been identifiable due to stylistic differences.</span></li>
+<li>
+<p>Meaning: Blinded pairwise comparison is expressed neutrally as experts ranking unlabeled deliverables, with request/reference inputs and sampling/grading design retained.</p>
+</li>
+<li>
+<p>Transformation reason: Blinded pairwise comparison is expressed neutrally as experts ranking unlabeled deliverables, with request/reference inputs and sampling/grading design retained.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H026 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>rank two or more unlabeled work deliverables.</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Human Review → Human Expert Grading</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Human Expert Grading:</strong> Blinded experts ranked <span class="verbatim">two or more unlabeled work deliverables</span>; comparisons took <span class="verbatim">over an hour</span> on average.</p>
+</li>
+<li><span class="verbatim">In addition to correctness, expert graders often consider subjective factors such as structure, style, format, aesthetics, and relevance.</span></li>
+<li>Experts saw the request and reference files, ranked deliverables, and justified decisions. Three samples × three graders yielded nine comparisons per prompt/model across 220 tasks.</li>
+<li><span class="verbatim">model samples may still have been identifiable due to stylistic differences.</span></li>
+<li>
+<p>Meaning: The ranking action is in the default-color lead; the deliverable phrase remains exact with its terminal period outside the blue span.</p>
+</li>
+<li>
+<p>Transformation reason: The ranking action is in the default-color lead; the deliverable phrase remains exact with its terminal period outside the blue span.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H027 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>over an hour.</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Human Review → Human Expert Grading</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Human Expert Grading:</strong> Blinded experts ranked <span class="verbatim">two or more unlabeled work deliverables</span>; comparisons took <span class="verbatim">over an hour</span> on average.</p>
+</li>
+<li><span class="verbatim">In addition to correctness, expert graders often consider subjective factors such as structure, style, format, aesthetics, and relevance.</span></li>
+<li>Experts saw the request and reference files, ranked deliverables, and justified decisions. Three samples × three graders yielded nine comparisons per prompt/model across 220 tasks.</li>
+<li><span class="verbatim">model samples may still have been identifiable due to stylistic differences.</span></li>
+<li>
+<p>Meaning: The exact duration fragment remains blue with its period moved into sentence punctuation; the average comparison context remains explicit.</p>
+</li>
+<li>
+<p>Transformation reason: The exact duration fragment remains blue with its period moved into sentence punctuation; the average comparison context remains explicit.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H030 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>stylistic differences.</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Human Review → Human Expert Grading</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <span class="verbatim">model samples may still have been identifiable due to stylistic differences.</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: stylistic differences.</li>
+</ul>
+</li>
+</ul>
+<h2 id="difficulty">difficulty</h2>
+<p><strong>Priority 3 · Quality Control · Human Review · Quality Dimensions</strong></p>
+<p>Difficulty: mean 3.32 gold / 3.20 full (1–5). Workload: gold mean 9.49 h, median 5 h; full mean 8.63 h, median 4 h.</p>
+<ul>
+<li>
+<p><strong>H014 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>average of 7 hours of work</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Quality Dimensions → difficulty</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - The introduction reports an <span class="verbatim">average of 7 hours of work</span> for an expert; the task-statistics tables report the means and medians above. Completion time is workload context.</p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: average of 7 hours of work</li>
+</ul>
+</li>
+<li>
+<p><strong>H075 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Avg time to complete (hrs) 9.49</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Quality Dimensions → difficulty</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - Difficulty: mean 3.32 gold / 3.20 full (1–5). Workload: gold mean 9.49 h, median 5 h; full mean 8.63 h, median 4 h.</p>
+<ul>
+<li>The introduction reports an <span class="verbatim">average of 7 hours of work</span> for an expert; the task-statistics tables report the means and medians above. Completion time is workload context.</li>
+</ul>
+</li>
+<li>
+<p>Meaning: The table row is reconstructed as a gold-task workload mean of 9.49 hours, beside the corresponding median of 5 hours.</p>
+</li>
+<li>
+<p>Transformation reason: The table row is reconstructed as a gold-task workload mean of 9.49 hours, beside the corresponding median of 5 hours.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H076 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Avg time to complete (hrs) 8.63</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Quality Dimensions → difficulty</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - Difficulty: mean 3.32 gold / 3.20 full (1–5). Workload: gold mean 9.49 h, median 5 h; full mean 8.63 h, median 4 h.</p>
+<ul>
+<li>The introduction reports an <span class="verbatim">average of 7 hours of work</span> for an expert; the task-statistics tables report the means and medians above. Completion time is workload context.</li>
+</ul>
+</li>
+<li>
+<p>Meaning: The table row is reconstructed as a full-set workload mean of 8.63 hours, beside the corresponding median of 4 hours.</p>
+</li>
+<li>
+<p>Transformation reason: The table row is reconstructed as a full-set workload mean of 8.63 hours, beside the corresponding median of 4 hours.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="representativeness">representativeness</h2>
+<p><strong>Priority 3 · Quality Control · Human Review · Quality Dimensions</strong></p>
+<p>Representativeness: occupational experts rated tasks against real-world standards (1–5); mean 4.50 gold / 4.43 full.</p>
+<ul>
+<li>
+<p><strong>H021 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>To assess task quality, we asked occupational experts to rate each task on its difficulty, representativeness, time to complete, and overall quality against real-world standards for their occupation.</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Quality Dimensions → representativeness</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - Representativeness: occupational experts rated tasks against real-world standards (1–5); mean 4.50 gold / 4.43 full.</p>
+<ul>
+<li>Occupational experts assessed difficulty, representativeness, time to complete, and overall quality against real-world occupational standards.</li>
+</ul>
+</li>
+<li>
+<p>Meaning: The question to occupational experts is expressed neutrally, retaining all four assessed dimensions and occupational real-world standards.</p>
+</li>
+<li>
+<p>Transformation reason: The question to occupational experts is expressed neutrally, retaining all four assessed dimensions and occupational real-world standards.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="automated-grading">Automated Grading</h2>
+<p><strong>Priority 3 · Model Evaluation · Auto Judge</strong></p>
+<p><strong>Automated Grading:</strong> Experimental GPT-5-high grader: 65.7% human agreement versus 70.8% human inter-rater agreement; 12/220 tasks ungradable.</p>
+<ul>
+<li>
+<p><strong>H028 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>we trained an experimental grading model</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Automated Grading</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Automated Grading:</strong> Experimental GPT-5-high grader: 65.7% human agreement versus 70.8% human inter-rater agreement; 12/220 tasks ungradable.</p>
+</li>
+<li>The experimental grading model performs expert-style pairwise comparisons. <span class="verbatim">Although limited, the automated grader is faster and cheaper than expert grading,</span> but is not a full substitute.</li>
+<li>Agreement uses scores H (human) and A (automated) in {0, 0.5, 1}: model preferred = 1, human preferred = 0, tie = 0.5. Human–automated agreement is E[1 − |H − A|]; human inter-rater agreement is E[1 − |H₁ − H₂|]. The latter uses <span class="verbatim">the empirical mean over all pairs of ratings</span> per sample, then averages sample scores for each model with at least two human graders.</li>
+<li><span class="verbatim">average human-automated grader agreement was 65.7% and human inter-rater agreement was 70.8%.</span> This was measured across three automated grader sweeps; valid scores only, excluding errors and the 12 ungradable tasks.</li>
+<li>The GPT-5-high grader correlates less with humans on capable OpenAI models, consistent with evidence that <span class="verbatim">models often favor their own responses</span>. <span class="verbatim">Both agreement metrics are highest for less capable models, since their outputs are easier to distinguish from human deliverables and are less likely to be preferred.</span></li>
+<li>Limitations: no internet, Python-only execution (three software tasks excluded), font-rendering differences, and limited speech-to-text/non-voice audio. <span class="verbatim">12 out of 220 tasks as ungradable due to limitations of the automated grader.</span></li>
+<li>
+<p>Meaning: Author framing is removed; the trained experimental expert-style pairwise grading model is identified in the lead and context.</p>
+</li>
+<li>
+<p>Transformation reason: Author framing is removed; the trained experimental expert-style pairwise grading model is identified in the lead and context.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H029 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>achieves 66% agreement with human expert graders, only 5% below human expert inter-rating agreement of 71%.</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Automated Grading</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Automated Grading:</strong> Experimental GPT-5-high grader: 65.7% human agreement versus 70.8% human inter-rater agreement; 12/220 tasks ungradable.</p>
+</li>
+<li>The experimental grading model performs expert-style pairwise comparisons. <span class="verbatim">Although limited, the automated grader is faster and cheaper than expert grading,</span> but is not a full substitute.</li>
+<li>Agreement uses scores H (human) and A (automated) in {0, 0.5, 1}: model preferred = 1, human preferred = 0, tie = 0.5. Human–automated agreement is E[1 − |H − A|]; human inter-rater agreement is E[1 − |H₁ − H₂|]. The latter uses <span class="verbatim">the empirical mean over all pairs of ratings</span> per sample, then averages sample scores for each model with at least two human graders.</li>
+<li><span class="verbatim">average human-automated grader agreement was 65.7% and human inter-rater agreement was 70.8%.</span> This was measured across three automated grader sweeps; valid scores only, excluding errors and the 12 ungradable tasks.</li>
+<li>The GPT-5-high grader correlates less with humans on capable OpenAI models, consistent with evidence that <span class="verbatim">models often favor their own responses</span>. <span class="verbatim">Both agreement metrics are highest for less capable models, since their outputs are easier to distinguish from human deliverables and are less likely to be preferred.</span></li>
+<li>Limitations: no internet, Python-only execution (three software tasks excluded), font-rendering differences, and limited speech-to-text/non-voice audio. <span class="verbatim">12 out of 220 tasks as ungradable due to limitations of the automated grader.</span></li>
+<li>
+<p>Meaning: The detailed appendix estimates 65.7% and 70.8% replace rounded 66% and 71%; their 5.1-percentage-point gap is preserved by those explicit paired values.</p>
+</li>
+<li>
+<p>Transformation reason: The detailed appendix estimates 65.7% and 70.8% replace rounded 66% and 71%; their 5.1-percentage-point gap is preserved by those explicit paired values.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H048 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>we make an automated grader proxy available, but do not consider it a full substitute for industry expert graders.</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Automated Grading</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Automated Grading:</strong> Experimental GPT-5-high grader: 65.7% human agreement versus 70.8% human inter-rater agreement; 12/220 tasks ungradable.</p>
+</li>
+<li>The experimental grading model performs expert-style pairwise comparisons. <span class="verbatim">Although limited, the automated grader is faster and cheaper than expert grading,</span> but is not a full substitute.</li>
+<li>Agreement uses scores H (human) and A (automated) in {0, 0.5, 1}: model preferred = 1, human preferred = 0, tie = 0.5. Human–automated agreement is E[1 − |H − A|]; human inter-rater agreement is E[1 − |H₁ − H₂|]. The latter uses <span class="verbatim">the empirical mean over all pairs of ratings</span> per sample, then averages sample scores for each model with at least two human graders.</li>
+<li><span class="verbatim">average human-automated grader agreement was 65.7% and human inter-rater agreement was 70.8%.</span> This was measured across three automated grader sweeps; valid scores only, excluding errors and the 12 ungradable tasks.</li>
+<li>The GPT-5-high grader correlates less with humans on capable OpenAI models, consistent with evidence that <span class="verbatim">models often favor their own responses</span>. <span class="verbatim">Both agreement metrics are highest for less capable models, since their outputs are easier to distinguish from human deliverables and are less likely to be preferred.</span></li>
+<li>Limitations: no internet, Python-only execution (three software tasks excluded), font-rendering differences, and limited speech-to-text/non-voice audio. <span class="verbatim">12 out of 220 tasks as ungradable due to limitations of the automated grader.</span></li>
+<li>
+<p>Meaning: Author framing is removed; the automated proxy remains explicitly experimental and not a full substitute for human experts.</p>
+</li>
+<li>
+<p>Transformation reason: Author framing is removed; the automated proxy remains explicitly experimental and not a full substitute for human experts.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H108 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>the empirical mean over all pairs of ratings</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Automated Grading</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - Agreement uses scores H (human) and A (automated) in {0, 0.5, 1}: model preferred = 1, human preferred = 0, tie = 0.5. Human–automated agreement is E[1 − |H − A|]; human inter-rater agreement is E[1 − |H₁ − H₂|]. The latter uses <span class="verbatim">the empirical mean over all pairs of ratings</span> per sample, then averages sample scores for each model with at least two human graders.</p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: the empirical mean over all pairs of ratings</li>
+</ul>
+</li>
+<li>
+<p><strong>H109 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>H human score</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Automated Grading</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Automated Grading:</strong> Experimental GPT-5-high grader: 65.7% human agreement versus 70.8% human inter-rater agreement; 12/220 tasks ungradable.</p>
+</li>
+<li>The experimental grading model performs expert-style pairwise comparisons. <span class="verbatim">Although limited, the automated grader is faster and cheaper than expert grading,</span> but is not a full substitute.</li>
+<li>Agreement uses scores H (human) and A (automated) in {0, 0.5, 1}: model preferred = 1, human preferred = 0, tie = 0.5. Human–automated agreement is E[1 − |H − A|]; human inter-rater agreement is E[1 − |H₁ − H₂|]. The latter uses <span class="verbatim">the empirical mean over all pairs of ratings</span> per sample, then averages sample scores for each model with at least two human graders.</li>
+<li><span class="verbatim">average human-automated grader agreement was 65.7% and human inter-rater agreement was 70.8%.</span> This was measured across three automated grader sweeps; valid scores only, excluding errors and the 12 ungradable tasks.</li>
+<li>The GPT-5-high grader correlates less with humans on capable OpenAI models, consistent with evidence that <span class="verbatim">models often favor their own responses</span>. <span class="verbatim">Both agreement metrics are highest for less capable models, since their outputs are easier to distinguish from human deliverables and are less likely to be preferred.</span></li>
+<li>Limitations: no internet, Python-only execution (three software tasks excluded), font-rendering differences, and limited speech-to-text/non-voice audio. <span class="verbatim">12 out of 220 tasks as ungradable due to limitations of the automated grader.</span></li>
+<li>
+<p>Meaning: The PDF-extraction order H human score is repaired to H (human), with the score range and preference semantics retained.</p>
+</li>
+<li>
+<p>Transformation reason: The PDF-extraction order H human score is repaired to H (human), with the score range and preference semantics retained.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H110 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>au- A tomated grader score</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Automated Grading</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Automated Grading:</strong> Experimental GPT-5-high grader: 65.7% human agreement versus 70.8% human inter-rater agreement; 12/220 tasks ungradable.</p>
+</li>
+<li>The experimental grading model performs expert-style pairwise comparisons. <span class="verbatim">Although limited, the automated grader is faster and cheaper than expert grading,</span> but is not a full substitute.</li>
+<li>Agreement uses scores H (human) and A (automated) in {0, 0.5, 1}: model preferred = 1, human preferred = 0, tie = 0.5. Human–automated agreement is E[1 − |H − A|]; human inter-rater agreement is E[1 − |H₁ − H₂|]. The latter uses <span class="verbatim">the empirical mean over all pairs of ratings</span> per sample, then averages sample scores for each model with at least two human graders.</li>
+<li><span class="verbatim">average human-automated grader agreement was 65.7% and human inter-rater agreement was 70.8%.</span> This was measured across three automated grader sweeps; valid scores only, excluding errors and the 12 ungradable tasks.</li>
+<li>The GPT-5-high grader correlates less with humans on capable OpenAI models, consistent with evidence that <span class="verbatim">models often favor their own responses</span>. <span class="verbatim">Both agreement metrics are highest for less capable models, since their outputs are easier to distinguish from human deliverables and are less likely to be preferred.</span></li>
+<li>Limitations: no internet, Python-only execution (three software tasks excluded), font-rendering differences, and limited speech-to-text/non-voice audio. <span class="verbatim">12 out of 220 tasks as ungradable due to limitations of the automated grader.</span></li>
+<li>
+<p>Meaning: The PDF-extraction order and broken word are repaired to A (automated), with the score range and preference semantics retained.</p>
+</li>
+<li>
+<p>Transformation reason: The PDF-extraction order and broken word are repaired to A (automated), with the score range and preference semantics retained.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H111 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>human scores and H1 H2</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Automated Grading</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Automated Grading:</strong> Experimental GPT-5-high grader: 65.7% human agreement versus 70.8% human inter-rater agreement; 12/220 tasks ungradable.</p>
+</li>
+<li>The experimental grading model performs expert-style pairwise comparisons. <span class="verbatim">Although limited, the automated grader is faster and cheaper than expert grading,</span> but is not a full substitute.</li>
+<li>Agreement uses scores H (human) and A (automated) in {0, 0.5, 1}: model preferred = 1, human preferred = 0, tie = 0.5. Human–automated agreement is E[1 − |H − A|]; human inter-rater agreement is E[1 − |H₁ − H₂|]. The latter uses <span class="verbatim">the empirical mean over all pairs of ratings</span> per sample, then averages sample scores for each model with at least two human graders.</li>
+<li><span class="verbatim">average human-automated grader agreement was 65.7% and human inter-rater agreement was 70.8%.</span> This was measured across three automated grader sweeps; valid scores only, excluding errors and the 12 ungradable tasks.</li>
+<li>The GPT-5-high grader correlates less with humans on capable OpenAI models, consistent with evidence that <span class="verbatim">models often favor their own responses</span>. <span class="verbatim">Both agreement metrics are highest for less capable models, since their outputs are easier to distinguish from human deliverables and are less likely to be preferred.</span></li>
+<li>Limitations: no internet, Python-only execution (three software tasks excluded), font-rendering differences, and limited speech-to-text/non-voice audio. <span class="verbatim">12 out of 220 tasks as ungradable due to limitations of the automated grader.</span></li>
+<li>
+<p>Meaning: The human scores H₁ and H₂ appear in the reconstructed agreement formula, together with pairwise empirical estimation and sample/model aggregation.</p>
+</li>
+<li>
+<p>Transformation reason: The human scores H₁ and H₂ appear in the reconstructed agreement formula, together with pairwise empirical estimation and sample/model aggregation.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H113 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>three automated grader</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Automated Grading</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <span class="verbatim">average human-automated grader agreement was 65.7% and human inter-rater agreement was 70.8%.</span> This was measured across three automated grader sweeps; valid scores only, excluding errors and the 12 ungradable tasks.</p>
+</li>
+<li>
+<p>Meaning: The three automated-grader sweeps are expressed in default color alongside detailed estimates and valid-score/exclusion conditions.</p>
+</li>
+<li>
+<p>Transformation reason: The three automated-grader sweeps are expressed in default color alongside detailed estimates and valid-score/exclusion conditions.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H114 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>average human-automated grader agreement was 65.7% and human inter-rater agreement was 70.8%.</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Automated Grading</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <span class="verbatim">average human-automated grader agreement was 65.7% and human inter-rater agreement was 70.8%.</span> This was measured across three automated grader sweeps; valid scores only, excluding errors and the 12 ungradable tasks.</p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: average human-automated grader agreement was 65.7% and human inter-rater agreement was 70.8%.</li>
+</ul>
+</li>
+<li>
+<p><strong>H115 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>models often favor their own responses</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Automated Grading</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - The GPT-5-high grader correlates less with humans on capable OpenAI models, consistent with evidence that <span class="verbatim">models often favor their own responses</span>. <span class="verbatim">Both agreement metrics are highest for less capable models, since their outputs are easier to distinguish from human deliverables and are less likely to be preferred.</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: models often favor their own responses</li>
+</ul>
+</li>
+<li>
+<p><strong>H116 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Both agreement metrics are highest for less capable models, since their outputs are easier to distinguish from human deliverables and are less likely to be preferred.</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Automated Grading</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - The GPT-5-high grader correlates less with humans on capable OpenAI models, consistent with evidence that <span class="verbatim">models often favor their own responses</span>. <span class="verbatim">Both agreement metrics are highest for less capable models, since their outputs are easier to distinguish from human deliverables and are less likely to be preferred.</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: Both agreement metrics are highest for less capable models, since their outputs are easier to distinguish from human deliverables and are less likely to be preferred.</li>
+</ul>
+</li>
+<li>
+<p><strong>H117 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>12 out of 220 tasks as ungradable due to limitations of the automated grader.</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Automated Grading</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - Limitations: no internet, Python-only execution (three software tasks excluded), font-rendering differences, and limited speech-to-text/non-voice audio. <span class="verbatim">12 out of 220 tasks as ungradable due to limitations of the automated grader.</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: 12 out of 220 tasks as ungradable due to limitations of the automated grader.</li>
+</ul>
+</li>
+</ul>
+<h2 id="speed-and-cost-comparison">Speed and Cost Comparison</h2>
+<p><strong>Priority 3 · Key Findings</strong></p>
+<p><strong>Speed and Cost Comparison:</strong> On gold tasks, GPT-5’s naive ratios were 90× faster / 474× cheaper; expert review and fallback reduced them to 1.12× / 1.18× for one try.</p>
+<ul>
+<li>
+<p><strong>H031 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>In the scenarios analyzed, incorporating frontier AI models into expert workflows showed the potential to save time and money relative to unaided experts.</code></li>
+<li>
+<p>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <span class="verbatim">In the scenarios analyzed, incorporating frontier AI models into expert workflows showed the potential to save time and money relative to unaided experts.</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: In the scenarios analyzed, incorporating frontier AI models into expert workflows showed the potential to save time and money relative to unaided experts.</li>
+</ul>
+</li>
+<li>
+<p><strong>H032 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>“try using the model and if still unsat- isfactory, fix it yourself”</code></li>
+<li>
+<p>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Speed and Cost Comparison:</strong> On gold tasks, GPT-5’s naive ratios were 90× faster / 474× cheaper; expert review and fallback reduced them to 1.12× / 1.18× for one try.</p>
+</li>
+<li><span class="verbatim">In the scenarios analyzed, incorporating frontier AI models into expert workflows showed the potential to save time and money relative to unaided experts.</span></li>
+<li>Speed/cost analysis means: H_T = 404 minutes, H_C = $361 for expert completion; R_T = 109 minutes, R_C = $86 for review. Completion cost uses occupational median hourly wages; review time comes from task monitoring. M_T and M_C denote empirical model API completion time and cost; w is the fraction rated better than the human deliverable.</li>
+<li>Naive ratios H_T/M_T and H_C/M_C ignore quality differences and implementation time. One attempt then fallback: E[T₁,ᵢ] = M_T,ᵢ + R_T,ᵢ + (1 − wᵢ)H_T,ᵢ; the cost analogue substitutes C for T. A human samples, reviews, and completes the task if model quality is below the bar.</li>
+<li>For n attempts, humans assess every output and resample if unsatisfactory, then complete the task if all attempts fail. As n tends to infinity, ratios are H_T/((M_T + R_T)/w) and H_C/((M_C + R_C)/w); GPT-5 ratios are 1.39× / 1.63×.</li>
+<li><span class="verbatim">When incorporating time to review and redo work, the payoff from using a model shrinks.</span></li>
+<li>The scenarios omit review of human deliverables, undesirable human outputs, and catastrophic-error costs. Completion times are validated self-reports; median-wage estimates likely understate these experts’ market cost. Claude, Gemini, and Grok cost estimates were unavailable.</li>
+<li>
+<p>Meaning: The try-and-fix setup is explained through sampling, expert review, repeated resampling, and eventual human completion rather than repeating its quoted nickname.</p>
+</li>
+<li>
+<p>Transformation reason: The try-and-fix setup is explained through sampling, expert review, repeated resampling, and eventual human completion rather than repeating its quoted nickname.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H033 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Here, an expert human samples from a model, reviews outputs, and if unsatisfactory, resamples and repeats.</code></li>
+<li>
+<p>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Speed and Cost Comparison:</strong> On gold tasks, GPT-5’s naive ratios were 90× faster / 474× cheaper; expert review and fallback reduced them to 1.12× / 1.18× for one try.</p>
+</li>
+<li><span class="verbatim">In the scenarios analyzed, incorporating frontier AI models into expert workflows showed the potential to save time and money relative to unaided experts.</span></li>
+<li>Speed/cost analysis means: H_T = 404 minutes, H_C = $361 for expert completion; R_T = 109 minutes, R_C = $86 for review. Completion cost uses occupational median hourly wages; review time comes from task monitoring. M_T and M_C denote empirical model API completion time and cost; w is the fraction rated better than the human deliverable.</li>
+<li>Naive ratios H_T/M_T and H_C/M_C ignore quality differences and implementation time. One attempt then fallback: E[T₁,ᵢ] = M_T,ᵢ + R_T,ᵢ + (1 − wᵢ)H_T,ᵢ; the cost analogue substitutes C for T. A human samples, reviews, and completes the task if model quality is below the bar.</li>
+<li>For n attempts, humans assess every output and resample if unsatisfactory, then complete the task if all attempts fail. As n tends to infinity, ratios are H_T/((M_T + R_T)/w) and H_C/((M_C + R_C)/w); GPT-5 ratios are 1.39× / 1.63×.</li>
+<li><span class="verbatim">When incorporating time to review and redo work, the payoff from using a model shrinks.</span></li>
+<li>The scenarios omit review of human deliverables, undesirable human outputs, and catastrophic-error costs. Completion times are validated self-reports; median-wage estimates likely understate these experts’ market cost. Claude, Gemini, and Grok cost estimates were unavailable.</li>
+<li>
+<p>Meaning: The sample/review/resample actions are merged into the repeated-attempt scenario; the one-attempt fallback scenario is separately defined.</p>
+</li>
+<li>
+<p>Transformation reason: The sample/review/resample actions are merged into the repeated-attempt scenario; the one-attempt fallback scenario is separately defined.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H049 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>HT</code></li>
+<li>
+<p>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - Speed/cost analysis means: H_T = 404 minutes, H_C = $361 for expert completion; R_T = 109 minutes, R_C = $86 for review. Completion cost uses occupational median hourly wages; review time comes from task monitoring. M_T and M_C denote empirical model API completion time and cost; w is the fraction rated better than the human deliverable.</p>
+</li>
+<li>
+<p>Meaning: H_T denotes human completion time.</p>
+</li>
+<li>
+<p>Transformation reason: The isolated or extraction-disordered mathematical selection is reconstructed in default color after inspecting the rendered formula. H_T denotes human completion time.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H050 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>HC,</code></li>
+<li>
+<p>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - Speed/cost analysis means: H_T = 404 minutes, H_C = $361 for expert completion; R_T = 109 minutes, R_C = $86 for review. Completion cost uses occupational median hourly wages; review time comes from task monitoring. M_T and M_C denote empirical model API completion time and cost; w is the fraction rated better than the human deliverable.</p>
+</li>
+<li>
+<p>Meaning: H_C denotes human completion cost.</p>
+</li>
+<li>
+<p>Transformation reason: The isolated or extraction-disordered mathematical selection is reconstructed in default color after inspecting the rendered formula. H_C denotes human completion cost.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H051 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>= 404 HT</code></li>
+<li>
+<p>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - Speed/cost analysis means: H_T = 404 minutes, H_C = $361 for expert completion; R_T = 109 minutes, R_C = $86 for review. Completion cost uses occupational median hourly wages; review time comes from task monitoring. M_T and M_C denote empirical model API completion time and cost; w is the fraction rated better than the human deliverable.</p>
+</li>
+<li>
+<p>Meaning: The gold-analysis mean human completion time is 404 minutes.</p>
+</li>
+<li>
+<p>Transformation reason: The isolated or extraction-disordered mathematical selection is reconstructed in default color after inspecting the rendered formula. The gold-analysis mean human completion time is 404 minutes.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H052 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>= $361. HC</code></li>
+<li>
+<p>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - Speed/cost analysis means: H_T = 404 minutes, H_C = $361 for expert completion; R_T = 109 minutes, R_C = $86 for review. Completion cost uses occupational median hourly wages; review time comes from task monitoring. M_T and M_C denote empirical model API completion time and cost; w is the fraction rated better than the human deliverable.</p>
+</li>
+<li>
+<p>Meaning: The gold-analysis mean human completion cost is $361.</p>
+</li>
+<li>
+<p>Transformation reason: The isolated or extraction-disordered mathematical selection is reconstructed in default color after inspecting the rendered formula. The gold-analysis mean human completion cost is $361.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H053 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>RT</code></li>
+<li>
+<p>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - Speed/cost analysis means: H_T = 404 minutes, H_C = $361 for expert completion; R_T = 109 minutes, R_C = $86 for review. Completion cost uses occupational median hourly wages; review time comes from task monitoring. M_T and M_C denote empirical model API completion time and cost; w is the fraction rated better than the human deliverable.</p>
+</li>
+<li>
+<p>Meaning: R_T denotes expert review time.</p>
+</li>
+<li>
+<p>Transformation reason: The isolated or extraction-disordered mathematical selection is reconstructed in default color after inspecting the rendered formula. R_T denotes expert review time.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H054 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>= 109 RT</code></li>
+<li>
+<p>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - Speed/cost analysis means: H_T = 404 minutes, H_C = $361 for expert completion; R_T = 109 minutes, R_C = $86 for review. Completion cost uses occupational median hourly wages; review time comes from task monitoring. M_T and M_C denote empirical model API completion time and cost; w is the fraction rated better than the human deliverable.</p>
+</li>
+<li>
+<p>Meaning: The mean expert review time is 109 minutes.</p>
+</li>
+<li>
+<p>Transformation reason: The isolated or extraction-disordered mathematical selection is reconstructed in default color after inspecting the rendered formula. The mean expert review time is 109 minutes.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H055 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>RC</code></li>
+<li>
+<p>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - Speed/cost analysis means: H_T = 404 minutes, H_C = $361 for expert completion; R_T = 109 minutes, R_C = $86 for review. Completion cost uses occupational median hourly wages; review time comes from task monitoring. M_T and M_C denote empirical model API completion time and cost; w is the fraction rated better than the human deliverable.</p>
+</li>
+<li>
+<p>Meaning: R_C denotes expert review cost.</p>
+</li>
+<li>
+<p>Transformation reason: The isolated or extraction-disordered mathematical selection is reconstructed in default color after inspecting the rendered formula. R_C denotes expert review cost.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H056 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>$86,</code></li>
+<li>
+<p>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - Speed/cost analysis means: H_T = 404 minutes, H_C = $361 for expert completion; R_T = 109 minutes, R_C = $86 for review. Completion cost uses occupational median hourly wages; review time comes from task monitoring. M_T and M_C denote empirical model API completion time and cost; w is the fraction rated better than the human deliverable.</p>
+</li>
+<li>
+<p>Meaning: The mean expert review cost is $86.</p>
+</li>
+<li>
+<p>Transformation reason: The isolated or extraction-disordered mathematical selection is reconstructed in default color after inspecting the rendered formula. The mean expert review cost is $86.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H057 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>MT</code></li>
+<li>
+<p>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - Speed/cost analysis means: H_T = 404 minutes, H_C = $361 for expert completion; R_T = 109 minutes, R_C = $86 for review. Completion cost uses occupational median hourly wages; review time comes from task monitoring. M_T and M_C denote empirical model API completion time and cost; w is the fraction rated better than the human deliverable.</p>
+</li>
+<li>
+<p>Meaning: M_T denotes empirical API model completion time.</p>
+</li>
+<li>
+<p>Transformation reason: The isolated or extraction-disordered mathematical selection is reconstructed in default color after inspecting the rendered formula. M_T denotes empirical API model completion time.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H058 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>MC</code></li>
+<li>
+<p>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - Speed/cost analysis means: H_T = 404 minutes, H_C = $361 for expert completion; R_T = 109 minutes, R_C = $86 for review. Completion cost uses occupational median hourly wages; review time comes from task monitoring. M_T and M_C denote empirical model API completion time and cost; w is the fraction rated better than the human deliverable.</p>
+</li>
+<li>
+<p>Meaning: M_C denotes empirical API model completion cost.</p>
+</li>
+<li>
+<p>Transformation reason: The isolated or extraction-disordered mathematical selection is reconstructed in default color after inspecting the rendered formula. M_C denotes empirical API model completion cost.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H059 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>w</code></li>
+<li>
+<p>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <span class="verbatim">When incorporating time to review and redo work, the payoff from using a model shrinks.</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: w</li>
+</ul>
+</li>
+<li>
+<p><strong>H060 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>HT /MT</code></li>
+<li>
+<p>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - Naive ratios H_T/M_T and H_C/M_C ignore quality differences and implementation time. One attempt then fallback: E[T₁,ᵢ] = M_T,ᵢ + R_T,ᵢ + (1 − wᵢ)H_T,ᵢ; the cost analogue substitutes C for T. A human samples, reviews, and completes the task if model quality is below the bar.</p>
+</li>
+<li>
+<p>Meaning: The naive time ratio is human completion time divided by model completion time.</p>
+</li>
+<li>
+<p>Transformation reason: The isolated or extraction-disordered mathematical selection is reconstructed in default color after inspecting the rendered formula. The naive time ratio is human completion time divided by model completion time.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H061 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>HC/MC.</code></li>
+<li>
+<p>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - Naive ratios H_T/M_T and H_C/M_C ignore quality differences and implementation time. One attempt then fallback: E[T₁,ᵢ] = M_T,ᵢ + R_T,ᵢ + (1 − wᵢ)H_T,ᵢ; the cost analogue substitutes C for T. A human samples, reviews, and completes the task if model quality is below the bar.</p>
+</li>
+<li>
+<p>Meaning: The naive cost ratio is human completion cost divided by model completion cost.</p>
+</li>
+<li>
+<p>Transformation reason: The isolated or extraction-disordered mathematical selection is reconstructed in default color after inspecting the rendered formula. The naive cost ratio is human completion cost divided by model completion cost.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H062 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>(1 wi) −</code></li>
+<li>
+<p>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - Naive ratios H_T/M_T and H_C/M_C ignore quality differences and implementation time. One attempt then fallback: E[T₁,ᵢ] = M_T,ᵢ + R_T,ᵢ + (1 − wᵢ)H_T,ᵢ; the cost analogue substitutes C for T. A human samples, reviews, and completes the task if model quality is below the bar.</p>
+</li>
+<li>
+<p>Meaning: The one-attempt expectation adds human fallback time weighted by 1 − wᵢ.</p>
+</li>
+<li>
+<p>Transformation reason: The isolated or extraction-disordered mathematical selection is reconstructed in default color after inspecting the rendered formula. The one-attempt expectation adds human fallback time weighted by 1 − wᵢ.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H063 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>human completion time for any fixes needed</code></li>
+<li>
+<p>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - Naive ratios H_T/M_T and H_C/M_C ignore quality differences and implementation time. One attempt then fallback: E[T₁,ᵢ] = M_T,ᵢ + R_T,ᵢ + (1 − wᵢ)H_T,ᵢ; the cost analogue substitutes C for T. A human samples, reviews, and completes the task if model quality is below the bar.</p>
+</li>
+<li>
+<p>Meaning: Human completion for needed fixes is represented by the full human fallback term in the one-attempt expectation.</p>
+</li>
+<li>
+<p>Transformation reason: The isolated or extraction-disordered mathematical selection is reconstructed in default color after inspecting the rendered formula. Human completion for needed fixes is represented by the full human fallback term in the one-attempt expectation.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H064 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>a human tries using GPT-5 for a task, assesses its quality, and then does the task themselves if the deliverable quality is below their quality bar.</code></li>
+<li>
+<p>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Speed and Cost Comparison:</strong> On gold tasks, GPT-5’s naive ratios were 90× faster / 474× cheaper; expert review and fallback reduced them to 1.12× / 1.18× for one try.</p>
+</li>
+<li><span class="verbatim">In the scenarios analyzed, incorporating frontier AI models into expert workflows showed the potential to save time and money relative to unaided experts.</span></li>
+<li>Speed/cost analysis means: H_T = 404 minutes, H_C = $361 for expert completion; R_T = 109 minutes, R_C = $86 for review. Completion cost uses occupational median hourly wages; review time comes from task monitoring. M_T and M_C denote empirical model API completion time and cost; w is the fraction rated better than the human deliverable.</li>
+<li>Naive ratios H_T/M_T and H_C/M_C ignore quality differences and implementation time. One attempt then fallback: E[T₁,ᵢ] = M_T,ᵢ + R_T,ᵢ + (1 − wᵢ)H_T,ᵢ; the cost analogue substitutes C for T. A human samples, reviews, and completes the task if model quality is below the bar.</li>
+<li>For n attempts, humans assess every output and resample if unsatisfactory, then complete the task if all attempts fail. As n tends to infinity, ratios are H_T/((M_T + R_T)/w) and H_C/((M_C + R_C)/w); GPT-5 ratios are 1.39× / 1.63×.</li>
+<li><span class="verbatim">When incorporating time to review and redo work, the payoff from using a model shrinks.</span></li>
+<li>The scenarios omit review of human deliverables, undesirable human outputs, and catastrophic-error costs. Completion times are validated self-reports; median-wage estimates likely understate these experts’ market cost. Claude, Gemini, and Grok cost estimates were unavailable.</li>
+<li>
+<p>Meaning: The try-once setup is expressed neutrally with sampling, quality assessment, and full human completion below the quality bar.</p>
+</li>
+<li>
+<p>Transformation reason: The try-once setup is expressed neutrally with sampling, quality assessment, and full human completion below the quality bar.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H065 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>without accounting for any quality differences</code></li>
+<li>
+<p>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Speed and Cost Comparison:</strong> On gold tasks, GPT-5’s naive ratios were 90× faster / 474× cheaper; expert review and fallback reduced them to 1.12× / 1.18× for one try.</p>
+</li>
+<li><span class="verbatim">In the scenarios analyzed, incorporating frontier AI models into expert workflows showed the potential to save time and money relative to unaided experts.</span></li>
+<li>Speed/cost analysis means: H_T = 404 minutes, H_C = $361 for expert completion; R_T = 109 minutes, R_C = $86 for review. Completion cost uses occupational median hourly wages; review time comes from task monitoring. M_T and M_C denote empirical model API completion time and cost; w is the fraction rated better than the human deliverable.</li>
+<li>Naive ratios H_T/M_T and H_C/M_C ignore quality differences and implementation time. One attempt then fallback: E[T₁,ᵢ] = M_T,ᵢ + R_T,ᵢ + (1 − wᵢ)H_T,ᵢ; the cost analogue substitutes C for T. A human samples, reviews, and completes the task if model quality is below the bar.</li>
+<li>For n attempts, humans assess every output and resample if unsatisfactory, then complete the task if all attempts fail. As n tends to infinity, ratios are H_T/((M_T + R_T)/w) and H_C/((M_C + R_C)/w); GPT-5 ratios are 1.39× / 1.63×.</li>
+<li><span class="verbatim">When incorporating time to review and redo work, the payoff from using a model shrinks.</span></li>
+<li>The scenarios omit review of human deliverables, undesirable human outputs, and catastrophic-error costs. Completion times are validated self-reports; median-wage estimates likely understate these experts’ market cost. Claude, Gemini, and Grok cost estimates were unavailable.</li>
+<li>
+<p>Meaning: The quality-blind naive-ratio assumption remains explicit with the implementation-time omission and exact ratio definitions.</p>
+</li>
+<li>
+<p>Transformation reason: The quality-blind naive-ratio assumption remains explicit with the implementation-time omission and exact ratio definitions.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H066 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>n a human tries rounds of using GPT-5 for a task, then assesses its quality each time, and then does the task themselves if the model quality is below their quality bar after all attempts.</code></li>
+<li>
+<p>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Speed and Cost Comparison:</strong> On gold tasks, GPT-5’s naive ratios were 90× faster / 474× cheaper; expert review and fallback reduced them to 1.12× / 1.18× for one try.</p>
+</li>
+<li><span class="verbatim">In the scenarios analyzed, incorporating frontier AI models into expert workflows showed the potential to save time and money relative to unaided experts.</span></li>
+<li>Speed/cost analysis means: H_T = 404 minutes, H_C = $361 for expert completion; R_T = 109 minutes, R_C = $86 for review. Completion cost uses occupational median hourly wages; review time comes from task monitoring. M_T and M_C denote empirical model API completion time and cost; w is the fraction rated better than the human deliverable.</li>
+<li>Naive ratios H_T/M_T and H_C/M_C ignore quality differences and implementation time. One attempt then fallback: E[T₁,ᵢ] = M_T,ᵢ + R_T,ᵢ + (1 − wᵢ)H_T,ᵢ; the cost analogue substitutes C for T. A human samples, reviews, and completes the task if model quality is below the bar.</li>
+<li>For n attempts, humans assess every output and resample if unsatisfactory, then complete the task if all attempts fail. As n tends to infinity, ratios are H_T/((M_T + R_T)/w) and H_C/((M_C + R_C)/w); GPT-5 ratios are 1.39× / 1.63×.</li>
+<li><span class="verbatim">When incorporating time to review and redo work, the payoff from using a model shrinks.</span></li>
+<li>The scenarios omit review of human deliverables, undesirable human outputs, and catastrophic-error costs. Completion times are validated self-reports; median-wage estimates likely understate these experts’ market cost. Claude, Gemini, and Grok cost estimates were unavailable.</li>
+<li>
+<p>Meaning: The extracted n-word order is repaired; the repeated attempts, assessment each time, and final below-bar fallback are described in order.</p>
+</li>
+<li>
+<p>Transformation reason: The extracted n-word order is repaired; the repeated attempts, assessment each time, and final below-bar fallback are described in order.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H067 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>When incorporating time to review and redo work, the payoff from using a model shrinks.</code></li>
+<li>
+<p>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <span class="verbatim">When incorporating time to review and redo work, the payoff from using a model shrinks.</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: When incorporating time to review and redo work, the payoff from using a model shrinks.</li>
+</ul>
+</li>
+</ul>
+<h2 id="model-strengths-and-weaknesses">Model Strengths and Weaknesses</h2>
+<p><strong>Priority 3 · Model Evaluation · Human Review</strong></p>
+<p><strong>Model Strengths and Weaknesses:</strong> Claude, Grok, and Gemini mainly lost through instruction following; GPT-5 high mainly through formatting.</p>
+<ul>
+<li>
+<p><strong>H034 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>5Samples were clustered using expert justifications;</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Human Review → Model Strengths and Weaknesses</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Model Strengths and Weaknesses:</strong> Claude, Grok, and Gemini mainly lost through instruction following; GPT-5 high mainly through formatting.</p>
+</li>
+<li><span class="verbatim">Claude, Grok, and Gemini most often lost due to instruction-following failures, while GPT-5 high lost mainly from formatting errors and had the fewest instruction-following issues. Gemini and Grok frequently promised but failed to provide deliverables, ignored reference data, or used the wrong format. GPT-5 and Grok showed the fewest accuracy errors, though all models sometimes hallucinated data or miscalculated.</span></li>
+<li><span class="verbatim">Samples were clustered using expert justifications; labels were mutually exclusive and left blank when the rationale was unclear.</span></li>
+<li>
+<p>Meaning: The extracted footnote marker 5 is omitted; the full expert-justification clustering clause, mutually exclusive labels, and unclear-rationale condition remain exact.</p>
+</li>
+<li>
+<p>Transformation reason: The extracted footnote marker 5 is omitted; the full expert-justification clustering clause, mutually exclusive labels, and unclear-rationale condition remain exact.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H035 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>We built a clustering pipeline to analyze why experts preferred or rejected GPT-5 high,</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Human Review → Model Strengths and Weaknesses</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Model Strengths and Weaknesses:</strong> Claude, Grok, and Gemini mainly lost through instruction following; GPT-5 high mainly through formatting.</p>
+</li>
+<li><span class="verbatim">Claude, Grok, and Gemini most often lost due to instruction-following failures, while GPT-5 high lost mainly from formatting errors and had the fewest instruction-following issues. Gemini and Grok frequently promised but failed to provide deliverables, ignored reference data, or used the wrong format. GPT-5 and Grok showed the fewest accuracy errors, though all models sometimes hallucinated data or miscalculated.</span></li>
+<li><span class="verbatim">Samples were clustered using expert justifications; labels were mutually exclusive and left blank when the rationale was unclear.</span></li>
+<li>
+<p>Meaning: Author framing is removed; the source-led loss analysis and clustering context retain GPT-5 high and the three other compared model families.</p>
+</li>
+<li>
+<p>Transformation reason: Author framing is removed; the source-led loss analysis and clustering context retain GPT-5 high and the three other compared model families.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H036 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>instruction-following failures,</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Human Review → Model Strengths and Weaknesses</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <span class="verbatim">Claude, Grok, and Gemini most often lost due to instruction-following failures, while GPT-5 high lost mainly from formatting errors and had the fewest instruction-following issues. Gemini and Grok frequently promised but failed to provide deliverables, ignored reference data, or used the wrong format. GPT-5 and Grok showed the fewest accuracy errors, though all models sometimes hallucinated data or miscalculated.</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: instruction-following failures,</li>
+</ul>
+</li>
+<li>
+<p><strong>H037 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>formatting errors</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Human Review → Model Strengths and Weaknesses</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <span class="verbatim">Claude, Grok, and Gemini most often lost due to instruction-following failures, while GPT-5 high lost mainly from formatting errors and had the fewest instruction-following issues. Gemini and Grok frequently promised but failed to provide deliverables, ignored reference data, or used the wrong format. GPT-5 and Grok showed the fewest accuracy errors, though all models sometimes hallucinated data or miscalculated.</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: formatting errors</li>
+</ul>
+</li>
+<li>
+<p><strong>H038 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>ignored reference data,</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Human Review → Model Strengths and Weaknesses</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <span class="verbatim">Claude, Grok, and Gemini most often lost due to instruction-following failures, while GPT-5 high lost mainly from formatting errors and had the fewest instruction-following issues. Gemini and Grok frequently promised but failed to provide deliverables, ignored reference data, or used the wrong format. GPT-5 and Grok showed the fewest accuracy errors, though all models sometimes hallucinated data or miscalculated.</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: ignored reference data,</li>
+</ul>
+</li>
+<li>
+<p><strong>H039 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>failed to provide deliverables,</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Human Review → Model Strengths and Weaknesses</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <span class="verbatim">Claude, Grok, and Gemini most often lost due to instruction-following failures, while GPT-5 high lost mainly from formatting errors and had the fewest instruction-following issues. Gemini and Grok frequently promised but failed to provide deliverables, ignored reference data, or used the wrong format. GPT-5 and Grok showed the fewest accuracy errors, though all models sometimes hallucinated data or miscalculated.</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: failed to provide deliverables,</li>
+</ul>
+</li>
+<li>
+<p><strong>H040 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>used the wrong format.</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Human Review → Model Strengths and Weaknesses</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <span class="verbatim">Claude, Grok, and Gemini most often lost due to instruction-following failures, while GPT-5 high lost mainly from formatting errors and had the fewest instruction-following issues. Gemini and Grok frequently promised but failed to provide deliverables, ignored reference data, or used the wrong format. GPT-5 and Grok showed the fewest accuracy errors, though all models sometimes hallucinated data or miscalculated.</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: used the wrong format.</li>
+</ul>
+</li>
+</ul>
+<h2 id="increasing-reasoning-effort-and-scaffolding">Increasing Reasoning Effort and Scaffolding</h2>
+<p><strong>Priority 3 · Key Findings</strong></p>
+<p><strong>Increasing Reasoning Effort and Scaffolding:</strong> <span class="verbatim">additional reasoning effort improved performance.</span> Prompting increased human preference by five percentage points.</p>
+<ul>
+<li>
+<p><strong>H041 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>We found that additional reasoning effort improved performance.</code></li>
+<li>
+<p>Now represented under <strong>Key Findings → Increasing Reasoning Effort and Scaffolding</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Increasing Reasoning Effort and Scaffolding:</strong> <span class="verbatim">additional reasoning effort improved performance.</span> Prompting increased human preference by five percentage points.</p>
+</li>
+<li>o3 and GPT-5 were tested at low, medium, and high reasoning effort. Prompting encouraged correctness checks, image-rendered layout inspection, standard Unicode, and concise output.</li>
+<li><span class="verbatim">Prompting fully eliminated black-square artifacts from GPT-5 responses, which previously affected over half of generated PDFs, and reduced egregious formatting errors in PowerPoint files from 86% to 64%. This can be partially attributed to a sharp increase in agents using their multi-modal capabilities to inspect deliverables (15% → 97%).</span></li>
+<li>Improved scaffolding enabled container GET requests and best-of-N sampling (N=4), using a GPT-5 grader to choose among four submissions with prompts, references, and deliverables.</li>
+<li>
+<p>Meaning: Author framing We found that is removed; the complete central finding remains blue.</p>
+</li>
+<li>
+<p>Transformation reason: Author framing We found that is removed; the complete central finding remains blue.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H042 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>improved agent scaffolding</code></li>
+<li>
+<p>Now represented under <strong>Key Findings → Increasing Reasoning Effort and Scaffolding</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Increasing Reasoning Effort and Scaffolding:</strong> <span class="verbatim">additional reasoning effort improved performance.</span> Prompting increased human preference by five percentage points.</p>
+</li>
+<li>o3 and GPT-5 were tested at low, medium, and high reasoning effort. Prompting encouraged correctness checks, image-rendered layout inspection, standard Unicode, and concise output.</li>
+<li><span class="verbatim">Prompting fully eliminated black-square artifacts from GPT-5 responses, which previously affected over half of generated PDFs, and reduced egregious formatting errors in PowerPoint files from 86% to 64%. This can be partially attributed to a sharp increase in agents using their multi-modal capabilities to inspect deliverables (15% → 97%).</span></li>
+<li>Improved scaffolding enabled container GET requests and best-of-N sampling (N=4), using a GPT-5 grader to choose among four submissions with prompts, references, and deliverables.</li>
+<li>
+<p>Meaning: Scaffolding is described with its reported GET requests, N=4 sampling, and GPT-5 selection judge rather than repeating the introductory fragment.</p>
+</li>
+<li>
+<p>Transformation reason: Scaffolding is described with its reported GET requests, N=4 sampling, and GPT-5 selection judge rather than repeating the introductory fragment.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H043 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>improve model capabilities with prompts.</code></li>
+<li>
+<p>Now represented under <strong>Key Findings → Increasing Reasoning Effort and Scaffolding</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Increasing Reasoning Effort and Scaffolding:</strong> <span class="verbatim">additional reasoning effort improved performance.</span> Prompting increased human preference by five percentage points.</p>
+</li>
+<li>o3 and GPT-5 were tested at low, medium, and high reasoning effort. Prompting encouraged correctness checks, image-rendered layout inspection, standard Unicode, and concise output.</li>
+<li><span class="verbatim">Prompting fully eliminated black-square artifacts from GPT-5 responses, which previously affected over half of generated PDFs, and reduced egregious formatting errors in PowerPoint files from 86% to 64%. This can be partially attributed to a sharp increase in agents using their multi-modal capabilities to inspect deliverables (15% → 97%).</span></li>
+<li>Improved scaffolding enabled container GET requests and best-of-N sampling (N=4), using a GPT-5 grader to choose among four submissions with prompts, references, and deliverables.</li>
+<li>
+<p>Meaning: The goal of capability improvement through prompts is represented through the actual prompt intervention and its measured human-preference improvement.</p>
+</li>
+<li>
+<p>Transformation reason: The goal of capability improvement through prompts is represented through the actual prompt intervention and its measured human-preference improvement.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H073 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>best-of-N sampling</code></li>
+<li>
+<p>Now represented under <strong>Key Findings → Increasing Reasoning Effort and Scaffolding</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - Improved scaffolding enabled container GET requests and best-of-N sampling (N=4), using a GPT-5 grader to choose among four submissions with prompts, references, and deliverables.</p>
+</li>
+<li>
+<p>Meaning: best-of-N sampling remains literal default-color terminology in a combined sentence specifying N=4 and judge inputs.</p>
+</li>
+<li>
+<p>Transformation reason: best-of-N sampling remains literal default-color terminology in a combined sentence specifying N=4 and judge inputs.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H074 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>GPT-5 grader</code></li>
+<li>
+<p>Now represented under <strong>Key Findings → Increasing Reasoning Effort and Scaffolding</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - Improved scaffolding enabled container GET requests and best-of-N sampling (N=4), using a GPT-5 grader to choose among four submissions with prompts, references, and deliverables.</p>
+</li>
+<li>
+<p>Meaning: GPT-5 grader remains literal default-color terminology in a combined sentence specifying best-of-N selection and inputs.</p>
+</li>
+<li>
+<p>Transformation reason: GPT-5 grader remains literal default-color terminology in a combined sentence specifying best-of-N selection and inputs.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="limitations">Limitations</h2>
+<p><strong>Priority 3 · Impact</strong></p>
+<p><strong>Limitations:</strong> Self-contained computer knowledge work, full prompt context, and one-shot tasks limit workplace realism.</p>
+<ul>
+<li>
+<p><strong>H045 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>knowledge work that can be performed on a computer, particularly around digital deliver- ables.</code></li>
+<li>
+<p>Now represented under <strong>Impact → Limitations</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <span class="verbatim">knowledge work that can be performed on a computer, particularly around digital deliverables.</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: knowledge work that can be performed on a computer, particularly around digital deliverables.</li>
+</ul>
+</li>
+<li>
+<p><strong>H046 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>we provide the full context of the task in the prompt,</code></li>
+<li>
+<p>Now represented under <strong>Impact → Limitations</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Limitations:</strong> Self-contained computer knowledge work, full prompt context, and one-shot tasks limit workplace realism.</p>
+</li>
+<li><span class="verbatim">knowledge work that can be performed on a computer, particularly around digital deliverables.</span></li>
+<li>Tasks provide full context in the prompt and are precisely specified and one-shot, not interactive. Manual/physical work, extensive tacit knowledge, private information, proprietary tools, and interpersonal communication are out of scope. Only 44 occupations are represented.</li>
+<li>
+<p>Meaning: Author framing is removed; the full prompt-context assumption remains explicit under Limitations.</p>
+</li>
+<li>
+<p>Transformation reason: Author framing is removed; the full prompt-context assumption remains explicit under Limitations.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H047 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>one-shot, not interactive:</code></li>
+<li>
+<p>Now represented under <strong>Impact → Limitations</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Limitations:</strong> Self-contained computer knowledge work, full prompt context, and one-shot tasks limit workplace realism.</p>
+</li>
+<li><span class="verbatim">knowledge work that can be performed on a computer, particularly around digital deliverables.</span></li>
+<li>Tasks provide full context in the prompt and are precisely specified and one-shot, not interactive. Manual/physical work, extensive tacit knowledge, private information, proprietary tools, and interpersonal communication are out of scope. Only 44 occupations are represented.</li>
+<li>
+<p>Meaning: The highlighted one-shot/noninteractive constraint is retained in default color with the surrounding precisely-specified/full-context limitation.</p>
+</li>
+<li>
+<p>Transformation reason: The highlighted one-shot/noninteractive constraint is retained in default color with the surrounding precisely-specified/full-context limitation.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="task-duration">Task Duration</h2>
+<p><strong>Priority 3 · Model Evaluation · Human Review</strong></p>
+<p><strong>Task Duration:</strong> <span class="verbatim">Win rates are highest for shorter tasks (0–2 hours) and decline steadily as completion time increases. This indicates that models perform best on faster, less time-intensive tasks.</span></p>
+<ul>
+<li>
+<p><strong>H068 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Win rates are highest for shorter tasks (0–2 hours) and decline steadily as completion time increases. This indicates that models perform best on faster, less time-intensive tasks.</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Human Review → Task Duration</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Task Duration:</strong> <span class="verbatim">Win rates are highest for shorter tasks (0–2 hours) and decline steadily as completion time increases. This indicates that models perform best on faster, less time-intensive tasks.</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: Win rates are highest for shorter tasks (0–2 hours) and decline steadily as completion time increases. This indicates that models perform best on faster, less time-intensive tasks.</li>
+</ul>
+</li>
+</ul>
+<h2 id="files-and-attachments">Files and Attachments</h2>
+<p><strong>Priority 3 · Special Design</strong></p>
+<p><strong>Files and Attachments:</strong> Diverse real-world files; <span class="verbatim">67.7% of tasks required interaction with at least one reference file.</span></p>
+<ul>
+<li>
+<p><strong>H077 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Many traditional evaluations rely on text-in/text-out task formats. GDPval tasks incorporate a broad range of real-world file types (such as spreadsheets, documents, presentations, images, audio, video, and specialized formats like CAD). 67.7% of tasks required interaction with at least one reference file.</code></li>
+<li>
+<p>Now represented under <strong>Special Design → Files and Attachments</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <span class="verbatim">Many traditional evaluations rely on text-in/text-out task formats. GDPval tasks incorporate a broad range of real-world file types (such as spreadsheets, documents, presentations, images, audio, video, and specialized formats like CAD). 67.7% of tasks required interaction with at least one reference file.</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: Many traditional evaluations rely on text-in/text-out task formats. GDPval tasks incorporate a broad range of real-world file types (such as spreadsheets, documents, presentations, images, audio, video, and specialized formats like CAD). 67.7% of tasks required interaction with at least one reference file.</li>
+</ul>
+</li>
+</ul>
+<h2 id="prompt-specificity">prompt-specificity</h2>
+<p><strong>Priority 3 · Quality Control · Human Review · Quality Dimensions</strong></p>
+<p>Prompt Specificity: <span class="verbatim">Occupational experts conducting human grading rated the specificity of instructions provided in each prompt.</span></p>
+<ul>
+<li>
+<p><strong>H078 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>the specificity of instructions provided in each prompt.</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Quality Dimensions → prompt-specificity</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - Prompt Specificity: <span class="verbatim">Occupational experts conducting human grading rated the specificity of instructions provided in each prompt.</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: the specificity of instructions provided in each prompt.</li>
+</ul>
+</li>
+<li>
+<p><strong>H079 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>human grading</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Quality Dimensions → prompt-specificity</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - Prompt Specificity: <span class="verbatim">Occupational experts conducting human grading rated the specificity of instructions provided in each prompt.</span></p>
+</li>
+<li>Meaning: The lead and original source excerpts preserve the highlighted fact in its reported context. Selection: human grading</li>
+</ul>
+</li>
+</ul>
+<h2 id="validating-the-digital-tasks-measure">Validating the Digital Tasks Measure</h2>
+<p><strong>Priority 3 · Dataset Creation</strong></p>
+<p><strong>Validating the Digital Tasks Measure:</strong> The digital-task classification aligns with Acemoglu &amp; Autor’s cognitive/manual work framework.</p>
+<ul>
+<li>
+<p><strong>H118 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>The patterns are clear: occupations with higher digital-task shares score systematically higher on the non-routine cognitive dimensions and lower on the manual dimensions. In other words, the more an occupation relies on digital tasks, the more it resembles cognitive, non-routine work.</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Validating the Digital Tasks Measure</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Validating the Digital Tasks Measure:</strong> The digital-task classification aligns with Acemoglu &amp; Autor’s cognitive/manual work framework.</p>
+</li>
+<li><span class="verbatim">occupations with higher digital-task shares score systematically higher on the non-routine cognitive dimensions and lower on the manual dimensions.</span></li>
+<li><span class="verbatim">knowledge-work occupations cluster at the top of the non-routine cognitive distributions and at the bottom of the routine and manual distributions.</span></li>
+<li>
+<p>Meaning: Context-dependent transitions are removed; the continuous digital-task relationship with cognitive versus manual dimensions remains exact.</p>
+</li>
+<li>
+<p>Transformation reason: Context-dependent transitions are removed; the continuous digital-task relationship with cognitive versus manual dimensions remains exact.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H119 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>The pattern is again clear– knowledge-work occupations cluster at the top of the non-routine cognitive distributions and at the bottom of the routine and manual distributions. Taken together, these results suggest that our digital- task classification is closely aligned with the economic literature on cognitive/manual work.</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Validating the Digital Tasks Measure</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Validating the Digital Tasks Measure:</strong> The digital-task classification aligns with Acemoglu &amp; Autor’s cognitive/manual work framework.</p>
+</li>
+<li><span class="verbatim">occupations with higher digital-task shares score systematically higher on the non-routine cognitive dimensions and lower on the manual dimensions.</span></li>
+<li><span class="verbatim">knowledge-work occupations cluster at the top of the non-routine cognitive distributions and at the bottom of the routine and manual distributions.</span></li>
+<li>
+<p>Meaning: Context-dependent transitions and the possessive our are removed; the binary-classification pattern remains exact and the overall economic-literature alignment appears in the lead.</p>
+</li>
+<li>
+<p>Transformation reason: Context-dependent transitions and the possessive our are removed; the binary-classification pattern remains exact and the overall economic-literature alignment appears in the lead.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="excluded-and-unclassified">Excluded and Unclassified</h2>
+<ul>
+<li>H112: Yellow highlight, excluded by your color preferences.</li>
+<li>H044: Squiggly annotation (#4B99FF); meaning unclassified, not included in the highlight count.</li>
+</ul><div class="footer">Source Markdown: 315_gdpval_regenerated_highlights.md · Standalone HTML · Works offline</div></main></div>
+<script>document.getElementById('expand').addEventListener('click',function(){const t=document.querySelector('.toc');if(t){t.style.display=t.style.display==='block'?'':'block';}});
+const sourceButton=document.getElementById('sources');if(sourceButton){sourceButton.addEventListener('click',function(){const excerpts=Array.from(document.querySelectorAll('details.source-excerpts'));const show=excerpts.some(d=>!d.open);excerpts.forEach(d=>d.open=show);sourceButton.textContent=show?'Hide Source Excerpts':'Show Source Excerpts';});}</script>
+</body></html>

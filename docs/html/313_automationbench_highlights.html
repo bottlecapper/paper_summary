@@ -1,0 +1,1194 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AutomationBench Highlight Audit</title><style>
+:root {color-scheme:light; --paper:#fff; --bg:#f3f5f2; --ink:#21312c; --muted:#5b6e65; --line:#dce4de; --accent:#24634b}
+* {box-sizing:border-box} body {margin:0;background:var(--bg);color:var(--ink);font:17px/1.7 system-ui,-apple-system,sans-serif}
+.layout {max-width:1280px;margin:auto;display:grid;grid-template-columns:235px minmax(0,1fr);gap:32px;padding:36px 24px}
+aside {align-self:start;position:sticky;top:24px;max-height:90vh;overflow:auto;font-size:13px}
+.brand {font-weight:750;letter-spacing:.08em;text-transform:uppercase;margin-bottom:24px;color:var(--accent)}
+.toc ul {padding-left:17px}.toc li {margin:8px 0}.toc a {color:var(--muted);text-decoration:none}
+main {background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:40px 48px;min-width:0}
+h1 {font-size:clamp(26px,3.5vw,40px);line-height:1.2;letter-spacing:-.035em;margin-top:0}
+h2 {font-size:25px;line-height:1.25;margin:28px 0 2px;padding:0} h3 {font-size:19px;line-height:1.3;margin:16px 0 2px;padding:0}
+h4 {font-size:17px;line-height:1.3;margin:10px 0 2px;padding:0}
+main > p, main > ul, main > ol {margin-top:0;margin-bottom:0}
+main li > p {margin-top:0;margin-bottom:0}
+main ul {list-style-type:disc;padding-left:1.5em}
+main ul ul {list-style-type:circle;margin-top:0;margin-bottom:0}
+p,li {max-width:78ch} a {color:var(--accent);text-underline-offset:3px} strong {font-weight:700}
+.verbatim {color:#175cd3}
+.task-instruction {font-size:0.88em;text-align:justify}
+.source-excerpts {margin:0}.source-excerpts > summary {font-size:13px;color:var(--muted);cursor:pointer}
+.source-excerpts ul, .source-excerpts ol {margin-top:0;margin-bottom:0}
+blockquote {margin:24px 0;border-left:4px solid #8eb79b;padding:12px 20px;background:#f0f6f0}
+table {width:100%;border-collapse:collapse;font-size:14px;display:block;overflow-x:auto} th,td {text-align:left;vertical-align:top;padding:12px 14px;border-bottom:1px solid var(--line)} th {background:#edf3ee}
+code {background:#eef2ed;border-radius:4px;padding:2px 5px;font-size:.9em} pre {overflow:auto;padding:16px;background:#eef2ed;border-radius:8px} pre code {padding:0}
+button {font:inherit;font-size:13px;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:7px;padding:8px 12px;cursor:pointer}
+.color-swatch {display:inline-block;width:14px;height:14px;vertical-align:-2px;border:1px solid #9ba99f;border-radius:3px;margin-right:5px}
+.tools {display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}.footer {margin-top:40px;font-size:12px;color:var(--muted)}
+@media(max-width:850px) {.layout {display:block;padding:16px} aside {position:static;max-height:none;margin-bottom:20px}.toc {display:none}main {padding:26px 22px}.tools {margin:8px 0}}
+@media print {body {background:white;font-size:11pt}.layout {display:block;padding:0}aside {display:none}main {border:0;padding:0}h2 {break-after:avoid}a {color:inherit}table {display:table;font-size:10pt}}
+</style></head><body>
+<div class="layout"><aside><div class="brand">Paper summary</div><nav aria-label="Contents"><div class="toc">
+<ul>
+<li><a href="#policy-design">Policy Design</a></li>
+<li><a href="#solvability">Solvability</a></li>
+<li><a href="#scoring">Scoring</a></li>
+<li><a href="#failure-modes">Failure Modes</a></li>
+<li><a href="#scope">Scope</a></li>
+<li><a href="#impact">Impact</a></li>
+<li><a href="#task-sourcing">Task Sourcing</a></li>
+<li><a href="#hardening">Hardening</a></li>
+<li><a href="#task-design">Task Design</a></li>
+<li><a href="#reward-hardening">Reward Hardening</a></li>
+<li><a href="#tool-interface">Tool Interface</a></li>
+<li><a href="#cost-and-repeatability">Cost And Repeatability</a></li>
+<li><a href="#outcome-flexibility">Outcome Flexibility</a></li>
+<li><a href="#human-validation">Human Validation</a></li>
+<li><a href="#complementary-successes">Complementary Successes</a></li>
+<li><a href="#simple-baseline">Simple Baseline</a></li>
+<li><a href="#important-sections">Important Sections</a></li>
+<li><a href="#excluded-and-unclassified">Excluded and Unclassified</a></li>
+</ul>
+</div>
+</nav>
+<div class="tools"><button onclick="window.print()">Print / save PDF</button><button id="expand">Show contents</button></div>
+</aside><main><h1 id="automationbench-highlight-audit">AutomationBench Highlight Audit</h1>
+<p>All 63 included highlights are mapped to the revised summary. Topics are ordered by their highest highlight priority; selections within each topic are ordered by priority, then paper order.</p>
+<p>Prior-coverage judgments are a manual semantic review. Annotation accounting is checked programmatically. Raw selections retain PDF extraction artifacts; mathematical selections are explained in context in the summary.</p>
+<p>Previous statuses: <strong>Covered</strong>, <strong>Partial</strong>, <strong>Title only</strong>, or <strong>Missing</strong>. New coverage means the highlighted information is represented by a topic lead, source excerpt, definition, or merged equivalent passage—not that every duplicate fragment is repeated verbatim.</p>
+<h2 id="policy-design">Policy Design</h2>
+<p><strong>Priority 2 · Special Design</strong></p>
+<ul>
+<li>
+<p><strong>Cross-Application Orchestration and Policy Adherence:</strong> Discovery, dependent calls, organizational rules, and distracting records are combined; prompts explicitly reference authoritative policies to distinguish consultation from prompt injection.</p>
+</li>
+<li>
+<p><strong>H032 · Bright green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>prompt injection.</code></li>
+<li>
+<p>Now represented under <strong>Special Design → Policy Design</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - <span class="verbatim">To avoid conflating policy-following with prompt-injection compliance, task prompts explicitly reference these policy documents, signaling that consulting them is expected behavior rather than an adversarial trick.</span></p>
+</li>
+<li>
+<p>Meaning: prompt injection.</p>
+</li>
+<li>
+<p>Transformation reason: Related fragments are merged with their subject and context; edited wording, punctuation, counts, or capitalization stay in the default color. The selected meaning is retained in the bound passage.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H012 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Agents receive a natural language business task and must autonomously discover available REST API endpoints across dozens of integrated applications, make sequential and interdependent calls, apply layered business rules, and navigate environments seeded with distractors, decoy records, and adversarial inputs.</code></li>
+<li>
+<p>Now represented under <strong>Special Design → Policy Design</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - <span class="verbatim">Agents receive a natural language business task and must autonomously discover available REST API endpoints across dozens of integrated applications, make sequential and interdependent calls, apply layered business rules, and navigate environments seeded with distractors, decoy records, and adversarial inputs.</span></p>
+</li>
+<li>Meaning: Agents receive a natural language business task and must autonomously discover available REST API endpoints across dozens of integrated applications, make sequential and interdependent calls, apply layered business rules, and navigate environments seeded with distractors, decoy records, and adversarial inputs.</li>
+</ul>
+</li>
+<li>
+<p><strong>H030 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Some tasks require the agent to follow policy documents that override seem- ingly reasonable defaults or external requests.</code></li>
+<li>
+<p>Now represented under <strong>Special Design → Policy Design</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - <span class="verbatim">Some tasks require the agent to follow policy documents that override seemingly reasonable defaults or external requests.</span></p>
+</li>
+<li>Meaning: Some tasks require the agent to follow policy documents that override seem- ingly reasonable defaults or external requests.</li>
+</ul>
+</li>
+<li>
+<p><strong>H031 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>task prompts explicitly reference these policy documents, signaling that consulting them is expected behavior rather than an adversarial trick.</code></li>
+<li>
+<p>Now represented under <strong>Special Design → Policy Design</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - <span class="verbatim">To avoid conflating policy-following with prompt-injection compliance, task prompts explicitly reference these policy documents, signaling that consulting them is expected behavior rather than an adversarial trick.</span></p>
+</li>
+<li>Meaning: task prompts explicitly reference these policy documents, signaling that consulting them is expected behavior rather than an adversarial trick.</li>
+</ul>
+</li>
+</ul>
+<h2 id="solvability">Solvability</h2>
+<p><strong>Priority 2 · Quality Control · Auto Judge</strong></p>
+<ul>
+<li>
+<p><strong>Solvability Checks:</strong> A separate hint-assisted mode guides endpoint selection without giving parameter values; smaller models achieved approximately 80–100%.</p>
+</li>
+<li>
+<p><strong>H036 · Bright green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>solvable,</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Auto Judge → Solvability</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Solvability Checks:</strong> A separate hint-assisted mode guides endpoint selection without giving parameter values; smaller models achieved approximately 80–100%.</p>
+</li>
+<li>
+<p>Meaning: solvable,</p>
+</li>
+<li>
+<p>Transformation reason: Related fragments are merged with their subject and context; edited wording, punctuation, counts, or capitalization stay in the default color. The selected meaning is retained in the bound passage.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H035 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>a separate hint sheet</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Auto Judge → Solvability</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - A <span class="verbatim">separate hint sheet</span> supplies <span class="verbatim">instructions on which endpoints to call and clues on parameters but not the parameters themselves.</span></p>
+</li>
+<li>
+<p>Meaning: a separate hint sheet</p>
+</li>
+<li>
+<p>Transformation reason: Related fragments are merged with their subject and context; edited wording, punctuation, counts, or capitalization stay in the default color. The selected meaning is retained in the bound passage.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H037 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>instructions on which endpoints to call and clues on parameters</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Auto Judge → Solvability</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - A <span class="verbatim">separate hint sheet</span> supplies <span class="verbatim">instructions on which endpoints to call and clues on parameters but not the parameters themselves.</span></p>
+</li>
+<li>Meaning: instructions on which endpoints to call and clues on parameters</li>
+</ul>
+</li>
+<li>
+<p><strong>H038 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Hints deliberately exclude actual parameter values,</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Auto Judge → Solvability</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - <span class="verbatim">Hints deliberately exclude actual parameter values, as including them could bypass tool calls entirely and mask discoverability issues.</span></p>
+</li>
+<li>Meaning: Hints deliberately exclude actual parameter values,</li>
+</ul>
+</li>
+</ul>
+<h2 id="scoring">Scoring</h2>
+<p><strong>Priority 2 · Model Evaluation · Auto Judge</strong></p>
+<ul>
+<li>
+<p><strong>Scoring:</strong> Uses <span class="verbatim">deterministic assertions instead of LLM-as-a-judge</span>: <span class="verbatim">exact string matches</span> and <span class="verbatim">structural checks</span> inspect final application state. All checks must pass; <span class="verbatim">no partial credit</span>.</p>
+</li>
+<li>
+<p><strong>H047 · Bright green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>instead of grading a text response or document, we consider only the end state of each connected app.</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Scoring</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - The final state of each connected app is graded, rather than a text response, document, or prescribed tool sequence.</p>
+</li>
+<li>
+<p>Meaning: instead of grading a text response or document, we consider only the end state of each connected app.</p>
+</li>
+<li>
+<p>Transformation reason: Grading object and excluded response/trajectory criteria are restated without author framing.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H053 · Bright green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>We use deterministic assertions instead of LLM-as-a-judge.</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Scoring</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Scoring:</strong> Uses <span class="verbatim">deterministic assertions instead of LLM-as-a-judge</span>: <span class="verbatim">exact string matches</span> and <span class="verbatim">structural checks</span> inspect final application state. All checks must pass; <span class="verbatim">no partial credit</span>.</p>
+</li>
+<li>
+<p>Meaning: We use deterministic assertions instead of LLM-as-a-judge.</p>
+</li>
+<li>
+<p>Transformation reason: Deterministic scoring is stated without author framing; exact success criteria are quoted underneath.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H054 · Bright green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>We include negative assertions to prevent shotgun approach reward hacking</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Scoring</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - Negative assertions prevent shotgun reward hacking, such as emailing everyone rather than only the requested recipient.</p>
+</li>
+<li>
+<p>Meaning: We include negative assertions to prevent shotgun approach reward hacking</p>
+</li>
+<li>
+<p>Transformation reason: Negative assertions and the shotgun-email example are summarized without author framing.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H055 · Bright green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>We give no partial credit</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Scoring</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - Completion diagnostics are available, but partial completion does not count toward the score. Avoiding an LLM judge reduces grading bias; synthetic generation can still introduce model bias.</p>
+</li>
+<li>
+<p>Meaning: We give no partial credit</p>
+</li>
+<li>
+<p>Transformation reason: No-partial-credit policy is restated neutrally with diagnostics separated from headline scoring.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H056 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>exact string matches</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Scoring</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - <span class="verbatim">All success criteria are expressed as exact string matches and structural checks over the world state, without semantic or subjective evaluation of text.</span></p>
+</li>
+<li>Meaning: exact string matches</li>
+</ul>
+</li>
+<li>
+<p><strong>H057 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>structural checks</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Scoring</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - <span class="verbatim">All success criteria are expressed as exact string matches and structural checks over the world state, without semantic or subjective evaluation of text.</span></p>
+</li>
+<li>Meaning: structural checks</li>
+</ul>
+</li>
+</ul>
+<h2 id="failure-modes">Failure Modes</h2>
+<p><strong>Priority 2 · Model Evaluation · Auto Judge</strong></p>
+<ul>
+<li>
+<p><strong>Common Failure Modes:</strong> False confidence, unsuccessful data search, missing list items, and imprecise instruction-following.</p>
+</li>
+<li>
+<p><strong>H065 · Bright green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>models declared success while actually failing.</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Failure Modes</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - <span class="verbatim">models declared success while actually failing.</span> This affected 72% of Opus’s failures, 91% of Gemini’s, and 84% of GPT 5.4’s.</p>
+</li>
+<li>Meaning: models declared success while actually failing.</li>
+</ul>
+</li>
+<li>
+<p><strong>H068 · Bright green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Models also do not follow instructions exactly.</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Failure Modes</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - <span class="verbatim">Models also do not follow instructions exactly.</span> <span class="verbatim">They paraphrase or outright ignore requirements for the content to include certain values despite precise instructions being given.</span></p>
+</li>
+<li>Meaning: Models also do not follow instructions exactly.</li>
+</ul>
+</li>
+<li>
+<p><strong>H070 · Bright green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Another failure mode is missing items.</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Failure Modes</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - <span class="verbatim">When a task involves processing a list (12 emails, 8 leads), models frequently process some items correctly and then summarize as if done without verifying every item was covered.</span></p>
+</li>
+<li>
+<p>Meaning: Another failure mode is missing items.</p>
+</li>
+<li>
+<p>Transformation reason: Missing-items error is represented by the complete highlighted list-processing sentence.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H066 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Models often are not persistent or methodical enough in searching for data when generic searches do not find the results.</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Failure Modes</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - <span class="verbatim">Models often are not persistent or methodical enough in searching for data when generic searches do not find the results.</span> They may assume data lives in a CRM rather than Google Sheets.</p>
+</li>
+<li>Meaning: Models often are not persistent or methodical enough in searching for data when generic searches do not find the results.</li>
+</ul>
+</li>
+<li>
+<p><strong>H067 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>When a task involves processing a list (12 emails, 8 leads), models frequently process some items correctly and then summarize as if done without verifying every item was covered.</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Failure Modes</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - <span class="verbatim">When a task involves processing a list (12 emails, 8 leads), models frequently process some items correctly and then summarize as if done without verifying every item was covered.</span></p>
+</li>
+<li>Meaning: When a task involves processing a list (12 emails, 8 leads), models frequently process some items correctly and then summarize as if done without verifying every item was covered.</li>
+</ul>
+</li>
+<li>
+<p><strong>H069 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>They paraphrase or outright ignore requirements for the content to include certain values despite precise instructions being given.</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Failure Modes</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - <span class="verbatim">Models also do not follow instructions exactly.</span> <span class="verbatim">They paraphrase or outright ignore requirements for the content to include certain values despite precise instructions being given.</span></p>
+</li>
+<li>Meaning: They paraphrase or outright ignore requirements for the content to include certain values despite precise instructions being given.</li>
+</ul>
+</li>
+</ul>
+<h2 id="scope">Scope</h2>
+<p><strong>Priority 3 · Summary</strong></p>
+<ul>
+<li>
+<p><strong>Purpose:</strong> Zapier benchmark for <span class="verbatim">evaluating AI agents on cross-application workflow orchestration via REST APIs.</span></p>
+</li>
+<li>
+<p><strong>H001 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>evaluating AI agents on cross-application workflow orches- tration via REST APIs.</code></li>
+<li>
+<p>Now represented under <strong>Summary → Scope</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Purpose:</strong> Zapier benchmark for <span class="verbatim">evaluating AI agents on cross-application workflow orchestration via REST APIs.</span></p>
+</li>
+<li>Meaning: evaluating AI agents on cross-application workflow orches- tration via REST APIs.</li>
+</ul>
+</li>
+<li>
+<p><strong>H002 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>tasks span Sales, Marketing, Operations, Support, Finance, and HR domains.</code></li>
+<li>
+<p>Now represented under <strong>Summary → Scope</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Scope:</strong> 600 public tasks and 600+ private evaluation tasks; <span class="verbatim">∼500 API endpoints across 47 apps</span>; <span class="verbatim">Sales, Marketing, Operations, Support, Finance, and HR</span>.</p>
+</li>
+<li>
+<p>Meaning: tasks span Sales, Marketing, Operations, Support, Finance, and HR domains.</p>
+</li>
+<li>
+<p>Transformation reason: Related fragments are merged with their subject and context; edited wording, punctuation, counts, or capitalization stay in the default color. The selected meaning is retained in the bound passage.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H003 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Grading is programmatic and end-state only:</code></li>
+<li>
+<p>Now represented under <strong>Summary → Scope</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Evaluation Method:</strong> <span class="verbatim">Grading is programmatic and end-state only:</span> all required final-state assertions must pass.</p>
+</li>
+<li>Meaning: Grading is programmatic and end-state only:</li>
+</ul>
+</li>
+<li>
+<p><strong>H004 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>The agent iteratively discovers and calls API endpoints to complete a task.</code></li>
+<li>
+<p>Now represented under <strong>Summary → Scope</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - <span class="verbatim">The agent iteratively discovers and calls API endpoints to complete a task.</span></p>
+</li>
+<li>Meaning: The agent iteratively discovers and calls API endpoints to complete a task.</li>
+</ul>
+</li>
+<li>
+<p><strong>H017 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>A pool of ∼500 API endpoints across 47 apps</code></li>
+<li>
+<p>Now represented under <strong>Summary → Scope</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Scope:</strong> 600 public tasks and 600+ private evaluation tasks; <span class="verbatim">∼500 API endpoints across 47 apps</span>; <span class="verbatim">Sales, Marketing, Operations, Support, Finance, and HR</span>.</p>
+</li>
+<li>
+<p>Meaning: A pool of ∼500 API endpoints across 47 apps</p>
+</li>
+<li>
+<p>Transformation reason: Related fragments are merged with their subject and context; edited wording, punctuation, counts, or capitalization stay in the default color. The selected meaning is retained in the bound passage.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H018 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>six distinct domains: Sales, Marketing, Opera- tions, Support, Finance, and HR.</code></li>
+<li>
+<p>Now represented under <strong>Summary → Scope</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Scope:</strong> 600 public tasks and 600+ private evaluation tasks; <span class="verbatim">∼500 API endpoints across 47 apps</span>; <span class="verbatim">Sales, Marketing, Operations, Support, Finance, and HR</span>.</p>
+</li>
+<li>
+<p>Meaning: six distinct domains: Sales, Marketing, Opera- tions, Support, Finance, and HR.</p>
+</li>
+<li>
+<p>Transformation reason: Related fragments are merged with their subject and context; edited wording, punctuation, counts, or capitalization stay in the default color. The selected meaning is retained in the bound passage.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H019 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>100 public tasks per domain</code></li>
+<li>
+<p>Now represented under <strong>Summary → Scope</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - Each domain has <span class="verbatim">100 public tasks per domain</span>; at least half the corpus is private, with additional hardening. Official scores use private tasks.</p>
+</li>
+<li>Meaning: 100 public tasks per domain</li>
+</ul>
+</li>
+</ul>
+<h2 id="impact">Impact</h2>
+<p><strong>Priority 3 · Impact</strong></p>
+<ul>
+<li>
+<p><strong>Impact:</strong> Targets <span class="verbatim">multi-step reasoning, policy adherence, and tool discovery</span> needed for business automation through widely available REST interfaces.</p>
+</li>
+<li>
+<p><strong>H013 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>REST APIs are the uni- versal standard and frequently the glue behind those tools.</code></li>
+<li>
+<p>Now represented under <strong>Impact</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - <span class="verbatim">Though solutions like MCPs and CLI tools exist, REST APIs are the universal standard and frequently the glue behind those tools.</span></p>
+</li>
+<li>Meaning: REST APIs are the uni- versal standard and frequently the glue behind those tools.</li>
+</ul>
+</li>
+<li>
+<p><strong>H014 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>multi-step reasoning,</code></li>
+<li>
+<p>Now represented under <strong>Impact</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Impact:</strong> Targets <span class="verbatim">multi-step reasoning, policy adherence, and tool discovery</span> needed for business automation through widely available REST interfaces.</p>
+</li>
+<li>Meaning: multi-step reasoning,</li>
+</ul>
+</li>
+<li>
+<p><strong>H015 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>policy adherence,</code></li>
+<li>
+<p>Now represented under <strong>Impact</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Impact:</strong> Targets <span class="verbatim">multi-step reasoning, policy adherence, and tool discovery</span> needed for business automation through widely available REST interfaces.</p>
+</li>
+<li>Meaning: policy adherence,</li>
+</ul>
+</li>
+<li>
+<p><strong>H016 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>tool discovery</code></li>
+<li>
+<p>Now represented under <strong>Impact</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Impact:</strong> Targets <span class="verbatim">multi-step reasoning, policy adherence, and tool discovery</span> needed for business automation through widely available REST interfaces.</p>
+</li>
+<li>Meaning: tool discovery</li>
+</ul>
+</li>
+</ul>
+<h2 id="task-sourcing">Task Sourcing</h2>
+<p><strong>Priority 3 · Dataset Creation</strong></p>
+<ul>
+<li>
+<p><strong>Task Generation:</strong> <span class="verbatim">Tasks were synthetically generated based on use cases from real customers.</span> Models used: <span class="verbatim">Opus 4.6, GPT 5.3 Codex, and Gemini 3</span>.</p>
+</li>
+<li>
+<p><strong>H020 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Tasks were synthetically generated based on use cases from real customers.</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Task Sourcing</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Task Generation:</strong> <span class="verbatim">Tasks were synthetically generated based on use cases from real customers.</span> Models used: <span class="verbatim">Opus 4.6, GPT 5.3 Codex, and Gemini 3</span>.</p>
+</li>
+<li>Meaning: Tasks were synthetically generated based on use cases from real customers.</li>
+</ul>
+</li>
+<li>
+<p><strong>H021 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>We used Opus 4.6, GPT 5.3 Codex, and Gemini 3 in task generation.</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Task Sourcing</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Task Generation:</strong> <span class="verbatim">Tasks were synthetically generated based on use cases from real customers.</span> Models used: <span class="verbatim">Opus 4.6, GPT 5.3 Codex, and Gemini 3</span>.</p>
+</li>
+<li>Workflow patterns accompanying negative feedback on Zapier’s Agents service were clustered by domain; models used those patterns as inspiration, with repeated passes on realism, difficulty, and app variety.</li>
+<li><span class="verbatim">No PII or confidential customer data was used</span>.</li>
+<li>
+<p>Meaning: We used Opus 4.6, GPT 5.3 Codex, and Gemini 3 in task generation.</p>
+</li>
+<li>
+<p>Transformation reason: Original model names are retained; author-voice framing is removed.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="hardening">Hardening</h2>
+<p><strong>Priority 3 · Special Design</strong></p>
+<ul>
+<li>
+<p><strong>Hardening:</strong> Combines irrelevant data, information behind tool calls, ambiguous information locations, similar names, and overriding business policies. Private tasks use additional hardening to reduce overfitting.</p>
+</li>
+<li>
+<p><strong>H022 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>a variety of hardening techniques,</code></li>
+<li>
+<p>Now represented under <strong>Special Design → Hardening</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Hardening:</strong> Combines irrelevant data, information behind tool calls, ambiguous information locations, similar names, and overriding business policies. Private tasks use additional hardening to reduce overfitting.</p>
+</li>
+<li>Irrelevant data: <span class="verbatim">adding irrelevant data</span>.</li>
+<li>Tool call responses: <span class="verbatim">keeping key info behind tool call responses</span>.</li>
+<li>Information location: <span class="verbatim">ambiguity of</span> <span class="verbatim">where info can be found</span>.</li>
+<li>Similar names: <span class="verbatim">similar naming for incorrect entries</span>.</li>
+<li>Business policies: <span class="verbatim">strict business policy rules with overriding priorities.</span></li>
+<li>Techniques were developed through experiments on current models; tasks found too easy were hardened.</li>
+<li><span class="verbatim">The private dataset employs additional hardening techniques to prevent overfitting on a small set of challenges.</span></li>
+<li><span class="verbatim">Benchmark progress ideally reflects improved reasoning over novel complexity rather than mastery of a few known difficulty types.</span></li>
+<li>
+<p>Meaning: a variety of hardening techniques,</p>
+</li>
+<li>
+<p>Transformation reason: Related fragments are merged with their subject and context; edited wording, punctuation, counts, or capitalization stay in the default color. The selected meaning is retained in the bound passage.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H023 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>adding irrelevant data,</code></li>
+<li>
+<p>Now represented under <strong>Special Design → Hardening</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Hardening:</strong> Combines irrelevant data, information behind tool calls, ambiguous information locations, similar names, and overriding business policies. Private tasks use additional hardening to reduce overfitting.</p>
+</li>
+<li>Irrelevant data: <span class="verbatim">adding irrelevant data</span>.</li>
+<li>Tool call responses: <span class="verbatim">keeping key info behind tool call responses</span>.</li>
+<li>Information location: <span class="verbatim">ambiguity of</span> <span class="verbatim">where info can be found</span>.</li>
+<li>Similar names: <span class="verbatim">similar naming for incorrect entries</span>.</li>
+<li>Business policies: <span class="verbatim">strict business policy rules with overriding priorities.</span></li>
+<li>Techniques were developed through experiments on current models; tasks found too easy were hardened.</li>
+<li><span class="verbatim">The private dataset employs additional hardening techniques to prevent overfitting on a small set of challenges.</span></li>
+<li><span class="verbatim">Benchmark progress ideally reflects improved reasoning over novel complexity rather than mastery of a few known difficulty types.</span></li>
+<li>
+<p>Meaning: adding irrelevant data,</p>
+</li>
+<li>
+<p>Transformation reason: Related fragments are merged with their subject and context; edited wording, punctuation, counts, or capitalization stay in the default color. The selected meaning is retained in the bound passage.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H024 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>keeping key info behind tool call responses,</code></li>
+<li>
+<p>Now represented under <strong>Special Design → Hardening</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Hardening:</strong> Combines irrelevant data, information behind tool calls, ambiguous information locations, similar names, and overriding business policies. Private tasks use additional hardening to reduce overfitting.</p>
+</li>
+<li>Irrelevant data: <span class="verbatim">adding irrelevant data</span>.</li>
+<li>Tool call responses: <span class="verbatim">keeping key info behind tool call responses</span>.</li>
+<li>Information location: <span class="verbatim">ambiguity of</span> <span class="verbatim">where info can be found</span>.</li>
+<li>Similar names: <span class="verbatim">similar naming for incorrect entries</span>.</li>
+<li>Business policies: <span class="verbatim">strict business policy rules with overriding priorities.</span></li>
+<li>Techniques were developed through experiments on current models; tasks found too easy were hardened.</li>
+<li><span class="verbatim">The private dataset employs additional hardening techniques to prevent overfitting on a small set of challenges.</span></li>
+<li><span class="verbatim">Benchmark progress ideally reflects improved reasoning over novel complexity rather than mastery of a few known difficulty types.</span></li>
+<li>
+<p>Meaning: keeping key info behind tool call responses,</p>
+</li>
+<li>
+<p>Transformation reason: Related fragments are merged with their subject and context; edited wording, punctuation, counts, or capitalization stay in the default color. The selected meaning is retained in the bound passage.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H025 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>ambiguity of</code></li>
+<li>
+<p>Now represented under <strong>Special Design → Hardening</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - Information location: <span class="verbatim">ambiguity of</span> <span class="verbatim">where info can be found</span>.</p>
+</li>
+<li>Meaning: ambiguity of</li>
+</ul>
+</li>
+<li>
+<p><strong>H026 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>where info can be found,</code></li>
+<li>
+<p>Now represented under <strong>Special Design → Hardening</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Hardening:</strong> Combines irrelevant data, information behind tool calls, ambiguous information locations, similar names, and overriding business policies. Private tasks use additional hardening to reduce overfitting.</p>
+</li>
+<li>Irrelevant data: <span class="verbatim">adding irrelevant data</span>.</li>
+<li>Tool call responses: <span class="verbatim">keeping key info behind tool call responses</span>.</li>
+<li>Information location: <span class="verbatim">ambiguity of</span> <span class="verbatim">where info can be found</span>.</li>
+<li>Similar names: <span class="verbatim">similar naming for incorrect entries</span>.</li>
+<li>Business policies: <span class="verbatim">strict business policy rules with overriding priorities.</span></li>
+<li>Techniques were developed through experiments on current models; tasks found too easy were hardened.</li>
+<li><span class="verbatim">The private dataset employs additional hardening techniques to prevent overfitting on a small set of challenges.</span></li>
+<li><span class="verbatim">Benchmark progress ideally reflects improved reasoning over novel complexity rather than mastery of a few known difficulty types.</span></li>
+<li>
+<p>Meaning: where info can be found,</p>
+</li>
+<li>
+<p>Transformation reason: Related fragments are merged with their subject and context; edited wording, punctuation, counts, or capitalization stay in the default color. The selected meaning is retained in the bound passage.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H027 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>similar naming for incorrect entries,</code></li>
+<li>
+<p>Now represented under <strong>Special Design → Hardening</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Hardening:</strong> Combines irrelevant data, information behind tool calls, ambiguous information locations, similar names, and overriding business policies. Private tasks use additional hardening to reduce overfitting.</p>
+</li>
+<li>Irrelevant data: <span class="verbatim">adding irrelevant data</span>.</li>
+<li>Tool call responses: <span class="verbatim">keeping key info behind tool call responses</span>.</li>
+<li>Information location: <span class="verbatim">ambiguity of</span> <span class="verbatim">where info can be found</span>.</li>
+<li>Similar names: <span class="verbatim">similar naming for incorrect entries</span>.</li>
+<li>Business policies: <span class="verbatim">strict business policy rules with overriding priorities.</span></li>
+<li>Techniques were developed through experiments on current models; tasks found too easy were hardened.</li>
+<li><span class="verbatim">The private dataset employs additional hardening techniques to prevent overfitting on a small set of challenges.</span></li>
+<li><span class="verbatim">Benchmark progress ideally reflects improved reasoning over novel complexity rather than mastery of a few known difficulty types.</span></li>
+<li>
+<p>Meaning: similar naming for incorrect entries,</p>
+</li>
+<li>
+<p>Transformation reason: Related fragments are merged with their subject and context; edited wording, punctuation, counts, or capitalization stay in the default color. The selected meaning is retained in the bound passage.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H028 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>strict business policy rules with overriding priorities.</code></li>
+<li>
+<p>Now represented under <strong>Special Design → Hardening</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - Business policies: <span class="verbatim">strict business policy rules with overriding priorities.</span></p>
+</li>
+<li>Meaning: strict business policy rules with overriding priorities.</li>
+</ul>
+</li>
+<li>
+<p><strong>H060 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>We used various hardening techniques to realistically increase the difficulty of the tasks.</code></li>
+<li>
+<p>Now represented under <strong>Special Design → Hardening</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Hardening:</strong> Combines irrelevant data, information behind tool calls, ambiguous information locations, similar names, and overriding business policies. Private tasks use additional hardening to reduce overfitting.</p>
+</li>
+<li>Irrelevant data: <span class="verbatim">adding irrelevant data</span>.</li>
+<li>Tool call responses: <span class="verbatim">keeping key info behind tool call responses</span>.</li>
+<li>Information location: <span class="verbatim">ambiguity of</span> <span class="verbatim">where info can be found</span>.</li>
+<li>Similar names: <span class="verbatim">similar naming for incorrect entries</span>.</li>
+<li>Business policies: <span class="verbatim">strict business policy rules with overriding priorities.</span></li>
+<li>Techniques were developed through experiments on current models; tasks found too easy were hardened.</li>
+<li><span class="verbatim">The private dataset employs additional hardening techniques to prevent overfitting on a small set of challenges.</span></li>
+<li><span class="verbatim">Benchmark progress ideally reflects improved reasoning over novel complexity rather than mastery of a few known difficulty types.</span></li>
+<li>
+<p>Meaning: We used various hardening techniques to realistically increase the difficulty of the tasks.</p>
+</li>
+<li>
+<p>Transformation reason: Related fragments are merged with their subject and context; edited wording, punctuation, counts, or capitalization stay in the default color. The selected meaning is retained in the bound passage.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="task-design">Task Design</h2>
+<p><strong>Priority 3 · Dataset Creation</strong></p>
+<ul>
+<li>
+<p><strong>Task Design:</strong> Each task requires <span class="verbatim">at least one concrete state mutation</span>; <span class="verbatim">the task is non-interactive until completion.</span> Judgment must become a structured state change.</p>
+</li>
+<li>
+<p><strong>H029 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>We limit subjectivity in this benchmark, but some degree is supported in these tasks by requiring the agent to record its decision as a structured state change (e.g., updating a status field, assigning a score, routing to a queue) rather than producing free-form text.</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Task Design</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - <span class="verbatim">requiring the agent to record its decision as a structured state change (e.g., updating a status field, assigning a score, routing to a queue) rather than producing free-form text.</span></p>
+</li>
+<li>
+<p>Meaning: We limit subjectivity in this benchmark, but some degree is supported in these tasks by requiring the agent to record its decision as a structured state change (e.g., updating a status field, assigning a score, routing to a queue) rather than producing free-form text.</p>
+</li>
+<li>
+<p>Transformation reason: Original clause preserves every structured-decision example; author framing is removed.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H033 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>at least one concrete state mutation</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Task Design</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Task Design:</strong> Each task requires <span class="verbatim">at least one concrete state mutation</span>; <span class="verbatim">the task is non-interactive until completion.</span> Judgment must become a structured state change.</p>
+</li>
+<li>Meaning: at least one concrete state mutation</li>
+</ul>
+</li>
+<li>
+<p><strong>H034 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>the task is non-interactive until completion.</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Task Design</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Task Design:</strong> Each task requires <span class="verbatim">at least one concrete state mutation</span>; <span class="verbatim">the task is non-interactive until completion.</span> Judgment must become a structured state change.</p>
+</li>
+<li>Meaning: the task is non-interactive until completion.</li>
+</ul>
+</li>
+</ul>
+<h2 id="reward-hardening">Reward Hardening</h2>
+<p><strong>Priority 3 · Quality Control · Auto Judge</strong></p>
+<ul>
+<li>
+<p><strong>Reward-Hacking Checks:</strong> Reinforcement-learning experiments exposed strategies used to strengthen the reward function.</p>
+</li>
+<li>
+<p><strong>H040 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>These runs identified some common reward-hacking strategies that we used to strengthen the reward function.</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Auto Judge → Reward Hardening</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Reward-Hacking Checks:</strong> Reinforcement-learning experiments exposed strategies used to strengthen the reward function.</p>
+</li>
+<li>Runs used Reinforcement Learning with Verifiable Rewards; discovered reward-hacking strategies informed stronger checks.</li>
+<li>
+<p>Meaning: These runs identified some common reward-hacking strategies that we used to strengthen the reward function.</p>
+</li>
+<li>
+<p>Transformation reason: RL reward-hacking experiments and resulting reward improvements are merged in neutral wording.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="tool-interface">Tool Interface</h2>
+<p><strong>Priority 3 · Model Evaluation · Auto Judge</strong></p>
+<ul>
+<li>
+<p><strong>Tool Interface:</strong> <span class="verbatim">two tools: Search and Execute.</span> Search uses <span class="verbatim">BM25</span> over API schemas, returning five candidates; Execute accepts method, URL, and body. Maximum: <span class="verbatim">50 steps</span>.</p>
+</li>
+<li>
+<p><strong>H041 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>two tools: Search and Execute.</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Tool Interface</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Tool Interface:</strong> <span class="verbatim">two tools: Search and Execute.</span> Search uses <span class="verbatim">BM25</span> over API schemas, returning five candidates; Execute accepts method, URL, and body. Maximum: <span class="verbatim">50 steps</span>.</p>
+</li>
+<li>Meaning: two tools: Search and Execute.</li>
+</ul>
+</li>
+<li>
+<p><strong>H042 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>No authentication is mimicked.</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Tool Interface</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - <span class="verbatim">No authentication is mimicked.</span> <span class="verbatim">Multiple tools can be called in parallel per step.</span> The 50-step limit is rarely reached.</p>
+</li>
+<li>Meaning: No authentication is mimicked.</li>
+</ul>
+</li>
+<li>
+<p><strong>H043 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Finding the right endpoints to use is part of the challenge.</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Tool Interface</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - <span class="verbatim">Finding the right endpoints to use is part of the challenge.</span></p>
+</li>
+<li>Meaning: Finding the right endpoints to use is part of the challenge.</li>
+</ul>
+</li>
+<li>
+<p><strong>H044 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>The execute tool triggers a simulation of retrieving or updating a database through Pydantic Models.</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Tool Interface</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - <span class="verbatim">The execute tool triggers a simulation of retrieving or updating a database through Pydantic Models.</span> These models are the application-state source of truth; pagination, required fields, and 4xx errors preserve real schema shapes.</p>
+</li>
+<li>Meaning: The execute tool triggers a simulation of retrieving or updating a database through Pydantic Models.</li>
+</ul>
+</li>
+<li>
+<p><strong>H045 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Multiple tools can be called in parallel per step.</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Tool Interface</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - <span class="verbatim">No authentication is mimicked.</span> <span class="verbatim">Multiple tools can be called in parallel per step.</span> The 50-step limit is rarely reached.</p>
+</li>
+<li>Meaning: Multiple tools can be called in parallel per step.</li>
+</ul>
+</li>
+<li>
+<p><strong>H046 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>maximum of 50 steps.</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Tool Interface</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Tool Interface:</strong> <span class="verbatim">two tools: Search and Execute.</span> Search uses <span class="verbatim">BM25</span> over API schemas, returning five candidates; Execute accepts method, URL, and body. Maximum: <span class="verbatim">50 steps</span>.</p>
+</li>
+<li>
+<p>Meaning: maximum of 50 steps.</p>
+</li>
+<li>
+<p>Transformation reason: Related fragments are merged with their subject and context; edited wording, punctuation, counts, or capitalization stay in the default color. The selected meaning is retained in the bound passage.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="cost-and-repeatability">Cost And Repeatability</h2>
+<p><strong>Priority 3 · Model Evaluation · Auto Judge</strong></p>
+<ul>
+<li>
+<p><strong>Cost and Repeatability:</strong> Score uses one run; reported run-to-run variance is typically within 1%. Cost is average token spending per task; latency is affected by provider rate limits.</p>
+</li>
+<li>
+<p><strong>H048 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>If an agent takes multiple actions inefficiently (create the lead, update the lead 5 times instead of once), it yields the same end result and scores equally, but with a higher Cost.</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Cost And Repeatability</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - <span class="verbatim">If an agent takes multiple actions inefficiently (create the lead, update the lead 5 times instead of once), it yields the same end result and scores equally, but with a higher Cost.</span></p>
+</li>
+<li>Meaning: If an agent takes multiple actions inefficiently (create the lead, update the lead 5 times instead of once), it yields the same end result and scores equally, but with a higher Cost.</li>
+</ul>
+</li>
+<li>
+<p><strong>H050 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Run-to-run variance is typically within 1%.</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Cost And Repeatability</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - <span class="verbatim">Run-to-run variance is typically within 1%.</span></p>
+</li>
+<li>Meaning: Run-to-run variance is typically within 1%.</li>
+</ul>
+</li>
+<li>
+<p><strong>H051 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Cost (USD per run)</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Cost And Repeatability</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - <span class="verbatim">Cost is computed by taking the average token cost spent per task.</span> USD cost is the primary efficiency metric.</p>
+</li>
+<li>
+<p>Meaning: Cost (USD per run)</p>
+</li>
+<li>
+<p>Transformation reason: Related fragments are merged with their subject and context; edited wording, punctuation, counts, or capitalization stay in the default color. The selected meaning is retained in the bound passage.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H052 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Cost is computed by taking the average token cost spent per task.</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Cost And Repeatability</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - <span class="verbatim">Cost is computed by taking the average token cost spent per task.</span> USD cost is the primary efficiency metric.</p>
+</li>
+<li>Meaning: Cost is computed by taking the average token cost spent per task.</li>
+</ul>
+</li>
+</ul>
+<h2 id="outcome-flexibility">Outcome Flexibility</h2>
+<p><strong>Priority 3 · Special Design</strong></p>
+<ul>
+<li>
+<p><strong>End-State Grading:</strong> Different valid tool sequences, parallel calls, and batched updates can earn the same score; side effects remain part of correctness.</p>
+</li>
+<li>
+<p><strong>H049 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Focusing on end-to-end results gives the agent flexibility to solve problems in creative ways (such as parallel tool calls and batched changes) while avoiding being overly prescriptive.</code></li>
+<li>
+<p>Now represented under <strong>Special Design → Outcome Flexibility</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - <span class="verbatim">Focusing on end-to-end results gives the agent flexibility to solve problems in creative ways (such as parallel tool calls and batched changes) while avoiding being overly prescriptive.</span></p>
+</li>
+<li>Meaning: Focusing on end-to-end results gives the agent flexibility to solve problems in creative ways (such as parallel tool calls and batched changes) while avoiding being overly prescriptive.</li>
+</ul>
+</li>
+</ul>
+<h2 id="human-validation">Human Validation</h2>
+<p><strong>Priority 3 · Quality Control · Human Review</strong></p>
+<ul>
+<li>
+<p><strong>Review Approach</strong></p>
+</li>
+<li>
+<p><strong>H058 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>We manually inspected samples of tasks to reduce this risk.</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Human Validation</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - Authors inspected task samples and repeated audits; hints were audited against rules to exclude actual parameter values.</p>
+</li>
+<li>
+<p>Meaning: We manually inspected samples of tasks to reduce this risk.</p>
+</li>
+<li>
+<p>Transformation reason: Sample-based manual inspection and repeated audits are restated without author framing.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H059 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>risk of lack of realism and impossibility.</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Human Validation</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:         - <span class="verbatim">there is a risk of lack of realism and impossibility.</span></p>
+</li>
+<li>Meaning: risk of lack of realism and impossibility.</li>
+</ul>
+</li>
+</ul>
+<h2 id="complementary-successes">Complementary Successes</h2>
+<p><strong>Priority 3 · Key Findings</strong></p>
+<ul>
+<li>
+<p><strong>Different Passing Sets:</strong> <span class="verbatim">Models are solving fairly different sets of tasks from each other.</span> Opus–Gemini <span class="verbatim">Jaccard similarity</span>: 0.17; 71% of Opus passes and 70% of Gemini passes were missed by the other.</p>
+</li>
+<li>
+<p><strong>H061 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Models are solving fairly different sets of tasks from each other.</code></li>
+<li>
+<p>Now represented under <strong>Key Findings → Complementary Successes</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Different Passing Sets:</strong> <span class="verbatim">Models are solving fairly different sets of tasks from each other.</span> Opus–Gemini <span class="verbatim">Jaccard similarity</span>: 0.17; 71% of Opus passes and 70% of Gemini passes were missed by the other.</p>
+</li>
+<li>Meaning: Models are solving fairly different sets of tasks from each other.</li>
+</ul>
+</li>
+<li>
+<p><strong>H062 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Jaccard similarity</code></li>
+<li>
+<p>Now represented under <strong>Key Findings → Complementary Successes</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Different Passing Sets:</strong> <span class="verbatim">Models are solving fairly different sets of tasks from each other.</span> Opus–Gemini <span class="verbatim">Jaccard similarity</span>: 0.17; 71% of Opus passes and 70% of Gemini passes were missed by the other.</p>
+</li>
+<li>Meaning: Jaccard similarity</li>
+</ul>
+</li>
+</ul>
+<h2 id="simple-baseline">Simple Baseline</h2>
+<p><strong>Priority 3 · Key Findings</strong></p>
+<ul>
+<li>
+<p><strong>Simple Domain:</strong> Haiku reached 97% on simpler workflows without regular-task noise; this harness check is excluded from benchmark scores.</p>
+</li>
+<li>
+<p><strong>H063 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>We also created a simple domain as a baseline to signal how well models do with simpler workflows without the noise and difficulty of regular tasks.</code></li>
+<li>
+<p>Now represented under <strong>Key Findings → Simple Baseline</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Simple Domain:</strong> Haiku reached 97% on simpler workflows without regular-task noise; this harness check is excluded from benchmark scores.</p>
+</li>
+<li>The simple domain tests workflows with explicit instructions, distinguishing basic tool competence from the benchmark’s layered difficulty.</li>
+<li>
+<p>Meaning: We also created a simple domain as a baseline to signal how well models do with simpler workflows without the noise and difficulty of regular tasks.</p>
+</li>
+<li>
+<p>Transformation reason: Simple-domain purpose, score, and exclusion from benchmark scoring are merged without author framing.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="important-sections">Important Sections</h2>
+<p><strong>Priority 3 · Important Sections</strong></p>
+<ul>
+<li>
+<p>Appendix, Task 1 (Sales): What Makes It Hard — Six Challenges</p>
+</li>
+<li>
+<p><strong>H071 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>What Makes It Hard Six challenges the model must navigate:</code></li>
+<li>
+<p>Now represented under <strong>Important Sections</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - Appendix, Task 1 (Sales): What Makes It Hard — Six Challenges</p>
+</li>
+<li>
+<p>Meaning: What Makes It Hard Six challenges the model must navigate:</p>
+</li>
+<li>
+<p>Transformation reason: Highlighted appendix subsection and six-challenge count retained; Title Case and contextual identifier are edited. All six challenges also appear under Task Design.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H072 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>What Makes It Hard Five challenges the model must navigate:</code></li>
+<li>
+<p>Now represented under <strong>Important Sections</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - Appendix, Task 2 (Operations): What Makes It Hard — Five Challenges</p>
+</li>
+<li>
+<p>Meaning: What Makes It Hard Five challenges the model must navigate:</p>
+</li>
+<li>
+<p>Transformation reason: Highlighted appendix subsection and five-challenge count retained; Title Case and contextual identifier are edited. All five challenges also appear under Task Design.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="excluded-and-unclassified">Excluded and Unclassified</h2>
+<ul>
+<li>H005: Dark green highlight, excluded by your color preferences.</li>
+<li>H006: Dark green highlight, excluded by your color preferences.</li>
+<li>H007: Dark green highlight, excluded by your color preferences.</li>
+<li>H008: Dark green highlight, excluded by your color preferences.</li>
+<li>H009: Dark green highlight, excluded by your color preferences.</li>
+<li>H010: Dark green highlight, excluded by your color preferences.</li>
+<li>H011: Dark green highlight, excluded by your color preferences.</li>
+<li>H039: Yellow highlight, excluded by your color preferences.</li>
+<li>H064: Yellow highlight, excluded by your color preferences.</li>
+</ul><div class="footer">Source Markdown: 313_automationbench_highlights.md · Standalone HTML · Works offline</div></main></div>
+<script>document.getElementById('expand').addEventListener('click',function(){const t=document.querySelector('.toc');if(t){t.style.display=t.style.display==='block'?'':'block';}});
+const sourceButton=document.getElementById('sources');if(sourceButton){sourceButton.addEventListener('click',function(){const excerpts=Array.from(document.querySelectorAll('details.source-excerpts'));const show=excerpts.some(d=>!d.open);excerpts.forEach(d=>d.open=show);sourceButton.textContent=show?'Hide Source Excerpts':'Show Source Excerpts';});}</script>
+</body></html>
