@@ -43,7 +43,7 @@ def build(output):
             audit = anchor(audit_path.as_posix(), "Audit")
         institutions = "<br>".join(escape(part.strip()) for part in re.split(r"<br\s*/?>", author, flags=re.IGNORECASE))
         cells = [escape(benchmark), institutions, escape(published),
-                 anchor(link_target(paper), "Paper"),
+                 anchor(link_target(paper), re.search(r"\[([^\]]+)\]", paper).group(1)),
                  anchor(summary_path.as_posix(), "Read summary"), audit]
         rows.append("<tr>" + "".join(f"<td>{cell}</td>" for cell in cells) + "</tr>")
 
