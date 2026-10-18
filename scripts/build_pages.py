@@ -28,7 +28,7 @@ def build(output):
     rows = []
     files = set()
     for line in table.splitlines()[2:]:
-        benchmark, author, published, paper, summary, _ = (
+        benchmark, author, published, paper, summary = (
             cell.strip() for cell in line.strip().strip("|").split("|")
         )
         markdown_path = Path(link_target(summary))
