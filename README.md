@@ -2,13 +2,15 @@
 
 ## Existing Paper Summaries
 
-| Paper | Summary | HTML | Highlight Audit |
-| --- | --- | --- | --- |
-| DeepSWE | [Read summary](summary/312_deepswe.md) | [HTML](html/312_deepswe.html) | [Audit](summary/312_deepswe_highlights.md) |
-| AutomationBench | [Read summary](summary/313_automationbench.md) | [HTML](html/313_automationbench.html) | [Audit](summary/313_automationbench_highlights.md) |
-| Terminal-Bench 2.0 | [Read summary](summary/314_terminal_bench.md) | [HTML](html/314_terminal_bench.html) | [Audit](summary/314_terminal_bench_highlights.md) |
-| GDPval | [Read summary](summary/315_gdpval.md) | [HTML](html/315_gdpval.html) | [Audit](summary/315_gdpval_highlights.md) |
-| OSWorld 2.0 | [Read summary](summary/316_osworld_2_0.md) | [HTML](html/316_osworld_2_0.html) | [Audit](summary/316_osworld_2_0_highlights.md) |
+| Benchmark Name | Author Company / Institution | Published Month | Paper Link | Summary Link |
+| --- | --- | --- | --- | --- |
+| DeepSWE | Datacurve | Jul 2026 | [Paper](https://arxiv.org/abs/2607.07946v1) | [Markdown](summary/312_deepswe.md) · [HTML](html/312_deepswe.html) |
+| AutomationBench | Zapier | Apr 2026 | [Paper](https://arxiv.org/abs/2604.18934) | [Markdown](summary/313_automationbench.md) · [HTML](html/313_automationbench.html) |
+| Terminal-Bench 2.0 | Stanford University, Laude Institute, and collaborators | Jan 2026 | [Paper](https://arxiv.org/abs/2601.11868) | [Markdown](summary/314_terminal_bench.md) · [HTML](html/314_terminal_bench.html) |
+| GDPval | OpenAI | Oct 2025 | [Paper](https://arxiv.org/abs/2510.04374v1) | [Markdown](summary/315_gdpval.md) · [HTML](html/315_gdpval.html) |
+| OSWorld 2.0 | XLANG Lab and collaborators | Jun 2026 | [Paper](https://arxiv.org/abs/2606.29537v2) | [Markdown](summary/316_osworld_2_0.md) · [HTML](html/316_osworld_2_0.html) |
+
+Published month refers to the paper's first arXiv submission. Paper links point to the versions used by the summaries, where specified.
 
 Additional GDPval materials: [regenerated summary](summary/315_gdpval_regenerated.md), [regenerated HTML](html/315_gdpval_regenerated.html), [highlight audit](summary/315_gdpval_regenerated_highlights.md), and [skill reproduction review](summary/315_gdpval_reproduction_review.md).
 
