@@ -2,7 +2,7 @@
 
 ## Existing Paper Summaries
 
-| Benchmark Name | Author Company / Institution | Published Month | Paper Link | Summary Link | HTML Link |
+| Benchmark | Author | Published | Paper | Summary | HTML |
 | --- | --- | --- | --- | --- | --- |
 | DeepSWE | Datacurve | Jul 2026 | [Paper](https://arxiv.org/abs/2607.07946v1) | [Markdown](summary/312_deepswe.md) | [HTML](html/312_deepswe.html) |
 | AutomationBench | Zapier | Apr 2026 | [Paper](https://arxiv.org/abs/2604.18934) | [Markdown](summary/313_automationbench.md) | [HTML](html/313_automationbench.html) |
