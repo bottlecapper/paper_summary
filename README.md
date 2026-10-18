@@ -2,7 +2,7 @@
 
 ## Existing Paper Summaries
 
-| Benchmark | Author Institude | Published | Paper | Summary | HTML |
+| Benchmark | Author Lab | Published | Paper | Summary | HTML |
 | --- | --- | --- | --- | --- | --- |
 | DeepSWE | Datacurve | Jul 2026 | [Paper](https://arxiv.org/abs/2607.07946v1) | [Markdown](summary/312_deepswe.md) | [312](https://bottlecapper.github.io/paper_summary/html/312_deepswe.html) |
 | AutomationBench | Zapier | Apr 2026 | [Paper](https://arxiv.org/abs/2604.18934) | [Markdown](summary/313_automationbench.md) | [313](https://bottlecapper.github.io/paper_summary/html/313_automationbench.html) |

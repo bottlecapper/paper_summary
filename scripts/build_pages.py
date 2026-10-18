@@ -96,7 +96,7 @@ def build(output):
     <p>Concise summaries of AI benchmark papers, with source excerpts and highlight audits.</p>
     <div class="table-scroll">
       <table>
-        <thead><tr><th>Benchmark</th><th>Author Institude</th><th>Published</th><th>Paper</th><th>Summary</th><th>Highlights</th></tr></thead>
+        <thead><tr><th>Benchmark</th><th>Author Lab</th><th>Published</th><th>Paper</th><th>Summary</th><th>Highlights</th></tr></thead>
         <tbody>__ROWS__</tbody>
       </table>
     </div>
