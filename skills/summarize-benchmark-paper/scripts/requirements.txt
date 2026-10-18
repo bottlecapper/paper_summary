@@ -1,0 +1,2 @@
+PyMuPDF>=1.22.5
+Markdown>=3.4.4

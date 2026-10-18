@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GDPval Profile</title><style>
+:root {color-scheme:light; --paper:#fff; --bg:#f3f5f2; --ink:#21312c; --muted:#5b6e65; --line:#dce4de; --accent:#24634b}
+* {box-sizing:border-box} body {margin:0;background:var(--bg);color:var(--ink);font:17px/1.7 system-ui,-apple-system,sans-serif}
+.layout {max-width:1280px;margin:auto;display:grid;grid-template-columns:235px minmax(0,1fr);gap:32px;padding:36px 24px}
+aside {align-self:start;position:sticky;top:24px;max-height:90vh;overflow:auto;font-size:13px}
+.brand {font-weight:750;letter-spacing:.08em;text-transform:uppercase;margin-bottom:24px;color:var(--accent)}
+.toc ul {padding-left:17px}.toc li {margin:8px 0}.toc a {color:var(--muted);text-decoration:none}
+main {background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:40px 48px;min-width:0}
+h1 {font-size:clamp(26px,3.5vw,40px);line-height:1.2;letter-spacing:-.035em;margin-top:0}
+h2 {font-size:25px;line-height:1.25;margin:28px 0 2px;padding:0} h3 {font-size:19px;line-height:1.3;margin:16px 0 2px;padding:0}
+h4 {font-size:17px;line-height:1.3;margin:10px 0 2px;padding:0}
+main > p, main > ul, main > ol {margin-top:0;margin-bottom:0}
+main li > p {margin-top:0;margin-bottom:0}
+main ul {list-style-type:disc;padding-left:1.5em}
+main ul ul {list-style-type:circle;margin-top:0;margin-bottom:0}
+p,li {max-width:78ch} a {color:var(--accent);text-underline-offset:3px} strong {font-weight:700}
+.verbatim {color:#175cd3}
+.task-instruction {font-size:0.88em;text-align:justify}
+.source-excerpts {margin:0}.source-excerpts > summary {font-size:13px;color:var(--muted);cursor:pointer}
+.source-excerpts ul, .source-excerpts ol {margin-top:0;margin-bottom:0}
+blockquote {margin:24px 0;border-left:4px solid #8eb79b;padding:12px 20px;background:#f0f6f0}
+table {width:100%;border-collapse:collapse;font-size:14px;display:block;overflow-x:auto} th,td {text-align:left;vertical-align:top;padding:12px 14px;border-bottom:1px solid var(--line)} th {background:#edf3ee}
+code {background:#eef2ed;border-radius:4px;padding:2px 5px;font-size:.9em} pre {overflow:auto;padding:16px;background:#eef2ed;border-radius:8px} pre code {padding:0}
+button {font:inherit;font-size:13px;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:7px;padding:8px 12px;cursor:pointer}
+.color-swatch {display:inline-block;width:14px;height:14px;vertical-align:-2px;border:1px solid #9ba99f;border-radius:3px;margin-right:5px}
+.tools {display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}.footer {margin-top:40px;font-size:12px;color:var(--muted)}
+@media(max-width:850px) {.layout {display:block;padding:16px} aside {position:static;max-height:none;margin-bottom:20px}.toc {display:none}main {padding:26px 22px}.tools {margin:8px 0}}
+@media print {body {background:white;font-size:11pt}.layout {display:block;padding:0}aside {display:none}main {border:0;padding:0}h2 {break-after:avoid}a {color:inherit}table {display:table;font-size:10pt}}
+</style></head><body>
+<div class="layout"><aside><div class="brand">Paper summary</div><nav aria-label="Contents"><div class="toc">
+<ul></ul>
+</div>
+</nav>
+<div class="tools"><button onclick="window.print()">Print / save PDF</button><button id="expand">Show contents</button></div>
+</aside><main><h1 id="gdpval-profile">GDPval Profile</h1>
+<p>Apply only to the annotated GDPval paper, never as a template of facts for another benchmark. Project overrides for slug <code>315_gdpval</code> are in <code>highlight_preferences.json</code> → <code>paper_overrides.315_gdpval</code>. Resolved settings preserve the reader's previously agreed layout and priorities.</p>
+<ul>
+<li>Retain Expert Sourcing and Task Design as reader-chosen labels. Dataset Creation order is Expert Sourcing → Validating the Digital Tasks Measure → Task Design.</li>
+<li>Quality Control and Model Evaluation each use Human Review, then Auto Judge. Dataset Auto Judge is Model-in-the-Loop Task Review; automated model-output grading belongs in Model Evaluation.</li>
+<li>Quality dimensions are Representativeness, Difficulty, Overall Quality, and Prompt Specificity. Difficulty includes the paper's difficulty scores and completion-time means/medians as workload context. Keep the specificity-assessment sentence visible and its percentage in Source Excerpts.</li>
+<li>Human evaluation topics are Human Expert Grading, Headline Results, Model Strengths and Weaknesses, and Task Duration. Automated Grading contains agreement, limitations, and scoring details.</li>
+<li>Key Findings priority: Speed and Cost Comparison; Increasing Reasoning Effort and Scaffolding; Under-Contextualized GDPval; Time to Complete. Findings specific to individual models are less important.</li>
+<li>Special Design priority: Expert Recruitment and Iterative Review Process; Files and Attachments; Representative Breadth. Reuse concise expert-experience, screening, review-count, and revision evidence under the first topic.</li>
+<li>Header paper link: https://arxiv.org/abs/2510.04374v1. Metadata is OpenAI, Oct 2025; calculate the reading estimate from the current text rather than copying a previous value.</li>
+<li>Headline Results links to https://artificialanalysis.ai/evaluations/gdpval-aa. Keep original paper results dated; Headline Results contains the dated paper comparison and leaderboard link only, with no additional source list, bar-legend explanation, independent-evaluation attribution, or ties note. Keep score definitions in internal provenance. Verify the leaderboard before changing it.</li>
+<li>The selected original example is public task <code>a328feea-47db-4856-b4be-2bdc63dd88fb</code>, an Administrative Services Manager absence/lateness policy. Under Task Design, keep only its complete original instruction and the official dataset source with task ID and row/search details. Put the dataset source and lookup details directly after <strong>Example Task:</strong>, before the instruction. Do not embed the expert Word-document text or other example details.</li>
+<li>
+<p>Source facts, counts, and section titles must still be checked against the PDF/topic map. No GDPval-specific number or topic is a default for future papers.</p>
+</li>
+<li>
+<p>Numbered filenames are <code>summary/315_gdpval.md</code>, <code>html/315_gdpval.html</code>, <code>summary/315_gdpval_highlights.md</code>, and <code>html/315_gdpval_highlights.html</code>; internal provenance uses <code>.artifacts/315_gdpval/</code>.</p>
+</li>
+<li>
+<p>Opening Summary keeps separate Purpose, Scope, Task Design, Time and Cost, and Evaluation Method bullets, when source information is available. Impact keeps separate Economic Relevance and Limitations bullets. These labels preserve this paper's edited organization; other papers derive appropriate content from their own sources.</p>
+</li>
+</ul><div class="footer">Source Markdown: 315_gdpval.md · Standalone HTML · Works offline</div></main></div>
+<script>document.getElementById('expand').addEventListener('click',function(){const t=document.querySelector('.toc');if(t){t.style.display=t.style.display==='block'?'':'block';}});
+const sourceButton=document.getElementById('sources');if(sourceButton){sourceButton.addEventListener('click',function(){const excerpts=Array.from(document.querySelectorAll('details.source-excerpts'));const show=excerpts.some(d=>!d.open);excerpts.forEach(d=>d.open=show);sourceButton.textContent=show?'Hide Source Excerpts':'Show Source Excerpts';});}</script>
+</body></html>

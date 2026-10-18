@@ -1,0 +1,978 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GDPval Highlight Audit</title><style>
+:root {color-scheme:light; --paper:#fff; --bg:#f3f5f2; --ink:#21312c; --muted:#5b6e65; --line:#dce4de; --accent:#24634b}
+* {box-sizing:border-box} body {margin:0;background:var(--bg);color:var(--ink);font:17px/1.7 system-ui,-apple-system,sans-serif}
+.layout {max-width:1280px;margin:auto;display:grid;grid-template-columns:235px minmax(0,1fr);gap:32px;padding:36px 24px}
+aside {align-self:start;position:sticky;top:24px;max-height:90vh;overflow:auto;font-size:13px}
+.brand {font-weight:750;letter-spacing:.08em;text-transform:uppercase;margin-bottom:24px;color:var(--accent)}
+.toc ul {padding-left:17px}.toc li {margin:8px 0}.toc a {color:var(--muted);text-decoration:none}
+main {background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:40px 48px;min-width:0}
+h1 {font-size:clamp(26px,3.5vw,40px);line-height:1.2;letter-spacing:-.035em;margin-top:0}
+h2 {font-size:25px;line-height:1.25;margin:28px 0 2px;padding:0} h3 {font-size:19px;line-height:1.3;margin:16px 0 2px;padding:0}
+h4 {font-size:17px;line-height:1.3;margin:10px 0 2px;padding:0}
+main > p, main > ul, main > ol {margin-top:0;margin-bottom:0}
+main li > p {margin-top:0;margin-bottom:0}
+main ul {list-style-type:disc;padding-left:1.5em}
+main ul ul {list-style-type:circle;margin-top:0;margin-bottom:0}
+p,li {max-width:78ch} a {color:var(--accent);text-underline-offset:3px} strong {font-weight:700}
+.verbatim {color:#175cd3}
+.source-excerpts {margin:0}.source-excerpts > summary {font-size:13px;color:var(--muted);cursor:pointer}
+.source-excerpts ul, .source-excerpts ol {margin-top:0;margin-bottom:0}
+blockquote {margin:24px 0;border-left:4px solid #8eb79b;padding:12px 20px;background:#f0f6f0}
+table {width:100%;border-collapse:collapse;font-size:14px;display:block;overflow-x:auto} th,td {text-align:left;vertical-align:top;padding:12px 14px;border-bottom:1px solid var(--line)} th {background:#edf3ee}
+code {background:#eef2ed;border-radius:4px;padding:2px 5px;font-size:.9em} pre {overflow:auto;padding:16px;background:#eef2ed;border-radius:8px} pre code {padding:0}
+button {font:inherit;font-size:13px;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:7px;padding:8px 12px;cursor:pointer}
+.color-swatch {display:inline-block;width:14px;height:14px;vertical-align:-2px;border:1px solid #9ba99f;border-radius:3px;margin-right:5px}
+.tools {display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}.footer {margin-top:40px;font-size:12px;color:var(--muted)}
+@media(max-width:850px) {.layout {display:block;padding:16px} aside {position:static;max-height:none;margin-bottom:20px}.toc {display:none}main {padding:26px 22px}.tools {margin:8px 0}}
+@media print {body {background:white;font-size:11pt}.layout {display:block;padding:0}aside {display:none}main {border:0;padding:0}h2 {break-after:avoid}a {color:inherit}table {display:table;font-size:10pt}}
+</style></head><body>
+<div class="layout"><aside><div class="brand">Paper summary</div><nav aria-label="Contents"><div class="toc">
+<ul>
+<li><a href="#quality-dimensions">Quality Dimensions</a></li>
+<li><a href="#model-in-the-loop-task-review">Model-in-the-Loop Task Review</a></li>
+<li><a href="#review-approach">Review Approach</a></li>
+<li><a href="#under-contextualized-gdpval">Under-Contextualized GDPval</a></li>
+<li><a href="#expert-sourcing">Expert Sourcing</a></li>
+<li><a href="#dataset-scope">Dataset Scope</a></li>
+<li><a href="#automated-grading">Automated Grading</a></li>
+<li><a href="#human-expert-grading">Human Expert Grading</a></li>
+<li><a href="#economic-relevance">Economic Relevance</a></li>
+<li><a href="#files-and-attachments">Files and Attachments</a></li>
+<li><a href="#representative-breadth">Representative Breadth</a></li>
+<li><a href="#time-to-complete">Time to Complete</a></li>
+<li><a href="#task-design">Task Design</a></li>
+<li><a href="#speed-and-cost-comparison">Speed and Cost Comparison</a></li>
+<li><a href="#model-strengths-and-weaknesses">Model Strengths and Weaknesses</a></li>
+<li><a href="#increasing-reasoning-effort-and-scaffolding">Increasing Reasoning Effort and Scaffolding</a></li>
+<li><a href="#limitations">Limitations</a></li>
+<li><a href="#task-duration">Task Duration</a></li>
+<li><a href="#prompt-specificity">Prompt Specificity</a></li>
+<li><a href="#validating-the-digital-tasks-measure">Validating the Digital Tasks Measure</a></li>
+<li><a href="#excluded-and-unclassified">Excluded and Unclassified</a></li>
+</ul>
+</div>
+</nav>
+<div class="tools"><button onclick="window.print()">Print / save PDF</button><button id="expand">Show contents</button></div>
+</aside><main><h1 id="gdpval-highlight-audit">GDPval Highlight Audit</h1>
+<p>All 117 included highlights are mapped to the revised summary. Topics are ordered by their highest highlight priority; selections within each topic are ordered by priority, then paper order.</p>
+<p>Prior-coverage judgments are a manual semantic review. Annotation accounting is checked programmatically. Raw selections retain PDF extraction artifacts; mathematical selections are explained in context in the summary.</p>
+<p>Previous statuses: <strong>Covered</strong>, <strong>Partial</strong>, <strong>Title only</strong>, or <strong>Missing</strong>. New coverage means the highlighted information is represented by a topic lead, source excerpt, definition, or merged equivalent passage—not that every duplicate fragment is repeated verbatim.</p>
+<h2 id="quality-dimensions">Quality Dimensions</h2>
+<p><strong>Priority 1 · Quality Control · Human Review · Quality Dimensions</strong></p>
+<p>Quality Dimensions</p>
+<ul>
+<li>
+<p><strong>H080 · Light cyan · Before: Title only</strong></p>
+<ul>
+<li>Selected text: <code>A.4.4 TASK REPRESENTATIVENESS</code></li>
+<li>Now represented under <strong>Quality Control → Human Review → Quality Dimensions</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H021 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>To assess task quality, we asked occupational experts to rate each task on its difficulty, representativeness, time to complete, and overall quality against real-world standards for their occupation.</code></li>
+<li>Now represented under <strong>Quality Control → Human Review → Quality Dimensions</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H075 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>Avg time to complete (hrs) 9.49</code></li>
+<li>Now represented under <strong>Quality Control → Human Review → Quality Dimensions</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H076 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>Avg time to complete (hrs) 8.63</code></li>
+<li>Now represented under <strong>Quality Control → Human Review → Quality Dimensions</strong>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="model-in-the-loop-task-review">Model-in-the-Loop Task Review</h2>
+<p><strong>Priority 1 · Quality Control · Auto Judge</strong></p>
+<p>Automated screening flags possible errors or omissions in task submissions.</p>
+<ul>
+<li>
+<p><strong>H099 · Light cyan · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>Because models can make mistakes, experts were instructed to take model feedback as a suggestion rather than a direction. Experts retained final responsibility for task accuracy and completeness; the model did not autonomously alter tasks.</code></li>
+<li>Now represented under <strong>Quality Control → Auto Judge → Model-in-the-Loop Task Review</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H094 · Bright green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>automatically screen each task submission</code></li>
+<li>Now represented under <strong>Quality Control → Auto Judge → Model-in-the-Loop Task Review</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H095 · Light green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>if there were no deliverable and reference files attached.</code></li>
+<li>Now represented under <strong>Quality Control → Auto Judge → Model-in-the-Loop Task Review</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H096 · Light green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>if the task complexity was too simple</code></li>
+<li>Now represented under <strong>Quality Control → Auto Judge → Model-in-the-Loop Task Review</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H097 · Light green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>ensuring the task is relevant to the selected O*NET occupation,</code></li>
+<li>Now represented under <strong>Quality Control → Auto Judge → Model-in-the-Loop Task Review</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H098 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>tasks performed primarily on a computer,</code></li>
+<li>Now represented under <strong>Quality Control → Auto Judge → Model-in-the-Loop Task Review</strong>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="review-approach">Review Approach</h2>
+<p><strong>Priority 1 · Quality Control · Human Review · Review Approach</strong></p>
+<p><span class="verbatim">Each task received an average of five human reviews (with a minimum of three reviews).</span></p>
+<ul>
+<li>
+<p><strong>H104 · Light cyan · Before: Title only</strong></p>
+<ul>
+<li>Selected text: <code>A.5.2 HUMAN EXPERT REVIEWERS</code></li>
+<li>Now represented under <strong>Quality Control → Human Review → Review Approach</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H022 · Bright green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>an iterative review pipeline involving both automated model-based screening and multiple stages of human expert review.</code></li>
+<li>Now represented under <strong>Quality Control → Human Review → Review Approach</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H023 · Bright green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>Each task received an average of five human reviews (with a minimum of three reviews).</code></li>
+<li>Now represented under <strong>Quality Control → Human Review → Review Approach</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H100 · Bright green · Before: Partial</strong></p>
+<ul>
+<li>Selected text: <code>Initially, our researchers manually reviewed all tasks to identify experts who produced consistently high- quality tasks; these individuals were trained and promoted to reviewers.</code></li>
+<li>Now represented under <strong>Quality Control → Human Review → Review Approach</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H024 · Light green · Before: Partial</strong></p>
+<ul>
+<li>Selected text: <code>Across all stages of review, experts provided detailed comments, and tasks were iteratively revised before subsequent reviews to enhance quality and representativeness,</code></li>
+<li>Now represented under <strong>Quality Control → Human Review → Review Approach</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H101 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>The most skilled reviewers were further trained to become lead reviewers, responsible for identifying, mentoring, and promoting additional qualified reviewers from within the expert pool.</code></li>
+<li>Now represented under <strong>Quality Control → Human Review → Review Approach</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H102 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>Throughout the review process, the research team regularly performed quality-control checks on tasks signed off by reviewers, ensuring ongoing alignment and quality standards.</code></li>
+<li>Now represented under <strong>Quality Control → Human Review → Review Approach</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H103 · Light green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>Human reviewers conducted multiple rounds of review on each task.</code></li>
+<li>Now represented under <strong>Quality Control → Human Review → Review Approach</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H105 · Light green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>occupation-specific reviewer</code></li>
+<li>Now represented under <strong>Quality Control → Human Review → Review Approach</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H106 · Light green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>generalist reviewer</code></li>
+<li>Now represented under <strong>Quality Control → Human Review → Review Approach</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H107 · Light green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>third expert reviewer</code></li>
+<li>Now represented under <strong>Quality Control → Human Review → Review Approach</strong>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="under-contextualized-gdpval">Under-Contextualized GDPval</h2>
+<p><strong>Priority 2 · Key Findings</strong></p>
+<p>GPT-5 performs worse on under-specified prompts that require it to find the necessary inputs, choose an approach, and determine formatting requirements.</p>
+<ul>
+<li>
+<p><strong>H069 · Bright green · Before: Partial</strong></p>
+<ul>
+<li>Selected text: <code>To assess how models handle task ambiguity, we created a modified version of GDPval with de- liberately lower-context prompts.</code></li>
+<li>Now represented under <strong>Key Findings → Under-Contextualized GDPval</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H070 · Light green · Before: Partial</strong></p>
+<ul>
+<li>Selected text: <code>These shorter prompts omitted additional context such as where to locate specific data within reference files, how to approach the problem, or detailed formatting expectations for the final deliverable; the models had to “figure it out.”</code></li>
+<li>Now represented under <strong>Key Findings → Under-Contextualized GDPval</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H071 · Light green · Before: Partial</strong></p>
+<ul>
+<li>Selected text: <code>navigating ambiguity by figuring out what to work on and where to get the necessary inputs.</code></li>
+<li>Now represented under <strong>Key Findings → Under-Contextualized GDPval</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H072 · Light green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>model’s performance was worse on under-specified prompts. In particular, the models struggled to figure out context.</code></li>
+<li>Now represented under <strong>Key Findings → Under-Contextualized GDPval</strong>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="expert-sourcing">Expert Sourcing</h2>
+<p><strong>Priority 2 · Dataset Creation</strong></p>
+<p>Experts are recruited from the highest-earning knowledge work occupations in the selected sectors; occupation-specific experience and selective screening ground tasks in professional work.</p>
+<ul>
+<li>
+<p><strong>H093 · Bright green · Before: Partial</strong></p>
+<ul>
+<li>Selected text: <code>Experts for each occupation were required to have previous experience in that specific occupation and sector</code></li>
+<li>Now represented under <strong>Dataset Creation → Expert Sourcing</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H002 · Light green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>industry professionals with an average of 14 years of experience.</code></li>
+<li>Now represented under <strong>Dataset Creation → Expert Sourcing</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H016 · Light green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>highest-earning knowledge work occupations</code></li>
+<li>Now represented under <strong>Dataset Creation → Expert Sourcing</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H017 · Light green · Before: Partial</strong></p>
+<ul>
+<li>Selected text: <code>We recruited expert industry professionals to create realistic tasks based on their professional work experience.</code></li>
+<li>Now represented under <strong>Dataset Creation → Expert Sourcing</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H018 · Light green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>The average expert had 14 years of experience.</code></li>
+<li>Now represented under <strong>Dataset Creation → Expert Sourcing</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H019 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>pass a video interview, a background check, a training and a quiz to partici- pate in the project.</code></li>
+<li>Now represented under <strong>Dataset Creation → Expert Sourcing</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H081 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>15+ years</code></li>
+<li>Now represented under <strong>Dataset Creation → Expert Sourcing</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H082 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>18+ years</code></li>
+<li>Now represented under <strong>Dataset Creation → Expert Sourcing</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H083 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>15 years</code></li>
+<li>Now represented under <strong>Dataset Creation → Expert Sourcing</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H084 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>20+ years</code></li>
+<li>Now represented under <strong>Dataset Creation → Expert Sourcing</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H085 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>25 years</code></li>
+<li>Now represented under <strong>Dataset Creation → Expert Sourcing</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H086 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>5+ years</code></li>
+<li>Now represented under <strong>Dataset Creation → Expert Sourcing</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H087 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>teams of 10+ engineers</code></li>
+<li>Now represented under <strong>Dataset Creation → Expert Sourcing</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H088 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>15+ years</code></li>
+<li>Now represented under <strong>Dataset Creation → Expert Sourcing</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H089 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>10 years</code></li>
+<li>Now represented under <strong>Dataset Creation → Expert Sourcing</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H090 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>20 years</code></li>
+<li>Now represented under <strong>Dataset Creation → Expert Sourcing</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H091 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>Less than 10% of applicants were selected to con- tribute tasks to our full set.</code></li>
+<li>Now represented under <strong>Dataset Creation → Expert Sourcing</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H092 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>Each occupation had a minimum of 5 quali- fied professionals.</code></li>
+<li>Now represented under <strong>Dataset Creation → Expert Sourcing</strong>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="dataset-scope">Dataset Scope</h2>
+<p><strong>Priority 3 · Summary</strong></p>
+<p>The full dataset contains <span class="verbatim">1,320 tasks</span> spanning <span class="verbatim">44 occupations across the top 9 sectors contributing to U.S. GDP (Gross Domestic Product).</span> The public gold subset has <span class="verbatim">220 tasks</span>. There are <span class="verbatim">at least 30 tasks per occupation in the full set</span> and <span class="verbatim">5 tasks per occupation in the gold subset</span>.</p>
+<ul>
+<li>
+<p><strong>H001 · Light green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>44 occupations across the top 9 sectors contributing to U.S. GDP (Gross Domestic Product).</code></li>
+<li>Now represented under <strong>Summary → Dataset Scope</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H003 · Light green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>220 tasks</code></li>
+<li>Now represented under <strong>Summary → Dataset Scope</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H005 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>at least 30 tasks per occupation in the full set (and 5 tasks per occupation in the gold subset), across 44 occupations.</code></li>
+<li>Now represented under <strong>Summary → Dataset Scope</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H010 · Light green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>1,320 tasks</code></li>
+<li>Now represented under <strong>Summary → Dataset Scope</strong>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="automated-grading">Automated Grading</h2>
+<p><strong>Priority 3 · Model Evaluation · Auto Judge</strong></p>
+<p><span class="verbatim">average human-automated grader agreement was 65.7% and human inter-rater agreement was 70.8%.</span></p>
+<ul>
+<li>
+<p><strong>H004 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>a pub- lic automated grading service</code></li>
+<li>Now represented under <strong>Model Evaluation → Auto Judge → Automated Grading</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H007 · Light green · Before: Partial</strong></p>
+<ul>
+<li>Selected text: <code>an experimental automated grader</code></li>
+<li>Now represented under <strong>Model Evaluation → Auto Judge → Automated Grading</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H028 · Light green · Before: Partial</strong></p>
+<ul>
+<li>Selected text: <code>we trained an experimental grading model</code></li>
+<li>Now represented under <strong>Model Evaluation → Auto Judge → Automated Grading</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H029 · Light green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>achieves 66% agreement with human expert graders, only 5% below human expert inter-rating agreement of 71%.</code></li>
+<li>Now represented under <strong>Model Evaluation → Auto Judge → Automated Grading</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H048 · Light green · Before: Partial</strong></p>
+<ul>
+<li>Selected text: <code>we make an automated grader proxy available, but do not consider it a full substitute for industry expert graders.</code></li>
+<li>Now represented under <strong>Model Evaluation → Auto Judge → Automated Grading</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H108 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>the empirical mean over all pairs of ratings</code></li>
+<li>Now represented under <strong>Model Evaluation → Auto Judge → Automated Grading</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H109 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>H human score</code></li>
+<li>Now represented under <strong>Model Evaluation → Auto Judge → Automated Grading</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H110 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>au- A tomated grader score</code></li>
+<li>Now represented under <strong>Model Evaluation → Auto Judge → Automated Grading</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H111 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>human scores and H1 H2</code></li>
+<li>Now represented under <strong>Model Evaluation → Auto Judge → Automated Grading</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H113 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>three automated grader</code></li>
+<li>Now represented under <strong>Model Evaluation → Auto Judge → Automated Grading</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H114 · Light green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>average human-automated grader agreement was 65.7% and human inter-rater agreement was 70.8%.</code></li>
+<li>Now represented under <strong>Model Evaluation → Auto Judge → Automated Grading</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H115 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>models often favor their own responses</code></li>
+<li>Now represented under <strong>Model Evaluation → Auto Judge → Automated Grading</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H116 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>Both agreement metrics are highest for less capable models, since their outputs are easier to distinguish from human deliverables and are less likely to be preferred.</code></li>
+<li>Now represented under <strong>Model Evaluation → Auto Judge → Automated Grading</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H117 · Light green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>12 out of 220 tasks as ungradable due to limitations of the automated grader.</code></li>
+<li>Now represented under <strong>Model Evaluation → Auto Judge → Automated Grading</strong>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="human-expert-grading">Human Expert Grading</h2>
+<p><strong>Priority 3 · Model Evaluation · Human Review</strong></p>
+<p><span class="verbatim">In addition to correctness, expert graders often consider subjective factors such as structure, style, format, aesthetics, and relevance.</span></p>
+<ul>
+<li>
+<p><strong>H006 · Light green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>our primary evaluation metric is head-to-head human expert comparison.</code></li>
+<li>Now represented under <strong>Model Evaluation → Human Review → Human Expert Grading</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H012 · Light green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>In addition to correctness, expert graders often consider subjective factors such as structure, style, format, aesthetics, and relevance.</code></li>
+<li>Now represented under <strong>Model Evaluation → Human Review → Human Expert Grading</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H013 · Light green · Before: Partial</strong></p>
+<ul>
+<li>Selected text: <code>our primary metric is win rate,</code></li>
+<li>Now represented under <strong>Model Evaluation → Human Review → Human Expert Grading</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H015 · Light green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>compare model outputs against a human expert baseline,</code></li>
+<li>Now represented under <strong>Model Evaluation → Human Review → Human Expert Grading</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H025 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>blinded expert pairwise comparisons,</code></li>
+<li>Now represented under <strong>Model Evaluation → Human Review → Human Expert Grading</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H026 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>rank two or more unlabeled work deliverables.</code></li>
+<li>Now represented under <strong>Model Evaluation → Human Review → Human Expert Grading</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H027 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>over an hour.</code></li>
+<li>Now represented under <strong>Model Evaluation → Human Review → Human Expert Grading</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H030 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>stylistic differences.</code></li>
+<li>Now represented under <strong>Model Evaluation → Human Review → Human Expert Grading</strong>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="economic-relevance">Economic Relevance</h2>
+<p><strong>Priority 3 · Impact</strong></p>
+<p><span class="verbatim">AI capability evaluations can provide clearer, more directly attributable evidence about model abilities, allowing us to assess economic relevance ahead of widespread adoption.</span></p>
+<ul>
+<li><strong>H008 · Light green · Before: Partial</strong><ul>
+<li>Selected text: <code>how increasingly capable AI models could affect the labor market—</code></li>
+<li>Now represented under <strong>Impact → Economic Relevance</strong>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="files-and-attachments">Files and Attachments</h2>
+<p><strong>Priority 3 · Special Design</strong></p>
+<p><span class="verbatim">GDPval tasks incorporate a broad range of real-world file types (such as spreadsheets, documents, presentations, images, audio, video, and specialized formats like CAD).</span></p>
+<ul>
+<li>
+<p><strong>H009 · Light green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>tasks are based on actual work product from industry experts,</code></li>
+<li>Now represented under <strong>Special Design → Files and Attachments</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H077 · Light green · Before: Partial</strong></p>
+<ul>
+<li>Selected text: <code>Many traditional evaluations rely on text-in/text-out task formats. GDPval tasks incorporate a broad range of real-world file types (such as spreadsheets, documents, presentations, images, audio, video, and specialized formats like CAD). 67.7% of tasks required interaction with at least one reference file.</code></li>
+<li>Now represented under <strong>Special Design → Files and Attachments</strong>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="representative-breadth">Representative Breadth</h2>
+<p><strong>Priority 3 · Special Design</strong></p>
+<p>The benchmark builds on production AI usage analyses to cover areas where model adoption is still emerging.</p>
+<ul>
+<li><strong>H011 · Light green · Before: Missing</strong><ul>
+<li>Selected text: <code>production AI usage analyses</code></li>
+<li>Now represented under <strong>Special Design → Representative Breadth</strong>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="time-to-complete">Time to Complete</h2>
+<p><strong>Priority 3 · Key Findings</strong></p>
+<p>Reported task-time averages differ across the introduction, task-statistics tables, and economic analysis.</p>
+<ul>
+<li><strong>H014 · Light green · Before: Missing</strong><ul>
+<li>Selected text: <code>average of 7 hours of work</code></li>
+<li>Now represented under <strong>Key Findings → Time to Complete</strong>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="task-design">Task Design</h2>
+<p><strong>Priority 3 · Dataset Creation</strong></p>
+<p><span class="verbatim">Each GDPval task consists of two primary components: a request (often with reference files) and a deliverable (work product).</span></p>
+<ul>
+<li><strong>H020 · Light green · Before: Covered</strong><ul>
+<li>Selected text: <code>Each GDPval task consists of two primary components: a request (often with reference files) and a deliverable (work product).</code></li>
+<li>Now represented under <strong>Dataset Creation → Task Design</strong>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="speed-and-cost-comparison">Speed and Cost Comparison</h2>
+<p><strong>Priority 3 · Key Findings</strong></p>
+<p><span class="verbatim">When incorporating time to review and redo work, the payoff from using a model shrinks.</span></p>
+<ul>
+<li>
+<p><strong>H031 · Light green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>In the scenarios analyzed, incorporating frontier AI models into expert workflows showed the potential to save time and money relative to unaided experts.</code></li>
+<li>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H032 · Light green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>“try using the model and if still unsat- isfactory, fix it yourself”</code></li>
+<li>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H033 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>Here, an expert human samples from a model, reviews outputs, and if unsatisfactory, resamples and repeats.</code></li>
+<li>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H049 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>HT</code></li>
+<li>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H050 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>HC,</code></li>
+<li>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H051 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>= 404 HT</code></li>
+<li>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H052 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>= $361. HC</code></li>
+<li>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H053 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>RT</code></li>
+<li>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H054 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>= 109 RT</code></li>
+<li>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H055 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>RC</code></li>
+<li>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H056 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>$86,</code></li>
+<li>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H057 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>MT</code></li>
+<li>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H058 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>MC</code></li>
+<li>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H059 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>w</code></li>
+<li>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H060 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>HT /MT</code></li>
+<li>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H061 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>HC/MC.</code></li>
+<li>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H062 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>(1 wi) −</code></li>
+<li>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H063 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>human completion time for any fixes needed</code></li>
+<li>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H064 · Light green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>a human tries using GPT-5 for a task, assesses its quality, and then does the task themselves if the deliverable quality is below their quality bar.</code></li>
+<li>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H065 · Light green · Before: Partial</strong></p>
+<ul>
+<li>Selected text: <code>without accounting for any quality differences</code></li>
+<li>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H066 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>n a human tries rounds of using GPT-5 for a task, then assesses its quality each time, and then does the task themselves if the model quality is below their quality bar after all attempts.</code></li>
+<li>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H067 · Light green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>When incorporating time to review and redo work, the payoff from using a model shrinks.</code></li>
+<li>Now represented under <strong>Key Findings → Speed and Cost Comparison</strong>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="model-strengths-and-weaknesses">Model Strengths and Weaknesses</h2>
+<p><strong>Priority 3 · Model Evaluation · Human Review</strong></p>
+<p><span class="verbatim">Claude, Grok, and Gemini most often lost due to instruction-following failures, while GPT-5 high lost mainly from formatting errors and had the fewest instruction-following issues.</span></p>
+<ul>
+<li>
+<p><strong>H034 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>5Samples were clustered using expert justifications;</code></li>
+<li>Now represented under <strong>Model Evaluation → Human Review → Model Strengths and Weaknesses</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H035 · Light green · Before: Partial</strong></p>
+<ul>
+<li>Selected text: <code>We built a clustering pipeline to analyze why experts preferred or rejected GPT-5 high,</code></li>
+<li>Now represented under <strong>Model Evaluation → Human Review → Model Strengths and Weaknesses</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H036 · Light green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>instruction-following failures,</code></li>
+<li>Now represented under <strong>Model Evaluation → Human Review → Model Strengths and Weaknesses</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H037 · Light green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>formatting errors</code></li>
+<li>Now represented under <strong>Model Evaluation → Human Review → Model Strengths and Weaknesses</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H038 · Light green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>ignored reference data,</code></li>
+<li>Now represented under <strong>Model Evaluation → Human Review → Model Strengths and Weaknesses</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H039 · Light green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>failed to provide deliverables,</code></li>
+<li>Now represented under <strong>Model Evaluation → Human Review → Model Strengths and Weaknesses</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H040 · Light green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>used the wrong format.</code></li>
+<li>Now represented under <strong>Model Evaluation → Human Review → Model Strengths and Weaknesses</strong>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="increasing-reasoning-effort-and-scaffolding">Increasing Reasoning Effort and Scaffolding</h2>
+<p><strong>Priority 3 · Key Findings</strong></p>
+<p>Increased reasoning effort, prompt-tuning, and agent scaffolding, including best-of-N sampling, improve performance and deliverable quality.</p>
+<ul>
+<li>
+<p><strong>H041 · Light green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>We found that additional reasoning effort improved performance.</code></li>
+<li>Now represented under <strong>Key Findings → Increasing Reasoning Effort and Scaffolding</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H042 · Light green · Before: Partial</strong></p>
+<ul>
+<li>Selected text: <code>improved agent scaffolding</code></li>
+<li>Now represented under <strong>Key Findings → Increasing Reasoning Effort and Scaffolding</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H043 · Light green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>improve model capabilities with prompts.</code></li>
+<li>Now represented under <strong>Key Findings → Increasing Reasoning Effort and Scaffolding</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H073 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>best-of-N sampling</code></li>
+<li>Now represented under <strong>Key Findings → Increasing Reasoning Effort and Scaffolding</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H074 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>GPT-5 grader</code></li>
+<li>Now represented under <strong>Key Findings → Increasing Reasoning Effort and Scaffolding</strong>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="limitations">Limitations</h2>
+<p><strong>Priority 3 · Impact</strong></p>
+<p>GDPval focuses on self-contained knowledge work; tasks are precisely-specified and one-shot, with the full task context provided.</p>
+<ul>
+<li>
+<p><strong>H045 · Light green · Before: Partial</strong></p>
+<ul>
+<li>Selected text: <code>knowledge work that can be performed on a computer, particularly around digital deliver- ables.</code></li>
+<li>Now represented under <strong>Impact → Limitations</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H046 · Light green · Before: Partial</strong></p>
+<ul>
+<li>Selected text: <code>we provide the full context of the task in the prompt,</code></li>
+<li>Now represented under <strong>Impact → Limitations</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H047 · Light green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>one-shot, not interactive:</code></li>
+<li>Now represented under <strong>Impact → Limitations</strong>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="task-duration">Task Duration</h2>
+<p><strong>Priority 3 · Model Evaluation · Human Review</strong></p>
+<p><span class="verbatim">Win rates are highest for shorter tasks (0–2 hours) and decline steadily as completion time increases.</span></p>
+<ul>
+<li><strong>H068 · Light green · Before: Covered</strong><ul>
+<li>Selected text: <code>Win rates are highest for shorter tasks (0–2 hours) and decline steadily as completion time increases. This indicates that models perform best on faster, less time-intensive tasks.</code></li>
+<li>Now represented under <strong>Model Evaluation → Human Review → Task Duration</strong>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="prompt-specificity">Prompt Specificity</h2>
+<p><strong>Priority 3 · Quality Control · Human Review · Quality Dimensions</strong></p>
+<p><span class="verbatim">Occupational experts conducting human grading rated the specificity of instructions provided in each prompt.</span></p>
+<ul>
+<li>
+<p><strong>H078 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>the specificity of instructions provided in each prompt.</code></li>
+<li>Now represented under <strong>Quality Control → Human Review → Quality Dimensions → Prompt Specificity</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H079 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>human grading</code></li>
+<li>Now represented under <strong>Quality Control → Human Review → Quality Dimensions → Prompt Specificity</strong>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="validating-the-digital-tasks-measure">Validating the Digital Tasks Measure</h2>
+<p><strong>Priority 3 · Dataset Creation</strong></p>
+<p>The digital tasks measure aligns with established economic measures of work: higher non-routine cognitive content and lower routine and manual content.</p>
+<ul>
+<li>
+<p><strong>H118 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>The patterns are clear: occupations with higher digital-task shares score systematically higher on the non-routine cognitive dimensions and lower on the manual dimensions. In other words, the more an occupation relies on digital tasks, the more it resembles cognitive, non-routine work.</code></li>
+<li>Now represented under <strong>Dataset Creation → Validating the Digital Tasks Measure</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>H119 · Light green · Before: Missing</strong></p>
+<ul>
+<li>Selected text: <code>The pattern is again clear– knowledge-work occupations cluster at the top of the non-routine cognitive distributions and at the bottom of the routine and manual distributions. Taken together, these results suggest that our digital- task classification is closely aligned with the economic literature on cognitive/manual work.</code></li>
+<li>Now represented under <strong>Dataset Creation → Validating the Digital Tasks Measure</strong>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="excluded-and-unclassified">Excluded and Unclassified</h2>
+<ul>
+<li>H112: Yellow highlight, excluded by your color preferences.</li>
+<li>H044: Squiggly annotation (#4B99FF); meaning unclassified, not included in the highlight count.</li>
+</ul><div class="footer">Source Markdown: 315_gdpval_highlights.md · Standalone HTML · Works offline</div></main></div>
+<script>document.getElementById('expand').addEventListener('click',function(){const t=document.querySelector('.toc');if(t){t.style.display=t.style.display==='block'?'':'block';}});
+const sourceButton=document.getElementById('sources');if(sourceButton){sourceButton.addEventListener('click',function(){const excerpts=Array.from(document.querySelectorAll('details.source-excerpts'));const show=excerpts.some(d=>!d.open);excerpts.forEach(d=>d.open=show);sourceButton.textContent=show?'Hide Source Excerpts':'Show Source Excerpts';});}</script>
+</body></html>

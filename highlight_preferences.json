@@ -1,0 +1,292 @@
+{
+  "colors": {
+    "#AAFFFF": {
+      "name": "Light cyan",
+      "priority": 1,
+      "include_in_summary": true
+    },
+    "#00FF00": {
+      "name": "Bright green",
+      "priority": 2,
+      "include_in_summary": true
+    },
+    "#AAFF7F": {
+      "name": "Light green",
+      "priority": 3,
+      "include_in_summary": true
+    },
+    "#FFFF00": {
+      "name": "Yellow",
+      "meaning": "Question or not understood",
+      "include_in_summary": false
+    }
+  },
+  "unknown_colors": "Report to the reader; do not assign a meaning",
+  "summary_subdirectory": "summary",
+  "html_subdirectory": "html",
+  "print_absolute_html_path": true,
+  "schema_version": 2,
+  "summary_format": {
+    "style": "Use short, complete sentences with clear subjects and verbs. Prefer original wording when it reads clearly; split dense lists and packed clauses, and use ordinary language when needed. Similar highlights may share one concise passage.",
+    "quality_control_subsections": [
+      "Human Review",
+      "Auto Judge"
+    ],
+    "quality_control_scope": "Quality of the benchmark/dataset itself: validity, prompt clarity, references, annotations, ground truth, and expert reference deliverables where documented",
+    "prompt_specificity_subsection": "Human Review → Quality Dimensions",
+    "model_evaluation_scope": "Using the benchmark to assess model trajectories, actions, outputs, or deliverables; model grading, metrics, evaluation-grader reliability, and errors",
+    "classification_rule": "Classify by what is judged, not whether the judge is human or automated",
+    "section_heading_case": "Title Case",
+    "section_separator": "Wider gap between sections (28px above headings); tight heading-to-content gap (2px below), with no top margins on paragraphs inside bullets; no divider lines",
+    "maximum_reading_minutes": 5,
+    "target_word_count": [
+      600,
+      800
+    ],
+    "maximum_word_count": 900,
+    "word_count_scope": "Overview; comprehensive source sub-bullets remain available as expandable HTML excerpts",
+    "cover_every_included_highlight": true,
+    "group_related_highlights_across_priorities": true,
+    "group_order": "Highest included priority first within each section, then source order",
+    "source_excerpts_collapsed_in_html": true,
+    "unmatched_highlights_section": "Key Findings",
+    "create_priority_ordered_coverage_inventory": true,
+    "benchmark_components": [
+      "Summary",
+      "Dataset Creation",
+      "Quality Control: Human Review, Auto Judge",
+      "Model Evaluation: Human Review, Auto Judge",
+      "Key Findings",
+      "Special Design",
+      "Impact",
+      "Important Sections"
+    ],
+    "header": "Single line: Organization · abbreviated month and year · estimated reading time · Paper link",
+    "show_arxiv_version_label": false,
+    "show_page_numbers": false,
+    "prefer_verbatim": true,
+    "narrative_voice": "Neutral third-person; rephrase author-voice we, our, and I accurately in the default color",
+    "standalone_readability": "Make each sentence understandable on its own. Remove context-dependent transitions, explain necessary paper terminology, and replace opaque noun lists or unexplained shorthand with plain language. Rewrites remain default color.",
+    "verbatim_color": "#175CD3",
+    "verbatim_markdown": "<span class=\"verbatim\">Exact source text</span>",
+    "edited_text_color": "default",
+    "final_section": "Important Sections: only actually highlighted titles, Title Case, optional section identifiers, no page numbers; indent highlighted subsections under highlighted parent sections",
+    "important_sections_maximum_entries": 5,
+    "important_sections_order": "Paper order: main-text sections first, then appendix sections; numeric section order within each group, preserving subsection nesting",
+    "important_sections_changed_capitalization_color": "default",
+    "summary_layout": "Use concise bullets for purpose, scope, task design, time/cost when reported, and evaluation method. Omit a redundant opening Key Findings bullet and any Resources and Data section.",
+    "summary_source_policy": "Incorporate user-supplied search results with accurate caveats; verify changing resources and distinguish independent evaluations from the paper results",
+    "include_external_links": false,
+    "include_paper_link_at_top": true,
+    "include_resources_section": false,
+    "human_review_structure": [
+      "Review Approach",
+      "Quality Dimensions"
+    ],
+    "human_review_presentation": "Parent bullets with four-space-indented sub-bullets; filled circles for parent bullets and hollow circles for sub-bullets. Keep category sub-bullets visible in HTML. Individual quality-dimension labels use normal weight; parent category labels remain bold.",
+    "review_requirements": "Keep task accuracy and completeness with the relevant review/screening method; omit a standalone Review Requirements bullet",
+    "task_characteristics": "Keep completion time with task statistics when useful; omit a standalone Task Characteristic bullet",
+    "external_link_exceptions": [
+      "Paper link at the top",
+      "Verified current leaderboard link in Headline Results; date historical paper scores and omit extra attribution or independent-evaluation commentary beside the link"
+    ],
+    "redundancy_review": "Review Summary bullets together with their Source Excerpts. Choose one clear representative passage or merge very similar highlights across paragraphs and colors. Keep repeated dataset definitions, counts, and conclusions once; preserve distinct facts, quantities, conditions, populations, and qualifications, and map all represented highlight IDs to the retained evidence.",
+    "summary_verbatim_priority": "Prefer concise original wording from highlighted passages when it is easy to read. Readability takes precedence over awkward combinations of original fragments. Use plain-language leads in default color when needed, retain one useful original passage for support, and keep only verified exact wording blue.",
+    "task_design_example": "Each Example Task contains only the complete original task instruction and its source. Use a readable instruction printed in the paper or appendix when available. Preserve a different existing task only when the reader explicitly selected it; an earlier agent selection does not override the paper preference. Quote the cited paper version exactly. If the same task appears in the paper, include the exact subsection title/number, figure number, or table number that shows it, even when also giving a dataset link; for a dataset source, give its official link, stable task ID, and available row/split or search hint. Use a source reference alone if the instruction is unavailable, unreadable, or restricted. Omit deliverables, output titles, walkthroughs, and other additional example details; preserve all content within the original instruction itself. Excluded appendix highlights remain excluded. When the same task has both a paper and official dataset source, retain both: exact paper location and official task link with its stable identifier. Keep the instruction faithful to the cited version.",
+    "quality_dimension_details": "Use reported dimensions, rating scales, populations, units, and mean/median statistics. Completion time describes workload rather than a quality rating. State what was assessed before results, and avoid duplicating statistics.",
+    "prompt_specificity_layout": "When prompt specificity is reported, keep how it was assessed visible and put detailed results in Source Excerpts.",
+    "auto_judge_detail_order": "Present screening criteria first, followed by advisory-feedback guidance and expert responsibility.",
+    "model_evaluation_subsections": [
+      "Human Review",
+      "Auto Judge"
+    ],
+    "source_excerpt_verbatim_review": "Before rendering, review default-color prose and every numeric table cell in all sections and expanded Source Excerpts. Mark verified exact wording and unchanged source numbers blue, including numbers within rephrased sentences, combined comparisons, or rearranged tables; verify the source row, model, setting, and population. Keep edited connections, calculated/converted values, changed precision, added symbols/units, and newly assembled range separators default color. Preserve clear prose when a color-only correction suffices; prefer coherent original clauses over scattered common-word matches. Task instructions are an exception: preserve their original wording in italics and the default text color; exclude them from the blue-formatting pass.",
+    "terminology_policy": "Never invent jargon, acronyms, or technical labels. Every technical term must occur in the current paper and retain its original meaning; verify it against source passages. Use ordinary language or briefly explain necessary paper terms. Preserve reader-chosen organizational labels. Edited capitalization stays default color; verbatim excerpts stay unchanged.",
+    "key_findings_priority": "Reader-specified priorities first; otherwise favor broadly useful findings and design insights over transient individual-model rankings, then highlight priority and source order.",
+    "reading_words_per_minute": 200,
+    "metadata": "Use this paper’s actual organization/authors, abbreviated month and year, measured overview reading estimate, and paper URL; no version label or page numbers.",
+    "revision_policy": "Edit Markdown first, render every changed Markdown document to paired HTML, and verify content consistency. Never update only the HTML.",
+    "skill_scope": "Benchmark papers only; other research paper types use other skills.",
+    "file_naming": "Use snake_case and retain any reader-provided numeric paper prefix consistently in Markdown, HTML, and provenance filenames.",
+    "example_presentation": "Put the source and lookup details immediately after **Example Task:** on the same line, before the instruction. Do not add a separate Source heading. Follow with one paragraph: The task instruction is: *“Complete unchanged task instruction.”* Italicize the quoted instruction in the default color, with no blue spans, manual line breaks, or separate instruction heading. Keep the introduction in normal type. Use 0.88em font size and justified alignment. Include only the instruction and its paper/dataset source; retain source identifiers needed to locate it. Do not include deliverables or other extra example material. Check the paper for the same task and include its exact subsection, figure, or table identifier when present. Do not use a location for a different task or a general task-design section. Put both paper and dataset references on the Example Task line when available for the same task; do not replace one source with the other.",
+    "special_design_hardening": "When reported, explain how tasks are deliberately made harder under Special Design, using the paper’s terminology and source excerpts for each technique and its purpose. Keep generation procedures in Dataset Creation and validity checks in Quality Control; avoid duplicating the main hardening explanation.",
+    "highlight_coverage_review": "Read every included selection against its bound summary evidence, checking each claim, action, constraint, number, and qualification in multi-part selections and rectangles. Explain actual transformations and where details survive; counts and generic coverage assertions do not establish semantic inclusion. Report restored omissions and intentional exclusions separately."
+  },
+  "paper_overrides": {
+    "315_gdpval": {
+      "summary_format": {
+        "expert_sourcing_group": "Merge Representative Experts and Professional Sourcing as Expert Sourcing",
+        "dataset_creation_order": [
+          "Expert Sourcing",
+          "Validating the Digital Tasks Measure",
+          "Task Design"
+        ],
+        "dataset_creation_dependency": "Digital-work validation is a preparation step and should appear immediately before Task Design, or nested beneath it as preparation",
+        "human_review_quality_dimensions": [
+          "Representativeness",
+          "Difficulty",
+          "Overall Quality",
+          "Prompt Specificity"
+        ],
+        "leaderboard_url": "https://artificialanalysis.ai/evaluations/gdpval-aa",
+        "headline_score_note": "Omit the separate note that headline scores include ties; retain exact score definitions internally and avoid inaccurate metric labels",
+        "summary_findings_policy": "For GDPval, omit the introductory Key Findings bullet. Keep findings in their dedicated sections; avoid broad claims about speed, cost, and oversight that lose the experiment context.",
+        "model_evaluation_grouping": "Human Review: Human Expert Grading, Headline Results, Model Strengths and Weaknesses, and Task Duration. Auto Judge: Automated Grading, agreement with humans, limitations, and agreement metrics. Keep evaluation of model outputs separate from dataset quality control.",
+        "key_findings_order": [
+          "Speed and Cost Comparison",
+          "Increasing Reasoning Effort and Scaffolding",
+          "Under-Contextualized GDPval",
+          "Time to Complete"
+        ],
+        "key_findings_priority": "For GDPval, prioritize Speed and Cost Comparison first, then Increasing Reasoning Effort and Scaffolding. Model-specific findings are less important. Explicit reader topic priorities override default highlight-priority ordering in the summary; the highlight audit remains ordered by annotation priority.",
+        "special_design_order": [
+          "Expert Recruitment and Iterative Review Process",
+          "Files and Attachments",
+          "Representative Breadth"
+        ],
+        "special_design_priority": "For GDPval, emphasize expert recruitment and the iterative human review process first, with Source Excerpts supporting expert experience/screening, review counts, and iterative revisions. This requested synthesis may reuse sourcing/review evidence without changing unique highlight assignments.",
+        "prompt_specificity_layout": "Keep the occupational-expert assessment sentence immediately after Prompt Specificity; place the 89.07% result in an indented Source Excerpts bullet. Preserve exact wording in blue.",
+        "quality_dimension_details": "Replace vague descriptions with reported rating scales and concrete values when available. Identify population, units, and mean versus median. For GDPval Difficulty, include mean difficulty ratings and expert completion-time means/medians; distinguish completion time as workload context rather than the difficulty rating itself. Avoid repeating these statistics elsewhere."
+      },
+      "paper_number": 315,
+      "paper_profile": "paper_profiles/315_gdpval.md"
+    },
+    "312_deepswe": {
+      "paper_number": 312,
+      "colors": {
+        "#00AA00": {
+          "name": "Dark green",
+          "meaning": "Benchmark name; exclude from summary priorities",
+          "include_in_summary": false
+        },
+        "#FF0000": {
+          "name": "Red rectangle",
+          "meaning": "High priority",
+          "priority": 1,
+          "include_in_summary": true,
+          "annotation_types": [
+            "Square"
+          ]
+        }
+      }
+    },
+    "313_automationbench": {
+      "paper_number": 313,
+      "colors": {
+        "#00AA00": {
+          "name": "Dark green",
+          "meaning": "Benchmark name; exclude from summary priorities",
+          "include_in_summary": false
+        }
+      }
+    },
+    "314_terminal_bench": {
+      "paper_number": 314,
+      "colors": {
+        "#00AA00": {
+          "name": "Dark green",
+          "meaning": "Benchmark name; exclude from summary priorities",
+          "include_in_summary": false
+        },
+        "#FF0000": {
+          "name": "Red rectangle",
+          "meaning": "High priority",
+          "priority": 1,
+          "include_in_summary": true,
+          "annotation_types": [
+            "Square"
+          ]
+        }
+      }
+    },
+    "316_osworld_2_0": {
+      "paper_number": 316,
+      "colors": {
+        "#00AA00": {
+          "name": "Dark green",
+          "meaning": "Benchmark name; exclude from summary priorities",
+          "include_in_summary": false
+        },
+        "#FF0000": {
+          "name": "Red rectangle",
+          "meaning": "High priority",
+          "priority": 1,
+          "include_in_summary": true,
+          "annotation_types": [
+            "Square"
+          ]
+        }
+      },
+      "scope": {
+        "exclude_sections": [
+          "Appendix H"
+        ],
+        "excluded_annotation_ids": [
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267,
+          268,
+          269,
+          270,
+          271,
+          272,
+          273,
+          274,
+          275,
+          276,
+          277,
+          278,
+          279,
+          280,
+          281,
+          282,
+          283,
+          284,
+          285,
+          286,
+          287,
+          288,
+          289,
+          290,
+          291,
+          292,
+          293,
+          294,
+          295,
+          296,
+          297,
+          298,
+          299,
+          300,
+          301,
+          302,
+          303,
+          304,
+          305,
+          306,
+          307,
+          308,
+          309,
+          310,
+          311,
+          312,
+          313,
+          314,
+          315,
+          316,
+          317,
+          318,
+          319,
+          320
+        ],
+        "reason": "Current reader request; retained Table 23 above Appendix H on the same page."
+      }
+    }
+  }
+}

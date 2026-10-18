@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AutomationBench</title><style>
+:root {color-scheme:light; --paper:#fff; --bg:#f3f5f2; --ink:#21312c; --muted:#5b6e65; --line:#dce4de; --accent:#24634b}
+* {box-sizing:border-box} body {margin:0;background:var(--bg);color:var(--ink);font:17px/1.7 system-ui,-apple-system,sans-serif}
+.layout {max-width:1280px;margin:auto;display:grid;grid-template-columns:235px minmax(0,1fr);gap:32px;padding:36px 24px}
+aside {align-self:start;position:sticky;top:24px;max-height:90vh;overflow:auto;font-size:13px}
+.brand {font-weight:750;letter-spacing:.08em;text-transform:uppercase;margin-bottom:24px;color:var(--accent)}
+.toc ul {padding-left:17px}.toc li {margin:8px 0}.toc a {color:var(--muted);text-decoration:none}
+main {background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:40px 48px;min-width:0}
+h1 {font-size:clamp(26px,3.5vw,40px);line-height:1.2;letter-spacing:-.035em;margin-top:0}
+h2 {font-size:25px;line-height:1.25;margin:28px 0 2px;padding:0} h3 {font-size:19px;line-height:1.3;margin:16px 0 2px;padding:0}
+h4 {font-size:17px;line-height:1.3;margin:10px 0 2px;padding:0}
+main > p, main > ul, main > ol {margin-top:0;margin-bottom:0}
+main li > p {margin-top:0;margin-bottom:0}
+main ul {list-style-type:disc;padding-left:1.5em}
+main ul ul {list-style-type:circle;margin-top:0;margin-bottom:0}
+p,li {max-width:78ch} a {color:var(--accent);text-underline-offset:3px} strong {font-weight:700}
+.verbatim {color:#175cd3}
+.task-instruction {font-size:0.88em;text-align:justify}
+.source-excerpts {margin:0}.source-excerpts > summary {font-size:13px;color:var(--muted);cursor:pointer}
+.source-excerpts ul, .source-excerpts ol {margin-top:0;margin-bottom:0}
+blockquote {margin:24px 0;border-left:4px solid #8eb79b;padding:12px 20px;background:#f0f6f0}
+table {width:100%;border-collapse:collapse;font-size:14px;display:block;overflow-x:auto} th,td {text-align:left;vertical-align:top;padding:12px 14px;border-bottom:1px solid var(--line)} th {background:#edf3ee}
+code {background:#eef2ed;border-radius:4px;padding:2px 5px;font-size:.9em} pre {overflow:auto;padding:16px;background:#eef2ed;border-radius:8px} pre code {padding:0}
+button {font:inherit;font-size:13px;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:7px;padding:8px 12px;cursor:pointer}
+.color-swatch {display:inline-block;width:14px;height:14px;vertical-align:-2px;border:1px solid #9ba99f;border-radius:3px;margin-right:5px}
+.tools {display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}.footer {margin-top:40px;font-size:12px;color:var(--muted)}
+@media(max-width:850px) {.layout {display:block;padding:16px} aside {position:static;max-height:none;margin-bottom:20px}.toc {display:none}main {padding:26px 22px}.tools {margin:8px 0}}
+@media print {body {background:white;font-size:11pt}.layout {display:block;padding:0}aside {display:none}main {border:0;padding:0}h2 {break-after:avoid}a {color:inherit}table {display:table;font-size:10pt}}
+</style></head><body>
+<div class="layout"><aside><div class="brand">Paper summary</div><nav aria-label="Contents"><div class="toc">
+<ul>
+<li><a href="#summary">Summary</a></li>
+<li><a href="#dataset-creation">Dataset Creation</a></li>
+<li><a href="#quality-control">Quality Control</a><ul>
+<li><a href="#human-review">Human Review</a></li>
+<li><a href="#auto-judge">Auto Judge</a></li>
+</ul>
+</li>
+<li><a href="#model-evaluation">Model Evaluation</a><ul>
+<li><a href="#human-review_1">Human Review</a></li>
+<li><a href="#auto-judge_1">Auto Judge</a></li>
+</ul>
+</li>
+<li><a href="#key-findings">Key Findings</a></li>
+<li><a href="#special-design">Special Design</a></li>
+<li><a href="#impact">Impact</a></li>
+<li><a href="#important-sections">Important Sections</a></li>
+</ul>
+</div>
+</nav>
+<div class="tools"><button onclick="window.print()">Print / save PDF</button><button id="expand">Show contents</button><button id="sources">Show Source Excerpts</button></div>
+</aside><main><h1 id="automationbench">AutomationBench</h1>
+<p><strong>Zapier · Apr 2026 · ~4-minute overview</strong> · <a href="https://arxiv.org/abs/2604.18934">Paper</a></p>
+<h2 id="summary">Summary</h2>
+<ul>
+<li><strong>Purpose:</strong> Zapier benchmark for <span class="verbatim">evaluating AI agents on cross-application workflow orchestration via REST APIs.</span></li>
+<li><strong>Scope:</strong> 600 public tasks and 600+ private evaluation tasks; <span class="verbatim">∼500 API endpoints across 47 apps</span>; <span class="verbatim">Sales, Marketing, Operations, Support, Finance, and HR</span>.</li>
+<li><strong>Task Design:</strong> One instruction starts an autonomous workflow; agents discover APIs, consult policies, and update simulated applications.</li>
+<li><strong>Time and Cost:</strong> Reports <span class="verbatim">average token cost spent per task</span>; time comparisons are confounded by provider rate limits.</li>
+<li><strong>Evaluation Method:</strong> <span class="verbatim">Grading is programmatic and end-state only:</span> all required final-state assertions must pass.<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<li><span class="verbatim">The agent iteratively discovers and calls API endpoints to complete a task.</span></li>
+<li>Each domain has <span class="verbatim">100 public tasks per domain</span>; at least half the corpus is private, with additional hardening. Official scores use private tasks.</li>
+</ul></details>
+</li>
+</ul>
+<h2 id="dataset-creation">Dataset Creation</h2>
+<ul>
+<li>
+<p><strong>Task Generation:</strong> <span class="verbatim">Tasks were synthetically generated based on use cases from real customers.</span> Models used: <span class="verbatim">Opus 4.6, GPT 5.3 Codex, and Gemini 3</span>.</p>
+<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<li>Workflow patterns accompanying negative feedback on Zapier’s Agents service were clustered by domain; models used those patterns as inspiration, with repeated passes on realism, difficulty, and app variety.</li>
+<li><span class="verbatim">No PII or confidential customer data was used</span>.</li>
+</ul></details>
+</li>
+<li>
+<p><strong>Task Design:</strong> Each task requires <span class="verbatim">at least one concrete state mutation</span>; <span class="verbatim">the task is non-interactive until completion.</span> Judgment must become a structured state change.</p>
+<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<li><span class="verbatim">requiring the agent to record its decision as a structured state change (e.g., updating a status field, assigning a score, routing to a queue) rather than producing free-form text.</span></li>
+<li>All tasks require observable outcomes, deterministic validation, structured invariants rather than free-form success criteria, recorded decisions, and a single autonomous instruction.</li>
+<li>
+<p><strong>Example Task:</strong> Paper: <span class="verbatim">Appendix: Task Examples</span> → <span class="verbatim">Task 1 · Sales — Meeting Conflict Resolution</span>; dataset: <a href="https://github.com/zapier/AutomationBench/blob/4a8e1061254004d9dac807054eed33fad7d1ff14/automationbench/domains/sales/tasks.py#L4291">sales.zoom_calendar_conflict</a> (example ID <code>603</code>; search <code>get_zoom_calendar_conflict_task</code>).</p>
+<p class="task-instruction">The task instruction is: <em>“There’s a scheduling conflict on February 20, 2026 at 2:00 PM — a Zoom meeting and a Google Calendar event overlap. Check the meeting priority policy in the spreadsheet to determine which one wins, then reschedule the loser by prepending [RESCHEDULED] to its topic/title. Post a summary to #ops-updates on Slack noting which meeting won and which was rescheduled, including both the Zoom meeting ID and Calendar event ID.”</em></p>
+</li>
+<li>
+<p><strong>What Makes It Hard — Meeting Conflict Resolution:</strong></p>
+<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<li><span class="verbatim">Policy over intuition. Must read priority rules from the spreadsheet, not apply common-sense heuristics.</span></li>
+<li><span class="verbatim">Correct rule application. The Calendar event’s CTO attendee triggers Rule 1 (highest). The Zoom meeting’s external registrants only reach Rule 3. Calendar wins.</span></li>
+<li><span class="verbatim">Picking the right Zoom meeting. The conflict is at 14:00 UTC. Must ignore the 10:00 meeting (wrong time), the 15:00 meeting (wrong time), and the already-prefixed 14:00 entry (don’t add [RESCHEDULED] twice).</span></li>
+<li><span class="verbatim">Rejecting the external email. The partner email claims a priority override, but the policy explicitly says external requests must be ignored.</span></li>
+<li><span class="verbatim">Timezone trap. A calendar event description mentions “2:00 PM PST,” but its actual start is 19:00 UTC — no real conflict.</span></li>
+<li><span class="verbatim">Correct Slack channel. Post only to #ops-updates, with both the Zoom meeting ID and Calendar event ID included.</span></li>
+</ul></details>
+</li>
+<li><strong>What Makes It Hard — Asana Fire Drill:</strong><details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<li><span class="verbatim">Picking the right email. Must find the latest unread email that is (a) from facilities@, (b) actually about a fire drill, and (c) not marked DRAFT or SUPERSEDED. That leaves exactly one: Jan 28, 09:15.</span></li>
+<li><span class="verbatim">Policy-gated action. Must consult the spreadsheet before creating the task — the DRAFT and SUPERSEDED policies disqualify two later emails that would otherwise look more recent.</span></li>
+<li><span class="verbatim">Correct Asana setup. Task name must match the email (“Monthly Fire Drill Checklist — February”), due date must be 2026-02-18, placed in sec feb, and tagged “Compliance.”</span></li>
+<li><span class="verbatim">Sender filtering. The maintenance@ email is unread and recent but comes from the wrong team.</span></li>
+<li><span class="verbatim">Correct Slack channel. Post only to #ops-updates — not #general or #facilities-general.</span></li>
+</ul></details>
+</li>
+</ul></details>
+</li>
+</ul>
+<h2 id="quality-control">Quality Control</h2>
+<h3 id="human-review">Human Review</h3>
+<ul>
+<li><strong>Review Approach</strong><ul>
+<li>Authors inspected task samples and repeated audits; hints were audited against rules to exclude actual parameter values.</li>
+</ul>
+</li>
+<li><strong>Quality Dimensions</strong><ul>
+<li>Realism and solvability: sampled reviews address synthetic-task errors, unrealistic complexity, and impossible tasks; exhaustive manual review is difficult.<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<li><span class="verbatim">there is a risk of lack of realism and impossibility.</span></li>
+<li>Bugs and unrealistic complexity were regularly audited; major changes will be versioned.</li>
+</ul></details>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="auto-judge">Auto Judge</h3>
+<ul>
+<li>
+<p><strong>Solvability Checks:</strong> A separate hint-assisted mode guides endpoint selection without giving parameter values; smaller models achieved approximately 80–100%.</p>
+<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<li>A <span class="verbatim">separate hint sheet</span> supplies <span class="verbatim">instructions on which endpoints to call and clues on parameters but not the parameters themselves.</span></li>
+<li><span class="verbatim">Hints deliberately exclude actual parameter values, as including them could bypass tool calls entirely and mask discoverability issues.</span></li>
+<li>The paper reports Haiku around 80–100%; 100% with larger models such as Opus is an expectation, with single-digit variance still persisting.</li>
+</ul></details>
+</li>
+<li>
+<p><strong>Reward-Hacking Checks:</strong> Reinforcement-learning experiments exposed strategies used to strengthen the reward function.</p>
+<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<li>Runs used Reinforcement Learning with Verifiable Rewards; discovered reward-hacking strategies informed stronger checks.</li>
+</ul></details>
+</li>
+</ul>
+<h2 id="model-evaluation">Model Evaluation</h2>
+<h3 id="human-review_1">Human Review</h3>
+<ul>
+<li>Final model performance is graded programmatically; separate human grading is not reported.</li>
+</ul>
+<h3 id="auto-judge_1">Auto Judge</h3>
+<ul>
+<li>
+<p><strong>Scoring:</strong> Uses <span class="verbatim">deterministic assertions instead of LLM-as-a-judge</span>: <span class="verbatim">exact string matches</span> and <span class="verbatim">structural checks</span> inspect final application state. All checks must pass; <span class="verbatim">no partial credit</span>.</p>
+<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<li>The final state of each connected app is graded, rather than a text response, document, or prescribed tool sequence.</li>
+<li><span class="verbatim">All success criteria are expressed as exact string matches and structural checks over the world state, without semantic or subjective evaluation of text.</span></li>
+<li>Negative assertions prevent shotgun reward hacking, such as emailing everyone rather than only the requested recipient.</li>
+<li>Completion diagnostics are available, but partial completion does not count toward the score. Avoiding an LLM judge reduces grading bias; synthetic generation can still introduce model bias.</li>
+</ul></details>
+</li>
+<li>
+<p><strong>Common Failure Modes:</strong> False confidence, unsuccessful data search, missing list items, and imprecise instruction-following.</p>
+<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<li><span class="verbatim">models declared success while actually failing.</span> This affected 72% of Opus’s failures, 91% of Gemini’s, and 84% of GPT 5.4’s.</li>
+<li><span class="verbatim">Models often are not persistent or methodical enough in searching for data when generic searches do not find the results.</span> They may assume data lives in a CRM rather than Google Sheets.</li>
+<li><span class="verbatim">When a task involves processing a list (12 emails, 8 leads), models frequently process some items correctly and then summarize as if done without verifying every item was covered.</span></li>
+<li><span class="verbatim">Models also do not follow instructions exactly.</span> <span class="verbatim">They paraphrase or outright ignore requirements for the content to include certain values despite precise instructions being given.</span></li>
+</ul></details>
+</li>
+<li>
+<p><strong>Tool Interface:</strong> <span class="verbatim">two tools: Search and Execute.</span> Search uses <span class="verbatim">BM25</span> over API schemas, returning five candidates; Execute accepts method, URL, and body. Maximum: <span class="verbatim">50 steps</span>.</p>
+<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<li><span class="verbatim">Finding the right endpoints to use is part of the challenge.</span></li>
+<li><span class="verbatim">The execute tool triggers a simulation of retrieving or updating a database through Pydantic Models.</span> These models are the application-state source of truth; pagination, required fields, and 4xx errors preserve real schema shapes.</li>
+<li><span class="verbatim">No authentication is mimicked.</span> <span class="verbatim">Multiple tools can be called in parallel per step.</span> The 50-step limit is rarely reached.</li>
+</ul></details>
+</li>
+<li>
+<p><strong>Cost and Repeatability:</strong> Score uses one run; reported run-to-run variance is typically within 1%. Cost is average token spending per task; latency is affected by provider rate limits.</p>
+<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<li><span class="verbatim">Run-to-run variance is typically within 1%.</span></li>
+<li><span class="verbatim">Cost is computed by taking the average token cost spent per task.</span> USD cost is the primary efficiency metric.</li>
+<li><span class="verbatim">If an agent takes multiple actions inefficiently (create the lead, update the lead 5 times instead of once), it yields the same end result and scores equally, but with a higher Cost.</span></li>
+</ul></details>
+</li>
+<li>
+<p><strong>Headline Results:</strong> Apr 2026: Opus 4.7 (max) 9.9% / $1.80 per task; Gemini 3.1 Pro (high) 9.6% / $0.54; GPT 5.4 (high) 7.6% / $1.93. <a href="https://zapier.com/benchmarks">Latest Leaderboard</a></p>
+</li>
+</ul>
+<h2 id="key-findings">Key Findings</h2>
+<ul>
+<li>
+<p><strong>Different Passing Sets:</strong> <span class="verbatim">Models are solving fairly different sets of tasks from each other.</span> Opus–Gemini <span class="verbatim">Jaccard similarity</span>: 0.17; 71% of Opus passes and 70% of Gemini passes were missed by the other.</p>
+</li>
+<li>
+<p><strong>Simple Domain:</strong> Haiku reached 97% on simpler workflows without regular-task noise; this harness check is excluded from benchmark scores.</p>
+<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<li>The simple domain tests workflows with explicit instructions, distinguishing basic tool competence from the benchmark’s layered difficulty.</li>
+</ul></details>
+</li>
+<li>
+<p><strong>Diagnostic Toolsets:</strong> Gemini scored 9.6% with API/default tools, 12.8% with Zapier tools, and 14.3% with Limited Zapier; narrowing the tool surface can help.</p>
+<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<li>Zapier tools use internal-action schemas; Limited Zapier exposes only the tools needed for a task. Haiku scores were 1.5%, 2.0%, and 3.8%, respectively.</li>
+</ul></details>
+</li>
+</ul>
+<h2 id="special-design">Special Design</h2>
+<ul>
+<li>
+<p><strong>Hardening:</strong> Combines irrelevant data, information behind tool calls, ambiguous information locations, similar names, and overriding business policies. Private tasks use additional hardening to reduce overfitting.</p>
+<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<li>Irrelevant data: <span class="verbatim">adding irrelevant data</span>.</li>
+<li>Tool call responses: <span class="verbatim">keeping key info behind tool call responses</span>.</li>
+<li>Information location: <span class="verbatim">ambiguity of</span> <span class="verbatim">where info can be found</span>.</li>
+<li>Similar names: <span class="verbatim">similar naming for incorrect entries</span>.</li>
+<li>Business policies: <span class="verbatim">strict business policy rules with overriding priorities.</span></li>
+<li>Techniques were developed through experiments on current models; tasks found too easy were hardened.</li>
+<li><span class="verbatim">The private dataset employs additional hardening techniques to prevent overfitting on a small set of challenges.</span></li>
+<li><span class="verbatim">Benchmark progress ideally reflects improved reasoning over novel complexity rather than mastery of a few known difficulty types.</span></li>
+</ul></details>
+</li>
+<li>
+<p><strong>Cross-Application Orchestration and Policy Adherence:</strong> Discovery, dependent calls, organizational rules, and distracting records are combined; prompts explicitly reference authoritative policies to distinguish consultation from prompt injection.</p>
+<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<li><span class="verbatim">Agents receive a natural language business task and must autonomously discover available REST API endpoints across dozens of integrated applications, make sequential and interdependent calls, apply layered business rules, and navigate environments seeded with distractors, decoy records, and adversarial inputs.</span></li>
+<li><span class="verbatim">Some tasks require the agent to follow policy documents that override seemingly reasonable defaults or external requests.</span></li>
+<li><span class="verbatim">To avoid conflating policy-following with prompt-injection compliance, task prompts explicitly reference these policy documents, signaling that consulting them is expected behavior rather than an adversarial trick.</span></li>
+</ul></details>
+</li>
+<li>
+<p><strong>End-State Grading:</strong> Different valid tool sequences, parallel calls, and batched updates can earn the same score; side effects remain part of correctness.</p>
+<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<li><span class="verbatim">Focusing on end-to-end results gives the agent flexibility to solve problems in creative ways (such as parallel tool calls and batched changes) while avoiding being overly prescriptive.</span></li>
+</ul></details>
+</li>
+</ul>
+<h2 id="impact">Impact</h2>
+<ul>
+<li>
+<p><strong>Impact:</strong> Targets <span class="verbatim">multi-step reasoning, policy adherence, and tool discovery</span> needed for business automation through widely available REST interfaces.</p>
+<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<li><span class="verbatim">Though solutions like MCPs and CLI tools exist, REST APIs are the universal standard and frequently the glue behind those tools.</span></li>
+<li>The paper positions API orchestration as a practical near-term approach for high-volume workflows, with less computational cost than computer use.</li>
+</ul></details>
+</li>
+<li>
+<p><strong>Limitations:</strong> Synthetic tasks may lack realism or be impossible; apps are simulated, authentication is omitted, and manual checks cover samples. Remaining business-workflow reasoning gaps may require later versions.</p>
+</li>
+</ul>
+<h2 id="important-sections">Important Sections</h2>
+<ul>
+<li>Appendix, Task 1 (Sales): What Makes It Hard — Six Challenges</li>
+<li>Appendix, Task 2 (Operations): What Makes It Hard — Five Challenges</li>
+</ul><div class="footer">Source Markdown: 313_automationbench.md · Standalone HTML · Works offline</div></main></div>
+<script>document.getElementById('expand').addEventListener('click',function(){const t=document.querySelector('.toc');if(t){t.style.display=t.style.display==='block'?'':'block';}});
+const sourceButton=document.getElementById('sources');if(sourceButton){sourceButton.addEventListener('click',function(){const excerpts=Array.from(document.querySelectorAll('details.source-excerpts'));const show=excerpts.some(d=>!d.open);excerpts.forEach(d=>d.open=show);sourceButton.textContent=show?'Hide Source Excerpts':'Show Source Excerpts';});}</script>
+</body></html>

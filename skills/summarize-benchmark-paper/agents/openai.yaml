@@ -1,0 +1,4 @@
+interface:
+  display_name: "Summarize Benchmark Paper"
+  short_description: "Summarize benchmark PDFs into Markdown and HTML"
+  default_prompt: "Use $summarize-benchmark-paper to summarize this benchmark PDF using my highlight priorities and the paper's terminology, with a concise overview and matching standalone HTML."
