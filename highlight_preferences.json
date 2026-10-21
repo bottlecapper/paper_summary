@@ -287,6 +287,18 @@
         ],
         "reason": "Current reader request; retained Table 23 above Appendix H on the same page."
       }
+    },
+    "317_frontierswe": {
+      "colors": {
+        "#E5EDF5": {
+          "name": "Original-file attachment icon",
+          "include_in_summary": false,
+          "annotation_types": [
+            "FileAttachment"
+          ],
+          "meaning": "Embedded source assets, not reader emphasis; identified by attachment metadata."
+        }
+      }
     }
   }
 }

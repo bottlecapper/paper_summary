@@ -125,7 +125,7 @@ def build(output):
         <tbody>__ROWS__</tbody>
       </table>
     </div>
-    <p class="note">Published month refers to the paper's first arXiv submission. Links retain the versions used by the summaries where specified.</p>
+    <p class="note">Published month refers to the first arXiv submission or, for blog reports, the linked report's release. Links retain the versions used by the summaries where specified.</p>
     <h2>Additional GDPval Materials</h2>
     <p>__EXTRAS__</p>
     <p class="note">In the summaries, blue text marks verified original wording. Expand Source Excerpts to read supporting details.</p>
