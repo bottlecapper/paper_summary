@@ -124,10 +124,11 @@
     - Compaction summarizes the trajectory using the same model; <span class="verbatim">PROGRESS.md</span> survives as a workspace log. Vision exposes workspace images such as plots and video frames.
     - The submit tool records a clean candidate, reports remaining time, and lets work continue. <span class="verbatim">A recorded submission is never lost to later work, so the model can take a risky change into a dirty workspace without watching the clock.</span>
     - <span class="verbatim">Proximus records every submitted candidate as a Git-backed checkpoint.</span> A second consecutive submit ends the run; other actions cancel final confirmation, and earlier submissions remain available.
-- **Open-Ended Problems:** Expert tasks require novel ideas and extensive planning, with constraints that prevent easy delegation or memorization.
-    - Tasks are <span class="verbatim">extremely difficult and open-ended technical problems that require novel ideas and extensive planning and would challenge the world's best engineers and researchers.</span>
-    - V2 implementation tasks expose complete tests but mutate their structure during verification. Notebook Compression requires byte-exact reconstruction by a decoder run in a separate container.
-    - V1 contrasts this scope with SWE-Bench Pro solutions averaging <span class="verbatim">107 lines of code.</span> and Terminal-Bench attempts lasting <span class="verbatim">1-20 minutes.</span>
+- **Open-Ended Problems:** Open-ended tasks allow different valid solutions; closed-ended questions ask for a specific answer. <span class="verbatim">Tasks in FrontierSWE are meant to reflect extremely difficult and open-ended technical problems that require novel ideas and extensive planning and would challenge the world's best engineers and researchers.</span>
+    - **FrontierSWE:** Agents build software or train models; different implementations or algorithms can meet the same requirements.
+    - **HLE:** Multiple-choice and short-answer questions have a known, unambiguous answer.
+    - **Automatic Grading:** The <span class="verbatim">verifier compiles and runs agent-written code to test it</span>, then scores the results against the task’s requirements.
+    - **Simulator-Based Verifier:** For example, in Snooker Prediction, the simulator generates both videos and true ball positions, so predictions can be scored against known coordinates.
 
 ## Impact
 - **Use:** Partial-credit scores and trajectories reveal differences in engineering, validation, visual reasoning, and research that shorter tasks can miss.

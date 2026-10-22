@@ -293,10 +293,11 @@ button {font:inherit;font-size:13px;border:1px solid var(--line);background:var(
 <li><span class="verbatim">Proximus records every submitted candidate as a Git-backed checkpoint.</span> A second consecutive submit ends the run; other actions cancel final confirmation, and earlier submissions remain available.</li>
 </ul></details>
 </li>
-<li><strong>Open-Ended Problems:</strong> Expert tasks require novel ideas and extensive planning, with constraints that prevent easy delegation or memorization.<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
-<li>Tasks are <span class="verbatim">extremely difficult and open-ended technical problems that require novel ideas and extensive planning and would challenge the world's best engineers and researchers.</span></li>
-<li>V2 implementation tasks expose complete tests but mutate their structure during verification. Notebook Compression requires byte-exact reconstruction by a decoder run in a separate container.</li>
-<li>V1 contrasts this scope with SWE-Bench Pro solutions averaging <span class="verbatim">107 lines of code.</span> and Terminal-Bench attempts lasting <span class="verbatim">1-20 minutes.</span></li>
+<li><strong>Open-Ended Problems:</strong> Open-ended tasks allow different valid solutions; closed-ended questions ask for a specific answer. <span class="verbatim">Tasks in FrontierSWE are meant to reflect extremely difficult and open-ended technical problems that require novel ideas and extensive planning and would challenge the world's best engineers and researchers.</span><details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<li><strong>FrontierSWE:</strong> Agents build software or train models; different implementations or algorithms can meet the same requirements.</li>
+<li><strong>HLE:</strong> Multiple-choice and short-answer questions have a known, unambiguous answer.</li>
+<li><strong>Automatic Grading:</strong> The <span class="verbatim">verifier compiles and runs agent-written code to test it</span>, then scores the results against the task’s requirements.</li>
+<li><strong>Simulator-Based Verifier:</strong> For example, in Snooker Prediction, the simulator generates both videos and true ball positions, so predictions can be scored against known coordinates.</li>
 </ul></details>
 </li>
 </ul>
