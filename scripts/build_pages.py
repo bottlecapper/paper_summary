@@ -54,7 +54,7 @@ def build(output):
         raise ValueError("No papers found in the README summary table")
     rows = []
     files = set()
-    for benchmark, author, published, paper, summary, _ in parsed.rows:
+    for benchmark, size, author, published, paper, summary, _ in parsed.rows:
         markdown_path = Path(summary["href"])
         if markdown_path.parent != Path("summary") or markdown_path.suffix != ".md":
             raise ValueError(f"Expected a Markdown summary path: {markdown_path}")
@@ -67,7 +67,7 @@ def build(output):
             audit = anchor(audit_path.as_posix(), "Audit")
         institutions = "<br>".join(escape(part.strip()) for part in author["text"].splitlines())
         markdown_url = "https://github.com/bottlecapper/paper_summary/blob/main/" + markdown_path.as_posix()
-        cells = [escape(benchmark["text"]), institutions, escape(published["text"]),
+        cells = [escape(benchmark["text"]), escape(size["text"]), institutions, escape(published["text"]),
                  anchor(paper["href"], paper["text"]),
                  anchor(markdown_url, "Markdown"), anchor(summary_path.as_posix(), "HTML"), audit]
         rows.append("<tr>" + "".join(f"<td>{cell}</td>" for cell in cells) + "</tr>")
@@ -110,7 +110,8 @@ def build(output):
     th, td { padding: 14px 16px; border-bottom: 1px solid light-dark(#dde2ea, #444); }
     th { background: light-dark(#f3f5f9, #24272d); }
     td:first-child { font-weight: 600; }
-    td:nth-child(n+3) { white-space: nowrap; }
+    td:nth-child(2) { white-space: nowrap; font-variant-numeric: tabular-nums; }
+    td:nth-child(n+4) { white-space: nowrap; }
     .note { color: light-dark(#596579, #b4bfce); font-size: .9rem; }
     h2 { margin-top: 36px; font-size: 1.3rem; }
   </style>
@@ -121,11 +122,12 @@ def build(output):
     <p>Concise summaries of AI benchmark papers, with source excerpts and highlight audits.</p>
     <div class="table-scroll">
       <table>
-        <thead><tr><th>Benchmark</th><th>Author Lab</th><th>Published</th><th>Paper</th><th colspan="2">Summary</th><th>Highlights</th></tr></thead>
+        <thead><tr><th>Benchmark</th><th>Size</th><th>Author Lab</th><th>Published</th><th>Paper</th><th colspan="2">Summary</th><th>Highlights</th></tr></thead>
         <tbody>__ROWS__</tbody>
       </table>
     </div>
     <p class="note">Published month refers to the first arXiv submission or, for blog reports, the linked report's release. Links retain the versions used by the summaries where specified.</p>
+    <p class="note">Size counts tasks in the listed benchmark version. AutomationBench's total is a lower bound: <a href="https://arxiv.org/html/2604.18934v1#S2">600 public tasks plus 600+ private evaluation tasks</a>. GDPval's <a href="https://arxiv.org/html/2510.04374v1#S1">1,320 total tasks include 220 public gold tasks</a>.</p>
     <h2>Additional GDPval Materials</h2>
     <p>__EXTRAS__</p>
     <p class="note">In the summaries, blue text marks verified original wording. Expand Source Excerpts to read supporting details.</p>
