@@ -1,11 +1,10 @@
 # OSWorld 2.0
 
-**XLANG Lab and Collaborators · Jul 2026 · ~4-minute overview** · [Paper](https://arxiv.org/abs/2606.29537v2)
+**XLANG Lab and Collaborators · Jul 2026 · ~5-minute overview** · [Paper](https://arxiv.org/abs/2606.29537v2)
 
 ## Summary
 
 - **Purpose:** OSWorld 2.0 tests whether AI agents can complete computer tasks from start to finish. It includes <span class="verbatim">108</span> everyday and professional tasks.
-    - OSWorld 2.0 is <span class="verbatim">a benchmark of 108 long-horizon computer-use workflows across everyday and professional tasks, designed to capture complex and challenging real-world phenomena.</span>
 - **Scope:** Tasks span <span class="verbatim">seven professional domains</span> and <span class="verbatim">21 subcategories</span>. They use <span class="verbatim">31 self-hosted websites</span> and desktop apps.
     - A <span class="verbatim">task involves 2.44 apps or services on average,</span> counting required apps and additional apps used by agents.
 - **Task Design:** Agents often need to find and combine information across files, apps, and past records.
@@ -39,6 +38,9 @@
 
 - **Task Design:** <span class="verbatim">Each task in OSWORLD 2.0 is defined as a self-contained end-to-end workflow that an agent must complete given a high-level user goal, realistic artifacts, a stateful computer environment, and a scoreable final state.</span>
     - The reimbursement workflow combines <span class="verbatim">Tutorial Following</span>, <span class="verbatim">Cross-source Reasoning</span>, <span class="verbatim">Dynamic Environment</span>, and <span class="verbatim">Proactive Interaction</span>: read the guideline, reconcile receipt/bank/prior-report evidence, revise after new email, and ask about missing or inconsistent evidence.
+    - OSWorld 2.0 is <span class="verbatim">a benchmark of 108 long-horizon computer-use workflows across everyday and professional tasks, designed to capture complex and challenging real-world phenomena.</span>
+
+- **Example Tasks:**
     - **Example Task:** Paper: Appendix <span class="verbatim">H.1.1 Task 008: Expense Reimbursement</span> (Figures <span class="verbatim">14</span>–<span class="verbatim">25</span>); dataset: [OSWorld V2 tasks](https://huggingface.co/datasets/xlangai/osworld_v2_tasks) (`task_008.py`; access required).
 
         The task instruction is: *“Please help me submit a reimbursement claim in the ExpenseFlow system. I attended NeurIPS 2025 and also gave a talk at Stanford, and I need to get my costs reimbursed, including conference registration, flights, and hotel. The supporting documents should be in my MailHub inbox, and you can cross-check the charges in my VaultBank account; I also have some additional materials saved on my Desktop. I’ve already opened the Oracle ExpenseFlow reimbursement guideline for you, please follow it step by step, fill out the expense report, prepare and upload required attachments, and submit the claim. One more thing, you may refer to my previously submitted report for my personal particulars.”*

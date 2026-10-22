@@ -57,9 +57,9 @@ button {font:inherit;font-size:13px;border:1px solid var(--line);background:var(
 <ul>
 <li><strong>Purpose:</strong> <span class="verbatim">FrontierSWE is an effort to test coding agents on the hardest ultra-long horizon technical challenges.</span></li>
 <li><strong>Scope:</strong> V2 contains <span class="verbatim">34 tasks</span> across <span class="verbatim">Implementation</span>, <span class="verbatim">Scientific Computing</span>, <span class="verbatim">Performance Optimisation</span>, <span class="verbatim">Visual Reasoning</span>, and <span class="verbatim">AI Research</span>.</li>
-<li><strong>Task Design:</strong> Examples include <span class="verbatim">Git to Zig</span> and <span class="verbatim">Snooker Prediction</span>: reimplementing Git and predicting future ball positions from video.</li>
-<li><strong>Time and Cost:</strong> Agents receive <span class="verbatim">20 hours per task</span>. Mean trial costs: <span class="verbatim">Fable 5.1</span> $<span class="verbatim">138.55</span>, <span class="verbatim">GPT-5.6 Sol</span> $<span class="verbatim">179.64</span>, and <span class="verbatim">GLM-5.3</span> $<span class="verbatim">97.22</span>.</li>
-<li><strong>Evaluation Method:</strong> V2 reports <span class="verbatim">mean@5 scores across all 34 tasks.</span> Task-specific verifiers award partial credit, with scores from <span class="verbatim">0</span> to <span class="verbatim">1</span>.</li>
+<li><strong>Task Design:</strong> Tasks are <span class="verbatim">extremely difficult and open-ended technical problems that require novel ideas and extensive planning</span>. Academic and industry collaborators help curate problems from their areas of expertise.</li>
+<li><strong>Time and Cost:</strong> V2 gives agents <span class="verbatim">a 20-hour budget per task.</span> The highest-scoring model, <span class="verbatim">Claude Fable 5.1</span>, averages <span class="verbatim">11.63</span> hours per trial, including unsuccessful attempts. V2 does not report measured human completion time or task-creation cost.</li>
+<li><strong>Evaluation Method:</strong> Task-specific verifiers award partial credit from <span class="verbatim">0</span> to <span class="verbatim">1</span>. V2 reports <span class="verbatim">mean@5 scores across all 34 tasks.</span> This averages scores over five trials per task.</li>
 </ul>
 <h2 id="dataset-creation">Dataset Creation</h2>
 <ul>
@@ -74,15 +74,32 @@ button {font:inherit;font-size:13px;border:1px solid var(--line);background:var(
 <li>The retired tasks are <span class="verbatim">PCQM4Mv2 Molecular Gap Prediction, Pyright Type Checking Optimization, Revideo Rendering Pipeline Optimization, and Dependent Type Checker.</span></li>
 </ul></details>
 </li>
-<li><strong>Task Design:</strong> Prompts specify performance targets or functional requirements. The highlighted examples cover implementation, performance, research, and visual tasks.<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
-<li><strong>Example Task:</strong> Paper: V1, Benchmark Design — Implementation; official task: <a href="https://www.frontierswe.com/v1/git-to-zig"><span class="verbatim">Git to Zig</span></a> (<code>git-to-zig</code>).</li>
-<li><strong>Example Task:</strong> Paper: V1, Benchmark Design — Research; official task: <a href="https://www.frontierswe.com/v1/frogsgame-rl"><span class="verbatim">FrogsGame Post-Training</span></a> (<code>frogsgame-rl</code>).</li>
-<li><strong>Example Task:</strong> Paper: V1, Benchmark Design — Research; official task: <a href="https://www.frontierswe.com/v1/optimizer-design"><span class="verbatim">Optimizer Design</span></a> (<code>optimizer-design</code>).</li>
-<li><strong>Example Task:</strong> Paper: V1, Benchmark Design — Performance; official task: <a href="https://www.frontierswe.com/v1/notebook-compression"><span class="verbatim">Notebook Compression</span></a> (<code>notebook-compression</code>).</li>
-<li><strong>Example Task:</strong> Paper: V2, New Tasks — Visual Reasoning; All 34 tasks, Snooker Prediction; official task: <a href="https://www.frontierswe.com/tasks/snooker-prediction"><span class="verbatim">Snooker Prediction</span></a> (<code>snooker-prediction</code>).</li>
-<li><strong>Example Task:</strong> Paper: V2, New Tasks — Visual Reasoning; All 34 tasks, Vision-only TORCS Racing Bot; official task: <a href="https://www.frontierswe.com/tasks/torcs-ai-bot"><span class="verbatim">TORCS Racing Bot</span></a> (<code>torcs-ai-bot</code>).</li>
-<li><strong>Example Task:</strong> Paper: V2, New Tasks — Visual Reasoning; All 34 tasks, Flight-Sim Renderer in OpenGL; official task: <a href="https://www.frontierswe.com/tasks/opengl-scene-engine"><span class="verbatim">Flight-Sim Renderer in OpenGL</span></a> (<code>opengl-scene-engine</code>).</li>
-<li><strong>Example Task:</strong> Paper: V2, New Tasks — Scientific Computing; All 34 tasks, Astronomy Toolkit; official task: <a href="https://www.frontierswe.com/tasks/autonomous-astrometry-toolkit"><span class="verbatim">Astronomy Toolkit</span></a> (<code>autonomous-astrometry-toolkit</code>).</li>
+<li><strong>Task Design:</strong><ul>
+<li><strong>Metrics:</strong> Prompts explicitly specify metrics including <span class="verbatim">performance improvements</span> and <span class="verbatim">coverage of functional requirements</span>.</li>
+<li><strong>Purpose:</strong> The purpose is to <span class="verbatim">ensure that agents have all the information needed to achieve a full score on a task.</span></li>
+<li><strong>Self-Check Tool:</strong> V2 ensures that <span class="verbatim">every workspace contains a documented self-check tool whose output correlates monotonically with the verifier score.</span><details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<li>The self-check tool helps the agent check whether changes will improve its final score.</li>
+</ul></details>
+</li>
+<li><strong>Test Suite and Verification:</strong> <span class="verbatim">For end-to-end implementation tasks, agents get the full test suite</span>.<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<li>Verification uses <span class="verbatim">1:1 structural mutation</span>. The intended idea is one original case paired with a changed counterpart that checks the same feature.<ul>
+<li>For example, <span class="verbatim">Astronomy Toolkit</span> illustrates this with a copied test campaign: every image gets one new ID and filename; image order and star-catalog rows are shuffled. Pixels and sky positions stay unchanged, and expected answers are relabeled to match the new IDs. A real solver should still find the same positions; a lookup keyed to old image IDs fails. The verifier adds this transformed campaign as an extra check. <a href="https://github.com/Proximal-Labs/frontier-swe-v2/blob/da83f84f8fbcec3cbf0f2b17c98ebc811355c2df/tasks/astronomy-toolkit/environment/tests/metamorphic_campaigns.py#L66-L130">Transformation code</a> · <a href="https://github.com/Proximal-Labs/frontier-swe-v2/blob/da83f84f8fbcec3cbf0f2b17c98ebc811355c2df/tasks/astronomy-toolkit/environment/tests/runner.py#L266-L283">Verifier runner</a>.</li>
+</ul>
+</li>
+<li>The intended result is that <span class="verbatim">agents are never undercredited for implementing a feature the verifier doesn't test while ensuring that hardcoding test results is not a viable strategy to succeed.</span></li>
+</ul></details>
+</li>
+</ul>
+</li>
+<li><strong>Example Tasks:</strong><details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<li><strong>Example Task:</strong> V1 Implementation - <a href="https://www.frontierswe.com/v1/git-to-zig"><span class="verbatim">Git to Zig</span></a> (<code>git-to-zig</code>).</li>
+<li><strong>Example Task:</strong> V1 Research - <a href="https://www.frontierswe.com/v1/frogsgame-rl"><span class="verbatim">FrogsGame Post-Training</span></a> (<code>frogsgame-rl</code>).</li>
+<li><strong>Example Task:</strong> V1 Research - <a href="https://www.frontierswe.com/v1/optimizer-design"><span class="verbatim">Optimizer Design</span></a> (<code>optimizer-design</code>).</li>
+<li><strong>Example Task:</strong> V1 Performance - <a href="https://www.frontierswe.com/v1/notebook-compression"><span class="verbatim">Notebook Compression</span></a> (<code>notebook-compression</code>).</li>
+<li><strong>Example Task:</strong> V2 Visual Reasoning - <a href="https://www.frontierswe.com/tasks/snooker-prediction"><span class="verbatim">Snooker Prediction</span></a> (<code>snooker-prediction</code>).</li>
+<li><strong>Example Task:</strong> V2 Visual Reasoning - <a href="https://www.frontierswe.com/tasks/torcs-ai-bot"><span class="verbatim">TORCS Racing Bot</span></a> (<code>torcs-ai-bot</code>).</li>
+<li><strong>Example Task:</strong> V2 Visual Reasoning - <a href="https://www.frontierswe.com/tasks/opengl-scene-engine"><span class="verbatim">Flight-Sim Renderer in OpenGL</span></a> (<code>opengl-scene-engine</code>).</li>
+<li><strong>Example Task:</strong> V2 Scientific Computing - <a href="https://www.frontierswe.com/tasks/autonomous-astrometry-toolkit"><span class="verbatim">Astronomy Toolkit</span></a> (<code>autonomous-astrometry-toolkit</code>).</li>
 </ul></details>
 </li>
 </ul>
@@ -90,12 +107,30 @@ button {font:inherit;font-size:13px;border:1px solid var(--line);background:var(
 <h3 id="human-review">Human Review</h3>
 <ul>
 <li><strong>Review Approach:</strong><ul>
-<li>V2 revises task design and scoring and fixes v1 tasks for fairness and reproducibility; separate manual QA steps are not described.</li>
+<li>V2 revises task design and scoring and applies an <span class="verbatim">improved QA process to all tasks</span>, including fixes to v1 tasks for <span class="verbatim">fairness and reproducibility.</span> The paper does not identify the reviewers.</li>
 </ul>
 </li>
 <li><strong>Quality Dimensions:</strong><ul>
-<li>Information completeness: agents must have <span class="verbatim">all the information needed to achieve a full score on a task.</span></li>
-<li>Fairness: <span class="verbatim">agents are never undercredited for implementing a feature the verifier doesn't test while ensuring that hardcoding test results is not a viable strategy to succeed.</span></li>
+<li><span class="verbatim">Fairness</span>: QA fixes aim to give agents the information needed to earn a full score.<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<li>The benchmark team <span class="verbatim">applied an improved QA process to all tasks and made fixes to tasks from v1</span>.</li>
+</ul></details>
+</li>
+<li>Reproducibility: performance grading uses a <span class="verbatim">deterministic and reproducible, machine-independent</span> metric.<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<li>The metric is <span class="verbatim">deterministic and reproducible, machine-independent, and correlated with wall-clock time on a single machine.</span></li>
+<li>After local re-scoring of preserved submissions from shared sandboxes, <span class="verbatim">rankings flipped: recorded improvements came back as regressions on a different host.</span></li>
+<li>Pinned hosts still showed <span class="verbatim">significant run-to-run variance in the scores caused by effects such as OS scheduling and thermal throttling.</span></li>
+<li>V2 uses <span class="verbatim">a weighted instruction count where each instruction is priced by its measured cost on a pinned Intel Sapphire Rapids microarchitecture, using published per-instruction throughput data.</span></li>
+<li><span class="verbatim">libexpat counts the whole process (including libc) so work pushed into library calls still counts, and Cranelift adds a compile-time penalty so a runtime win from a slower compiler does not pay.</span></li>
+</ul></details>
+</li>
+<li><span class="verbatim">Preventing Cheating</span>: clean verifier containers and user separation protect tests and rewards from agent-written code.<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<li><span class="verbatim">Harbor's native two-container approach: the agent's container is stopped, a fresh verifier boots from a pinned image, and the entire filesystem is clean.</span></li>
+<li><span class="verbatim">Pre-written reward files, mutated binaries, planted tests, background processes: all gone by construction.</span></li>
+<li>Without user separation, <span class="verbatim">the agent's runtime can write directly to the reward file or spawn processes that keep overwriting it.</span></li>
+<li><span class="verbatim">Even with a separate container, the verifier compiles and runs agent-written code to test it, and that code inherits root if unguarded.</span></li>
+<li>The <span class="verbatim">Dockerfile</span> <span class="verbatim">creates a non-root agent user</span>; <span class="verbatim">all scored material lives under root-owned mode 0700 paths</span>, and <span class="verbatim">test.sh</span> <span class="verbatim">locks the reward directory and drops to the agent user before executing any agent code.</span></li>
+</ul></details>
+</li>
 </ul>
 </li>
 </ul>
@@ -117,7 +152,7 @@ button {font:inherit;font-size:13px;border:1px solid var(--line);background:var(
 <h3 id="auto-judge_1">Auto Judge</h3>
 <ul>
 <li><strong>Task Scoring:</strong> V2 verifiers measure partial progress from <span class="verbatim">0</span> to <span class="verbatim">1</span> against disclosed functional or performance objectives. Models run at maximum reasoning effort.<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
-<li>V1 assesses partial solutions on <span class="verbatim">a scale from zero to one.</span> Each model–harness combination runs <span class="verbatim">five trials per task</span>, comparing <span class="verbatim">both mean@5 and best@5 values.</span></li>
+<li>V1 assesses partial solutions on <span class="verbatim">a scale from zero to one.</span> Each model–harness combination runs <span class="verbatim">five trials per task</span>, comparing <span class="verbatim">both mean@5 and best@5 values.</span> Mean@5 averages the five trial scores; best@5 takes the highest score.</li>
 <li>V2: <span class="verbatim">every task now reports a score between 0 and 1,</span> allowing aggregate benchmark scores.</li>
 <li>V2 evaluates <span class="verbatim">each model at its maximum reasoning effort, with Proximus as the default harness and a 20-hour budget per task.</span></li>
 </ul></details>
@@ -193,17 +228,10 @@ button {font:inherit;font-size:13px;border:1px solid var(--line);background:var(
 </ul></details>
 </li>
 <li>
-<p><strong>Performance Engineering:</strong> V2 replaces noisy wall-clock grading with a <span class="verbatim">weighted instruction count</span> priced for <span class="verbatim">Intel Sapphire Rapids</span>. The metric is <span class="verbatim">deterministic and reproducible, machine-independent, and correlated with wall-clock time on a single machine.</span></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
-<li>After local re-scoring of preserved submissions from shared sandboxes, <span class="verbatim">rankings flipped: recorded improvements came back as regressions on a different host.</span></li>
-<li>Pinned hosts still showed <span class="verbatim">significant run-to-run variance in the scores caused by effects such as OS scheduling and thermal throttling.</span></li>
-<li>V2 uses <span class="verbatim">a weighted instruction count where each instruction is priced by its measured cost on a pinned Intel Sapphire Rapids microarchitecture, using published per-instruction throughput data.</span></li>
-<li><span class="verbatim">libexpat counts the whole process (including libc) so work pushed into library calls still counts, and Cranelift adds a compile-time penalty so a runtime win from a slower compiler does not pay.</span></li>
-</ul></details>
+<p><strong>Performance Engineering:</strong> V2 scores performance tasks using a <span class="verbatim">weighted instruction count</span> priced for <span class="verbatim">Intel Sapphire Rapids</span>.</p>
 </li>
 <li><strong>Self-Check Feedback:</strong> <span class="verbatim">Every task gives the agent a self-check signal that tracks verifier score.</span> This makes local feedback available throughout the run.<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
-<li>Each workspace provides a <span class="verbatim">documented self-check tool whose output correlates monotonically with the verifier score.</span></li>
-<li>The feedback may be <span class="verbatim">a runnable test suite, a comparison against reference behaviour, or a disclosed objective metric.</span> End-to-end implementation tasks expose the full test suite.</li>
+<li>The feedback may be <span class="verbatim">a runnable test suite, a comparison against reference behaviour, or a disclosed objective metric.</span></li>
 </ul></details>
 </li>
 <li><strong>Cheating Attempts:</strong> Clean verification defeats cached answers and <span class="verbatim">evaluator manipulation</span>, exposing weak or incomplete implementations.<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
@@ -252,14 +280,7 @@ button {font:inherit;font-size:13px;border:1px solid var(--line);background:var(
 <h2 id="special-design">Special Design</h2>
 <ul>
 <li><strong>Preventing Cheating:</strong> A fresh verifier container and non-root execution protect hidden tests and reward files from agent-written code; successful-looking local output cannot substitute for verification.<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
-<li><span class="verbatim">Harbor's native two-container approach: the agent's container is stopped, a fresh verifier boots from a pinned image, and the entire filesystem is clean.</span></li>
 <li><span class="verbatim">Pre-written reward files, mutated binaries, planted tests, background processes: all gone by construction.</span></li>
-<li>Without user separation, <span class="verbatim">the agent's runtime can write directly to the reward file or spawn processes that keep overwriting it.</span></li>
-<li><span class="verbatim">Even with a separate container, the verifier compiles and runs agent-written code to test it, and that code inherits root if unguarded.</span></li>
-<li>The <span class="verbatim">Dockerfile</span> creates a non-root agent. Scored material stays under root-owned <span class="verbatim">mode 0700 paths</span>, and <span class="verbatim">test.sh</span> locks the reward directory and switches to the agent user before executing any agent code.</li>
-<li><strong>Code 1a. Dockerfile:</strong> Creates the non-root agent; keeps verifier assets under root ownership; gives the agent ownership of its workspace.</li>
-<li><strong>Code 1b. Test.sh:</strong> Locks the reward directory before executing agent code, runs the candidate without root, and scores root-written evidence.</li>
-<li><strong>Code 1c. Cheats Prevented:</strong> Blocks direct reward writes, background overwrites, reading hidden tests, renaming the test runner, and patching a library imported by the scorer.</li>
 </ul></details>
 </li>
 <li><strong>Proximus Harness:</strong> Extends mini-swe-agent with compaction, vision, and a submit tool. Safe checkpoints and remaining-time feedback encourage continued work.<details class="source-excerpts"><summary>Source Excerpts</summary><ul>

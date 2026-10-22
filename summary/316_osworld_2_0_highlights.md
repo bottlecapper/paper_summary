@@ -1032,6 +1032,13 @@ Previous statuses: **Covered**, **Partial**, **Title only**, or **Missing**. New
     - Summary evidence: - **Task Design:** <span class="verbatim">Each task in OSWORLD 2.0 is defined as a self-contained end-to-end workflow that an agent must complete given a high-level user goal, realistic artifacts, a stateful computer environment, and a scoreable final state.</span>
     - Meaning: Each task in OSWORLD 2.0 is defined as a self-contained end-to-end workflow that an agent must complete given a high-level user goal, realistic artifacts, a stateful computer environment, and a scoreable final state.
 
+- **H001 · Light green · Before: Not assessed**
+    - Selected text: `108 long-horizon computer-use workflows across everyday and professional tasks,`
+    - Now represented under **Dataset Creation → Task Design**.
+
+    - Summary evidence:     - OSWorld 2.0 is <span class="verbatim">a benchmark of 108 long-horizon computer-use workflows across everyday and professional tasks, designed to capture complex and challenging real-world phenomena.</span>
+    - Meaning: 108 long-horizon computer-use workflows across everyday and professional tasks,
+
 - **H011 · Light green · Before: Not assessed**
     - Selected text: `submitting an ExpenseFlow reimbursement claim.`
     - Now represented under **Dataset Creation → Task Design**.
@@ -1040,6 +1047,13 @@ Previous statuses: **Covered**, **Partial**, **Title only**, or **Missing**. New
     - Meaning: submitting an ExpenseFlow reimbursement claim.
 
     - Transformation reason: The task definition is quoted in full. The selected reimbursement workflow retains its four-phenomenon explanation. The complete original task instruction is retained unchanged in one quoted paragraph, with Appendix H.1.1 and Figures 14–25 identifying the illustrated walkthrough and submitted report; no deliverable is reconstructed from the request. Appendix H highlights remain excluded from coverage.
+
+- **H091 · Light green · Before: Not assessed**
+    - Selected text: `computer-use workflows`
+    - Now represented under **Dataset Creation → Task Design**.
+
+    - Summary evidence:     - OSWorld 2.0 is <span class="verbatim">a benchmark of 108 long-horizon computer-use workflows across everyday and professional tasks, designed to capture complex and challenging real-world phenomena.</span>
+    - Meaning: computer-use workflows
 
 - **H110 · Light green · Before: Not assessed**
     - Selected text: `four of the phenomena in one task.`
@@ -1613,13 +1627,6 @@ Previous statuses: **Covered**, **Partial**, **Title only**, or **Missing**. New
 
 - **Purpose:** OSWorld 2.0 tests whether AI agents can complete computer tasks from start to finish. It includes <span class="verbatim">108</span> everyday and professional tasks.
 
-- **H001 · Light green · Before: Not assessed**
-    - Selected text: `108 long-horizon computer-use workflows across everyday and professional tasks,`
-    - Now represented under **Summary → Overview**.
-
-    - Summary evidence:     - OSWorld 2.0 is <span class="verbatim">a benchmark of 108 long-horizon computer-use workflows across everyday and professional tasks, designed to capture complex and challenging real-world phenomena.</span>
-    - Meaning: 108 long-horizon computer-use workflows across everyday and professional tasks,
-
 - **H003 · Light green · Before: Not assessed**
     - Selected text: `average of 318 tool calls`
     - Now represented under **Summary → Overview**.
@@ -1654,19 +1661,11 @@ Previous statuses: **Covered**, **Partial**, **Title only**, or **Missing**. New
 
     - Transformation reason: The highlighted domain description and distribution label are represented once by the seven domains and 21 subcategories; repeated figure-caption wording is omitted.
 
-- **H091 · Light green · Before: Not assessed**
-    - Selected text: `computer-use workflows`
-    - Now represented under **Summary → Overview**.
-
-    - Summary evidence:     - OSWorld 2.0 is <span class="verbatim">a benchmark of 108 long-horizon computer-use workflows across everyday and professional tasks, designed to capture complex and challenging real-world phenomena.</span>
-    - Meaning: computer-use workflows
-
 - **H092 · Light green · Before: Not assessed**
     - Selected text: `OSWORLD 2.0 comprises 108 tasks across 31 self-hosted websites and a broad range of desktop appli- cations. These tasks are designed to measure complete computer-use workflows rather than isolated interface operations.`
     - Now represented under **Summary → Overview**.
 
     - Summary evidence: - **Purpose:** OSWorld 2.0 tests whether AI agents can complete computer tasks from start to finish. It includes <span class="verbatim">108</span> everyday and professional tasks.
-    - OSWorld 2.0 is <span class="verbatim">a benchmark of 108 long-horizon computer-use workflows across everyday and professional tasks, designed to capture complex and challenging real-world phenomena.</span>
 - **Scope:** Tasks span <span class="verbatim">seven professional domains</span> and <span class="verbatim">21 subcategories</span>. They use <span class="verbatim">31 self-hosted websites</span> and desktop apps.
     - Meaning: OSWORLD 2.0 comprises 108 tasks across 31 self-hosted websites and a broad range of desktop appli- cations. These tasks are designed to measure complete computer-use workflows rather than isolated interface operations.
 

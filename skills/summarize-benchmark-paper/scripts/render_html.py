@@ -78,19 +78,34 @@ def rebase_local_links(body, source_path, output_path):
 def collapse_source_lists(body):
     """Keep nested source bullets available beneath a short, readable overview."""
     root = ElementTree.fromstring("<div>" + body + "</div>")
-    important_sections = False
+    keep_section_visible = False
+    collapsed_items = set()
     for block in root:
         if block.tag == "h2":
-            important_sections = "".join(block.itertext()).strip() == "Important Sections"
-        if important_sections:
+            keep_section_visible = "".join(block.itertext()).strip() in ("Summary", "Important Sections")
+        if keep_section_visible:
             continue
         for item in list(block.iter("li")):
+            # Preserve the logical bullet hierarchy inside a source excerpt.
+            if item in collapsed_items:
+                continue
             # Category children are overview content, rather than source excerpts.
             lead = item.find("p")
             label = (lead if lead is not None else item).find("strong")
-            if label is not None and "".join(label.itertext()).rstrip(":") in (
-                    "Review Approach", "Quality Dimensions"):
-                continue
+            if label is not None:
+                label_text = "".join(label.itertext()).rstrip(":")
+                if label_text in ("Review Approach", "Quality Dimensions"):
+                    continue
+                # A heading-only category introduces visible design elements.
+                # A complete design sentence may instead have source excerpts.
+                if label_text == "Task Design":
+                    lead_text = item.text or ""
+                    for part in item:
+                        if part.tag in ("ul", "ol", "details"):
+                            break
+                        lead_text += "".join(part.itertext()) + (part.tail or "")
+                    if lead_text.strip().rstrip(":") == label_text:
+                        continue
             for child in list(item):
                 if child.tag not in ("ul", "ol"):
                     continue
@@ -101,6 +116,7 @@ def collapse_source_lists(body):
                 ElementTree.SubElement(details, "summary").text = "Source Excerpts"
                 details.append(child)
                 item.insert(position, details)
+                collapsed_items.update(child.iter("li"))
     return "".join(ElementTree.tostring(child, encoding="unicode", method="html") for child in root)
 
 

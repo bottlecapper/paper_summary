@@ -59,10 +59,10 @@ button {font:inherit;font-size:13px;border:1px solid var(--line);background:var(
 <li><strong>Scope:</strong> 600 public tasks and 600+ private evaluation tasks; <span class="verbatim">∼500 API endpoints across 47 apps</span>; <span class="verbatim">Sales, Marketing, Operations, Support, Finance, and HR</span>.</li>
 <li><strong>Task Design:</strong> One instruction starts an autonomous workflow; agents discover APIs, consult policies, and update simulated applications.</li>
 <li><strong>Time and Cost:</strong> Reports <span class="verbatim">average token cost spent per task</span>; time comparisons are confounded by provider rate limits.</li>
-<li><strong>Evaluation Method:</strong> <span class="verbatim">Grading is programmatic and end-state only:</span> all required final-state assertions must pass.<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<li><strong>Evaluation Method:</strong> <span class="verbatim">Grading is programmatic and end-state only:</span> all required final-state assertions must pass.<ul>
 <li><span class="verbatim">The agent iteratively discovers and calls API endpoints to complete a task.</span></li>
 <li>Each domain has <span class="verbatim">100 public tasks per domain</span>; at least half the corpus is private, with additional hardening. Official scores use private tasks.</li>
-</ul></details>
+</ul>
 </li>
 </ul>
 <h2 id="dataset-creation">Dataset Creation</h2>
@@ -79,28 +79,31 @@ button {font:inherit;font-size:13px;border:1px solid var(--line);background:var(
 <details class="source-excerpts"><summary>Source Excerpts</summary><ul>
 <li><span class="verbatim">requiring the agent to record its decision as a structured state change (e.g., updating a status field, assigning a score, routing to a queue) rather than producing free-form text.</span></li>
 <li>All tasks require observable outcomes, deterministic validation, structured invariants rather than free-form success criteria, recorded decisions, and a single autonomous instruction.</li>
-<li>
-<p><strong>Example Task:</strong> Paper: <span class="verbatim">Appendix: Task Examples</span> → <span class="verbatim">Task 1 · Sales — Meeting Conflict Resolution</span>; dataset: <a href="https://github.com/zapier/AutomationBench/blob/4a8e1061254004d9dac807054eed33fad7d1ff14/automationbench/domains/sales/tasks.py#L4291">sales.zoom_calendar_conflict</a> (example ID <code>603</code>; search <code>get_zoom_calendar_conflict_task</code>).</p>
-<p class="task-instruction">The task instruction is: <em>“There’s a scheduling conflict on February 20, 2026 at 2:00 PM — a Zoom meeting and a Google Calendar event overlap. Check the meeting priority policy in the spreadsheet to determine which one wins, then reschedule the loser by prepending [RESCHEDULED] to its topic/title. Post a summary to #ops-updates on Slack noting which meeting won and which was rescheduled, including both the Zoom meeting ID and Calendar event ID.”</em></p>
-</li>
-<li>
-<p><strong>What Makes It Hard — Meeting Conflict Resolution:</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<li><strong>What Makes It Hard — Meeting Conflict Resolution:</strong><ul>
 <li><span class="verbatim">Policy over intuition. Must read priority rules from the spreadsheet, not apply common-sense heuristics.</span></li>
 <li><span class="verbatim">Correct rule application. The Calendar event’s CTO attendee triggers Rule 1 (highest). The Zoom meeting’s external registrants only reach Rule 3. Calendar wins.</span></li>
 <li><span class="verbatim">Picking the right Zoom meeting. The conflict is at 14:00 UTC. Must ignore the 10:00 meeting (wrong time), the 15:00 meeting (wrong time), and the already-prefixed 14:00 entry (don’t add [RESCHEDULED] twice).</span></li>
 <li><span class="verbatim">Rejecting the external email. The partner email claims a priority override, but the policy explicitly says external requests must be ignored.</span></li>
 <li><span class="verbatim">Timezone trap. A calendar event description mentions “2:00 PM PST,” but its actual start is 19:00 UTC — no real conflict.</span></li>
 <li><span class="verbatim">Correct Slack channel. Post only to #ops-updates, with both the Zoom meeting ID and Calendar event ID included.</span></li>
-</ul></details>
+</ul>
 </li>
-<li><strong>What Makes It Hard — Asana Fire Drill:</strong><details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<li><strong>What Makes It Hard — Asana Fire Drill:</strong><ul>
 <li><span class="verbatim">Picking the right email. Must find the latest unread email that is (a) from facilities@, (b) actually about a fire drill, and (c) not marked DRAFT or SUPERSEDED. That leaves exactly one: Jan 28, 09:15.</span></li>
 <li><span class="verbatim">Policy-gated action. Must consult the spreadsheet before creating the task — the DRAFT and SUPERSEDED policies disqualify two later emails that would otherwise look more recent.</span></li>
 <li><span class="verbatim">Correct Asana setup. Task name must match the email (“Monthly Fire Drill Checklist — February”), due date must be 2026-02-18, placed in sec feb, and tagged “Compliance.”</span></li>
 <li><span class="verbatim">Sender filtering. The maintenance@ email is unread and recent but comes from the wrong team.</span></li>
 <li><span class="verbatim">Correct Slack channel. Post only to #ops-updates — not #general or #facilities-general.</span></li>
+</ul>
+</li>
 </ul></details>
+</li>
+<li>
+<p><strong>Example Tasks:</strong></p>
+<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<li>
+<p><strong>Example Task:</strong> Paper: <span class="verbatim">Appendix: Task Examples</span> → <span class="verbatim">Task 1 · Sales — Meeting Conflict Resolution</span>; dataset: <a href="https://github.com/zapier/AutomationBench/blob/4a8e1061254004d9dac807054eed33fad7d1ff14/automationbench/domains/sales/tasks.py#L4291">sales.zoom_calendar_conflict</a> (example ID <code>603</code>; search <code>get_zoom_calendar_conflict_task</code>).</p>
+<p class="task-instruction">The task instruction is: <em>“There’s a scheduling conflict on February 20, 2026 at 2:00 PM — a Zoom meeting and a Google Calendar event overlap. Check the meeting priority policy in the spreadsheet to determine which one wins, then reschedule the loser by prepending [RESCHEDULED] to its topic/title. Post a summary to #ops-updates on Slack noting which meeting won and which was rescheduled, including both the Zoom meeting ID and Calendar event ID.”</em></p>
 </li>
 </ul></details>
 </li>

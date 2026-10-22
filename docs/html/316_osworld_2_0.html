@@ -52,25 +52,22 @@ button {font:inherit;font-size:13px;border:1px solid var(--line);background:var(
 </nav>
 <div class="tools"><button onclick="window.print()">Print / save PDF</button><button id="expand">Show contents</button><button id="sources">Show Source Excerpts</button></div>
 </aside><main><h1 id="osworld-20">OSWorld 2.0</h1>
-<p><strong>XLANG Lab and Collaborators · Jul 2026 · ~4-minute overview</strong> · <a href="https://arxiv.org/abs/2606.29537v2">Paper</a></p>
+<p><strong>XLANG Lab and Collaborators · Jul 2026 · ~5-minute overview</strong> · <a href="https://arxiv.org/abs/2606.29537v2">Paper</a></p>
 <h2 id="summary">Summary</h2>
 <ul>
-<li><strong>Purpose:</strong> OSWorld 2.0 tests whether AI agents can complete computer tasks from start to finish. It includes <span class="verbatim">108</span> everyday and professional tasks.<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
-<li>OSWorld 2.0 is <span class="verbatim">a benchmark of 108 long-horizon computer-use workflows across everyday and professional tasks, designed to capture complex and challenging real-world phenomena.</span></li>
-</ul></details>
-</li>
-<li><strong>Scope:</strong> Tasks span <span class="verbatim">seven professional domains</span> and <span class="verbatim">21 subcategories</span>. They use <span class="verbatim">31 self-hosted websites</span> and desktop apps.<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<li><strong>Purpose:</strong> OSWorld 2.0 tests whether AI agents can complete computer tasks from start to finish. It includes <span class="verbatim">108</span> everyday and professional tasks.</li>
+<li><strong>Scope:</strong> Tasks span <span class="verbatim">seven professional domains</span> and <span class="verbatim">21 subcategories</span>. They use <span class="verbatim">31 self-hosted websites</span> and desktop apps.<ul>
 <li>A <span class="verbatim">task involves 2.44 apps or services on average,</span> counting required apps and additional apps used by agents.</li>
-</ul></details>
+</ul>
 </li>
-<li><strong>Task Design:</strong> Agents often need to find and combine information across files, apps, and past records.<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<li><strong>Task Design:</strong> Agents often need to find and combine information across files, apps, and past records.<ul>
 <li>Computer-use agents can <span class="verbatim">browse the web, manage files, write and run code, and operate desktop applications on a user’s behalf.</span></li>
-</ul></details>
+</ul>
 </li>
-<li><strong>Time and Cost:</strong> Median <span class="verbatim">completion time for a skilled human</span> is about <span class="verbatim">1.6 hours</span>, compared with about two minutes in OSWorld 1.0.<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<li><strong>Time and Cost:</strong> Median <span class="verbatim">completion time for a skilled human</span> is about <span class="verbatim">1.6 hours</span>, compared with about two minutes in OSWorld 1.0.<ul>
 <li><span class="verbatim">69.6% of tasks are estimated to take a skilled human user more than one hour.</span></li>
 <li>In the single-action setting with maximum thinking, Claude Opus 4.7 averages <span class="verbatim">318.4</span> tool calls per task.</li>
-</ul></details>
+</ul>
 </li>
 <li><strong>Evaluation Method:</strong> The final result is scored against task checkpoints. Agents earn partial credit; full success requires every checkpoint to pass.</li>
 </ul>
@@ -106,6 +103,12 @@ button {font:inherit;font-size:13px;border:1px solid var(--line);background:var(
 <p><strong>Task Design:</strong> <span class="verbatim">Each task in OSWORLD 2.0 is defined as a self-contained end-to-end workflow that an agent must complete given a high-level user goal, realistic artifacts, a stateful computer environment, and a scoreable final state.</span></p>
 <details class="source-excerpts"><summary>Source Excerpts</summary><ul>
 <li>The reimbursement workflow combines <span class="verbatim">Tutorial Following</span>, <span class="verbatim">Cross-source Reasoning</span>, <span class="verbatim">Dynamic Environment</span>, and <span class="verbatim">Proactive Interaction</span>: read the guideline, reconcile receipt/bank/prior-report evidence, revise after new email, and ask about missing or inconsistent evidence.</li>
+<li>OSWorld 2.0 is <span class="verbatim">a benchmark of 108 long-horizon computer-use workflows across everyday and professional tasks, designed to capture complex and challenging real-world phenomena.</span></li>
+</ul></details>
+</li>
+<li>
+<p><strong>Example Tasks:</strong></p>
+<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
 <li>
 <p><strong>Example Task:</strong> Paper: Appendix <span class="verbatim">H.1.1 Task 008: Expense Reimbursement</span> (Figures <span class="verbatim">14</span>–<span class="verbatim">25</span>); dataset: <a href="https://huggingface.co/datasets/xlangai/osworld_v2_tasks">OSWorld V2 tasks</a> (<code>task_008.py</code>; access required).</p>
 <p class="task-instruction">The task instruction is: <em>“Please help me submit a reimbursement claim in the ExpenseFlow system. I attended NeurIPS 2025 and also gave a talk at Stanford, and I need to get my costs reimbursed, including conference registration, flights, and hotel. The supporting documents should be in my MailHub inbox, and you can cross-check the charges in my VaultBank account; I also have some additional materials saved on my Desktop. I’ve already opened the Oracle ExpenseFlow reimbursement guideline for you, please follow it step by step, fill out the expense report, prepare and upload required attachments, and submit the claim. One more thing, you may refer to my previously submitted report for my personal particulars.”</em></p>

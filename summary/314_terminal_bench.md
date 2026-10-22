@@ -6,7 +6,6 @@
 
 - **Purpose:** Terminal-Bench is <span class="verbatim">a framework to evaluate agents on realistic tasks in command line interfaces.</span> Terminal-Bench 2.0 contains <span class="verbatim">89 tasks</span>.
 - **Scope:** High-skill work across <span class="verbatim">software engineering, scientific computing, cybersecurity, and machine learning</span>; 16 author-assigned categories.
-    - <span class="verbatim">Terminal-Bench evaluates whether agents can perform the kind of high-skill work that professionals are paid to do, including configuring legacy systems, reimplementing research papers, and solving general software engineering problems.</span>
     - The terminal is <span class="verbatim">a ubiquitous, versatile, and powerful interface</span>.
     - Equal-contribution corresponding authors include <span class="verbatim">Mike A. Merrill</span> and <span class="verbatim">Alexander G. Shaw</span>.
 - **Task Design:** <span class="verbatim">Terminal-Bench tasks are interactive.</span> Agents explore and manipulate a container to achieve the requested final state.
@@ -18,11 +17,14 @@
 - **Task Sourcing:** The project <span class="verbatim">crowd-sourced tasks through open-source contributions, with 93 contributors creating 229 tasks.</span> The final dataset contains 89 tasks.
     - Selection was <span class="verbatim">based on the author’s difficulty assessment and a quality assessment by three experienced human reviewers</span>.
     - Software engineering is the largest category (26 tasks), with no majority category; the collection also includes personal-assistant and video-processing work.
+    - <span class="verbatim">Terminal-Bench evaluates whether agents can perform the kind of high-skill work that professionals are paid to do, including configuring legacy systems, reimplementing research papers, and solving general software engineering problems.</span>
 
 - **Task Design:** <span class="verbatim">A Terminal-Bench task consists of an instruction, a Docker image, a set of tests, an example solution, and a time limit</span>.
     - <span class="verbatim">Each task features a unique environment, human-written solution, and comprehensive tests for verification.</span>
     - The Dockerfile initializes relevant packages/files; instructions define the goal, tests verify completion, and a human-written oracle demonstrates solvability. Tests are injected for verification rather than exposed with the oracle during agent execution.
     - <span class="verbatim">Claude 4 Opus was used to transform the author-provided task instructions into the abbreviated “Description” in Appendix H.</span> The example below uses the instruction shown in Figure 2.
+
+- **Example Tasks:**
     - **Example Task:** Paper: Figure <span class="verbatim">2</span> (COBOL example); dataset: [cobol-modernization](https://github.com/harbor-framework/terminal-bench-2/blob/2fd12b88aafdd04a52c298e3940bcb189f9766d6/cobol-modernization/instruction.md) (`instruction.md`).
 
         The task instruction is: *“Re-implement the COBOL program located in /app/src/program.cbl, in Python. Your script must produce identical results to the COBOL baseline.”*

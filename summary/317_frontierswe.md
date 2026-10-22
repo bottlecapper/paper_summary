@@ -4,9 +4,9 @@
 ## Summary
 - **Purpose:** <span class="verbatim">FrontierSWE is an effort to test coding agents on the hardest ultra-long horizon technical challenges.</span>
 - **Scope:** V2 contains <span class="verbatim">34 tasks</span> across <span class="verbatim">Implementation</span>, <span class="verbatim">Scientific Computing</span>, <span class="verbatim">Performance Optimisation</span>, <span class="verbatim">Visual Reasoning</span>, and <span class="verbatim">AI Research</span>.
-- **Task Design:** Examples include <span class="verbatim">Git to Zig</span> and <span class="verbatim">Snooker Prediction</span>: reimplementing Git and predicting future ball positions from video.
-- **Time and Cost:** Agents receive <span class="verbatim">20 hours per task</span>. Mean trial costs: <span class="verbatim">Fable 5.1</span> $<span class="verbatim">138.55</span>, <span class="verbatim">GPT-5.6 Sol</span> $<span class="verbatim">179.64</span>, and <span class="verbatim">GLM-5.3</span> $<span class="verbatim">97.22</span>.
-- **Evaluation Method:** V2 reports <span class="verbatim">mean@5 scores across all 34 tasks.</span> Task-specific verifiers award partial credit, with scores from <span class="verbatim">0</span> to <span class="verbatim">1</span>.
+- **Task Design:** Tasks are <span class="verbatim">extremely difficult and open-ended technical problems that require novel ideas and extensive planning</span>. Academic and industry collaborators help curate problems from their areas of expertise.
+- **Time and Cost:** V2 gives agents <span class="verbatim">a 20-hour budget per task.</span> The highest-scoring model, <span class="verbatim">Claude Fable 5.1</span>, averages <span class="verbatim">11.63</span> hours per trial, including unsuccessful attempts. V2 does not report measured human completion time or task-creation cost.
+- **Evaluation Method:** Task-specific verifiers award partial credit from <span class="verbatim">0</span> to <span class="verbatim">1</span>. V2 reports <span class="verbatim">mean@5 scores across all 34 tasks.</span> This averages scores over five trials per task.
 
 ## Dataset Creation
 - **Problem Sourcing:** Academic and industry collaborators curate real problems requiring expert knowledge.
@@ -16,23 +16,44 @@
     - V1 contained <span class="verbatim">17 tasks in the categories implementation, performance, and research:</span> <span class="verbatim">5 tasks</span>, <span class="verbatim">9 tasks</span>, and <span class="verbatim">3 tasks</span>, respectively.
     - <span class="verbatim">FrontierSWE v2 comes with 21 new challenges, bringing the total number of tasks to 34.</span>
     - The retired tasks are <span class="verbatim">PCQM4Mv2 Molecular Gap Prediction, Pyright Type Checking Optimization, Revideo Rendering Pipeline Optimization, and Dependent Type Checker.</span>
-- **Task Design:** Prompts specify performance targets or functional requirements. The highlighted examples cover implementation, performance, research, and visual tasks.
-    - **Example Task:** Paper: V1, Benchmark Design — Implementation; official task: [<span class="verbatim">Git to Zig</span>](https://www.frontierswe.com/v1/git-to-zig) (`git-to-zig`).
-    - **Example Task:** Paper: V1, Benchmark Design — Research; official task: [<span class="verbatim">FrogsGame Post-Training</span>](https://www.frontierswe.com/v1/frogsgame-rl) (`frogsgame-rl`).
-    - **Example Task:** Paper: V1, Benchmark Design — Research; official task: [<span class="verbatim">Optimizer Design</span>](https://www.frontierswe.com/v1/optimizer-design) (`optimizer-design`).
-    - **Example Task:** Paper: V1, Benchmark Design — Performance; official task: [<span class="verbatim">Notebook Compression</span>](https://www.frontierswe.com/v1/notebook-compression) (`notebook-compression`).
-    - **Example Task:** Paper: V2, New Tasks — Visual Reasoning; All 34 tasks, Snooker Prediction; official task: [<span class="verbatim">Snooker Prediction</span>](https://www.frontierswe.com/tasks/snooker-prediction) (`snooker-prediction`).
-    - **Example Task:** Paper: V2, New Tasks — Visual Reasoning; All 34 tasks, Vision-only TORCS Racing Bot; official task: [<span class="verbatim">TORCS Racing Bot</span>](https://www.frontierswe.com/tasks/torcs-ai-bot) (`torcs-ai-bot`).
-    - **Example Task:** Paper: V2, New Tasks — Visual Reasoning; All 34 tasks, Flight-Sim Renderer in OpenGL; official task: [<span class="verbatim">Flight-Sim Renderer in OpenGL</span>](https://www.frontierswe.com/tasks/opengl-scene-engine) (`opengl-scene-engine`).
-    - **Example Task:** Paper: V2, New Tasks — Scientific Computing; All 34 tasks, Astronomy Toolkit; official task: [<span class="verbatim">Astronomy Toolkit</span>](https://www.frontierswe.com/tasks/autonomous-astrometry-toolkit) (`autonomous-astrometry-toolkit`).
+- **Task Design:**
+    - **Metrics:** Prompts explicitly specify metrics including <span class="verbatim">performance improvements</span> and <span class="verbatim">coverage of functional requirements</span>.
+    - **Purpose:** The purpose is to <span class="verbatim">ensure that agents have all the information needed to achieve a full score on a task.</span>
+    - **Self-Check Tool:** V2 ensures that <span class="verbatim">every workspace contains a documented self-check tool whose output correlates monotonically with the verifier score.</span>
+        - The self-check tool helps the agent check whether changes will improve its final score.
+    - **Test Suite and Verification:** <span class="verbatim">For end-to-end implementation tasks, agents get the full test suite</span>.
+        - Verification uses <span class="verbatim">1:1 structural mutation</span>. The intended idea is one original case paired with a changed counterpart that checks the same feature.
+            - For example, <span class="verbatim">Astronomy Toolkit</span> illustrates this with a copied test campaign: every image gets one new ID and filename; image order and star-catalog rows are shuffled. Pixels and sky positions stay unchanged, and expected answers are relabeled to match the new IDs. A real solver should still find the same positions; a lookup keyed to old image IDs fails. The verifier adds this transformed campaign as an extra check. [Transformation code](https://github.com/Proximal-Labs/frontier-swe-v2/blob/da83f84f8fbcec3cbf0f2b17c98ebc811355c2df/tasks/astronomy-toolkit/environment/tests/metamorphic_campaigns.py#L66-L130) · [Verifier runner](https://github.com/Proximal-Labs/frontier-swe-v2/blob/da83f84f8fbcec3cbf0f2b17c98ebc811355c2df/tasks/astronomy-toolkit/environment/tests/runner.py#L266-L283).
+        - The intended result is that <span class="verbatim">agents are never undercredited for implementing a feature the verifier doesn't test while ensuring that hardcoding test results is not a viable strategy to succeed.</span>
+- **Example Tasks:**
+    - **Example Task:** V1 Implementation - [<span class="verbatim">Git to Zig</span>](https://www.frontierswe.com/v1/git-to-zig) (`git-to-zig`).
+    - **Example Task:** V1 Research - [<span class="verbatim">FrogsGame Post-Training</span>](https://www.frontierswe.com/v1/frogsgame-rl) (`frogsgame-rl`).
+    - **Example Task:** V1 Research - [<span class="verbatim">Optimizer Design</span>](https://www.frontierswe.com/v1/optimizer-design) (`optimizer-design`).
+    - **Example Task:** V1 Performance - [<span class="verbatim">Notebook Compression</span>](https://www.frontierswe.com/v1/notebook-compression) (`notebook-compression`).
+    - **Example Task:** V2 Visual Reasoning - [<span class="verbatim">Snooker Prediction</span>](https://www.frontierswe.com/tasks/snooker-prediction) (`snooker-prediction`).
+    - **Example Task:** V2 Visual Reasoning - [<span class="verbatim">TORCS Racing Bot</span>](https://www.frontierswe.com/tasks/torcs-ai-bot) (`torcs-ai-bot`).
+    - **Example Task:** V2 Visual Reasoning - [<span class="verbatim">Flight-Sim Renderer in OpenGL</span>](https://www.frontierswe.com/tasks/opengl-scene-engine) (`opengl-scene-engine`).
+    - **Example Task:** V2 Scientific Computing - [<span class="verbatim">Astronomy Toolkit</span>](https://www.frontierswe.com/tasks/autonomous-astrometry-toolkit) (`autonomous-astrometry-toolkit`).
 
 ## Quality Control
 ### Human Review
 - **Review Approach:**
-    - V2 revises task design and scoring and fixes v1 tasks for fairness and reproducibility; separate manual QA steps are not described.
+    - V2 revises task design and scoring and applies an <span class="verbatim">improved QA process to all tasks</span>, including fixes to v1 tasks for <span class="verbatim">fairness and reproducibility.</span> The paper does not identify the reviewers.
 - **Quality Dimensions:**
-    - Information completeness: agents must have <span class="verbatim">all the information needed to achieve a full score on a task.</span>
-    - Fairness: <span class="verbatim">agents are never undercredited for implementing a feature the verifier doesn't test while ensuring that hardcoding test results is not a viable strategy to succeed.</span>
+    - <span class="verbatim">Fairness</span>: QA fixes aim to give agents the information needed to earn a full score.
+        - The benchmark team <span class="verbatim">applied an improved QA process to all tasks and made fixes to tasks from v1</span>.
+    - Reproducibility: performance grading uses a <span class="verbatim">deterministic and reproducible, machine-independent</span> metric.
+        - The metric is <span class="verbatim">deterministic and reproducible, machine-independent, and correlated with wall-clock time on a single machine.</span>
+        - After local re-scoring of preserved submissions from shared sandboxes, <span class="verbatim">rankings flipped: recorded improvements came back as regressions on a different host.</span>
+        - Pinned hosts still showed <span class="verbatim">significant run-to-run variance in the scores caused by effects such as OS scheduling and thermal throttling.</span>
+        - V2 uses <span class="verbatim">a weighted instruction count where each instruction is priced by its measured cost on a pinned Intel Sapphire Rapids microarchitecture, using published per-instruction throughput data.</span>
+        - <span class="verbatim">libexpat counts the whole process (including libc) so work pushed into library calls still counts, and Cranelift adds a compile-time penalty so a runtime win from a slower compiler does not pay.</span>
+    - <span class="verbatim">Preventing Cheating</span>: clean verifier containers and user separation protect tests and rewards from agent-written code.
+        - <span class="verbatim">Harbor's native two-container approach: the agent's container is stopped, a fresh verifier boots from a pinned image, and the entire filesystem is clean.</span>
+        - <span class="verbatim">Pre-written reward files, mutated binaries, planted tests, background processes: all gone by construction.</span>
+        - Without user separation, <span class="verbatim">the agent's runtime can write directly to the reward file or spawn processes that keep overwriting it.</span>
+        - <span class="verbatim">Even with a separate container, the verifier compiles and runs agent-written code to test it, and that code inherits root if unguarded.</span>
+        - The <span class="verbatim">Dockerfile</span> <span class="verbatim">creates a non-root agent user</span>; <span class="verbatim">all scored material lives under root-owned mode 0700 paths</span>, and <span class="verbatim">test.sh</span> <span class="verbatim">locks the reward directory and drops to the agent user before executing any agent code.</span>
 ### Auto Judge
 - Automated task-construction screening is not separately described.
 
@@ -43,7 +64,7 @@
 - A separate human scoring protocol is not reported.
 ### Auto Judge
 - **Task Scoring:** V2 verifiers measure partial progress from <span class="verbatim">0</span> to <span class="verbatim">1</span> against disclosed functional or performance objectives. Models run at maximum reasoning effort.
-    - V1 assesses partial solutions on <span class="verbatim">a scale from zero to one.</span> Each model–harness combination runs <span class="verbatim">five trials per task</span>, comparing <span class="verbatim">both mean@5 and best@5 values.</span>
+    - V1 assesses partial solutions on <span class="verbatim">a scale from zero to one.</span> Each model–harness combination runs <span class="verbatim">five trials per task</span>, comparing <span class="verbatim">both mean@5 and best@5 values.</span> Mean@5 averages the five trial scores; best@5 takes the highest score.
     - V2: <span class="verbatim">every task now reports a score between 0 and 1,</span> allowing aggregate benchmark scores.
     - V2 evaluates <span class="verbatim">each model at its maximum reasoning effort, with Proximus as the default harness and a 20-hour budget per task.</span>
 - **Headline Results:** Sep 2026 v2 results: <span class="verbatim">Claude Fable 5.1</span> <span class="verbatim">56.29%</span>, <span class="verbatim">GPT-5.6 Sol</span> <span class="verbatim">32.2%</span>, <span class="verbatim">GLM-5.3</span> <span class="verbatim">30.2%</span>. [Leaderboard](https://www.frontierswe.com/).
@@ -63,14 +84,9 @@
         | <span class="verbatim">Muse Spark 1.2</span> | <span class="verbatim">12.0%</span> | <span class="verbatim">6.0–19.2%</span> |
         | <span class="verbatim">Inkling</span> | <span class="verbatim">4.1%</span> | <span class="verbatim">1.4–8.0%</span> |
 
-- **Performance Engineering:** V2 replaces noisy wall-clock grading with a <span class="verbatim">weighted instruction count</span> priced for <span class="verbatim">Intel Sapphire Rapids</span>. The metric is <span class="verbatim">deterministic and reproducible, machine-independent, and correlated with wall-clock time on a single machine.</span>
-    - After local re-scoring of preserved submissions from shared sandboxes, <span class="verbatim">rankings flipped: recorded improvements came back as regressions on a different host.</span>
-    - Pinned hosts still showed <span class="verbatim">significant run-to-run variance in the scores caused by effects such as OS scheduling and thermal throttling.</span>
-    - V2 uses <span class="verbatim">a weighted instruction count where each instruction is priced by its measured cost on a pinned Intel Sapphire Rapids microarchitecture, using published per-instruction throughput data.</span>
-    - <span class="verbatim">libexpat counts the whole process (including libc) so work pushed into library calls still counts, and Cranelift adds a compile-time penalty so a runtime win from a slower compiler does not pay.</span>
+- **Performance Engineering:** V2 scores performance tasks using a <span class="verbatim">weighted instruction count</span> priced for <span class="verbatim">Intel Sapphire Rapids</span>.
 - **Self-Check Feedback:** <span class="verbatim">Every task gives the agent a self-check signal that tracks verifier score.</span> This makes local feedback available throughout the run.
-    - Each workspace provides a <span class="verbatim">documented self-check tool whose output correlates monotonically with the verifier score.</span>
-    - The feedback may be <span class="verbatim">a runnable test suite, a comparison against reference behaviour, or a disclosed objective metric.</span> End-to-end implementation tasks expose the full test suite.
+    - The feedback may be <span class="verbatim">a runnable test suite, a comparison against reference behaviour, or a disclosed objective metric.</span>
 - **Cheating Attempts:** Clean verification defeats cached answers and <span class="verbatim">evaluator manipulation</span>, exposing weak or incomplete implementations.
     - **GPT-5.6 Sol — SPICE:** The model replaced failed simulator cases with public gold-file lookups. <span class="verbatim">The shortcut was ultimately futile: the clean verifier removed the gold files, and the simulator passed only 33/99 cases.</span>
     - **GPT-5.6 Sol — Quantum Simulation and Inference Serving:** Public-answer tables and removed cache-busting request fields created shortcut paths. <span class="verbatim">Hidden variations defeated these shortcuts, leaving only partial reward from the fallback implementations.</span>
@@ -101,14 +117,7 @@
 
 ## Special Design
 - **Preventing Cheating:** A fresh verifier container and non-root execution protect hidden tests and reward files from agent-written code; successful-looking local output cannot substitute for verification.
-    - <span class="verbatim">Harbor's native two-container approach: the agent's container is stopped, a fresh verifier boots from a pinned image, and the entire filesystem is clean.</span>
     - <span class="verbatim">Pre-written reward files, mutated binaries, planted tests, background processes: all gone by construction.</span>
-    - Without user separation, <span class="verbatim">the agent's runtime can write directly to the reward file or spawn processes that keep overwriting it.</span>
-    - <span class="verbatim">Even with a separate container, the verifier compiles and runs agent-written code to test it, and that code inherits root if unguarded.</span>
-    - The <span class="verbatim">Dockerfile</span> creates a non-root agent. Scored material stays under root-owned <span class="verbatim">mode 0700 paths</span>, and <span class="verbatim">test.sh</span> locks the reward directory and switches to the agent user before executing any agent code.
-    - **Code 1a. Dockerfile:** Creates the non-root agent; keeps verifier assets under root ownership; gives the agent ownership of its workspace.
-    - **Code 1b. Test.sh:** Locks the reward directory before executing agent code, runs the candidate without root, and scores root-written evidence.
-    - **Code 1c. Cheats Prevented:** Blocks direct reward writes, background overwrites, reading hidden tests, renaming the test runner, and patching a library imported by the scorer.
 - **Proximus Harness:** Extends mini-swe-agent with compaction, vision, and a submit tool. Safe checkpoints and remaining-time feedback encourage continued work.
     - <span class="verbatim">Proximus is a minimal agent harness built for ultra-long-horizon coding tasks.</span> It builds on <span class="verbatim">mini-swe-agent</span> and adds <span class="verbatim">compaction, vision, and a submit tool.</span>
     - Compaction summarizes the trajectory using the same model; <span class="verbatim">PROGRESS.md</span> survives as a workspace log. Vision exposes workspace images such as plots and video frames.

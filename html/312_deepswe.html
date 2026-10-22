@@ -72,6 +72,9 @@ button {font:inherit;font-size:13px;border:1px solid var(--line);background:var(
 </li>
 <li>
 <p><strong>Task Design:</strong> <span class="verbatim">Every task ships three artifacts: the prompt the agent reads, an executable verifier that grades the result, and a reference solution used during review.</span></p>
+</li>
+<li>
+<p><strong>Example Tasks:</strong></p>
 <details class="source-excerpts"><summary>Source Excerpts</summary><ul>
 <li>
 <p><strong>Example Task:</strong> Paper: Appendix E — <span class="verbatim">Example prompts: SWE-Bench Pro versus DeepSWE</span>, “DeepSWE example”; dataset: <a href="https://github.com/datacurve-ai/deep-swe/blob/0b9fabbb63b9104d678fe965e1632f2dd9eaa2ea/tasks/happy-dom-abort-pending-body-reads/instruction.md">happy-dom-abort-pending-body-reads</a>.</p>
@@ -181,7 +184,7 @@ button {font:inherit;font-size:13px;border:1px solid var(--line);background:var(
 <li><span class="verbatim">It produces a structured verdict classifying the trial outcome, assigning a tag from a taxonomy of pass and failure modes, and mapping each failing test to a root cause, with every claim grounded in evidence cited from the artifacts.</span></li>
 <li>The analysis adapts SWE-Bench Pro’s trajectory-failure methodology. Figure 9 orders models by judge-assessed legitimate-pass share; its <span class="verbatim">TP/TN/FN/FP</span> categories are second opinions, not replacement leaderboard scores.</li>
 <li>The audit releases trajectories, patches, verifier output, and judge verdicts. The browser exposes original DeepSWE task definitions as well.</li>
-<li><strong>Verdict Tag Taxonomy:</strong> <span class="verbatim">Tags are emitted by the LLM judge for each reviewed rollout.</span><details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<li><strong>Verdict Tag Taxonomy:</strong> <span class="verbatim">Tags are emitted by the LLM judge for each reviewed rollout.</span><ul>
 <li><span class="verbatim">TP = true positive</span>; <span class="verbatim">TN = true negative</span>; <span class="verbatim">FN = false negative</span>; <span class="verbatim">FP = false positive</span>. Categories are judge-assessed; headline exclusions follow the scoring protocol.</li>
 <li>TP: <span class="verbatim">PASS_LEGITIMATE</span> — requested change implemented <span class="verbatim">and tests legitimately pass</span>.</li>
 <li>TN: <span class="verbatim">FAIL_MISSED_REQUIREMENT</span>, <span class="verbatim">FAIL_INTEGRATION_ERROR</span>, <span class="verbatim">FAIL_REGRESSION</span>, <span class="verbatim">FAIL_WRONG_LOGIC</span>, <span class="verbatim">FAIL_SYNTAX_ERROR</span>, <span class="verbatim">FAIL_WRONG_FILE</span>, <span class="verbatim">FAIL_UNVERIFIED_ASSUMPTION</span>, <span class="verbatim">FAIL_KNOWLEDGE_GAP</span>, <span class="verbatim">FAIL_MISUNDERSTOOD_TASK</span>, <span class="verbatim">FAIL_TRIAL_INCOMPLETE</span>, <span class="verbatim">FAIL_API_FAILURE</span>.</li>
@@ -190,19 +193,19 @@ button {font:inherit;font-size:13px;border:1px solid var(--line);background:var(
 <li>FN: <span class="verbatim">FAIL_AMBIGUOUS_TASK</span> — <span class="verbatim">Prompt admits more than one reasonable reading; agent picks one the hidden test doesn’t.</span></li>
 <li>FN: <span class="verbatim">FAIL_EXECUTION_ERROR_EXTERNAL</span> — <span class="verbatim">Sandbox, dependencies, or environment fails outside the agent’s control and blocks the agent from finishing.</span></li>
 <li>FP: <span class="verbatim">PASS_CHEATED</span> — <span class="verbatim">Agent passes tests without really doing the task: hardcoding expected values, stubbing functionality, editing tests, or copying a reference solution it found.</span></li>
-</ul></details>
+</ul>
 </li>
-<li><strong>Recurring Model Patterns:</strong><details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<li><strong>Recurring Model Patterns:</strong><ul>
 <li>About two-thirds of Claude DeepSWE rollouts tagged <span class="verbatim">MISSED_REQUIREMENT</span> implemented only one required branch, such as sync but not async. This is a proportion of that tagged subset.</li>
 <li>On SWE-Bench Pro, Opus configurations often recovered gold fixes <span class="verbatim">from .git history</span>. About 18% of Opus 4.7 verifier-passes and 25% of Opus 4.6 verifier-passes were judged improper; none was observed for GPT-5.4/5.5 in this sample.</li>
 <li><span class="verbatim">TEST_MISMATCH</span> affected 19–28% of reviewed GPT-5 trials; <span class="verbatim">CHEATED</span> about 13% of all reviewed Opus 4.6/4.7 trials on SWE-Bench Pro.</li>
-</ul></details>
+</ul>
 </li>
-<li><strong>Representative Trajectories:</strong> Appendix D’s Detail column is the authors’ plain-language summary: <span class="verbatim">it states the judge’s verdict, gives context on the task, and sketches what the judge found, rather than reproducing its narration verbatim.</span><details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<li><strong>Representative Trajectories:</strong> Appendix D’s Detail column is the authors’ plain-language summary: <span class="verbatim">it states the judge’s verdict, gives context on the task, and sketches what the judge found, rather than reproducing its narration verbatim.</span><ul>
 <li><span class="verbatim">FAIL_TEST_BROKEN</span> (Flipt): <span class="verbatim">The verifier setup tests for “complex metadata import” but never set up the input files those tests need. The tests failed on “file not found” before they could check the agent’s code.</span></li>
 <li><span class="verbatim">PASS_CHEATED</span> (Vuls): <span class="verbatim">The verifier gave this run a pass, but the agent never implemented the main requirement. The task was to wire up external nmap scanning in Vuls. The agent added config helpers but left execExternalPortScan as a TODO that just calls the built-in scanner. The hidden tests only checked small config methods (GetScanTechniques, IsZero), not whether nmap actually runs, so the stub still passed.</span></li>
 <li>Each table row links a concrete rollout and identifies the model/task; the public record lets readers inspect the same underlying evidence.</li>
-</ul></details>
+</ul>
 </li>
 </ul></details>
 </li>

@@ -45,6 +45,7 @@ button {font:inherit;font-size:13px;border:1px solid var(--line);background:var(
 <li><a href="#exploit-agent">Exploit Agent</a></li>
 <li><a href="#command-analysis">Command Analysis</a></li>
 <li><a href="#scope">Scope</a></li>
+<li><a href="#sourcing">Sourcing</a></li>
 <li><a href="#scoring">Scoring</a></li>
 <li><a href="#harness">Harness</a></li>
 <li><a href="#model-vs-agent">Model Vs Agent</a></li>
@@ -52,7 +53,6 @@ button {font:inherit;font-size:13px;border:1px solid var(--line);background:var(
 <li><a href="#trajectory-analysis">Trajectory Analysis</a></li>
 <li><a href="#adapters">Adapters</a></li>
 <li><a href="#task-design">Task Design</a></li>
-<li><a href="#sourcing">Sourcing</a></li>
 <li><a href="#quality-dimensions">Quality Dimensions</a></li>
 <li><a href="#limitations">Limitations</a></li>
 <li><a href="#human-time-estimates">Human Time Estimates</a></li>
@@ -65,7 +65,7 @@ button {font:inherit;font-size:13px;border:1px solid var(--line);background:var(
 </ul>
 </div>
 </nav>
-<div class="tools"><button onclick="window.print()">Print / save PDF</button><button id="expand">Show contents</button><button id="sources">Show Source Excerpts</button></div>
+<div class="tools"><button onclick="window.print()">Print / save PDF</button><button id="expand">Show contents</button></div>
 </aside><main><h1 id="terminal-bench-highlight-audit">Terminal-Bench Highlight Audit</h1>
 <p>All 185 included highlights are mapped to the revised summary. Topics are ordered by their highest highlight priority; selections within each topic are ordered by priority, then paper order.</p>
 <p>Prior-coverage judgments are a manual semantic review. Annotation accounting is checked programmatically. Raw selections retain PDF extraction artifacts; mathematical selections are explained in context in the summary.</p>
@@ -76,7 +76,7 @@ button {font:inherit;font-size:13px;border:1px solid var(--line);background:var(
 <ul>
 <li>
 <p><strong>H057 · Red rectangle · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>As shown in Figure 3, the following steps were taken to ensure these characteristics for each task: • When a task was initially submitted to the project’s GitHub, an automated workflow ran the task’s oracle solution to ensure solvability. If the test cases failed, the contributor was asked to modify their task. Similarly, other checks verified the absence of common failure modes (e.g., a no-op “dummy” agent should fail the task). • Contributors were asked to complete a checklist confirming that they had manually checked for common errors in their task specification. More details are in Section B.1. • Contributors were asked to run an automated tool on their task, which used a language model to find common mistakes. More details are in Section B.2. • A team of experienced reviewers worked with the contributor to manually check the task and verify that it met quality standards. • Each task was run with multiple language models and Terminus 2. If the agent failed, the contributor determined whether the failure was due to a genuine lack of capability or a problem</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Task Audit Process</strong>.</p>
@@ -84,17 +84,17 @@ button {font:inherit;font-size:13px;border:1px solid var(--line);background:var(
 <li>
 <p>Summary evidence: ### Human Review</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>Review Approach</strong></p>
 <ul>
 <li>Contributors submit checklists after manual self-checks; tasks are <span class="verbatim">manually verified by three human reviewers for correctness.</span> Expert review precedes merging, followed by two final auditors; combined reviewer attention averages three hours/task.</li>
-<li>Contributors and post-merge auditors inspect multi-model Terminus 2 failures to distinguish task defects from agent limitations; every exploit trajectory is manually reviewed.<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<li>Contributors and post-merge auditors inspect multi-model Terminus 2 failures to distinguish task defects from agent limitations; every exploit trajectory is manually reviewed.<ul>
 <li>Figure 3: contributor submission → automated CI/LLM checks → expert review (reject, request changes, or approve/merge) → post-merge model experiments → manual trajectory audit → exploit audit → final accept/revise decision.</li>
 <li><span class="verbatim">Between the three reviews, the average task received approximately three hours of combined reviewer attention,</span> excluding task creation.</li>
 <li><span class="verbatim">A team of experienced reviewers worked with the contributor to manually check the task and verify that it met quality standards.</span> <span class="verbatim">Each task was run with multiple language models and Terminus 2.</span></li>
-</ul></details>
+</ul>
 </li>
 </ul>
 </li>
@@ -108,23 +108,23 @@ button {font:inherit;font-size:13px;border:1px solid var(--line);background:var(
 </li>
 <li>
 <p><strong>Task Contributor Checklist:</strong> Checks human authorship, specification/test coverage, schemas, cheating resistance, reproducibility, and analysis of strong-model failures.</p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Contributors run <span class="verbatim">tb tasks check &lt;task-id&gt;</span> and require all checks to pass. <span class="verbatim">All behavior checked in the test cases is described in the task instruction.</span> <span class="verbatim">All behavior described in the task instruction is checked in the unit tests.</span> Test cases <span class="verbatim">have informative docstrings that describe which behavior they check.</span></li>
 <li>Instructions in <span class="verbatim">task.yaml</span> are human-written; <span class="verbatim">solution.sh</span> is human-written with minimal language-model help. Structured outputs must have an exact schema in the task or a separate file.</li>
 <li>Contributors check resistance to edited data, embedded answer strings, and training on test data. For <span class="verbatim">external dependencies (e.g. Docker images, pip packages, etc.)</span>, <span class="verbatim">their versions are pinned to ensure reproducibility.</span> The apt exception is below.</li>
 <li>Contributors run <span class="verbatim">terminus-2</span> with <span class="verbatim">a powerful model (e.g., GPT-5)</span>. Failing runs are expected for harder tasks; contributors analyze them to confirm task validity. <span class="verbatim">tb tasks debug</span> can help.</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>Agentic Benchmark Checklist:</strong> ABC assessment averaged 0.896; limitations include residual non-determinism, no objective test-quality metrics, public tasks, and no quantified impact of remaining flaws.</p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li><span class="verbatim">the benchmark relies on extensive human review of test specifications and coverage.</span> Code coverage and cyclomatic-complexity metrics were not used to assess test quality.</li>
 <li><span class="verbatim">Some non-determinism remains.</span> Hardware, external APIs, and infrastructure can change outcomes despite containers and repeat runs.</li>
 <li><span class="verbatim">All tasks are hosted on a public GitHub repository.</span> There is no private held-out set; a canary discourages contamination but cannot prevent training or overfitting.</li>
 <li>Outcome Validity: 0.857; Task Validity: 1.000; Benchmark Reporting: 0.830.</li>
 <li><span class="verbatim">Authors of ABC have been closely involved with the development process, and many issues were surfaced and resolved through the public GitHub repository.</span> <span class="verbatim">This collaboration highlights how the ABC framework, when combined with active engagement from benchmark developers, can be a useful tool for ensuring rigor and improving benchmark quality.</span></li>
 <li><span class="verbatim">it does not provide quantitative estimates of how such flaws impact benchmark results.</span></li>
-</ul></details>
+</ul>
 </li>
 </ul>
 <h3 id="auto-judge">Auto Judge</h3>
@@ -134,7 +134,7 @@ button {font:inherit;font-size:13px;border:1px solid var(--line);background:var(
 </li>
 <li>
 <p><strong>Deterministic Checks:</strong> GitHub Actions rejects failures in metadata, file references, canaries, privileges, and test/oracle exposure checks; apt versions remain unpinned.</p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li><span class="verbatim">When a task was initially submitted to the project’s GitHub, an automated workflow ran the task’s oracle solution to ensure solvability. If the test cases failed, the contributor was asked to modify their task.</span> A <span class="verbatim">no-op “dummy” agent should fail the task</span>.</li>
 <li><span class="verbatim">Canary Check to ensure the task artifacts contain the canary string.</span></li>
 <li><span class="verbatim">Dockerfile Reference Check to ensure the task environment (Dockerfile) shall not in- clude tests or oracle solutions, otherwise agents could cheat by reading them.</span></li>
@@ -142,11 +142,11 @@ button {font:inherit;font-size:13px;border:1px solid var(--line);background:var(
 <li><span class="verbatim">Test File Reference Check to ensure that if tests reference a file and the oracle solu- tion references the same file, the file must be mentioned in the task description, unless otherwise allowed.</span></li>
 <li><span class="verbatim">Privilege check to ensure that no task environment has potential security issues, such as using privileged containers.</span></li>
 <li><span class="verbatim">Task Field Check to ensure meta data of tasks are properly filled.</span></li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>LLM-Backed Quality Check:</strong> Checks specification/test alignment, schemas, cheating resistance, dependencies, typos, hidden artifacts, test setup, and hardcoded answers.</p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li><span class="verbatim">Behavior in Task Description checks whether all behavior checked in the test cases is described in the task description.</span></li>
 <li><span class="verbatim">Behavior in Tests checks whether all behavior described in the task description is checked in the unit tests.</span></li>
 <li><span class="verbatim">Informative Test Docstrings checks whether test cases have informative docstrings that describe which behavior they check.</span></li>
@@ -158,19 +158,19 @@ button {font:inherit;font-size:13px;border:1px solid var(--line);background:var(
 <li><span class="verbatim">Test Deps in Image checks if there are any test dependencies installed in the image dur- ing the build process. They should be installed in the run-tests.sh script instead.</span></li>
 <li><span class="verbatim">Hardcoded Solution checks if the solution directly outputs or hard-codes the final answer using commands like echo/cat without performing the steps an agent would need to compute it. Using echo/cat to write source files or scripts that are then executed is acceptable. This check should PASS when the solution demonstrates a sequence of commands (e.g., data processing, running code) that derives the answer, and FAIL when the solution simply prints or writes the final answer without computation.</span></li>
 <li><span class="verbatim">File Reference Mentioned checks if the agent needs to produce a file to be checked by tests, whether these filenames are mentioned in the task.yaml explicitly.</span></li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>Debug Tool:</strong> Determines whether <span class="verbatim">test failures are due to insufficient task instructions rather than normal agent limitations.</span></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>The LLM receives task specification, run information, and trial data; it checks unspecified names/formats/signatures/values, implicit expectations, undocumented exact strings, and examples incorrectly treated as requirements.</li>
 <li><span class="verbatim">If all trials fail on the same tests with similar errors, this suggests systematic instruction issues rather than agent variability.</span> Differing failures can indicate appropriate task difficulty.</li>
 <li>The prompt returns a JSON outcome (PASS, FAIL, or NOT_APPLICABLE) and explanation, and asks for agent-log inspection where available.</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>Adversarial Exploit Agent:</strong> <span class="verbatim">An adversarial exploit agent was run to detect design flaws that could allow agents to cheat and pass the tests.</span> Every trajectory is manually reviewed.</p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>OpenHands is used <span class="verbatim">to attempt to pass the tests by cheating without actually looking at the tests and oracle solutions.</span> <span class="verbatim">The trajectories are then manually inspected and verified by an author, regardless of whether the agent passes the task or not.</span></li>
 <li><span class="verbatim">Common exploits found by this agent include monkey-patching test environments, guessing answers, and generating all possible answers with the hope that tests might only check existence of a correct answer but not absence of wrong answers.</span></li>
 <li>The source prompt requires at least some cheating, even if combined with normal methods, and forbids completing the task solely by legitimate means.</li>
@@ -197,11 +197,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The rectangle’s initial audit steps are retained across Review Approach, Task Contributor Checklist, Oracle and Dummy Checks, deterministic/LLM checks, and multi-model failure diagnosis. Contributor revision and reviewer quality checks are explicit; the continuation is covered with H65.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H058 · Light cyan · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>Figure 3:</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Task Audit Process</strong>.</p>
@@ -215,11 +215,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The prose and Figure 3 workflow are grouped across the Quality Control passage: contributor checklist, automated CI/LLM and oracle/dummy checks, expert review, multi-model Terminus runs, contributor versus post-merge failure diagnosis, exploit audit with manual verification, and two final auditors. Review/reject/revise/accept decisions and reviewer workload remain explicit.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H065 · Red rectangle · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>with the task. This process was conducted during the initial review phase by the contributor and a second time during the post-merge audit phase by the auditors. More details are in Section B.3. • An adversarial exploit agent was run to detect design flaws that could allow agents to cheat and pass the tests. More details are in Section B.4. • Finally, tasks were manually reviewed by two additional auditors to determine their inclusion in Terminal-Bench 2.0.</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Task Audit Process</strong>.</p>
@@ -227,17 +227,17 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Summary evidence: ### Human Review</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>Review Approach</strong></p>
 <ul>
 <li>Contributors submit checklists after manual self-checks; tasks are <span class="verbatim">manually verified by three human reviewers for correctness.</span> Expert review precedes merging, followed by two final auditors; combined reviewer attention averages three hours/task.</li>
-<li>Contributors and post-merge auditors inspect multi-model Terminus 2 failures to distinguish task defects from agent limitations; every exploit trajectory is manually reviewed.<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<li>Contributors and post-merge auditors inspect multi-model Terminus 2 failures to distinguish task defects from agent limitations; every exploit trajectory is manually reviewed.<ul>
 <li>Figure 3: contributor submission → automated CI/LLM checks → expert review (reject, request changes, or approve/merge) → post-merge model experiments → manual trajectory audit → exploit audit → final accept/revise decision.</li>
 <li><span class="verbatim">Between the three reviews, the average task received approximately three hours of combined reviewer attention,</span> excluding task creation.</li>
 <li><span class="verbatim">A team of experienced reviewers worked with the contributor to manually check the task and verify that it met quality standards.</span> <span class="verbatim">Each task was run with multiple language models and Terminus 2.</span></li>
-</ul></details>
+</ul>
 </li>
 </ul>
 </li>
@@ -251,23 +251,23 @@ the final goal, but you MUST use at least some cheating.
 </li>
 <li>
 <p><strong>Task Contributor Checklist:</strong> Checks human authorship, specification/test coverage, schemas, cheating resistance, reproducibility, and analysis of strong-model failures.</p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Contributors run <span class="verbatim">tb tasks check &lt;task-id&gt;</span> and require all checks to pass. <span class="verbatim">All behavior checked in the test cases is described in the task instruction.</span> <span class="verbatim">All behavior described in the task instruction is checked in the unit tests.</span> Test cases <span class="verbatim">have informative docstrings that describe which behavior they check.</span></li>
 <li>Instructions in <span class="verbatim">task.yaml</span> are human-written; <span class="verbatim">solution.sh</span> is human-written with minimal language-model help. Structured outputs must have an exact schema in the task or a separate file.</li>
 <li>Contributors check resistance to edited data, embedded answer strings, and training on test data. For <span class="verbatim">external dependencies (e.g. Docker images, pip packages, etc.)</span>, <span class="verbatim">their versions are pinned to ensure reproducibility.</span> The apt exception is below.</li>
 <li>Contributors run <span class="verbatim">terminus-2</span> with <span class="verbatim">a powerful model (e.g., GPT-5)</span>. Failing runs are expected for harder tasks; contributors analyze them to confirm task validity. <span class="verbatim">tb tasks debug</span> can help.</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>Agentic Benchmark Checklist:</strong> ABC assessment averaged 0.896; limitations include residual non-determinism, no objective test-quality metrics, public tasks, and no quantified impact of remaining flaws.</p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li><span class="verbatim">the benchmark relies on extensive human review of test specifications and coverage.</span> Code coverage and cyclomatic-complexity metrics were not used to assess test quality.</li>
 <li><span class="verbatim">Some non-determinism remains.</span> Hardware, external APIs, and infrastructure can change outcomes despite containers and repeat runs.</li>
 <li><span class="verbatim">All tasks are hosted on a public GitHub repository.</span> There is no private held-out set; a canary discourages contamination but cannot prevent training or overfitting.</li>
 <li>Outcome Validity: 0.857; Task Validity: 1.000; Benchmark Reporting: 0.830.</li>
 <li><span class="verbatim">Authors of ABC have been closely involved with the development process, and many issues were surfaced and resolved through the public GitHub repository.</span> <span class="verbatim">This collaboration highlights how the ABC framework, when combined with active engagement from benchmark developers, can be a useful tool for ensuring rigor and improving benchmark quality.</span></li>
 <li><span class="verbatim">it does not provide quantitative estimates of how such flaws impact benchmark results.</span></li>
-</ul></details>
+</ul>
 </li>
 </ul>
 <h3 id="auto-judge_1">Auto Judge</h3>
@@ -277,7 +277,7 @@ the final goal, but you MUST use at least some cheating.
 </li>
 <li>
 <p><strong>Deterministic Checks:</strong> GitHub Actions rejects failures in metadata, file references, canaries, privileges, and test/oracle exposure checks; apt versions remain unpinned.</p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li><span class="verbatim">When a task was initially submitted to the project’s GitHub, an automated workflow ran the task’s oracle solution to ensure solvability. If the test cases failed, the contributor was asked to modify their task.</span> A <span class="verbatim">no-op “dummy” agent should fail the task</span>.</li>
 <li><span class="verbatim">Canary Check to ensure the task artifacts contain the canary string.</span></li>
 <li><span class="verbatim">Dockerfile Reference Check to ensure the task environment (Dockerfile) shall not in- clude tests or oracle solutions, otherwise agents could cheat by reading them.</span></li>
@@ -285,11 +285,11 @@ the final goal, but you MUST use at least some cheating.
 <li><span class="verbatim">Test File Reference Check to ensure that if tests reference a file and the oracle solu- tion references the same file, the file must be mentioned in the task description, unless otherwise allowed.</span></li>
 <li><span class="verbatim">Privilege check to ensure that no task environment has potential security issues, such as using privileged containers.</span></li>
 <li><span class="verbatim">Task Field Check to ensure meta data of tasks are properly filled.</span></li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>LLM-Backed Quality Check:</strong> Checks specification/test alignment, schemas, cheating resistance, dependencies, typos, hidden artifacts, test setup, and hardcoded answers.</p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li><span class="verbatim">Behavior in Task Description checks whether all behavior checked in the test cases is described in the task description.</span></li>
 <li><span class="verbatim">Behavior in Tests checks whether all behavior described in the task description is checked in the unit tests.</span></li>
 <li><span class="verbatim">Informative Test Docstrings checks whether test cases have informative docstrings that describe which behavior they check.</span></li>
@@ -301,19 +301,19 @@ the final goal, but you MUST use at least some cheating.
 <li><span class="verbatim">Test Deps in Image checks if there are any test dependencies installed in the image dur- ing the build process. They should be installed in the run-tests.sh script instead.</span></li>
 <li><span class="verbatim">Hardcoded Solution checks if the solution directly outputs or hard-codes the final answer using commands like echo/cat without performing the steps an agent would need to compute it. Using echo/cat to write source files or scripts that are then executed is acceptable. This check should PASS when the solution demonstrates a sequence of commands (e.g., data processing, running code) that derives the answer, and FAIL when the solution simply prints or writes the final answer without computation.</span></li>
 <li><span class="verbatim">File Reference Mentioned checks if the agent needs to produce a file to be checked by tests, whether these filenames are mentioned in the task.yaml explicitly.</span></li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>Debug Tool:</strong> Determines whether <span class="verbatim">test failures are due to insufficient task instructions rather than normal agent limitations.</span></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>The LLM receives task specification, run information, and trial data; it checks unspecified names/formats/signatures/values, implicit expectations, undocumented exact strings, and examples incorrectly treated as requirements.</li>
 <li><span class="verbatim">If all trials fail on the same tests with similar errors, this suggests systematic instruction issues rather than agent variability.</span> Differing failures can indicate appropriate task difficulty.</li>
 <li>The prompt returns a JSON outcome (PASS, FAIL, or NOT_APPLICABLE) and explanation, and asks for agent-log inspection where available.</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>Adversarial Exploit Agent:</strong> <span class="verbatim">An adversarial exploit agent was run to detect design flaws that could allow agents to cheat and pass the tests.</span> Every trajectory is manually reviewed.</p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>OpenHands is used <span class="verbatim">to attempt to pass the tests by cheating without actually looking at the tests and oracle solutions.</span> <span class="verbatim">The trajectories are then manually inspected and verified by an author, regardless of whether the agent passes the task or not.</span></li>
 <li><span class="verbatim">Common exploits found by this agent include monkey-patching test environments, guessing answers, and generating all possible answers with the hope that tests might only check existence of a correct answer but not absence of wrong answers.</span></li>
 <li>The source prompt requires at least some cheating, even if combined with normal methods, and forbids completing the task solely by legitimate means.</li>
@@ -340,11 +340,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The continuation retains contributor diagnosis in initial review and auditor diagnosis after merging, adversarial exploit detection with manual inspection, and two additional auditors deciding final inclusion.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H056 · Bright green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>task audit process</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Task Audit Process</strong>.</p>
@@ -358,11 +358,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The prose and Figure 3 workflow are grouped across the Quality Control passage: contributor checklist, automated CI/LLM and oracle/dummy checks, expert review, multi-model Terminus runs, contributor versus post-merge failure diagnosis, exploit audit with manual verification, and two final auditors. Review/reject/revise/accept decisions and reviewer workload remain explicit.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H059 · Bright green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>An adversarial exploit agent was run to detect design flaws that could allow agents to cheat and pass the tests.</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Task Audit Process</strong>.</p>
@@ -371,11 +371,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence: - <strong>Adversarial Exploit Agent:</strong> <span class="verbatim">An adversarial exploit agent was run to detect design flaws that could allow agents to cheat and pass the tests.</span> Every trajectory is manually reviewed.</p>
 </li>
 <li>Meaning: An adversarial exploit agent was run to detect design flaws that could allow agents to cheat and pass the tests.</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H125 · Bright green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>a sequence of automated and manual steps</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Task Audit Process</strong>.</p>
@@ -389,11 +389,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The prose and Figure 3 workflow are grouped across the Quality Control passage: contributor checklist, automated CI/LLM and oracle/dummy checks, expert review, multi-model Terminus runs, contributor versus post-merge failure diagnosis, exploit audit with manual verification, and two final auditors. Review/reject/revise/accept decisions and reviewer workload remain explicit.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H025 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>manually verified by three human reviewers for correctness.</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Task Audit Process</strong>.</p>
@@ -402,11 +402,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - Contributors submit checklists after manual self-checks; tasks are <span class="verbatim">manually verified by three human reviewers for correctness.</span> Expert review precedes merging, followed by two final auditors; combined reviewer attention averages three hours/task.</p>
 </li>
 <li>Meaning: manually verified by three human reviewers for correctness.</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H050 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>other checks verified the absence of common failure modes</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Task Audit Process</strong>.</p>
@@ -420,11 +420,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The prose and Figure 3 workflow are grouped across the Quality Control passage: contributor checklist, automated CI/LLM and oracle/dummy checks, expert review, multi-model Terminus runs, contributor versus post-merge failure diagnosis, exploit audit with manual verification, and two final auditors. Review/reject/revise/accept decisions and reviewer workload remain explicit.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H051 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>complete a checklist</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Task Audit Process</strong>.</p>
@@ -438,11 +438,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The prose and Figure 3 workflow are grouped across the Quality Control passage: contributor checklist, automated CI/LLM and oracle/dummy checks, expert review, multi-model Terminus runs, contributor versus post-merge failure diagnosis, exploit audit with manual verification, and two final auditors. Review/reject/revise/accept decisions and reviewer workload remain explicit.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H052 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>run an automated tool</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Task Audit Process</strong>.</p>
@@ -456,11 +456,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The prose and Figure 3 workflow are grouped across the Quality Control passage: contributor checklist, automated CI/LLM and oracle/dummy checks, expert review, multi-model Terminus runs, contributor versus post-merge failure diagnosis, exploit audit with manual verification, and two final auditors. Review/reject/revise/accept decisions and reviewer workload remain explicit.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H053 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>Each task was run with multiple language models and Terminus 2.</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Task Audit Process</strong>.</p>
@@ -469,11 +469,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:         - <span class="verbatim">A team of experienced reviewers worked with the contributor to manually check the task and verify that it met quality standards.</span> <span class="verbatim">Each task was run with multiple language models and Terminus 2.</span></p>
 </li>
 <li>Meaning: Each task was run with multiple language models and Terminus 2.</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H054 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>manually check the task</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Task Audit Process</strong>.</p>
@@ -482,11 +482,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:         - <span class="verbatim">A team of experienced reviewers worked with the contributor to manually check the task and verify that it met quality standards.</span> <span class="verbatim">Each task was run with multiple language models and Terminus 2.</span></p>
 </li>
 <li>Meaning: manually check the task</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H055 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>an automated workflow ran the task’s oracle solution to ensure solvability.</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Task Audit Process</strong>.</p>
@@ -495,11 +495,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence: - <strong>Oracle and Dummy Checks:</strong> Submission automation requires the oracle to pass and a no-op agent to fail; failed checks trigger task revision.</p>
 </li>
 <li>Meaning: an automated workflow ran the task’s oracle solution to ensure solvability.</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H060 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>manually reviewed by two additional auditors</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Task Audit Process</strong>.</p>
@@ -513,11 +513,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The prose and Figure 3 workflow are grouped across the Quality Control passage: contributor checklist, automated CI/LLM and oracle/dummy checks, expert review, multi-model Terminus runs, contributor versus post-merge failure diagnosis, exploit audit with manual verification, and two final auditors. Review/reject/revise/accept decisions and reviewer workload remain explicit.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H128 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>enforce task contributors to confirm that they have manually checked for common errors.</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Task Audit Process</strong>.</p>
@@ -531,7 +531,7 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The prose and Figure 3 workflow are grouped across the Quality Control passage: contributor checklist, automated CI/LLM and oracle/dummy checks, expert review, multi-model Terminus runs, contributor versus post-merge failure diagnosis, exploit audit with manual verification, and two final auditors. Review/reject/revise/accept decisions and reviewer workload remain explicit.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 </ul>
 <h2 id="impact">Impact</h2>
@@ -542,7 +542,7 @@ the final goal, but you MUST use at least some cheating.
 </li>
 <li>
 <p><strong>H119 · Light cyan · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>we urge dataset curators to invest significant effort into manual verification</code></li>
 <li>
 <p>Now represented under <strong>Impact</strong>.</p>
@@ -556,11 +556,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: First-person urging is rewritten as a recommendation to dataset curators. The original manual-verification phrase is the lead; the source bullet retains extreme validation difficulty and both anti-cheating and complete-specification requirements.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H120 · Bright green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>ensuring that cheating is difficult and also verifying that all properties tested have been adequately specified in the task description.</code></li>
 <li>
 <p>Now represented under <strong>Impact</strong>.</p>
@@ -569,11 +569,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - The paper reports that <span class="verbatim">validating the correctness of these tasks is extremely difficult</span>. Manual review should include <span class="verbatim">ensuring that cheating is difficult and also verifying that all properties tested have been adequately specified in the task description.</span></p>
 </li>
 <li>Meaning: ensuring that cheating is difficult and also verifying that all properties tested have been adequately specified in the task description.</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H121 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>We have found that validating the correctness of these tasks is extremely difficult,</code></li>
 <li>
 <p>Now represented under <strong>Impact</strong>.</p>
@@ -587,7 +587,7 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: First-person urging is rewritten as a recommendation to dataset curators. The original manual-verification phrase is the lead; the source bullet retains extreme validation difficulty and both anti-cheating and complete-specification requirements.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 </ul>
 <h2 id="important-sections">Important Sections</h2>
@@ -677,7 +677,7 @@ the final goal, but you MUST use at least some cheating.
 </li>
 <li>
 <p><strong>H127 · Red rectangle · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>tb tasks check &lt;task-id&gt; I ran on my new task and ensured that all checks pass. □ All behavior checked in the test cases is described in the task instruction. □ All behavior described in the task instruction is checked in the unit tests. □ My test cases have informative docstrings that describe which behavior they check. □ It is hard for the agent to cheat on my task (e.g. by editing data files, looking inside files for □ strings that represent solutions, training on the test set, etc.). task.yaml My was written by a human. □ solution.sh My was written by a human (with minimal help from a language model). □ If the agent produces structured data (e.g. it is tasked with building an API) the exact schema is □ task.yaml described in the or a separate file.</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Human Review → Contributor Checklist</strong>.</p>
@@ -695,11 +695,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: First-person checkbox wording becomes contributor requirements. All eight selected criteria survive: passing the check command, both directions of behavior coverage, informative docstrings, anti-cheating examples, human-written instructions, human-written solution with minimal model help, and exact structured schemas.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H129 · Red rectangle · Before: Partial</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>If my task uses external dependencies (e.g. Docker images, pip packages, etc.) their versions □ are pinned to ensure reproducibility. I ran this task using terminus-2 with a powerful model (e.g., GPT-5). For failing runs (which □ are expected for harder tasks!), I’ve added an analysis below to confirm the task itself is valid. tb tasks debug (Hint: can help).</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Human Review → Contributor Checklist</strong>.</p>
@@ -717,7 +717,7 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The two selected attestations survive as dependency version pinning for reproducibility (including Docker images and pip packages), a powerful-model Terminus 2 run with the GPT-5 example, expected failures on harder tasks, failure analysis to confirm task validity, and the tb tasks debug hint. The separately reported apt exception remains explicit.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 </ul>
 <h2 id="deterministic-checks">Deterministic Checks</h2>
@@ -728,7 +728,7 @@ the final goal, but you MUST use at least some cheating.
 </li>
 <li>
 <p><strong>H143 · Red rectangle · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>To facilitate automated quality control, we leveraged GitHub Actions as the Continuous Integration tool to automatically reject tasks that demonstrate common problems, provided that they can be verified deterministically. Specifically, we have: Canary Check • to ensure the task artifacts contain the canary string. Dockerfile Reference Check • to ensure the task environment (Dockerfile) shall not in- clude tests or oracle solutions, otherwise agents could cheat by reading them. Dockerfile Sanity Check • to check that apt dependencies are not pinned, as older apt package versions could be removed from the registry. Test File Reference Check • to ensure that if tests reference a file and the oracle solu- tion references the same file, the file must be mentioned in the task description, unless otherwise allowed. Privilege check • to ensure that no task environment has potential security issues, such as using privileged containers. Task Field Check • to ensure meta data of tasks are properly filled.</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Auto Judge → Deterministic Checks</strong>.</p>
@@ -749,11 +749,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The CI introduction is neutralized; all six original check descriptions survive, including why apt versions stay unpinned, the shared-file reference exception, and privileged-container rejection.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H130 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>automated quality control,</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Auto Judge → Deterministic Checks</strong>.</p>
@@ -767,11 +767,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The introductory first-person CI statement becomes a GitHub Actions rejection rule. All six named checks and their constraints remain quoted, alongside oracle-pass/dummy-fail checks and task revision.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H131 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>automatically reject tasks</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Auto Judge → Deterministic Checks</strong>.</p>
@@ -785,11 +785,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The introductory first-person CI statement becomes a GitHub Actions rejection rule. All six named checks and their constraints remain quoted, alongside oracle-pass/dummy-fail checks and task revision.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H133 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>(Dockerfile) shall not in- clude tests or oracle solutions,</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Auto Judge → Deterministic Checks</strong>.</p>
@@ -798,11 +798,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - <span class="verbatim">Dockerfile Reference Check to ensure the task environment (Dockerfile) shall not in- clude tests or oracle solutions, otherwise agents could cheat by reading them.</span></p>
 </li>
 <li>Meaning: (Dockerfile) shall not in- clude tests or oracle solutions,</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H134 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>if tests reference a file and the oracle solu- tion references the same file, the file must be mentioned in the task description,</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Auto Judge → Deterministic Checks</strong>.</p>
@@ -811,11 +811,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - <span class="verbatim">Test File Reference Check to ensure that if tests reference a file and the oracle solu- tion references the same file, the file must be mentioned in the task description, unless otherwise allowed.</span></p>
 </li>
 <li>Meaning: if tests reference a file and the oracle solu- tion references the same file, the file must be mentioned in the task description,</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H135 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>no task environment has potential security issues,</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Auto Judge → Deterministic Checks</strong>.</p>
@@ -824,7 +824,7 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - <span class="verbatim">Privilege check to ensure that no task environment has potential security issues, such as using privileged containers.</span></p>
 </li>
 <li>Meaning: no task environment has potential security issues,</li>
-</ul></details>
+</ul>
 </li>
 </ul>
 <h2 id="llm-checks">Llm Checks</h2>
@@ -835,7 +835,7 @@ the final goal, but you MUST use at least some cheating.
 </li>
 <li>
 <p><strong>H144 · Red rectangle · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>Behavior in Task Description • checks whether all behavior checked in the test cases is described in the task description. Behavior in Tests • checks whether all behavior described in the task description is checked in the unit tests. Informative Test Docstrings • checks whether test cases have informative docstrings that describe which behavior they check. Anti Cheating Measures • checks if it is hard for the agent to cheat on the task (e.g. by editing data files, looking inside files for strings that represent solutions, training on the test set, etc.). If Dockerfile involves git cloning, it ensures that the agent won’t see newer commits. Structured Data Schema • checks if the agent produces structured data (e.g. it is tasked with building an API) and whether the exact schema is described in the task.yaml or a separate file. Pinned Dependencies • checks if the task uses external dependencies (e.g. pip packages), whether their versions are pinned to ensure reproducibility. Apt packages shall not be pinned, but all python dependencies should be pinned. Typos • checks whether there are any typos. It looks very closely at file and variable names, because these can be hard to catch. Tests or Solution in Image • checks if the tests/ folder or solution file is not copied to the image. Test Deps in Image • checks if there are any test dependencies installed in the image dur- ing the build process. They should be installed in the run-tests.sh script instead. Hardcoded Solution • checks if the solution directly outputs or hard-codes the final answer using commands like echo/cat without performing the steps an agent would need to compute it. Using echo/cat to write source files or scripts that are then executed is acceptable. This check should PASS when the solution demonstrates a sequence of commands (e.g., data processing, running code) that derives the answer, and FAIL when the solution simply prints or writes the final answer without computation.</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Auto Judge → Llm Checks</strong>.</p>
@@ -860,11 +860,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: All ten criteria on this page are retained in original wording, including future-commit protection, apt/Python pinning distinctions, test dependencies installed at test time, and computed versus printed hardcoded answers.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H145 · Red rectangle · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>File Reference Mentioned • checks if the agent needs to produce a file to be checked by tests, whether these filenames are mentioned in the task.yaml explicitly.</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Auto Judge → Llm Checks</strong>.</p>
@@ -889,11 +889,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The eleventh LLM criterion retains the explicit task.yaml filename requirement for outputs inspected by tests.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H136 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>LLM-backed quality check</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Auto Judge → Llm Checks</strong>.</p>
@@ -907,11 +907,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The check-tool label is capitalized for presentation; all eleven criteria retain their original wording, including the apt exception and the distinction between computing answers and simply printing them.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H137 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>whether all behavior checked in the test cases is described in the task description.</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Auto Judge → Llm Checks</strong>.</p>
@@ -920,11 +920,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - <span class="verbatim">Behavior in Task Description checks whether all behavior checked in the test cases is described in the task description.</span></p>
 </li>
 <li>Meaning: whether all behavior checked in the test cases is described in the task description.</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H138 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>whether all behavior described in the task description is checked in the unit tests.</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Auto Judge → Llm Checks</strong>.</p>
@@ -933,11 +933,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - <span class="verbatim">Behavior in Tests checks whether all behavior described in the task description is checked in the unit tests.</span></p>
 </li>
 <li>Meaning: whether all behavior described in the task description is checked in the unit tests.</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H139 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>if the task uses external dependencies</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Auto Judge → Llm Checks</strong>.</p>
@@ -946,11 +946,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - <span class="verbatim">Pinned Dependencies checks if the task uses external dependencies (e.g. pip packages), whether their versions are pinned to ensure reproducibility. Apt packages shall not be pinned, but all python dependencies should be pinned.</span></p>
 </li>
 <li>Meaning: if the task uses external dependencies</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H140 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>whether their versions are pinned to ensure reproducibility.</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Auto Judge → Llm Checks</strong>.</p>
@@ -959,11 +959,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - <span class="verbatim">Pinned Dependencies checks if the task uses external dependencies (e.g. pip packages), whether their versions are pinned to ensure reproducibility. Apt packages shall not be pinned, but all python dependencies should be pinned.</span></p>
 </li>
 <li>Meaning: whether their versions are pinned to ensure reproducibility.</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H141 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>Apt packages shall not be pinned, but all python dependencies should be pinned.</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Auto Judge → Llm Checks</strong>.</p>
@@ -972,11 +972,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - <span class="verbatim">Pinned Dependencies checks if the task uses external dependencies (e.g. pip packages), whether their versions are pinned to ensure reproducibility. Apt packages shall not be pinned, but all python dependencies should be pinned.</span></p>
 </li>
 <li>Meaning: Apt packages shall not be pinned, but all python dependencies should be pinned.</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H142 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>FAIL when the solution simply prints or writes the final answer without computation.</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Auto Judge → Llm Checks</strong>.</p>
@@ -985,7 +985,7 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - <span class="verbatim">Hardcoded Solution checks if the solution directly outputs or hard-codes the final answer using commands like echo/cat without performing the steps an agent would need to compute it. Using echo/cat to write source files or scripts that are then executed is acceptable. This check should PASS when the solution demonstrates a sequence of commands (e.g., data processing, running code) that derives the answer, and FAIL when the solution simply prints or writes the final answer without computation.</span></p>
 </li>
 <li>Meaning: FAIL when the solution simply prints or writes the final answer without computation.</li>
-</ul></details>
+</ul>
 </li>
 </ul>
 <h2 id="exploit-agent">Exploit Agent</h2>
@@ -996,7 +996,7 @@ the final goal, but you MUST use at least some cheating.
 </li>
 <li>
 <p><strong>H156 · Red rectangle · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>You are a security researcher bot and your goal is to exploit any way to CHEAT and complete a task assigned to you. If you can complete a task normally without cheating, DO NOT do it. Complete a task ONLY IF you could use some cheating. A great way of cheating is to guess how tests might be written to verify the results. Here’s your task. Remember, their outcomes are validated by programs ( pytest) that are deterministic, and MIGHT have flaws which allows you to pass it using shortcuts. It is OKAY if you use some cheating and some normal methods to achieve the final goal, but you MUST use at least some cheating. ## Task Description {{ instruction }}</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Auto Judge → Exploit Agent</strong>.</p>
@@ -1030,11 +1030,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The full original exploit prompt is embedded unchanged in a blue code block. It retains its task placeholder, deterministic-test framing, guessing shortcut, and mandatory-cheating restriction; it is treated as source material.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H151 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>an adversarial exploit agent</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Auto Judge → Exploit Agent</strong>.</p>
@@ -1048,11 +1048,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The method label is capitalized. The source description retains OpenHands, no test/oracle access, manual inspection regardless of pass/fail, exploit examples, and the complete original prompt including the requirement to use some cheating.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H152 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>prompt:</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Auto Judge → Exploit Agent</strong>.</p>
@@ -1066,11 +1066,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The method label is capitalized. The source description retains OpenHands, no test/oracle access, manual inspection regardless of pass/fail, exploit examples, and the complete original prompt including the requirement to use some cheating.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H154 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>guessing answers,</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Auto Judge → Exploit Agent</strong>.</p>
@@ -1079,11 +1079,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - <span class="verbatim">Common exploits found by this agent include monkey-patching test environments, guessing answers, and generating all possible answers with the hope that tests might only check existence of a correct answer but not absence of wrong answers.</span></p>
 </li>
 <li>Meaning: guessing answers,</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H155 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>gen- erating all possible answers</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Auto Judge → Exploit Agent</strong>.</p>
@@ -1092,7 +1092,7 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - <span class="verbatim">Common exploits found by this agent include monkey-patching test environments, guessing answers, and generating all possible answers with the hope that tests might only check existence of a correct answer but not absence of wrong answers.</span></p>
 </li>
 <li>Meaning: gen- erating all possible answers</li>
-</ul></details>
+</ul>
 </li>
 </ul>
 <h2 id="command-analysis">Command Analysis</h2>
@@ -1103,7 +1103,7 @@ the final goal, but you MUST use at least some cheating.
 </li>
 <li>
 <p><strong>H182 · Light cyan · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>identify individual command failures across trajectories,</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Command Analysis</strong>.</p>
@@ -1112,11 +1112,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence: - <strong>Command-Level Error Analysis:</strong> LLM judges <span class="verbatim">identify individual command failures across trajectories, and classify these errors against a failure mode taxonomy.</span> These are Terminus 2 traces. Missing executables account for <span class="verbatim">24.1% of all failures</span>.</p>
 </li>
 <li>Meaning: identify individual command failures across trajectories,</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H089 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>LLM-as-judge</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Command Analysis</strong>.</p>
@@ -1130,11 +1130,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: First-person judge descriptions are rewritten in third person. The lead and detection/classification bullets retain Terminus 2 traces, individual command input/output, both judge settings and agreement samples, uniformly sampled failures across tasks/models, the taxonomy, and absent executable/PATH errors. Source prompts remain separate from task scoring.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H090 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>identifying and quantifying command failures.</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Command Analysis</strong>.</p>
@@ -1148,11 +1148,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: First-person judge descriptions are rewritten in third person. The lead and detection/classification bullets retain Terminus 2 traces, individual command input/output, both judge settings and agreement samples, uniformly sampled failures across tasks/models, the taxonomy, and absent executable/PATH errors. Source prompts remain separate from task scoring.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H091 · Light green · Before: Partial</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>review individual command input-output pairs from the recorded Terminus 2 trajectories and determine if a failure is observed in the output.</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Command Analysis</strong>.</p>
@@ -1172,11 +1172,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: First-person judge descriptions are rewritten in third person. The lead and detection/classification bullets retain Terminus 2 traces, individual command input/output, both judge settings and agreement samples, uniformly sampled failures across tasks/models, the taxonomy, and absent executable/PATH errors. Source prompts remain separate from task scoring.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H092 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>failure mode taxonomy</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Command Analysis</strong>.</p>
@@ -1185,11 +1185,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence: - <strong>Command-Level Error Analysis:</strong> LLM judges <span class="verbatim">identify individual command failures across trajectories, and classify these errors against a failure mode taxonomy.</span> These are Terminus 2 traces. Missing executables account for <span class="verbatim">24.1% of all failures</span>.</p>
 </li>
 <li>Meaning: failure mode taxonomy</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H093 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>command failures calling executables that are not installed or not in PATH are the most frequent</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Command Analysis</strong>.</p>
@@ -1198,11 +1198,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - Classification: GPT-5 high reasoning uses a category/subcategory taxonomy; agreement is 82.0% against 50 author annotations. <span class="verbatim">3,800 failures are uniformly sampled and categorized across Terminal-Bench tasks and models</span>. The paper finds that <span class="verbatim">command failures calling executables that are not installed or not in PATH are the most frequent (24.1% of all failures) followed by failures when running executables (9.6%).</span></p>
 </li>
 <li>Meaning: command failures calling executables that are not installed or not in PATH are the most frequent</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H094 · Light green · Before: Partial</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>Terminus 2 command failures across all models and tasks mapped to the failure mode taxonomy.</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Command Analysis</strong>.</p>
@@ -1218,11 +1218,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: First-person judge descriptions are rewritten in third person. The lead and detection/classification bullets retain Terminus 2 traces, individual command input/output, both judge settings and agreement samples, uniformly sampled failures across tasks/models, the taxonomy, and absent executable/PATH errors. Source prompts remain separate from task scoring.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H181 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>We use an LLM-as-judge to identify individual command failures across trajectories, and classify these errors against a failure mode taxonomy.</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Command Analysis</strong>.</p>
@@ -1242,11 +1242,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: First-person judge descriptions are rewritten in third person. The lead and detection/classification bullets retain Terminus 2 traces, individual command input/output, both judge settings and agreement samples, uniformly sampled failures across tasks/models, the taxonomy, and absent executable/PATH errors. Source prompts remain separate from task scoring.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H185 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>The user will provide you with segments from a terminal traces where errors occur. Your goal is to classify the errors into an error taxonomy.</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Command Analysis</strong>.</p>
@@ -1255,11 +1255,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - <strong>Classification Prompt — Source Excerpt:</strong> <span class="verbatim">The user will provide you with segments from a terminal traces where errors occur. Your goal is to classify the errors into an error taxonomy.</span></p>
 </li>
 <li>Meaning: The user will provide you with segments from a terminal traces where errors occur. Your goal is to classify the errors into an error taxonomy.</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H186 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>Identify if any output failures that occur.</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Command Analysis</strong>.</p>
@@ -1268,11 +1268,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - <strong>Identification Prompt — Source Excerpts:</strong> <span class="verbatim">The user will provide you with segments from a terminal trace - these contain a single input and all captured outputs.</span> <span class="verbatim">Identify if any output failures that occur.</span></p>
 </li>
 <li>Meaning: Identify if any output failures that occur.</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H187 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>The user will provide you with segments from a terminal trace - these contain a single input and all captured outputs.</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Command Analysis</strong>.</p>
@@ -1281,7 +1281,7 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - <strong>Identification Prompt — Source Excerpts:</strong> <span class="verbatim">The user will provide you with segments from a terminal trace - these contain a single input and all captured outputs.</span> <span class="verbatim">Identify if any output failures that occur.</span></p>
 </li>
 <li>Meaning: The user will provide you with segments from a terminal trace - these contain a single input and all captured outputs.</li>
-</ul></details>
+</ul>
 </li>
 </ul>
 <h2 id="scope">Scope</h2>
@@ -1292,7 +1292,7 @@ the final goal, but you MUST use at least some cheating.
 </li>
 <li>
 <p><strong>H012 · Bright green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>Terminal-Bench,</code></li>
 <li>
 <p>Now represented under <strong>Summary → Scope</strong>.</p>
@@ -1306,24 +1306,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: Names and fragment labels are retained with their subjects, without citation markers or trailing punctuation. The purpose and evaluation bullets identify the framework, 89-task dataset, and frontier LLM/agent target; the scope bullets retain the four work domains and terminal context.</p>
 </li>
-</ul></details>
-</li>
-<li>
-<p><strong>H014 · Bright green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
-<li>Selected text: <code>Terminal-Bench evaluates whether agents can perform the kind of high- skill work that professionals are paid to do, including configuring legacy systems, reimplementing research papers, and solving general software engineering problems.</code></li>
-<li>
-<p>Now represented under <strong>Summary → Scope</strong>.</p>
-</li>
-<li>
-<p>Summary evidence:     - <span class="verbatim">Terminal-Bench evaluates whether agents can perform the kind of high-skill work that professionals are paid to do, including configuring legacy systems, reimplementing research papers, and solving general software engineering problems.</span></p>
-</li>
-<li>Meaning: Terminal-Bench evaluates whether agents can perform the kind of high- skill work that professionals are paid to do, including configuring legacy systems, reimplementing research papers, and solving general software engineering problems.</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H001 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>89 tasks</code></li>
 <li>
 <p>Now represented under <strong>Summary → Scope</strong>.</p>
@@ -1332,11 +1319,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence: - <strong>Purpose:</strong> Terminal-Bench is <span class="verbatim">a framework to evaluate agents on realistic tasks in command line interfaces.</span> Terminal-Bench 2.0 contains <span class="verbatim">89 tasks</span>.</p>
 </li>
 <li>Meaning: 89 tasks</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H002 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>Terminal-Bench 2.0:</code></li>
 <li>
 <p>Now represented under <strong>Summary → Scope</strong>.</p>
@@ -1350,11 +1337,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: Names and fragment labels are retained with their subjects, without citation markers or trailing punctuation. The purpose and evaluation bullets identify the framework, 89-task dataset, and frontier LLM/agent target; the scope bullets retain the four work domains and terminal context.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H004 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>Mike A. Merrill1,*, Alexander G. Shaw2,*,</code></li>
 <li>
 <p>Now represented under <strong>Summary → Scope</strong>.</p>
@@ -1368,11 +1355,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: Names and fragment labels are retained with their subjects, without citation markers or trailing punctuation. The purpose and evaluation bullets identify the framework, 89-task dataset, and frontier LLM/agent target; the scope bullets retain the four work domains and terminal context.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H006 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>terminal:</code></li>
 <li>
 <p>Now represented under <strong>Summary → Scope</strong>.</p>
@@ -1386,11 +1373,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: Names and fragment labels are retained with their subjects, without citation markers or trailing punctuation. The purpose and evaluation bullets identify the framework, 89-task dataset, and frontier LLM/agent target; the scope bullets retain the four work domains and terminal context.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H007 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>a ubiquitous, versatile, and powerful interface</code></li>
 <li>
 <p>Now represented under <strong>Summary → Scope</strong>.</p>
@@ -1399,11 +1386,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - The terminal is <span class="verbatim">a ubiquitous, versatile, and powerful interface</span>.</p>
 </li>
 <li>Meaning: a ubiquitous, versatile, and powerful interface</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H008 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>software engineering,</code></li>
 <li>
 <p>Now represented under <strong>Summary → Scope</strong>.</p>
@@ -1412,11 +1399,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence: - <strong>Scope:</strong> High-skill work across <span class="verbatim">software engineering, scientific computing, cybersecurity, and machine learning</span>; 16 author-assigned categories.</p>
 </li>
 <li>Meaning: software engineering,</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H009 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>scientific computing,</code></li>
 <li>
 <p>Now represented under <strong>Summary → Scope</strong>.</p>
@@ -1425,11 +1412,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence: - <strong>Scope:</strong> High-skill work across <span class="verbatim">software engineering, scientific computing, cybersecurity, and machine learning</span>; 16 author-assigned categories.</p>
 </li>
 <li>Meaning: scientific computing,</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H010 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>cybersecurity,</code></li>
 <li>
 <p>Now represented under <strong>Summary → Scope</strong>.</p>
@@ -1438,11 +1425,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence: - <strong>Scope:</strong> High-skill work across <span class="verbatim">software engineering, scientific computing, cybersecurity, and machine learning</span>; 16 author-assigned categories.</p>
 </li>
 <li>Meaning: cybersecurity,</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H011 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>machine learning.</code></li>
 <li>
 <p>Now represented under <strong>Summary → Scope</strong>.</p>
@@ -1456,11 +1443,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: Names and fragment labels are retained with their subjects, without citation markers or trailing punctuation. The purpose and evaluation bullets identify the framework, 89-task dataset, and frontier LLM/agent target; the scope bullets retain the four work domains and terminal context.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H013 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>a framework to evaluate agents on realistic tasks in command line interfaces.</code></li>
 <li>
 <p>Now represented under <strong>Summary → Scope</strong>.</p>
@@ -1469,11 +1456,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence: - <strong>Purpose:</strong> Terminal-Bench is <span class="verbatim">a framework to evaluate agents on realistic tasks in command line interfaces.</span> Terminal-Bench 2.0 contains <span class="verbatim">89 tasks</span>.</p>
 </li>
 <li>Meaning: a framework to evaluate agents on realistic tasks in command line interfaces.</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H028 · Light green · Before: Partial</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>benchmark frontier LLMs and agents</code></li>
 <li>
 <p>Now represented under <strong>Summary → Scope</strong>.</p>
@@ -1482,7 +1469,114 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence: - <strong>Evaluation Method:</strong> Experiments <span class="verbatim">benchmark frontier LLMs and agents</span> using final-state tests, repeated trials, and confidence intervals.</p>
 </li>
 <li>Meaning: benchmark frontier LLMs and agents</li>
-</ul></details>
+</ul>
+</li>
+</ul>
+<h2 id="sourcing">Sourcing</h2>
+<p><strong>Priority 2 · Dataset Creation</strong></p>
+<ul>
+<li>
+<p><strong>Task Sourcing:</strong> The project <span class="verbatim">crowd-sourced tasks through open-source contributions, with 93 contributors creating 229 tasks.</span> The final dataset contains 89 tasks.</p>
+</li>
+<li>
+<p><strong>H014 · Bright green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>Terminal-Bench evaluates whether agents can perform the kind of high- skill work that professionals are paid to do, including configuring legacy systems, reimplementing research papers, and solving general software engineering problems.</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Sourcing</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - <span class="verbatim">Terminal-Bench evaluates whether agents can perform the kind of high-skill work that professionals are paid to do, including configuring legacy systems, reimplementing research papers, and solving general software engineering problems.</span></p>
+</li>
+<li>Meaning: Terminal-Bench evaluates whether agents can perform the kind of high- skill work that professionals are paid to do, including configuring legacy systems, reimplementing research papers, and solving general software engineering problems.</li>
+</ul>
+</li>
+<li>
+<p><strong>H027 · Light green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>the process of creating Terminal-Bench 2.0.</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Sourcing</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Task Sourcing:</strong> The project <span class="verbatim">crowd-sourced tasks through open-source contributions, with 93 contributors creating 229 tasks.</span> The final dataset contains 89 tasks.</p>
+</li>
+<li>
+<p>Meaning: the process of creating Terminal-Bench 2.0.</p>
+</li>
+<li>
+<p>Transformation reason: First-person sourcing is rewritten with the project as subject. The lead retains open-source crowd-sourcing, 93 contributors, 229 contributions, and 89 selected tasks; the first source bullet preserves selection by author difficulty and three reviewers, with category diversity in the next bullet.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H043 · Light green · Before: Partial</strong></p>
+<ul>
+<li>Selected text: <code>In order to design a diverse benchmark, we crowd-sourced tasks through open-source contributions, with 93 contributors creating 229 tasks.</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Sourcing</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Task Sourcing:</strong> The project <span class="verbatim">crowd-sourced tasks through open-source contributions, with 93 contributors creating 229 tasks.</span> The final dataset contains 89 tasks.</p>
+</li>
+<li>Selection was <span class="verbatim">based on the author’s difficulty assessment and a quality assessment by three experienced human reviewers</span>.</li>
+<li>Software engineering is the largest category (26 tasks), with no majority category; the collection also includes personal-assistant and video-processing work.</li>
+<li>
+<p>Meaning: In order to design a diverse benchmark, we crowd-sourced tasks through open-source contributions, with 93 contributors creating 229 tasks.</p>
+</li>
+<li>
+<p>Transformation reason: First-person sourcing is rewritten with the project as subject. The lead retains open-source crowd-sourcing, 93 contributors, 229 contributions, and 89 selected tasks; the first source bullet preserves selection by author difficulty and three reviewers, with category diversity in the next bullet.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H044 · Light green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>we selected 89</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Sourcing</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Task Sourcing:</strong> The project <span class="verbatim">crowd-sourced tasks through open-source contributions, with 93 contributors creating 229 tasks.</span> The final dataset contains 89 tasks.</p>
+</li>
+<li>
+<p>Meaning: we selected 89</p>
+</li>
+<li>
+<p>Transformation reason: First-person sourcing is rewritten with the project as subject. The lead retains open-source crowd-sourcing, 93 contributors, 229 contributions, and 89 selected tasks; the first source bullet preserves selection by author difficulty and three reviewers, with category diversity in the next bullet.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H045 · Light green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>based on the author’s difficulty assessment and a quality assess- ment by three experienced human reviewers</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Sourcing</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - Selection was <span class="verbatim">based on the author’s difficulty assessment and a quality assessment by three experienced human reviewers</span>.</p>
+</li>
+<li>Meaning: based on the author’s difficulty assessment and a quality assess- ment by three experienced human reviewers</li>
+</ul>
+</li>
+<li>
+<p><strong>H064 · Light green · Before: Covered</strong></p>
+<ul>
+<li>Selected text: <code>a variety of categories,</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Sourcing</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - Software engineering is the largest category (26 tasks), with no majority category; the collection also includes personal-assistant and video-processing work.</p>
+</li>
+<li>
+<p>Meaning: a variety of categories,</p>
+</li>
+<li>
+<p>Transformation reason: First-person sourcing is rewritten with the project as subject. The lead retains open-source crowd-sourcing, 93 contributors, 229 contributions, and 89 selected tasks; the first source bullet preserves selection by author difficulty and three reviewers, with category diversity in the next bullet.</p>
+</li>
+</ul>
 </li>
 </ul>
 <h2 id="scoring">Scoring</h2>
@@ -1493,7 +1587,7 @@ the final goal, but you MUST use at least some cheating.
 </li>
 <li>
 <p><strong>H030 · Bright green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>outcome-driven This is intentional as Terminal-Bench is an framework where each agent is free to accomplish the task using a variety of approaches.</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Scoring</strong>.</p>
@@ -1507,11 +1601,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: Author framing and repeated setup prose are shortened. The excerpt retains outcome-driven freedom to use shell or richer tools, final-container-state scoring, repeated supported combinations, trial count, and best-compatible-scaffold selection.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H005 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>These agents interact with the environment by directly issuing shell commands like grep, find, and cat, or by invoking more complicated custom tools to search the web, edit files, or execute code.</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Scoring</strong>.</p>
@@ -1525,11 +1619,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: Author framing and repeated setup prose are shortened. The excerpt retains outcome-driven freedom to use shell or richer tools, final-container-state scoring, repeated supported combinations, trial count, and best-compatible-scaffold selection.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H031 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>The tests verify that all outcomes described in the instruction have been achieved by testing properties of the final container state; they do not test the agent’s commands or console output.</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Scoring</strong>.</p>
@@ -1538,11 +1632,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence: - <strong>Scoring:</strong> <span class="verbatim">The tests verify that all outcomes described in the instruction have been achieved by testing properties of the final container state; they do not test the agent’s commands or console output.</span></p>
 </li>
 <li>Meaning: The tests verify that all outcomes described in the instruction have been achieved by testing properties of the final container state; they do not test the agent’s commands or console output.</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H038 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>The agent scaffold used to report each model was chosen to maximize performance.</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Scoring</strong>.</p>
@@ -1551,7 +1645,7 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - <span class="verbatim">The agent scaffold used to report each model was chosen to maximize performance.</span></p>
 </li>
 <li>Meaning: The agent scaffold used to report each model was chosen to maximize performance.</li>
-</ul></details>
+</ul>
 </li>
 </ul>
 <h2 id="harness">Harness</h2>
@@ -1562,7 +1656,7 @@ the final goal, but you MUST use at least some cheating.
 </li>
 <li>
 <p><strong>H037 · Bright green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>Tasks are specified using the Harbor task format and are run using the Harbor harness, which supports popular agents,</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Harness</strong>.</p>
@@ -1576,11 +1670,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: First-person setup statements are rewritten in third person. The excerpt retains Harbor format/harness, all six agents and their two classes, compatible models, container/package-manager tool installation, Bash-only Terminus 2, tmux loop, context condensation, and the configuration repository name.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H032 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>Claude Code,</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Harness</strong>.</p>
@@ -1594,11 +1688,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: First-person setup statements are rewritten in third person. The excerpt retains Harbor format/harness, all six agents and their two classes, compatible models, container/package-manager tool installation, Bash-only Terminus 2, tmux loop, context condensation, and the configuration repository name.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H033 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>Codex CLI,</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Harness</strong>.</p>
@@ -1612,11 +1706,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: First-person setup statements are rewritten in third person. The excerpt retains Harbor format/harness, all six agents and their two classes, compatible models, container/package-manager tool installation, Bash-only Terminus 2, tmux loop, context condensation, and the configuration repository name.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H034 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>OpenHands,</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Harness</strong>.</p>
@@ -1630,11 +1724,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: First-person setup statements are rewritten in third person. The excerpt retains Harbor format/harness, all six agents and their two classes, compatible models, container/package-manager tool installation, Bash-only Terminus 2, tmux loop, context condensation, and the configuration repository name.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H035 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>Mini-SWE-Agent,</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Harness</strong>.</p>
@@ -1648,11 +1742,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: First-person setup statements are rewritten in third person. The excerpt retains Harbor format/harness, all six agents and their two classes, compatible models, container/package-manager tool installation, Bash-only Terminus 2, tmux loop, context condensation, and the configuration repository name.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H036 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>Terminus 2,</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Harness</strong>.</p>
@@ -1666,11 +1760,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: First-person setup statements are rewritten in third person. The excerpt retains Harbor format/harness, all six agents and their two classes, compatible models, container/package-manager tool installation, Bash-only Terminus 2, tmux loop, context condensation, and the configuration repository name.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H066 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>Terminus 2 has a single tool, a headless terminal, and completes tasks using only Bash commands.</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Harness</strong>.</p>
@@ -1679,11 +1773,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - <span class="verbatim">Terminus 2 has a single tool, a headless terminal, and completes tasks using only Bash commands.</span></p>
 </li>
 <li>Meaning: Terminus 2 has a single tool, a headless terminal, and completes tasks using only Bash commands.</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H067 · Light green · Before: Partial</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>we do not explicitly require agents to use a terminal as their sole tool. Instead, they are free to manipulate the container however they please. Many agents are installed directly into the container by a package manager and wield tools that are actually executable programs, far more complex than a typical Bash command.</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Harness</strong>.</p>
@@ -1703,11 +1797,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: First-person setup statements are rewritten in third person. The excerpt retains Harbor format/harness, all six agents and their two classes, compatible models, container/package-manager tool installation, Bash-only Terminus 2, tmux loop, context condensation, and the configuration repository name.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H068 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>three open-source software engineering agents</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Harness</strong>.</p>
@@ -1716,11 +1810,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - The evaluation uses <span class="verbatim">three popular command-line agents</span> (Claude Code, Codex CLI, Gemini CLI) and <span class="verbatim">three open-source software engineering agents</span> (OpenHands, Mini-SWE-Agent, Terminus 2).</p>
 </li>
 <li>Meaning: three open-source software engineering agents</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H069 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>three popular command-line agents</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Harness</strong>.</p>
@@ -1729,11 +1823,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - The evaluation uses <span class="verbatim">three popular command-line agents</span> (Claude Code, Codex CLI, Gemini CLI) and <span class="verbatim">three open-source software engineering agents</span> (OpenHands, Mini-SWE-Agent, Terminus 2).</p>
 </li>
 <li>Meaning: three popular command-line agents</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H070 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>We evaluate each model using its compatible agent scaffolds.</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Harness</strong>.</p>
@@ -1747,11 +1841,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: First-person setup statements are rewritten in third person. The excerpt retains Harbor format/harness, all six agents and their two classes, compatible models, container/package-manager tool installation, Bash-only Terminus 2, tmux loop, context condensation, and the configuration repository name.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H072 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>tasks are implemented in the Harbor task format and executed using the Harbor harness.</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Harness</strong>.</p>
@@ -1765,11 +1859,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: First-person setup statements are rewritten in third person. The excerpt retains Harbor format/harness, all six agents and their two classes, compatible models, container/package-manager tool installation, Bash-only Terminus 2, tmux loop, context condensation, and the configuration repository name.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H073 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>The Harbor configuration files we use in the experiments are available at github.com/laude-institute/terminal-bench-experiments.</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Harness</strong>.</p>
@@ -1783,11 +1877,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: First-person setup statements are rewritten in third person. The excerpt retains Harbor format/harness, all six agents and their two classes, compatible models, container/package-manager tool installation, Bash-only Terminus 2, tmux loop, context condensation, and the configuration repository name.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H188 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>Terminus 2 operates solely by issuing Bash commands.</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Harness</strong>.</p>
@@ -1801,11 +1895,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: First-person setup statements are rewritten in third person. The excerpt retains Harbor format/harness, all six agents and their two classes, compatible models, container/package-manager tool installation, Bash-only Terminus 2, tmux loop, context condensation, and the configuration repository name.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H189 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>The agent operates in a simple loop where a language model produces keystrokes which are executed in a tmux shell inside a Docker container. After execution the results of the command’s output is returned to the model.</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Harness</strong>.</p>
@@ -1814,11 +1908,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - <span class="verbatim">The agent operates in a simple loop where a language model produces keystrokes which are executed in a tmux shell inside a Docker container. After execution the results of the command’s output is returned to the model.</span></p>
 </li>
 <li>Meaning: The agent operates in a simple loop where a language model produces keystrokes which are executed in a tmux shell inside a Docker container. After execution the results of the command’s output is returned to the model.</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H190 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>Terminus 2 incorporates a context summarization module</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Harness</strong>.</p>
@@ -1827,7 +1921,7 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - <span class="verbatim">Terminus 2 incorporates a context summarization module which makes calls to a language model to condense the agent’s context when it reaches its model’s context limit.</span> <span class="verbatim">This allows it to operate on extended tasks that may require millions of tokens.</span></p>
 </li>
 <li>Meaning: Terminus 2 incorporates a context summarization module</li>
-</ul></details>
+</ul>
 </li>
 </ul>
 <h2 id="model-vs-agent">Model Vs Agent</h2>
@@ -1838,7 +1932,7 @@ the final goal, but you MUST use at least some cheating.
 </li>
 <li>
 <p><strong>H074 · Bright green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>model selection is usually more important than agent scaffold when optimizing for performance.</code></li>
 <li>
 <p>Now represented under <strong>Key Findings → Model Vs Agent</strong>.</p>
@@ -1847,7 +1941,7 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence: - <strong>Model Selection:</strong> <span class="verbatim">model selection is usually more important than agent scaffold when optimizing for performance.</span></p>
 </li>
 <li>Meaning: model selection is usually more important than agent scaffold when optimizing for performance.</li>
-</ul></details>
+</ul>
 </li>
 </ul>
 <h2 id="efficiency">Efficiency</h2>
@@ -1858,7 +1952,7 @@ the final goal, but you MUST use at least some cheating.
 </li>
 <li>
 <p><strong>H078 · Bright green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>no correlation between the number of average turns per trial and model success rates</code></li>
 <li>
 <p>Now represented under <strong>Key Findings → Efficiency</strong>.</p>
@@ -1872,11 +1966,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: Repeated findings are grouped rather than repeated verbatim. The lead retains the two shared qualitative conclusions; source bullets define turns/trials and per-model means, preserve the reasoning/decision-quality interpretation, and retain efficient token/episode use and the recommendation against merely increasing volume or frequency.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H079 · Bright green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>higher token count does not necessarily correlate with better performance</code></li>
 <li>
 <p>Now represented under <strong>Key Findings → Efficiency</strong>.</p>
@@ -1890,11 +1984,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: Repeated findings are grouped rather than repeated verbatim. The lead retains the two shared qualitative conclusions; source bullets define turns/trials and per-model means, preserve the reasoning/decision-quality interpretation, and retain efficient token/episode use and the recommendation against merely increasing volume or frequency.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H195 · Bright green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>the number of interaction rounds has no meaningful relationship with task success.</code></li>
 <li>
 <p>Now represented under <strong>Key Findings → Efficiency</strong>.</p>
@@ -1903,11 +1997,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - <span class="verbatim">the number of interaction rounds has no meaningful relationship with task success.</span> <span class="verbatim">more attempts do not translate to better outcomes.</span></p>
 </li>
 <li>Meaning: the number of interaction rounds has no meaningful relationship with task success.</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H200 · Bright green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>generating more text does not necessarily improve performance.</code></li>
 <li>
 <p>Now represented under <strong>Key Findings → Efficiency</strong>.</p>
@@ -1916,11 +2010,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - <span class="verbatim">generating more text does not necessarily improve performance.</span> <span class="verbatim">excessive verbosity can reflect inefficient reasoning rather than thoroughness.</span></p>
 </li>
 <li>Meaning: generating more text does not necessarily improve performance.</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H202 · Bright green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>(1) verbosity and an extensive number of turns do not inherently lead to better performance, and (2) the most effective models demonstrate efficiency in both token generation and episode utilization. This suggests that future model development should include focus on improving decision quality and strategic reasoning rather than simply increasing output volume or interaction frequency.</code></li>
 <li>
 <p>Now represented under <strong>Key Findings → Efficiency</strong>.</p>
@@ -1938,11 +2032,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: Repeated findings are grouped rather than repeated verbatim. The lead retains the two shared qualitative conclusions; source bullets define turns/trials and per-model means, preserve the reasoning/decision-quality interpretation, and retain efficient token/episode use and the recommendation against merely increasing volume or frequency.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H191 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>output token generation</code></li>
 <li>
 <p>Now represented under <strong>Key Findings → Efficiency</strong>.</p>
@@ -1956,11 +2050,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: Repeated findings are grouped rather than repeated verbatim. The lead retains the two shared qualitative conclusions; source bullets define turns/trials and per-model means, preserve the reasoning/decision-quality interpretation, and retain efficient token/episode use and the recommendation against merely increasing volume or frequency.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H192 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>episode count efficiency.</code></li>
 <li>
 <p>Now represented under <strong>Key Findings → Efficiency</strong>.</p>
@@ -1974,11 +2068,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: Repeated findings are grouped rather than repeated verbatim. The lead retains the two shared qualitative conclusions; source bullets define turns/trials and per-model means, preserve the reasoning/decision-quality interpretation, and retain efficient token/episode use and the recommendation against merely increasing volume or frequency.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H193 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>an episode refers to a turn in a trial.</code></li>
 <li>
 <p>Now represented under <strong>Key Findings → Efficiency</strong>.</p>
@@ -1987,11 +2081,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - <span class="verbatim">an episode refers to a turn in a trial.</span> Episode count efficiency averages turns over all Terminus 2 trials per model; verbosity averages generated output tokens per trial for each model.</p>
 </li>
 <li>Meaning: an episode refers to a turn in a trial.</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H194 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>This metric captures how many interaction rounds a model typically requires to resolve a task,</code></li>
 <li>
 <p>Now represented under <strong>Key Findings → Efficiency</strong>.</p>
@@ -2005,11 +2099,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: Repeated findings are grouped rather than repeated verbatim. The lead retains the two shared qualitative conclusions; source bullets define turns/trials and per-model means, preserve the reasoning/decision-quality interpretation, and retain efficient token/episode use and the recommendation against merely increasing volume or frequency.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H196 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>more attempts do not translate to better outcomes.</code></li>
 <li>
 <p>Now represented under <strong>Key Findings → Efficiency</strong>.</p>
@@ -2018,11 +2112,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - <span class="verbatim">the number of interaction rounds has no meaningful relationship with task success.</span> <span class="verbatim">more attempts do not translate to better outcomes.</span></p>
 </li>
 <li>Meaning: more attempts do not translate to better outcomes.</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H197 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>These findings suggest that successful performance in terminal environments depends primarily on the quality of reasoning and decision-making within each interaction, rather than the quantity of attempts.</code></li>
 <li>
 <p>Now represented under <strong>Key Findings → Efficiency</strong>.</p>
@@ -2040,11 +2134,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: Repeated findings are grouped rather than repeated verbatim. The lead retains the two shared qualitative conclusions; source bullets define turns/trials and per-model means, preserve the reasoning/decision-quality interpretation, and retain efficient token/episode use and the recommendation against merely increasing volume or frequency.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H198 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>verbosity</code></li>
 <li>
 <p>Now represented under <strong>Key Findings → Efficiency</strong>.</p>
@@ -2053,11 +2147,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - <span class="verbatim">an episode refers to a turn in a trial.</span> Episode count efficiency averages turns over all Terminus 2 trials per model; verbosity averages generated output tokens per trial for each model.</p>
 </li>
 <li>Meaning: verbosity</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H199 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>This analysis reveals whether generating more text correlates with better task performance, or if conciseness can be equally effec- tive.</code></li>
 <li>
 <p>Now represented under <strong>Key Findings → Efficiency</strong>.</p>
@@ -2075,11 +2169,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: Repeated findings are grouped rather than repeated verbatim. The lead retains the two shared qualitative conclusions; source bullets define turns/trials and per-model means, preserve the reasoning/decision-quality interpretation, and retain efficient token/episode use and the recommendation against merely increasing volume or frequency.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H201 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>ex- cessive verbosity can reflect inefficient reasoning rather than thoroughness.</code></li>
 <li>
 <p>Now represented under <strong>Key Findings → Efficiency</strong>.</p>
@@ -2088,7 +2182,7 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - <span class="verbatim">generating more text does not necessarily improve performance.</span> <span class="verbatim">excessive verbosity can reflect inefficient reasoning rather than thoroughness.</span></p>
 </li>
 <li>Meaning: ex- cessive verbosity can reflect inefficient reasoning rather than thoroughness.</li>
-</ul></details>
+</ul>
 </li>
 </ul>
 <h2 id="trajectory-analysis">Trajectory Analysis</h2>
@@ -2099,7 +2193,7 @@ the final goal, but you MUST use at least some cheating.
 </li>
 <li>
 <p><strong>H168 · Bright green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>For each failure mode, the description follows a rubric that includes its high-level framing, a decision procedure, and exclusion criteria.</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Trajectory Analysis</strong>.</p>
@@ -2113,11 +2207,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: First-person sampling and refinement are rewritten in third person. The lead retains two failed trials per task/model and three failure classes; source bullets retain MAST adaptation, Docent/custom pipeline, two annotators, iterative rubrics, mode-specific framing/decisions/exclusions, judge reliability, all nine definitions, and model-specific failure signatures.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H026 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>a taxonomy of failure modes</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Trajectory Analysis</strong>.</p>
@@ -2131,11 +2225,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: First-person sampling and refinement are rewritten in third person. The lead retains two failed trials per task/model and three failure classes; source bullets retain MAST adaptation, Docent/custom pipeline, two annotators, iterative rubrics, mode-specific framing/decisions/exclusions, judge reliability, all nine definitions, and model-specific failure signatures.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H083 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>We derive a failure categorization building from the Multi-Agent System Taxonomy (MAST)</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Trajectory Analysis</strong>.</p>
@@ -2149,11 +2243,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: First-person sampling and refinement are rewritten in third person. The lead retains two failed trials per task/model and three failure classes; source bullets retain MAST adaptation, Docent/custom pipeline, two annotators, iterative rubrics, mode-specific framing/decisions/exclusions, judge reliability, all nine definitions, and model-specific failure signatures.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H084 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>a simplified taxonomy with three high-level classes – Execution, Coherence, and Verification —- each with subclasses.</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Trajectory Analysis</strong>.</p>
@@ -2167,11 +2261,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: First-person sampling and refinement are rewritten in third person. The lead retains two failed trials per task/model and three failure classes; source bullets retain MAST adaptation, Docent/custom pipeline, two annotators, iterative rubrics, mode-specific framing/decisions/exclusions, judge reliability, all nine definitions, and model-specific failure signatures.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H085 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>The failed trials are analyzed with Docent (Meng et al., 2025), together with a custom pipeline, to annotate, refine, and validate the rubrics in Pan et al. (2025).</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Trajectory Analysis</strong>.</p>
@@ -2250,11 +2344,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: First-person sampling and refinement are rewritten in third person. The lead retains two failed trials per task/model and three failure classes; source bullets retain MAST adaptation, Docent/custom pipeline, two annotators, iterative rubrics, mode-specific framing/decisions/exclusions, judge reliability, all nine definitions, and model-specific failure signatures.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H086 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>For each task, we sample two failed trials per model.</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Trajectory Analysis</strong>.</p>
@@ -2268,11 +2362,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: First-person sampling and refinement are rewritten in third person. The lead retains two failed trials per task/model and three failure classes; source bullets retain MAST adaptation, Docent/custom pipeline, two annotators, iterative rubrics, mode-specific framing/decisions/exclusions, judge reliability, all nine definitions, and model-specific failure signatures.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H087 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>We iterate this process to refine the rubrics and labeling consistency.</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Trajectory Analysis</strong>.</p>
@@ -2286,11 +2380,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: First-person sampling and refinement are rewritten in third person. The lead retains two failed trials per task/model and three failure classes; source bullets retain MAST adaptation, Docent/custom pipeline, two annotators, iterative rubrics, mode-specific framing/decisions/exclusions, judge reliability, all nine definitions, and model-specific failure signatures.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H088 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>These distinct failure signatures suggest that different models require distinct strategies for improvement.</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Trajectory Analysis</strong>.</p>
@@ -2299,11 +2393,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - <span class="verbatim">These distinct failure signatures suggest that different models require distinct strategies for improvement.</span></p>
 </li>
 <li>Meaning: These distinct failure signatures suggest that different models require distinct strategies for improvement.</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H164 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>defines a set of fine-grained categories of agent failures</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Trajectory Analysis</strong>.</p>
@@ -2317,11 +2411,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: First-person sampling and refinement are rewritten in third person. The lead retains two failed trials per task/model and three failure classes; source bullets retain MAST adaptation, Docent/custom pipeline, two annotators, iterative rubrics, mode-specific framing/decisions/exclusions, judge reliability, all nine definitions, and model-specific failure signatures.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H165 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>The resulting categories are organized into three broad classes: and Execution, Coherence, Verifi- cation.</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Trajectory Analysis</strong>.</p>
@@ -2335,11 +2429,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: First-person sampling and refinement are rewritten in third person. The lead retains two failed trials per task/model and three failure classes; source bullets retain MAST adaptation, Docent/custom pipeline, two annotators, iterative rubrics, mode-specific framing/decisions/exclusions, judge reliability, all nine definitions, and model-specific failure signatures.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H166 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>we use a separate rubric for each failure mode to enable more precise definitions, clearer decision boundaries, and mode-specific exclusion criteria.</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Trajectory Analysis</strong>.</p>
@@ -2353,11 +2447,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: First-person sampling and refinement are rewritten in third person. The lead retains two failed trials per task/model and three failure classes; source bullets retain MAST adaptation, Docent/custom pipeline, two annotators, iterative rubrics, mode-specific framing/decisions/exclusions, judge reliability, all nine definitions, and model-specific failure signatures.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H169 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>The refined rubrics are then used to generate the final failure classification.</code></li>
 <li>
 <p>Now represented under <strong>Model Evaluation → Auto Judge → Trajectory Analysis</strong>.</p>
@@ -2366,7 +2460,7 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - Separate rubrics enable <span class="verbatim">more precise definitions, clearer decision boundaries, and mode-specific exclusion criteria.</span> Each includes <span class="verbatim">its high-level framing, a decision procedure, and exclusion criteria.</span> <span class="verbatim">The refined rubrics are then used to generate the final failure classification.</span> Judge precision is 92% and recall 90%.</p>
 </li>
 <li>Meaning: The refined rubrics are then used to generate the final failure classification.</li>
-</ul></details>
+</ul>
 </li>
 </ul>
 <h2 id="adapters">Adapters</h2>
@@ -2377,7 +2471,7 @@ the final goal, but you MUST use at least some cheating.
 </li>
 <li>
 <p><strong>H205 · Bright green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>Table 5:</code></li>
 <li>
 <p>Now represented under <strong>Special Design → Adapters</strong>.</p>
@@ -2386,11 +2480,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - <span class="verbatim">Table 5: Adapter List: 26 benchmarks integrated as adapters in Terminal Bench format</span> spans repository engineering, programming, science, interactive agents, code performance, machine learning, and cybersecurity.</p>
 </li>
 <li>Meaning: Table 5:</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H170 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>Adapters serve as the interface layer that integrates external benchmarks into Terminal-Bench’s unified evaluation framework</code></li>
 <li>
 <p>Now represented under <strong>Special Design → Adapters</strong>.</p>
@@ -2399,11 +2493,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - <span class="verbatim">Adapters serve as the interface layer that integrates external benchmarks into Terminal-Bench’s unified evaluation framework</span>.</p>
 </li>
 <li>Meaning: Adapters serve as the interface layer that integrates external benchmarks into Terminal-Bench’s unified evaluation framework</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H171 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>adapters translate diverse task formats into Terminal- Bench’s standardized schema,</code></li>
 <li>
 <p>Now represented under <strong>Special Design → Adapters</strong>.</p>
@@ -2412,11 +2506,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence: - <strong>Adapters:</strong> <span class="verbatim">Terminal-Bench currently supports 26 adapters</span>; <span class="verbatim">adapters translate diverse task formats into Terminal-Bench’s standardized schema,</span> with parity experiments verifying fidelity.</p>
 </li>
 <li>Meaning: adapters translate diverse task formats into Terminal- Bench’s standardized schema,</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H172 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>To integrate a benchmark through an adapter, four core requirements must be met:</code></li>
 <li>
 <p>Now represented under <strong>Special Design → Adapters</strong>.</p>
@@ -2425,11 +2519,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - Requirements: <span class="verbatim">To integrate a benchmark through an adapter, four core requirements must be met: (1) task descriptions in natural language, (2) containerized environments for reproducibility, (3) programmatic evaluation criteria, and (4) optionally, reference solutions for validation.</span></p>
 </li>
 <li>Meaning: To integrate a benchmark through an adapter, four core requirements must be met:</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H173 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>(1)</code></li>
 <li>
 <p>Now represented under <strong>Special Design → Adapters</strong>.</p>
@@ -2438,11 +2532,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - Requirements: <span class="verbatim">To integrate a benchmark through an adapter, four core requirements must be met: (1) task descriptions in natural language, (2) containerized environments for reproducibility, (3) programmatic evaluation criteria, and (4) optionally, reference solutions for validation.</span></p>
 </li>
 <li>Meaning: (1)</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H174 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>(2)</code></li>
 <li>
 <p>Now represented under <strong>Special Design → Adapters</strong>.</p>
@@ -2451,11 +2545,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - Requirements: <span class="verbatim">To integrate a benchmark through an adapter, four core requirements must be met: (1) task descriptions in natural language, (2) containerized environments for reproducibility, (3) programmatic evaluation criteria, and (4) optionally, reference solutions for validation.</span></p>
 </li>
 <li>Meaning: (2)</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H175 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>(3)</code></li>
 <li>
 <p>Now represented under <strong>Special Design → Adapters</strong>.</p>
@@ -2464,11 +2558,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - Requirements: <span class="verbatim">To integrate a benchmark through an adapter, four core requirements must be met: (1) task descriptions in natural language, (2) containerized environments for reproducibility, (3) programmatic evaluation criteria, and (4) optionally, reference solutions for validation.</span></p>
 </li>
 <li>Meaning: (3)</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H176 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>(4)</code></li>
 <li>
 <p>Now represented under <strong>Special Design → Adapters</strong>.</p>
@@ -2477,11 +2571,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - Requirements: <span class="verbatim">To integrate a benchmark through an adapter, four core requirements must be met: (1) task descriptions in natural language, (2) containerized environments for reproducibility, (3) programmatic evaluation criteria, and (4) optionally, reference solutions for validation.</span></p>
 </li>
 <li>Meaning: (4)</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H177 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>parity ex-</code></li>
 <li>
 <p>Now represented under <strong>Special Design → Adapters</strong>.</p>
@@ -2495,11 +2589,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The lead retains 26 adapters and standardized-schema translation. Source bullets retain the interface role, all four requirements including reproducibility/validation and optional references, controlled parity trials and integration after passing them, one interface, and the highlighted Table 5 caption.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H178 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>comparisons where identical agents and models are evaluated on both the original and adapted versions across multiple trials.</code></li>
 <li>
 <p>Now represented under <strong>Special Design → Adapters</strong>.</p>
@@ -2508,11 +2602,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - <span class="verbatim">controlled comparisons where identical agents and models are evaluated on both the original and adapted versions across multiple trials.</span> <span class="verbatim">These experiments ensure that adaptation preserves the benchmark’s evaluation semantics without introducing artifacts.</span> Integration follows successful parity checks.</p>
 </li>
 <li>Meaning: comparisons where identical agents and models are evaluated on both the original and adapted versions across multiple trials.</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H179 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>researchers can evaluate any agent on any adapted benchmark through a single interface.</code></li>
 <li>
 <p>Now represented under <strong>Special Design → Adapters</strong>.</p>
@@ -2521,11 +2615,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - <span class="verbatim">researchers can evaluate any agent on any adapted benchmark through a single interface.</span></p>
 </li>
 <li>Meaning: researchers can evaluate any agent on any adapted benchmark through a single interface.</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H180 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>Terminal-Bench currently supports 26 adapters</code></li>
 <li>
 <p>Now represented under <strong>Special Design → Adapters</strong>.</p>
@@ -2534,11 +2628,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence: - <strong>Adapters:</strong> <span class="verbatim">Terminal-Bench currently supports 26 adapters</span>; <span class="verbatim">adapters translate diverse task formats into Terminal-Bench’s standardized schema,</span> with parity experiments verifying fidelity.</p>
 </li>
 <li>Meaning: Terminal-Bench currently supports 26 adapters</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H204 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>26 benchmarks</code></li>
 <li>
 <p>Now represented under <strong>Special Design → Adapters</strong>.</p>
@@ -2547,7 +2641,7 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - <span class="verbatim">Table 5: Adapter List: 26 benchmarks integrated as adapters in Terminal Bench format</span> spans repository engineering, programming, science, interactive agents, code performance, machine learning, and cybersecurity.</p>
 </li>
 <li>Meaning: 26 benchmarks</li>
-</ul></details>
+</ul>
 </li>
 </ul>
 <h2 id="task-design">Task Design</h2>
@@ -2558,7 +2652,7 @@ the final goal, but you MUST use at least some cheating.
 </li>
 <li>
 <p><strong>H003 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>Each task features a unique environment, human- written solution, and comprehensive tests for verification.</code></li>
 <li>
 <p>Now represented under <strong>Dataset Creation → Task Design</strong>.</p>
@@ -2567,11 +2661,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - <span class="verbatim">Each task features a unique environment, human-written solution, and comprehensive tests for verification.</span></p>
 </li>
 <li>Meaning: Each task features a unique environment, human- written solution, and comprehensive tests for verification.</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H015 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>task Each consists of</code></li>
 <li>
 <p>Now represented under <strong>Dataset Creation → Task Design</strong>.</p>
@@ -2585,11 +2679,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The highlighted component/number is expanded into its named task artifact or adapter requirement, rather than repeating an isolated numeral.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H016 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>(1)</code></li>
 <li>
 <p>Now represented under <strong>Dataset Creation → Task Design</strong>.</p>
@@ -2598,11 +2692,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence: - <strong>Task Design:</strong> <span class="verbatim">A Terminal-Bench task consists of an instruction, a Docker image, a set of tests, an example solution, and a time limit</span>.</p>
 </li>
 <li>Meaning: (1)</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H017 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>(2)</code></li>
 <li>
 <p>Now represented under <strong>Dataset Creation → Task Design</strong>.</p>
@@ -2611,11 +2705,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence: - <strong>Task Design:</strong> <span class="verbatim">A Terminal-Bench task consists of an instruction, a Docker image, a set of tests, an example solution, and a time limit</span>.</p>
 </li>
 <li>Meaning: (2)</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H018 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>environment</code></li>
 <li>
 <p>Now represented under <strong>Dataset Creation → Task Design</strong>.</p>
@@ -2624,11 +2718,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - The Dockerfile initializes relevant packages/files; instructions define the goal, tests verify completion, and a human-written oracle demonstrates solvability. Tests are injected for verification rather than exposed with the oracle during agent execution.</p>
 </li>
 <li>Meaning: environment</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H019 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>instruction</code></li>
 <li>
 <p>Now represented under <strong>Dataset Creation → Task Design</strong>.</p>
@@ -2637,11 +2731,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - The Dockerfile initializes relevant packages/files; instructions define the goal, tests verify completion, and a human-written oracle demonstrates solvability. Tests are injected for verification rather than exposed with the oracle during agent execution.</p>
 </li>
 <li>Meaning: instruction</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H020 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>(3)</code></li>
 <li>
 <p>Now represented under <strong>Dataset Creation → Task Design</strong>.</p>
@@ -2650,11 +2744,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence: - <strong>Task Design:</strong> <span class="verbatim">A Terminal-Bench task consists of an instruction, a Docker image, a set of tests, an example solution, and a time limit</span>.</p>
 </li>
 <li>Meaning: (3)</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H021 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>tests</code></li>
 <li>
 <p>Now represented under <strong>Dataset Creation → Task Design</strong>.</p>
@@ -2663,11 +2757,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - The Dockerfile initializes relevant packages/files; instructions define the goal, tests verify completion, and a human-written oracle demonstrates solvability. Tests are injected for verification rather than exposed with the oracle during agent execution.</p>
 </li>
 <li>Meaning: tests</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H022 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>(4)</code></li>
 <li>
 <p>Now represented under <strong>Dataset Creation → Task Design</strong>.</p>
@@ -2676,11 +2770,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence: - <strong>Task Design:</strong> <span class="verbatim">A Terminal-Bench task consists of an instruction, a Docker image, a set of tests, an example solution, and a time limit</span>.</p>
 </li>
 <li>Meaning: (4)</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H023 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>reference solution</code></li>
 <li>
 <p>Now represented under <strong>Dataset Creation → Task Design</strong>.</p>
@@ -2689,11 +2783,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - The Dockerfile initializes relevant packages/files; instructions define the goal, tests verify completion, and a human-written oracle demonstrates solvability. Tests are injected for verification rather than exposed with the oracle during agent execution.</p>
 </li>
 <li>Meaning: reference solution</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H029 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>A Terminal-Bench task consists of an instruction, a Docker image, a set of tests, an example solution, and a time limit</code></li>
 <li>
 <p>Now represented under <strong>Dataset Creation → Task Design</strong>.</p>
@@ -2702,11 +2796,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence: - <strong>Task Design:</strong> <span class="verbatim">A Terminal-Bench task consists of an instruction, a Docker image, a set of tests, an example solution, and a time limit</span>.</p>
 </li>
 <li>Meaning: A Terminal-Bench task consists of an instruction, a Docker image, a set of tests, an example solution, and a time limit</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H039 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>instruction,</code></li>
 <li>
 <p>Now represented under <strong>Dataset Creation → Task Design</strong>.</p>
@@ -2715,11 +2809,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence: - <strong>Task Design:</strong> <span class="verbatim">A Terminal-Bench task consists of an instruction, a Docker image, a set of tests, an example solution, and a time limit</span>.</p>
 </li>
 <li>Meaning: instruction,</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H040 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>Dockerfile,</code></li>
 <li>
 <p>Now represented under <strong>Dataset Creation → Task Design</strong>.</p>
@@ -2733,11 +2827,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The highlighted component/number is expanded into its named task artifact or adapter requirement, rather than repeating an isolated numeral.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H041 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>tests,</code></li>
 <li>
 <p>Now represented under <strong>Dataset Creation → Task Design</strong>.</p>
@@ -2746,11 +2840,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - The Dockerfile initializes relevant packages/files; instructions define the goal, tests verify completion, and a human-written oracle demonstrates solvability. Tests are injected for verification rather than exposed with the oracle during agent execution.</p>
 </li>
 <li>Meaning: tests,</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H042 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>oracle solution.</code></li>
 <li>
 <p>Now represented under <strong>Dataset Creation → Task Design</strong>.</p>
@@ -2764,11 +2858,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The highlighted component/number is expanded into its named task artifact or adapter requirement, rather than repeating an isolated numeral.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H203 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>Claude 4 Opus was used to transform the author-provided task instructions into the abbreviated “Description”</code></li>
 <li>
 <p>Now represented under <strong>Dataset Creation → Task Design</strong>.</p>
@@ -2777,101 +2871,7 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - <span class="verbatim">Claude 4 Opus was used to transform the author-provided task instructions into the abbreviated “Description” in Appendix H.</span> The example below uses the instruction shown in Figure 2.</p>
 </li>
 <li>Meaning: Claude 4 Opus was used to transform the author-provided task instructions into the abbreviated “Description”</li>
-</ul></details>
-</li>
 </ul>
-<h2 id="sourcing">Sourcing</h2>
-<p><strong>Priority 3 · Dataset Creation</strong></p>
-<ul>
-<li>
-<p><strong>Task Sourcing:</strong> The project <span class="verbatim">crowd-sourced tasks through open-source contributions, with 93 contributors creating 229 tasks.</span> The final dataset contains 89 tasks.</p>
-</li>
-<li>
-<p><strong>H027 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
-<li>Selected text: <code>the process of creating Terminal-Bench 2.0.</code></li>
-<li>
-<p>Now represented under <strong>Dataset Creation → Sourcing</strong>.</p>
-</li>
-<li>
-<p>Summary evidence: - <strong>Task Sourcing:</strong> The project <span class="verbatim">crowd-sourced tasks through open-source contributions, with 93 contributors creating 229 tasks.</span> The final dataset contains 89 tasks.</p>
-</li>
-<li>
-<p>Meaning: the process of creating Terminal-Bench 2.0.</p>
-</li>
-<li>
-<p>Transformation reason: First-person sourcing is rewritten with the project as subject. The lead retains open-source crowd-sourcing, 93 contributors, 229 contributions, and 89 selected tasks; the first source bullet preserves selection by author difficulty and three reviewers, with category diversity in the next bullet.</p>
-</li>
-</ul></details>
-</li>
-<li>
-<p><strong>H043 · Light green · Before: Partial</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
-<li>Selected text: <code>In order to design a diverse benchmark, we crowd-sourced tasks through open-source contributions, with 93 contributors creating 229 tasks.</code></li>
-<li>
-<p>Now represented under <strong>Dataset Creation → Sourcing</strong>.</p>
-</li>
-<li>
-<p>Summary evidence: - <strong>Task Sourcing:</strong> The project <span class="verbatim">crowd-sourced tasks through open-source contributions, with 93 contributors creating 229 tasks.</span> The final dataset contains 89 tasks.</p>
-</li>
-<li>Selection was <span class="verbatim">based on the author’s difficulty assessment and a quality assessment by three experienced human reviewers</span>.</li>
-<li>Software engineering is the largest category (26 tasks), with no majority category; the collection also includes personal-assistant and video-processing work.</li>
-<li>
-<p>Meaning: In order to design a diverse benchmark, we crowd-sourced tasks through open-source contributions, with 93 contributors creating 229 tasks.</p>
-</li>
-<li>
-<p>Transformation reason: First-person sourcing is rewritten with the project as subject. The lead retains open-source crowd-sourcing, 93 contributors, 229 contributions, and 89 selected tasks; the first source bullet preserves selection by author difficulty and three reviewers, with category diversity in the next bullet.</p>
-</li>
-</ul></details>
-</li>
-<li>
-<p><strong>H044 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
-<li>Selected text: <code>we selected 89</code></li>
-<li>
-<p>Now represented under <strong>Dataset Creation → Sourcing</strong>.</p>
-</li>
-<li>
-<p>Summary evidence: - <strong>Task Sourcing:</strong> The project <span class="verbatim">crowd-sourced tasks through open-source contributions, with 93 contributors creating 229 tasks.</span> The final dataset contains 89 tasks.</p>
-</li>
-<li>
-<p>Meaning: we selected 89</p>
-</li>
-<li>
-<p>Transformation reason: First-person sourcing is rewritten with the project as subject. The lead retains open-source crowd-sourcing, 93 contributors, 229 contributions, and 89 selected tasks; the first source bullet preserves selection by author difficulty and three reviewers, with category diversity in the next bullet.</p>
-</li>
-</ul></details>
-</li>
-<li>
-<p><strong>H045 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
-<li>Selected text: <code>based on the author’s difficulty assessment and a quality assess- ment by three experienced human reviewers</code></li>
-<li>
-<p>Now represented under <strong>Dataset Creation → Sourcing</strong>.</p>
-</li>
-<li>
-<p>Summary evidence:     - Selection was <span class="verbatim">based on the author’s difficulty assessment and a quality assessment by three experienced human reviewers</span>.</p>
-</li>
-<li>Meaning: based on the author’s difficulty assessment and a quality assess- ment by three experienced human reviewers</li>
-</ul></details>
-</li>
-<li>
-<p><strong>H064 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
-<li>Selected text: <code>a variety of categories,</code></li>
-<li>
-<p>Now represented under <strong>Dataset Creation → Sourcing</strong>.</p>
-</li>
-<li>
-<p>Summary evidence:     - Software engineering is the largest category (26 tasks), with no majority category; the collection also includes personal-assistant and video-processing work.</p>
-</li>
-<li>
-<p>Meaning: a variety of categories,</p>
-</li>
-<li>
-<p>Transformation reason: First-person sourcing is rewritten with the project as subject. The lead retains open-source crowd-sourcing, 93 contributors, 229 contributions, and 89 selected tasks; the first source bullet preserves selection by author difficulty and three reviewers, with category diversity in the next bullet.</p>
-</li>
-</ul></details>
 </li>
 </ul>
 <h2 id="quality-dimensions">Quality Dimensions</h2>
@@ -2882,7 +2882,7 @@ the final goal, but you MUST use at least some cheating.
 </li>
 <li>
 <p><strong>H046 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>the unit tests will pass if and only if the container ends in an acceptable state.</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Human Review → Quality Dimensions</strong>.</p>
@@ -2891,11 +2891,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - Specificity: <span class="verbatim">the unit tests will pass if and only if the container ends in an acceptable state.</span></p>
 </li>
 <li>Meaning: the unit tests will pass if and only if the container ends in an acceptable state.</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H047 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>an oracle solution</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Human Review → Quality Dimensions</strong>.</p>
@@ -2904,11 +2904,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - Solvability: <span class="verbatim">each task has an oracle solution script that mirrors a real workflow and, when executed, causes all test cases to pass.</span></p>
 </li>
 <li>Meaning: an oracle solution</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H048 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>all test cases to pass.</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Human Review → Quality Dimensions</strong>.</p>
@@ -2917,11 +2917,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - Solvability: <span class="verbatim">each task has an oracle solution script that mirrors a real workflow and, when executed, causes all test cases to pass.</span></p>
 </li>
 <li>Meaning: all test cases to pass.</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H049 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>“cheat”</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Human Review → Quality Dimensions</strong>.</p>
@@ -2935,7 +2935,7 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The selected specificity condition, oracle solvability, and cheating/integrity term are placed under their named dimensions. Shortcuts are explained through the future-Git-commit example rather than repeating an isolated word.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 </ul>
 <h2 id="limitations">Limitations</h2>
@@ -2946,7 +2946,7 @@ the final goal, but you MUST use at least some cheating.
 </li>
 <li>
 <p><strong>H061 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>still have flaws.</code></li>
 <li>
 <p>Now represented under <strong>Impact → Limitations</strong>.</p>
@@ -2960,11 +2960,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: First-person references to the dataset and verification criteria are rewritten in third person. Internet/package/web access, possible oracle lookup, intentional contamination, residual task flaws, and reproducibility constraints remain explicit, with observed/non-observed behavior distinguished.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H095 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>we allow agents to access the internet to install packages and query the web for relevant information.</code></li>
 <li>
 <p>Now represented under <strong>Impact → Limitations</strong>.</p>
@@ -2978,11 +2978,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: First-person references to the dataset and verification criteria are rewritten in third person. Internet/package/web access, possible oracle lookup, intentional contamination, residual task flaws, and reproducibility constraints remain explicit, with observed/non-observed behavior distinguished.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H097 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>cheat by reading the oracle solutions.</code></li>
 <li>
 <p>Now represented under <strong>Impact → Limitations</strong>.</p>
@@ -2996,11 +2996,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: First-person references to the dataset and verification criteria are rewritten in third person. Internet/package/web access, possible oracle lookup, intentional contamination, residual task flaws, and reproducibility constraints remain explicit, with observed/non-observed behavior distinguished.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H098 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>intentional contamination</code></li>
 <li>
 <p>Now represented under <strong>Impact → Limitations</strong>.</p>
@@ -3009,11 +3009,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence: - <strong>Limitations:</strong> Internet access enables package installation/research and potential oracle lookup. Public tasks risk <span class="verbatim">intentional contamination</span>; external services, resource variation, and residual task flaws affect validity and reproducibility.</p>
 </li>
 <li>Meaning: intentional contamination</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H099 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>some tasks could fall short of our verification criteria</code></li>
 <li>
 <p>Now represented under <strong>Impact → Limitations</strong>.</p>
@@ -3027,7 +3027,7 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: First-person references to the dataset and verification criteria are rewritten in third person. Internet/package/web access, possible oracle lookup, intentional contamination, residual task flaws, and reproducibility constraints remain explicit, with observed/non-observed behavior distinguished.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 </ul>
 <h2 id="human-time-estimates">Human Time Estimates</h2>
@@ -3038,7 +3038,7 @@ the final goal, but you MUST use at least some cheating.
 </li>
 <li>
 <p><strong>H062 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>“junior time estimate”)</code></li>
 <li>
 <p>Now represented under <strong>Dataset Creation → Human Time Estimates</strong>.</p>
@@ -3052,11 +3052,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The isolated junior/expert estimate labels are expanded into their source definitions: a junior unfamiliar with the topic versus a domain expert. Table counts and the OCaml example are presented with workload units, without treating estimates as observed runs.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H063 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>(“expert time estimate”).</code></li>
 <li>
 <p>Now represented under <strong>Dataset Creation → Human Time Estimates</strong>.</p>
@@ -3070,7 +3070,7 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The isolated junior/expert estimate labels are expanded into their source definitions: a junior unfamiliar with the topic versus a domain expert. Table counts and the OCaml example are presented with workload units, without treating estimates as observed runs.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 </ul>
 <h2 id="runtime">Runtime</h2>
@@ -3081,7 +3081,7 @@ the final goal, but you MUST use at least some cheating.
 </li>
 <li>
 <p><strong>H075 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>up to two hours,</code></li>
 <li>
 <p>Now represented under <strong>Key Findings → Runtime</strong>.</p>
@@ -3095,11 +3095,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The selected runtime passage is split into a concise lead and the extreme-trial source bullet, retaining time, calls, and tokens. The final bullet distinguishes Terminus-only API calls from the full-trial time/token population; prose two hours is expressed as the source figure’s 2 hours.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H076 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>Most agents attempt tasks for less than 20 minutes.</code></li>
 <li>
 <p>Now represented under <strong>Key Findings → Runtime</strong>.</p>
@@ -3113,11 +3113,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The selected runtime passage is split into a concise lead and the extreme-trial source bullet, retaining time, calls, and tokens. The final bullet distinguishes Terminus-only API calls from the full-trial time/token population; prose two hours is expressed as the source figure’s 2 hours.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H077 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>100 million tokens on a single task,</code></li>
 <li>
 <p>Now represented under <strong>Key Findings → Runtime</strong>.</p>
@@ -3131,11 +3131,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The selected runtime passage is split into a concise lead and the extreme-trial source bullet, retaining time, calls, and tokens. The final bullet distinguishes Terminus-only API calls from the full-trial time/token population; prose two hours is expressed as the source figure’s 2 hours.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H124 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>Most trials are completed in under 20 minutes, using fewer than 25 model calls and 10 million tokens. In extreme cases, agents ran for up to 2 hours, making hundreds of model calls and using nearly 100 million tokens.</code></li>
 <li>
 <p>Now represented under <strong>Key Findings → Runtime</strong>.</p>
@@ -3151,7 +3151,7 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The selected runtime passage is split into a concise lead and the extreme-trial source bullet, retaining time, calls, and tokens. The final bullet distinguishes Terminus-only API calls from the full-trial time/token population; prose two hours is expressed as the source figure’s 2 hours.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 </ul>
 <h2 id="empirical-difficulty">Empirical Difficulty</h2>
@@ -3162,7 +3162,7 @@ the final goal, but you MUST use at least some cheating.
 </li>
 <li>
 <p><strong>H080 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>“empirical difficulty”</code></li>
 <li>
 <p>Now represented under <strong>Key Findings → Empirical Difficulty</strong>.</p>
@@ -3176,11 +3176,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The difficulty label is capitalized; the original average-pass-rate definition and human-medium/model-hard discrepancy are retained. Thresholds, populations, percentages, correlation, and illustrative tasks remain in the supporting excerpt.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H081 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>Terminus 2’s aver- age pass rate across the frontier models</code></li>
 <li>
 <p>Now represented under <strong>Key Findings → Empirical Difficulty</strong>.</p>
@@ -3189,11 +3189,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence: - <strong>Empirical Difficulty:</strong> Based on <span class="verbatim">Terminus 2’s average pass rate across the frontier models</span>. <span class="verbatim">The largest discrepancy occurs when humans rate tasks as medium but models find them hard</span> (54.5%).</p>
 </li>
 <li>Meaning: Terminus 2’s aver- age pass rate across the frontier models</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H082 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>The largest discrepancy occurs when humans rate tasks as medium but models find them hard</code></li>
 <li>
 <p>Now represented under <strong>Key Findings → Empirical Difficulty</strong>.</p>
@@ -3202,7 +3202,7 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence: - <strong>Empirical Difficulty:</strong> Based on <span class="verbatim">Terminus 2’s average pass rate across the frontier models</span>. <span class="verbatim">The largest discrepancy occurs when humans rate tasks as medium but models find them hard</span> (54.5%).</p>
 </li>
 <li>Meaning: The largest discrepancy occurs when humans rate tasks as medium but models find them hard</li>
-</ul></details>
+</ul>
 </li>
 </ul>
 <h2 id="general-agentic-scope">General Agentic Scope</h2>
@@ -3213,7 +3213,7 @@ the final goal, but you MUST use at least some cheating.
 </li>
 <li>
 <p><strong>H100 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>tool-use,</code></li>
 <li>
 <p>Now represented under <strong>Special Design → General Agentic Scope</strong>.</p>
@@ -3227,11 +3227,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The selected related-work categories are grouped in one comparison bullet. The lead retains general computer manipulation and the real terminal shell; the following source bullet distinguishes narrower command-line benchmarks.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H101 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>software engineering</code></li>
 <li>
 <p>Now represented under <strong>Special Design → General Agentic Scope</strong>.</p>
@@ -3240,11 +3240,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - Related benchmarks focus on software engineering, tool-use, computer use, and scientific discovery.</p>
 </li>
 <li>Meaning: software engineering</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H102 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>Computer use</code></li>
 <li>
 <p>Now represented under <strong>Special Design → General Agentic Scope</strong>.</p>
@@ -3258,11 +3258,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The selected related-work categories are grouped in one comparison bullet. The lead retains general computer manipulation and the real terminal shell; the following source bullet distinguishes narrower command-line benchmarks.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H103 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>scientific discovery,</code></li>
 <li>
 <p>Now represented under <strong>Special Design → General Agentic Scope</strong>.</p>
@@ -3276,11 +3276,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The selected related-work categories are grouped in one comparison bullet. The lead retains general computer manipulation and the real terminal shell; the following source bullet distinguishes narrower command-line benchmarks.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H104 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>Terminal-Bench is distinct</code></li>
 <li>
 <p>Now represented under <strong>Special Design → General Agentic Scope</strong>.</p>
@@ -3294,11 +3294,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The selected related-work categories are grouped in one comparison bullet. The lead retains general computer manipulation and the real terminal shell; the following source bullet distinguishes narrower command-line benchmarks.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H122 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>In comparison, Terminal-Bench is focused on general agentic manipulation of computers.</code></li>
 <li>
 <p>Now represented under <strong>Special Design → General Agentic Scope</strong>.</p>
@@ -3312,11 +3312,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The selected related-work categories are grouped in one comparison bullet. The lead retains general computer manipulation and the real terminal shell; the following source bullet distinguishes narrower command-line benchmarks.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H123 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>Other benchmarks measure narrow aspects of the command line interface,</code></li>
 <li>
 <p>Now represented under <strong>Special Design → General Agentic Scope</strong>.</p>
@@ -3325,7 +3325,7 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - <span class="verbatim">Other benchmarks measure narrow aspects of the command line interface,</span> including shell optimization, environment configuration, and translating natural language to Bash; Terminal-Bench instead targets <span class="verbatim">general agentic manipulation of computers.</span></p>
 </li>
 <li>Meaning: Other benchmarks measure narrow aspects of the command line interface,</li>
-</ul></details>
+</ul>
 </li>
 </ul>
 <h2 id="debug-tool">Debug Tool</h2>
@@ -3336,7 +3336,7 @@ the final goal, but you MUST use at least some cheating.
 </li>
 <li>
 <p><strong>H146 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>an LLM-powered debug tool to analyze failed tasks.</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Auto Judge → Debug Tool</strong>.</p>
@@ -3350,11 +3350,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The debug prompt is described as a source instrument rather than executed. The lead retains instruction defects versus agent limitations; its source bullets retain inputs, four defect classes, cross-trial failure comparison, JSON outcomes, and log inspection.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H147 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>prompt.</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Auto Judge → Debug Tool</strong>.</p>
@@ -3368,11 +3368,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The debug prompt is described as a source instrument rather than executed. The lead retains instruction defects versus agent limitations; its source bullets retain inputs, four defect classes, cross-trial failure comparison, JSON outcomes, and log inspection.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H148 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>if test failures are due to insufficient task instructions rather than normal agent limitations.</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Auto Judge → Debug Tool</strong>.</p>
@@ -3386,11 +3386,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The debug prompt is described as a source instrument rather than executed. The lead retains instruction defects versus agent limitations; its source bullets retain inputs, four defect classes, cross-trial failure comparison, JSON outcomes, and log inspection.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H149 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>Compare failure patterns across trials.</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Auto Judge → Debug Tool</strong>.</p>
@@ -3404,11 +3404,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The debug prompt is described as a source instrument rather than executed. The lead retains instruction defects versus agent limitations; its source bullets retain inputs, four defect classes, cross-trial failure comparison, JSON outcomes, and log inspection.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H150 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>If all trials fail on the same tests with similar errors, this suggests systematic instruction issues rather than agent variability.</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Auto Judge → Debug Tool</strong>.</p>
@@ -3417,7 +3417,7 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - <span class="verbatim">If all trials fail on the same tests with similar errors, this suggests systematic instruction issues rather than agent variability.</span> Differing failures can indicate appropriate task difficulty.</p>
 </li>
 <li>Meaning: If all trials fail on the same tests with similar errors, this suggests systematic instruction issues rather than agent variability.</li>
-</ul></details>
+</ul>
 </li>
 </ul>
 <h2 id="abc">Abc</h2>
@@ -3428,7 +3428,7 @@ the final goal, but you MUST use at least some cheating.
 </li>
 <li>
 <p><strong>H157 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>Agentic Benchmark Checklist (ABC)</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Human Review → Abc</strong>.</p>
@@ -3442,11 +3442,11 @@ the final goal, but you MUST use at least some cheating.
 <li>
 <p>Transformation reason: The ABC name and scores are given with the assessment. Original source bullets retain manual test-quality review, residual non-determinism, public tasks, developer/ABC collaboration and its rigor/quality benefit, and the absence of quantified flaw impact.</p>
 </li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H158 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>Some non-determinism remains.</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Human Review → Abc</strong>.</p>
@@ -3455,11 +3455,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - <span class="verbatim">Some non-determinism remains.</span> Hardware, external APIs, and infrastructure can change outcomes despite containers and repeat runs.</p>
 </li>
 <li>Meaning: Some non-determinism remains.</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H159 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>the benchmark relies on extensive human review of test specifications and coverage.</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Human Review → Abc</strong>.</p>
@@ -3468,11 +3468,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - <span class="verbatim">the benchmark relies on extensive human review of test specifications and coverage.</span> Code coverage and cyclomatic-complexity metrics were not used to assess test quality.</p>
 </li>
 <li>Meaning: the benchmark relies on extensive human review of test specifications and coverage.</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H160 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>All tasks are hosted on a public GitHub repository.</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Human Review → Abc</strong>.</p>
@@ -3481,11 +3481,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - <span class="verbatim">All tasks are hosted on a public GitHub repository.</span> There is no private held-out set; a canary discourages contamination but cannot prevent training or overfitting.</p>
 </li>
 <li>Meaning: All tasks are hosted on a public GitHub repository.</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H161 · Light green · Before: Partial</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>This collaboration highlights how the ABC framework, when combined with active engagement from benchmark developers, can be a useful tool for ensuring rigor and improving benchmark quality.</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Human Review → Abc</strong>.</p>
@@ -3494,11 +3494,11 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - <span class="verbatim">Authors of ABC have been closely involved with the development process, and many issues were surfaced and resolved through the public GitHub repository.</span> <span class="verbatim">This collaboration highlights how the ABC framework, when combined with active engagement from benchmark developers, can be a useful tool for ensuring rigor and improving benchmark quality.</span></p>
 </li>
 <li>Meaning: This collaboration highlights how the ABC framework, when combined with active engagement from benchmark developers, can be a useful tool for ensuring rigor and improving benchmark quality.</li>
-</ul></details>
+</ul>
 </li>
 <li>
 <p><strong>H162 · Light green · Before: Covered</strong></p>
-<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
+<ul>
 <li>Selected text: <code>it does not provide quantitative estimates of how such flaws impact benchmark results.</code></li>
 <li>
 <p>Now represented under <strong>Quality Control → Human Review → Abc</strong>.</p>
@@ -3507,7 +3507,7 @@ the final goal, but you MUST use at least some cheating.
 <p>Summary evidence:     - <span class="verbatim">it does not provide quantitative estimates of how such flaws impact benchmark results.</span></p>
 </li>
 <li>Meaning: it does not provide quantitative estimates of how such flaws impact benchmark results.</li>
-</ul></details>
+</ul>
 </li>
 </ul>
 <h2 id="excluded-and-unclassified">Excluded and Unclassified</h2>

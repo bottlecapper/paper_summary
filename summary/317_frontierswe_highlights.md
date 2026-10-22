@@ -1,6 +1,6 @@
 # FrontierSWE Highlight Audit
 
-All 63 included highlights are mapped to the revised summary. Topics are ordered by their highest highlight priority; selections within each topic are ordered by priority, then paper order.
+All 64 included highlights are mapped to the revised summary. Topics are ordered by their highest highlight priority; selections within each topic are ordered by priority, then paper order.
 
 Prior-coverage judgments are a manual semantic review. Annotation accounting is checked programmatically. Raw selections retain PDF extraction artifacts; mathematical selections are explained in context in the summary.
 
@@ -49,139 +49,147 @@ Previous statuses: **Covered**, **Partial**, **Title only**, or **Missing**. New
     - Summary evidence: - V2 — <span class="verbatim">Visual Reasoning</span>
     - Meaning: Visual Reasoning
 
+## Task Design
+
+**Priority 2 · Dataset Creation**
+
+- **Task Design:**
+
+- **H027 · Bright green · Before: Not assessed**
+    - Selected text: `ensure that agents have all the information needed to achieve a full score on a task.`
+    - Now represented under **Dataset Creation → Task Design**.
+
+    - Summary evidence:     - **Purpose:** The purpose is to <span class="verbatim">ensure that agents have all the information needed to achieve a full score on a task.</span>
+    - Meaning: ensure that agents have all the information needed to achieve a full score on a task.
+
+- **H030 · Bright green · Before: Not assessed**
+    - Selected text: `agents are never undercredited for implementing a feature the verifier doesn't test while ensuring that hardcoding test results is not a viable strategy to succeed.`
+    - Now represented under **Dataset Creation → Task Design**.
+
+    - Summary evidence:         - The intended result is that <span class="verbatim">agents are never undercredited for implementing a feature the verifier doesn't test while ensuring that hardcoding test results is not a viable strategy to succeed.</span>
+    - Meaning: agents are never undercredited for implementing a feature the verifier doesn't test while ensuring that hardcoding test results is not a viable strategy to succeed.
+
+- **H028 · Light green · Before: Not assessed**
+    - Selected text: `every workspace contains a documented self-check tool whose output correlates monotonically with the verifier score.`
+    - Now represented under **Dataset Creation → Task Design**.
+
+    - Summary evidence:     - **Self-Check Tool:** V2 ensures that <span class="verbatim">every workspace contains a documented self-check tool whose output correlates monotonically with the verifier score.</span>
+    - Meaning: every workspace contains a documented self-check tool whose output correlates monotonically with the verifier score.
+
+- **H029 · Yellow question — explanation requested · Before: Not assessed**
+    - Selected text: `1:1 structural mutation during verification,`
+    - Now represented under **Dataset Creation → Task Design**.
+
+    - Summary evidence:         - Verification uses <span class="verbatim">1:1 structural mutation</span>. The intended idea is one original case paired with a changed counterpart that checks the same feature.
+    - Meaning: 1:1 structural mutation during verification,
+
+    - Transformation reason: Included at the reader's explicit request despite the usual yellow exclusion. The original term and verification context are retained. Astronomy Toolkit illustrates a copied case with one-to-one renamed image identities and consistently relabeled answers; the code adds it as an extra check and does not formally define the paper's notation. Explanations remain default color rather than being presented as PDF quotations.
+
 ## Quality Dimensions
 
 **Priority 2 · Quality Control · Human Review**
 
 - **Quality Dimensions:**
 
-- **H027 · Bright green · Before: Not assessed**
-    - Selected text: `ensure that agents have all the information needed to achieve a full score on a task.`
-    - Now represented under **Quality Control → Human Review → Quality Dimensions**.
-
-    - Summary evidence:     - Information completeness: agents must have <span class="verbatim">all the information needed to achieve a full score on a task.</span>
-    - Meaning: ensure that agents have all the information needed to achieve a full score on a task.
-
-    - Transformation reason: The ensure-that connector is replaced with an explicit quality-dimension subject; all information and full-score requirements remain in the original clause.
-
-- **H030 · Bright green · Before: Not assessed**
-    - Selected text: `agents are never undercredited for implementing a feature the verifier doesn't test while ensuring that hardcoding test results is not a viable strategy to succeed.`
-    - Now represented under **Quality Control → Human Review → Quality Dimensions**.
-
-    - Summary evidence:     - Fairness: <span class="verbatim">agents are never undercredited for implementing a feature the verifier doesn't test while ensuring that hardcoding test results is not a viable strategy to succeed.</span>
-    - Meaning: agents are never undercredited for implementing a feature the verifier doesn't test while ensuring that hardcoding test results is not a viable strategy to succeed.
-
-## Performance Grading
-
-**Priority 2 · Model Evaluation · Auto Judge**
-
-- **Performance Engineering:** V2 replaces noisy wall-clock grading with a <span class="verbatim">weighted instruction count</span> priced for <span class="verbatim">Intel Sapphire Rapids</span>. The metric is <span class="verbatim">deterministic and reproducible, machine-independent, and correlated with wall-clock time on a single machine.</span>
-
 - **H035 · Bright green · Before: Not assessed**
     - Selected text: `ensured the metric is deterministic and reproducible, machine-independent, and correlated with wall-clock time on a single machine.`
-    - Now represented under **Model Evaluation → Auto Judge → Performance Grading**.
+    - Now represented under **Quality Control → Human Review → Quality Dimensions**.
 
-    - Summary evidence: - **Performance Engineering:** V2 replaces noisy wall-clock grading with a <span class="verbatim">weighted instruction count</span> priced for <span class="verbatim">Intel Sapphire Rapids</span>. The metric is <span class="verbatim">deterministic and reproducible, machine-independent, and correlated with wall-clock time on a single machine.</span>
+    - Summary evidence:         - The metric is <span class="verbatim">deterministic and reproducible, machine-independent, and correlated with wall-clock time on a single machine.</span>
     - Meaning: ensured the metric is deterministic and reproducible, machine-independent, and correlated with wall-clock time on a single machine.
 
     - Transformation reason: The ensured-the-metric-is setup is replaced by an explicit metric subject; deterministic, reproducible, machine-independent, and single-machine wall-clock correlation are all retained verbatim.
 
+- **H037 · Bright green · Before: Not assessed**
+    - Selected text: `Harbor's native two-container approach: the agent's container is stopped, a fresh verifier boots from a pinned image, and the entire filesystem is clean.`
+    - Now represented under **Quality Control → Human Review → Quality Dimensions**.
+
+    - Summary evidence:         - <span class="verbatim">Harbor's native two-container approach: the agent's container is stopped, a fresh verifier boots from a pinned image, and the entire filesystem is clean.</span>
+    - Meaning: Harbor's native two-container approach: the agent's container is stopped, a fresh verifier boots from a pinned image, and the entire filesystem is clean.
+
+- **H039 · Bright green · Before: Not assessed**
+    - Selected text: `the Dockerfile creates a non-root user, all agent scored material lives under root-owned mode 0700 paths, and locks the reward directory test.sh and drops to the agent user before executing any agent code.`
+    - Now represented under **Quality Control → Human Review → Quality Dimensions**.
+
+    - Summary evidence:         - The <span class="verbatim">Dockerfile</span> <span class="verbatim">creates a non-root agent user</span>; <span class="verbatim">all scored material lives under root-owned mode 0700 paths</span>, and <span class="verbatim">test.sh</span> <span class="verbatim">locks the reward directory and drops to the agent user before executing any agent code.</span>
+    - Meaning: the Dockerfile creates a non-root user, all agent scored material lives under root-owned mode 0700 paths, and locks the reward directory test.sh and drops to the agent user before executing any agent code.
+
+    - Transformation reason: Inline-code reading-order corruption is repaired using the original page: non-root agent, root-only mode 0700 assets, reward-directory locking, and privilege dropping before any agent code executes are retained in verified source fragments.
+
 - **H031 · Light green · Before: Not assessed**
     - Selected text: `When we re-scored preserved submissions locally, rankings flipped: recorded improvements came back as regressions on a different host.`
-    - Now represented under **Model Evaluation → Auto Judge → Performance Grading**.
+    - Now represented under **Quality Control → Human Review → Quality Dimensions**.
 
-    - Summary evidence:     - After local re-scoring of preserved submissions from shared sandboxes, <span class="verbatim">rankings flipped: recorded improvements came back as regressions on a different host.</span>
+    - Summary evidence:         - After local re-scoring of preserved submissions from shared sandboxes, <span class="verbatim">rankings flipped: recorded improvements came back as regressions on a different host.</span>
     - Meaning: When we re-scored preserved submissions locally, rankings flipped: recorded improvements came back as regressions on a different host.
 
-    - Transformation reason: The local rescoring setup is restated neutrally and the complete ranking-reversal finding is quoted.
+    - Transformation reason: The local rescoring setup is restated neutrally and the complete ranking-reversal finding is quoted as evidence of the benchmark metric's reproducibility problem.
 
 - **H032 · Light green · Before: Not assessed**
     - Selected text: `even when running our tasks on pinned hosts, we still saw significant run-to- run variance in the scores caused by effects such as OS scheduling and thermal throttling.`
-    - Now represented under **Model Evaluation → Auto Judge → Performance Grading**.
+    - Now represented under **Quality Control → Human Review → Quality Dimensions**.
 
-    - Summary evidence:     - Pinned hosts still showed <span class="verbatim">significant run-to-run variance in the scores caused by effects such as OS scheduling and thermal throttling.</span>
+    - Summary evidence:         - Pinned hosts still showed <span class="verbatim">significant run-to-run variance in the scores caused by effects such as OS scheduling and thermal throttling.</span>
     - Meaning: even when running our tasks on pinned hosts, we still saw significant run-to- run variance in the scores caused by effects such as OS scheduling and thermal throttling.
 
     - Transformation reason: Author framing is removed; the pinned-host condition and complete scheduling/thermal-throttling explanation remain together.
 
 - **H036 · Light green · Before: Not assessed**
     - Selected text: `To work around this, agents now optimise a proxy metric: a weighted instruction count where each instruction is priced by its measured cost on a pinned Intel Sapphire Rapids microarchitecture, using published per-instruction throughput data.`
-    - Now represented under **Model Evaluation → Auto Judge → Performance Grading**.
+    - Now represented under **Quality Control → Human Review → Quality Dimensions**.
 
-    - Summary evidence:     - V2 uses <span class="verbatim">a weighted instruction count where each instruction is priced by its measured cost on a pinned Intel Sapphire Rapids microarchitecture, using published per-instruction throughput data.</span>
+    - Summary evidence:         - V2 uses <span class="verbatim">a weighted instruction count where each instruction is priced by its measured cost on a pinned Intel Sapphire Rapids microarchitecture, using published per-instruction throughput data.</span>
     - Meaning: To work around this, agents now optimise a proxy metric: a weighted instruction count where each instruction is priced by its measured cost on a pinned Intel Sapphire Rapids microarchitecture, using published per-instruction throughput data.
 
-    - Transformation reason: The context-dependent transition and agent-optimization framing are omitted; the complete weighted-instruction definition, measured cost, pinned Sapphire Rapids architecture, and published throughput basis are retained in the quoted clause.
-
-## Preventing Cheating
-
-**Priority 2 · Special Design**
-
-- **Preventing Cheating:** A fresh verifier container and non-root execution protect hidden tests and reward files from agent-written code; successful-looking local output cannot substitute for verification.
-
-- **H037 · Bright green · Before: Not assessed**
-    - Selected text: `Harbor's native two-container approach: the agent's container is stopped, a fresh verifier boots from a pinned image, and the entire filesystem is clean.`
-    - Now represented under **Special Design → Preventing Cheating**.
-
-    - Summary evidence:     - <span class="verbatim">Harbor's native two-container approach: the agent's container is stopped, a fresh verifier boots from a pinned image, and the entire filesystem is clean.</span>
-    - Meaning: Harbor's native two-container approach: the agent's container is stopped, a fresh verifier boots from a pinned image, and the entire filesystem is clean.
-
-- **H039 · Bright green · Before: Not assessed**
-    - Selected text: `the Dockerfile creates a non-root user, all agent scored material lives under root-owned mode 0700 paths, and locks the reward directory test.sh and drops to the agent user before executing any agent code.`
-    - Now represented under **Special Design → Preventing Cheating**.
-
-    - Summary evidence:     - The <span class="verbatim">Dockerfile</span> creates a non-root agent. Scored material stays under root-owned <span class="verbatim">mode 0700 paths</span>, and <span class="verbatim">test.sh</span> locks the reward directory and switches to the agent user before executing any agent code.
-    - Meaning: the Dockerfile creates a non-root user, all agent scored material lives under root-owned mode 0700 paths, and locks the reward directory test.sh and drops to the agent user before executing any agent code.
-
-    - Transformation reason: The selected sentence has inline-code reading-order corruption. The page was visually checked: non-root agent, root-only mode 0700 assets, reward-directory locking, and privilege dropping before agent execution are all retained.
+    - Transformation reason: The context-dependent transition and agent-optimization framing are omitted; the complete weighted-instruction definition, measured cost, pinned Sapphire Rapids architecture, and published throughput basis remain in the quoted clause.
 
 - **H038 · Light green · Before: Not assessed**
     - Selected text: `Pre-written reward files, mutated binaries, planted tests, background processes: all gone by construction.`
-    - Now represented under **Special Design → Preventing Cheating**.
+    - Now represented under **Quality Control → Human Review → Quality Dimensions**.
 
-    - Summary evidence:     - <span class="verbatim">Pre-written reward files, mutated binaries, planted tests, background processes: all gone by construction.</span>
+    - Summary evidence:         - <span class="verbatim">Pre-written reward files, mutated binaries, planted tests, background processes: all gone by construction.</span>
     - Meaning: Pre-written reward files, mutated binaries, planted tests, background processes: all gone by construction.
 
 - **H040 · Light green · Before: Not assessed**
     - Selected text: `the agent's runtime can write directly to the reward file or spawn processes that keep overwriting it.`
-    - Now represented under **Special Design → Preventing Cheating**.
+    - Now represented under **Quality Control → Human Review → Quality Dimensions**.
 
-    - Summary evidence:     - Without user separation, <span class="verbatim">the agent's runtime can write directly to the reward file or spawn processes that keep overwriting it.</span>
+    - Summary evidence:         - Without user separation, <span class="verbatim">the agent's runtime can write directly to the reward file or spawn processes that keep overwriting it.</span>
     - Meaning: the agent's runtime can write directly to the reward file or spawn processes that keep overwriting it.
 
 - **H041 · Light green · Before: Not assessed**
     - Selected text: `Even with a separate container, the verifier compiles and runs agent-written code to test it, and that code inherits root if unguarded.`
-    - Now represented under **Special Design → Preventing Cheating**.
+    - Now represented under **Quality Control → Human Review → Quality Dimensions**.
 
-    - Summary evidence:     - <span class="verbatim">Even with a separate container, the verifier compiles and runs agent-written code to test it, and that code inherits root if unguarded.</span>
+    - Summary evidence:         - <span class="verbatim">Even with a separate container, the verifier compiles and runs agent-written code to test it, and that code inherits root if unguarded.</span>
     - Meaning: Even with a separate container, the verifier compiles and runs agent-written code to test it, and that code inherits root if unguarded.
 
 - **H043 · Light green · Before: Not assessed**
     - Selected text: `Code 1a. DOCKERFILE`
-    - Now represented under **Special Design → Preventing Cheating**.
+    - Now represented under **Quality Control → Human Review → Quality Dimensions**.
 
-    - Summary evidence:     - **Code 1a. Dockerfile:** Creates the non-root agent; keeps verifier assets under root ownership; gives the agent ownership of its workspace.
+    - Summary evidence:         - The <span class="verbatim">Dockerfile</span> <span class="verbatim">creates a non-root agent user</span>; <span class="verbatim">all scored material lives under root-owned mode 0700 paths</span>, and <span class="verbatim">test.sh</span> <span class="verbatim">locks the reward directory and drops to the agent user before executing any agent code.</span>
     - Meaning: Code 1a. DOCKERFILE
 
-    - Transformation reason: The highlighted code heading is retained with Title Case and a concise description of its actual code, rather than pasting unhighlighted setup code.
+    - Transformation reason: The reader explicitly removed the standalone code-example bullets. The Dockerfile heading is merged into the retained original prose about creating a non-root agent and protecting scoring assets; the code-example heading and its added description are omitted.
 
 - **H044 · Light green · Before: Not assessed**
     - Selected text: `Code 1b. TEST.SH`
-    - Now represented under **Special Design → Preventing Cheating**.
+    - Now represented under **Quality Control → Human Review → Quality Dimensions**.
 
-    - Summary evidence:     - **Code 1b. Test.sh:** Locks the reward directory before executing agent code, runs the candidate without root, and scores root-written evidence.
+    - Summary evidence:         - The <span class="verbatim">Dockerfile</span> <span class="verbatim">creates a non-root agent user</span>; <span class="verbatim">all scored material lives under root-owned mode 0700 paths</span>, and <span class="verbatim">test.sh</span> <span class="verbatim">locks the reward directory and drops to the agent user before executing any agent code.</span>
     - Meaning: Code 1b. TEST.SH
 
-    - Transformation reason: The highlighted code heading is retained with Title Case; its privilege and evidence boundary are described from the displayed script.
+    - Transformation reason: The reader explicitly removed the standalone code-example bullets. The test.sh heading is merged into the retained original prose about locking rewards and dropping privileges before agent code; the separate code-example heading and description are omitted.
 
 - **H045 · Light green · Before: Not assessed**
     - Selected text: `Code 1c. CHEATS PREVENTED`
-    - Now represented under **Special Design → Preventing Cheating**.
+    - Now represented under **Quality Control → Human Review → Quality Dimensions**.
 
-    - Summary evidence:     - **Code 1c. Cheats Prevented:** Blocks direct reward writes, background overwrites, reading hidden tests, renaming the test runner, and patching a library imported by the scorer.
+    - Summary evidence:         - <span class="verbatim">Pre-written reward files, mutated binaries, planted tests, background processes: all gone by construction.</span>
     - Meaning: Code 1c. CHEATS PREVENTED
 
-    - Transformation reason: The highlighted code heading is retained with Title Case; all five blocked actions in the associated example are listed.
+    - Transformation reason: The reader explicitly removed the standalone code-example bullets. The heading's prevention theme is merged into the retained original list of blocked reward-file, binary, test and background-process tampering; the added five-example description is intentionally omitted.
 
 ## Visual Reasoning
 
@@ -302,22 +310,22 @@ Previous statuses: **Covered**, **Partial**, **Title only**, or **Missing**. New
 
 **Priority 3 · Summary**
 
-- **Time and Cost:** Agents receive <span class="verbatim">20 hours per task</span>. Mean trial costs: <span class="verbatim">Fable 5.1</span> $<span class="verbatim">138.55</span>, <span class="verbatim">GPT-5.6 Sol</span> $<span class="verbatim">179.64</span>, and <span class="verbatim">GLM-5.3</span> $<span class="verbatim">97.22</span>.
+- **Time and Cost:** V2 gives agents <span class="verbatim">a 20-hour budget per task.</span> The highest-scoring model, <span class="verbatim">Claude Fable 5.1</span>, averages <span class="verbatim">11.63</span> hours per trial, including unsuccessful attempts. V2 does not report measured human completion time or task-creation cost.
 
 - **H001 · Light green · Before: Not assessed**
     - Selected text: `Agents are given 20 hours per task;`
     - Now represented under **Summary → Time Budget**.
 
-    - Summary evidence: - **Time and Cost:** Agents receive <span class="verbatim">20 hours per task</span>. Mean trial costs: <span class="verbatim">Fable 5.1</span> $<span class="verbatim">138.55</span>, <span class="verbatim">GPT-5.6 Sol</span> $<span class="verbatim">179.64</span>, and <span class="verbatim">GLM-5.3</span> $<span class="verbatim">97.22</span>.
+    - Summary evidence: - **Time and Cost:** V2 gives agents <span class="verbatim">a 20-hour budget per task.</span> The highest-scoring model, <span class="verbatim">Claude Fable 5.1</span>, averages <span class="verbatim">11.63</span> hours per trial, including unsuccessful attempts. V2 does not report measured human completion time or task-creation cost.
     - Meaning: Agents are given 20 hours per task;
 
-    - Transformation reason: The shared 20-hour allowance is retained once; author wording and the trailing semicolon are omitted.
+    - Transformation reason: The shared 20-hour allowance is retained in the visible lead using v2 wording. The top-model runtime is taken from v2 source data and is distinguished from successful completion time.
 
 - **H014 · Light green · Before: Not assessed**
     - Selected text: `measure how far models can get within 20 hours:`
     - Now represented under **Summary → Time Budget**.
 
-    - Summary evidence: - **Time and Cost:** Agents receive <span class="verbatim">20 hours per task</span>. Mean trial costs: <span class="verbatim">Fable 5.1</span> $<span class="verbatim">138.55</span>, <span class="verbatim">GPT-5.6 Sol</span> $<span class="verbatim">179.64</span>, and <span class="verbatim">GLM-5.3</span> $<span class="verbatim">97.22</span>.
+    - Summary evidence: - **Time and Cost:** V2 gives agents <span class="verbatim">a 20-hour budget per task.</span> The highest-scoring model, <span class="verbatim">Claude Fable 5.1</span>, averages <span class="verbatim">11.63</span> hours per trial, including unsuccessful attempts. V2 does not report measured human completion time or task-creation cost.
     - Meaning: measure how far models can get within 20 hours:
 
     - Transformation reason: The measure-within-20-hours statement is merged into the shared time allowance; the Evaluation Method and Task Scoring bullets retain assessment of partial progress.
@@ -344,66 +352,66 @@ Previous statuses: **Covered**, **Partial**, **Title only**, or **Missing**. New
     - Summary evidence:     - <span class="verbatim">FrontierSWE v2 comes with 21 new challenges, bringing the total number of tasks to 34.</span>
     - Meaning: FrontierSWE v2 comes with 21 new challenges, bringing the total number of tasks to 34.
 
-## Task Design
+## Example Tasks
 
 **Priority 3 · Dataset Creation**
 
-- **Task Design:** Prompts specify performance targets or functional requirements. The highlighted examples cover implementation, performance, research, and visual tasks.
+- **Example Tasks:**
 
 - **H003 · Light green · Before: Not assessed**
     - Selected text: `FrogsGame Post-Training`
-    - Now represented under **Dataset Creation → Task Design**.
+    - Now represented under **Dataset Creation → Example Tasks**.
 
-    - Summary evidence:     - **Example Task:** Paper: V1, Benchmark Design — Research; official task: [<span class="verbatim">FrogsGame Post-Training</span>](https://www.frontierswe.com/v1/frogsgame-rl) (`frogsgame-rl`).
+    - Summary evidence:     - **Example Task:** V1 Research - [<span class="verbatim">FrogsGame Post-Training</span>](https://www.frontierswe.com/v1/frogsgame-rl) (`frogsgame-rl`).
     - Meaning: FrogsGame Post-Training
 
 - **H004 · Light green · Before: Not assessed**
     - Selected text: `Git to Zig`
-    - Now represented under **Dataset Creation → Task Design**.
+    - Now represented under **Dataset Creation → Example Tasks**.
 
-    - Summary evidence:     - **Example Task:** Paper: V1, Benchmark Design — Implementation; official task: [<span class="verbatim">Git to Zig</span>](https://www.frontierswe.com/v1/git-to-zig) (`git-to-zig`).
+    - Summary evidence:     - **Example Task:** V1 Implementation - [<span class="verbatim">Git to Zig</span>](https://www.frontierswe.com/v1/git-to-zig) (`git-to-zig`).
     - Meaning: Git to Zig
 
 - **H005 · Light green · Before: Not assessed**
     - Selected text: `Optimizer Design`
-    - Now represented under **Dataset Creation → Task Design**.
+    - Now represented under **Dataset Creation → Example Tasks**.
 
-    - Summary evidence:     - **Example Task:** Paper: V1, Benchmark Design — Research; official task: [<span class="verbatim">Optimizer Design</span>](https://www.frontierswe.com/v1/optimizer-design) (`optimizer-design`).
+    - Summary evidence:     - **Example Task:** V1 Research - [<span class="verbatim">Optimizer Design</span>](https://www.frontierswe.com/v1/optimizer-design) (`optimizer-design`).
     - Meaning: Optimizer Design
 
 - **H006 · Light green · Before: Not assessed**
     - Selected text: `Notebook Compression`
-    - Now represented under **Dataset Creation → Task Design**.
+    - Now represented under **Dataset Creation → Example Tasks**.
 
-    - Summary evidence:     - **Example Task:** Paper: V1, Benchmark Design — Performance; official task: [<span class="verbatim">Notebook Compression</span>](https://www.frontierswe.com/v1/notebook-compression) (`notebook-compression`).
+    - Summary evidence:     - **Example Task:** V1 Performance - [<span class="verbatim">Notebook Compression</span>](https://www.frontierswe.com/v1/notebook-compression) (`notebook-compression`).
     - Meaning: Notebook Compression
 
 - **H017 · Light green · Before: Not assessed**
     - Selected text: `TORCS Racing Bot`
-    - Now represented under **Dataset Creation → Task Design**.
+    - Now represented under **Dataset Creation → Example Tasks**.
 
-    - Summary evidence:     - **Example Task:** Paper: V2, New Tasks — Visual Reasoning; All 34 tasks, Vision-only TORCS Racing Bot; official task: [<span class="verbatim">TORCS Racing Bot</span>](https://www.frontierswe.com/tasks/torcs-ai-bot) (`torcs-ai-bot`).
+    - Summary evidence:     - **Example Task:** V2 Visual Reasoning - [<span class="verbatim">TORCS Racing Bot</span>](https://www.frontierswe.com/tasks/torcs-ai-bot) (`torcs-ai-bot`).
     - Meaning: TORCS Racing Bot
 
 - **H018 · Light green · Before: Not assessed**
     - Selected text: `Snooker Prediction`
-    - Now represented under **Dataset Creation → Task Design**.
+    - Now represented under **Dataset Creation → Example Tasks**.
 
-    - Summary evidence:     - **Example Task:** Paper: V2, New Tasks — Visual Reasoning; All 34 tasks, Snooker Prediction; official task: [<span class="verbatim">Snooker Prediction</span>](https://www.frontierswe.com/tasks/snooker-prediction) (`snooker-prediction`).
+    - Summary evidence:     - **Example Task:** V2 Visual Reasoning - [<span class="verbatim">Snooker Prediction</span>](https://www.frontierswe.com/tasks/snooker-prediction) (`snooker-prediction`).
     - Meaning: Snooker Prediction
 
 - **H023 · Light green · Before: Not assessed**
     - Selected text: `Flight-Sim Renderer in OpenGL`
-    - Now represented under **Dataset Creation → Task Design**.
+    - Now represented under **Dataset Creation → Example Tasks**.
 
-    - Summary evidence:     - **Example Task:** Paper: V2, New Tasks — Visual Reasoning; All 34 tasks, Flight-Sim Renderer in OpenGL; official task: [<span class="verbatim">Flight-Sim Renderer in OpenGL</span>](https://www.frontierswe.com/tasks/opengl-scene-engine) (`opengl-scene-engine`).
+    - Summary evidence:     - **Example Task:** V2 Visual Reasoning - [<span class="verbatim">Flight-Sim Renderer in OpenGL</span>](https://www.frontierswe.com/tasks/opengl-scene-engine) (`opengl-scene-engine`).
     - Meaning: Flight-Sim Renderer in OpenGL
 
 - **H024 · Light green · Before: Not assessed**
     - Selected text: `Astronomy Toolkit`
-    - Now represented under **Dataset Creation → Task Design**.
+    - Now represented under **Dataset Creation → Example Tasks**.
 
-    - Summary evidence:     - **Example Task:** Paper: V2, New Tasks — Scientific Computing; All 34 tasks, Astronomy Toolkit; official task: [<span class="verbatim">Astronomy Toolkit</span>](https://www.frontierswe.com/tasks/autonomous-astrometry-toolkit) (`autonomous-astrometry-toolkit`).
+    - Summary evidence:     - **Example Task:** V2 Scientific Computing - [<span class="verbatim">Astronomy Toolkit</span>](https://www.frontierswe.com/tasks/autonomous-astrometry-toolkit) (`autonomous-astrometry-toolkit`).
     - Meaning: Astronomy Toolkit
 
 ## Task Scoring
@@ -416,7 +424,7 @@ Previous statuses: **Covered**, **Partial**, **Title only**, or **Missing**. New
     - Selected text: `we measure how well agents do on an individual task or whether they can write partial solutions and accordingly grade tasks on a scale from zero to one.`
     - Now represented under **Model Evaluation → Auto Judge → Task Scoring**.
 
-    - Summary evidence:     - V1 assesses partial solutions on <span class="verbatim">a scale from zero to one.</span> Each model–harness combination runs <span class="verbatim">five trials per task</span>, comparing <span class="verbatim">both mean@5 and best@5 values.</span>
+    - Summary evidence:     - V1 assesses partial solutions on <span class="verbatim">a scale from zero to one.</span> Each model–harness combination runs <span class="verbatim">five trials per task</span>, comparing <span class="verbatim">both mean@5 and best@5 values.</span> Mean@5 averages the five trial scores; best@5 takes the highest score.
     - Meaning: we measure how well agents do on an individual task or whether they can write partial solutions and accordingly grade tasks on a scale from zero to one.
 
     - Transformation reason: The original author-voice clause is restated as assessment of partial solutions; the original zero-to-one scale is quoted.
@@ -425,7 +433,7 @@ Previous statuses: **Covered**, **Partial**, **Title only**, or **Missing**. New
     - Selected text: `We run each model & harness combination for five trials per task and measure model standings considering both mean@5 and best@5 values.`
     - Now represented under **Model Evaluation → Auto Judge → Task Scoring**.
 
-    - Summary evidence:     - V1 assesses partial solutions on <span class="verbatim">a scale from zero to one.</span> Each model–harness combination runs <span class="verbatim">five trials per task</span>, comparing <span class="verbatim">both mean@5 and best@5 values.</span>
+    - Summary evidence:     - V1 assesses partial solutions on <span class="verbatim">a scale from zero to one.</span> Each model–harness combination runs <span class="verbatim">five trials per task</span>, comparing <span class="verbatim">both mean@5 and best@5 values.</span> Mean@5 averages the five trial scores; best@5 takes the highest score.
     - Meaning: We run each model & harness combination for five trials per task and measure model standings considering both mean@5 and best@5 values.
 
     - Transformation reason: The author-voice run description becomes a neutral model–harness statement, retaining five trials and both mean@5 and best@5.
@@ -536,41 +544,10 @@ Previous statuses: **Covered**, **Partial**, **Title only**, or **Missing**. New
     - Now represented under **Quality Control → Human Review → Qa Review Approach**.
 
     - Summary evidence: - **Review Approach:**
-    - V2 revises task design and scoring and fixes v1 tasks for fairness and reproducibility; separate manual QA steps are not described.
+    - V2 revises task design and scoring and applies an <span class="verbatim">improved QA process to all tasks</span>, including fixes to v1 tasks for <span class="verbatim">fairness and reproducibility.</span> The paper does not identify the reviewers.
     - Meaning: We revamped some of our task design and scoring methodology and applied fixes to existing tasks to improve fairness and reproducibility.
 
-    - Transformation reason: The author-voice sentence is restated neutrally, preserving changes to task design, scoring methodology, existing tasks, fairness, and reproducibility. No undocumented manual procedure is asserted.
-
-## Self Check Feedback
-
-**Priority 3 · Model Evaluation · Auto Judge**
-
-- **Self-Check Feedback:** <span class="verbatim">Every task gives the agent a self-check signal that tracks verifier score.</span> This makes local feedback available throughout the run.
-
-- **H028 · Light green · Before: Not assessed**
-    - Selected text: `every workspace contains a documented self-check tool whose output correlates monotonically with the verifier score.`
-    - Now represented under **Model Evaluation → Auto Judge → Self Check Feedback**.
-
-    - Summary evidence:     - Each workspace provides a <span class="verbatim">documented self-check tool whose output correlates monotonically with the verifier score.</span>
-    - Meaning: every workspace contains a documented self-check tool whose output correlates monotonically with the verifier score.
-
-    - Transformation reason: The repeated every-workspace subject is merged with the lead; documented availability and the monotonic verifier relation remain in the complete original clause.
-
-- **H060 · Light green · Before: Not assessed**
-    - Selected text: `Every task gives the agent a self-check signal that tracks verifier score.`
-    - Now represented under **Model Evaluation → Auto Judge → Self Check Feedback**.
-
-    - Summary evidence: - **Self-Check Feedback:** <span class="verbatim">Every task gives the agent a self-check signal that tracks verifier score.</span> This makes local feedback available throughout the run.
-    - Meaning: Every task gives the agent a self-check signal that tracks verifier score.
-
-- **H061 · Light green · Before: Not assessed**
-    - Selected text: `Depending on the task, this may be a runnable test suite, a comparison against reference behaviour, or a disclosed objective metric.`
-    - Now represented under **Model Evaluation → Auto Judge → Self Check Feedback**.
-
-    - Summary evidence:     - The feedback may be <span class="verbatim">a runnable test suite, a comparison against reference behaviour, or a disclosed objective metric.</span> End-to-end implementation tasks expose the full test suite.
-    - Meaning: Depending on the task, this may be a runnable test suite, a comparison against reference behaviour, or a disclosed objective metric.
-
-    - Transformation reason: The context-dependent opening is replaced with an explicit feedback subject; all three original feedback mechanisms remain.
+    - Transformation reason: The author-voice sentence is restated neutrally, preserving changes to task design, scoring methodology, existing tasks, fairness, and reproducibility. The following Fairness paragraph supplies the improved QA process applied to all tasks; no undocumented reviewer identity or manual procedure is asserted.
 
 ## Post Rollout Review
 
@@ -633,13 +610,34 @@ Previous statuses: **Covered**, **Partial**, **Title only**, or **Missing**. New
     - Repeated submissions can become churn: one OpenGL run submitted the same commit <span class="verbatim">199</span> consecutive times in <span class="verbatim">47 minutes.</span> Submission count measures use of the checkpointing interface, rather than meaningful changes in strategy.
     - Meaning: Grok often uses submissions as insurance: checkpoint a working state, attempt a risky change, and roll back if it fails.
 
+## Self Check Feedback
+
+**Priority 3 · Model Evaluation · Auto Judge**
+
+- **Self-Check Feedback:** <span class="verbatim">Every task gives the agent a self-check signal that tracks verifier score.</span> This makes local feedback available throughout the run.
+
+- **H060 · Light green · Before: Not assessed**
+    - Selected text: `Every task gives the agent a self-check signal that tracks verifier score.`
+    - Now represented under **Model Evaluation → Auto Judge → Self Check Feedback**.
+
+    - Summary evidence: - **Self-Check Feedback:** <span class="verbatim">Every task gives the agent a self-check signal that tracks verifier score.</span> This makes local feedback available throughout the run.
+    - Meaning: Every task gives the agent a self-check signal that tracks verifier score.
+
+- **H061 · Light green · Before: Not assessed**
+    - Selected text: `Depending on the task, this may be a runnable test suite, a comparison against reference behaviour, or a disclosed objective metric.`
+    - Now represented under **Model Evaluation → Auto Judge → Self Check Feedback**.
+
+    - Summary evidence:     - The feedback may be <span class="verbatim">a runnable test suite, a comparison against reference behaviour, or a disclosed objective metric.</span>
+    - Meaning: Depending on the task, this may be a runnable test suite, a comparison against reference behaviour, or a disclosed objective metric.
+
+    - Transformation reason: The context-dependent opening is replaced with an explicit feedback subject; all three original feedback mechanisms remain.
+
 ## Excluded and Unclassified
 
 - H019: Original-file attachment icon highlight, excluded by your color preferences.
 - H020: Original-file attachment icon highlight, excluded by your color preferences.
 - H021: Original-file attachment icon highlight, excluded by your color preferences.
 - H022: Original-file attachment icon highlight, excluded by your color preferences.
-- H029: Yellow highlight, excluded by your color preferences.
 - H069: Original-file attachment icon highlight, excluded by your color preferences.
 - H070: Original-file attachment icon highlight, excluded by your color preferences.
 - H071: Original-file attachment icon highlight, excluded by your color preferences.

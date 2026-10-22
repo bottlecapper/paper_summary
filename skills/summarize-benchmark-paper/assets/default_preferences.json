@@ -44,7 +44,7 @@
       800
     ],
     "maximum_word_count": 900,
-    "word_count_scope": "Overview; comprehensive source sub-bullets remain available as expandable HTML excerpts",
+    "word_count_scope": "Visible overview, including all Summary content; supporting source bullets in later sections remain available as expandable HTML excerpts",
     "cover_every_included_highlight": true,
     "group_related_highlights_across_priorities": true,
     "group_order": "Highest included priority first within each section, then source order",
@@ -74,7 +74,7 @@
     "important_sections_maximum_entries": 5,
     "important_sections_order": "Paper order: main-text sections first, then appendix sections; numeric section order within each group, preserving subsection nesting",
     "important_sections_changed_capitalization_color": "default",
-    "summary_layout": "Use concise bullets for purpose, scope, task design, time/cost when reported, and evaluation method. Omit a redundant opening Key Findings bullet and any Resources and Data section.",
+    "summary_layout": "Use concise, fully visible bullets for purpose, scope, task design, time/cost when reported, and evaluation method. Keep essential time limits and partial-credit scoring in the main bullets, with no Source Excerpts in Summary. Omit a redundant opening Key Findings bullet and any Resources and Data section.",
     "summary_source_policy": "Incorporate user-supplied search results with accurate caveats; verify changing resources and distinguish independent evaluations from the paper results",
     "include_external_links": false,
     "include_paper_link_at_top": true,
@@ -108,7 +108,7 @@
     "revision_policy": "Edit Markdown first, render every changed Markdown document to paired HTML, and verify content consistency. Never update only the HTML.",
     "skill_scope": "Benchmark papers only; other research paper types use other skills.",
     "file_naming": "Use snake_case and retain any reader-provided numeric paper prefix consistently in Markdown, HTML, and provenance filenames.",
-    "example_presentation": "Put the source and lookup details immediately after **Example Task:** on the same line, before the instruction. Do not add a separate Source heading. Follow with one paragraph: The task instruction is: *“Complete unchanged task instruction.”* Italicize the quoted instruction in the default color, with no blue spans, manual line breaks, or separate instruction heading. Keep the introduction in normal type. Use 0.88em font size and justified alignment. Include only the instruction and its paper/dataset source; retain source identifiers needed to locate it. Do not include deliverables or other extra example material. Check the paper for the same task and include its exact subsection, figure, or table identifier when present. Do not use a location for a different task or a general task-design section. Put both paper and dataset references on the Example Task line when available for the same task; do not replace one source with the other.",
+    "example_presentation": "Place **Example Tasks:** directly under Dataset Creation, alongside Task Design; nest individual **Example Task:** entries beneath it. Put the source and lookup details immediately after **Example Task:** on the same line, before the instruction. Use a compact paper version/section/figure/table locator, a hyphen, the linked task name, and its ID when available; omit boilerplate such as Paper: and official task:. Keep full retrieval details internally. Do not add a separate Source heading. Follow with one paragraph: The task instruction is: *“Complete unchanged task instruction.”* Italicize the quoted instruction in the default color, with no blue spans, manual line breaks, or separate instruction heading. Keep the introduction in normal type. Use 0.88em font size and justified alignment. Include only the instruction and its paper/dataset source; retain source identifiers needed to locate it. Do not include deliverables or other extra example material. Check the paper for the same task and include its exact subsection, figure, or table identifier when present. Do not use a location for a different task or a general task-design section. Put both paper and dataset references on the Example Task line when available for the same task; do not replace one source with the other.",
     "special_design_hardening": "When reported, explain how tasks are deliberately made harder under Special Design, using the paper’s terminology and source excerpts for each technique and its purpose. Keep generation procedures in Dataset Creation and validity checks in Quality Control; avoid duplicating the main hardening explanation.",
     "highlight_coverage_review": "Read every included selection against its bound summary evidence, checking each claim, action, constraint, number, and qualification in multi-part selections and rectangles. Explain actual transformations and where details survive; counts and generic coverage assertions do not establish semantic inclusion. Report restored omissions and intentional exclusions separately."
   }

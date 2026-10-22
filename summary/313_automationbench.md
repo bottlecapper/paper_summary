@@ -21,10 +21,6 @@
 - **Task Design:** Each task requires <span class="verbatim">at least one concrete state mutation</span>; <span class="verbatim">the task is non-interactive until completion.</span> Judgment must become a structured state change.
     - <span class="verbatim">requiring the agent to record its decision as a structured state change (e.g., updating a status field, assigning a score, routing to a queue) rather than producing free-form text.</span>
     - All tasks require observable outcomes, deterministic validation, structured invariants rather than free-form success criteria, recorded decisions, and a single autonomous instruction.
-    - **Example Task:** Paper: <span class="verbatim">Appendix: Task Examples</span> → <span class="verbatim">Task 1 · Sales — Meeting Conflict Resolution</span>; dataset: [sales.zoom_calendar_conflict](https://github.com/zapier/AutomationBench/blob/4a8e1061254004d9dac807054eed33fad7d1ff14/automationbench/domains/sales/tasks.py#L4291) (example ID `603`; search `get_zoom_calendar_conflict_task`).
-
-        The task instruction is: *“There’s a scheduling conflict on February 20, 2026 at 2:00 PM — a Zoom meeting and a Google Calendar event overlap. Check the meeting priority policy in the spreadsheet to determine which one wins, then reschedule the loser by prepending \[RESCHEDULED\] to its topic/title. Post a summary to #ops-updates on Slack noting which meeting won and which was rescheduled, including both the Zoom meeting ID and Calendar event ID.”*
-
     - **What Makes It Hard — Meeting Conflict Resolution:**
         - <span class="verbatim">Policy over intuition. Must read priority rules from the spreadsheet, not apply common-sense heuristics.</span>
         - <span class="verbatim">Correct rule application. The Calendar event’s CTO attendee triggers Rule 1 (highest). The Zoom meeting’s external registrants only reach Rule 3. Calendar wins.</span>
@@ -38,6 +34,11 @@
         - <span class="verbatim">Correct Asana setup. Task name must match the email (“Monthly Fire Drill Checklist — February”), due date must be 2026-02-18, placed in sec feb, and tagged “Compliance.”</span>
         - <span class="verbatim">Sender filtering. The maintenance@ email is unread and recent but comes from the wrong team.</span>
         - <span class="verbatim">Correct Slack channel. Post only to #ops-updates — not #general or #facilities-general.</span>
+
+- **Example Tasks:**
+    - **Example Task:** Paper: <span class="verbatim">Appendix: Task Examples</span> → <span class="verbatim">Task 1 · Sales — Meeting Conflict Resolution</span>; dataset: [sales.zoom_calendar_conflict](https://github.com/zapier/AutomationBench/blob/4a8e1061254004d9dac807054eed33fad7d1ff14/automationbench/domains/sales/tasks.py#L4291) (example ID `603`; search `get_zoom_calendar_conflict_task`).
+
+        The task instruction is: *“There’s a scheduling conflict on February 20, 2026 at 2:00 PM — a Zoom meeting and a Google Calendar event overlap. Check the meeting priority policy in the spreadsheet to determine which one wins, then reschedule the loser by prepending \[RESCHEDULED\] to its topic/title. Post a summary to #ops-updates on Slack noting which meeting won and which was rescheduled, including both the Zoom meeting ID and Calendar event ID.”*
 
 ## Quality Control
 

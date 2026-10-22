@@ -56,11 +56,10 @@ button {font:inherit;font-size:13px;border:1px solid var(--line);background:var(
 <h2 id="summary">Summary</h2>
 <ul>
 <li><strong>Purpose:</strong> Terminal-Bench is <span class="verbatim">a framework to evaluate agents on realistic tasks in command line interfaces.</span> Terminal-Bench 2.0 contains <span class="verbatim">89 tasks</span>.</li>
-<li><strong>Scope:</strong> High-skill work across <span class="verbatim">software engineering, scientific computing, cybersecurity, and machine learning</span>; 16 author-assigned categories.<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
-<li><span class="verbatim">Terminal-Bench evaluates whether agents can perform the kind of high-skill work that professionals are paid to do, including configuring legacy systems, reimplementing research papers, and solving general software engineering problems.</span></li>
+<li><strong>Scope:</strong> High-skill work across <span class="verbatim">software engineering, scientific computing, cybersecurity, and machine learning</span>; 16 author-assigned categories.<ul>
 <li>The terminal is <span class="verbatim">a ubiquitous, versatile, and powerful interface</span>.</li>
 <li>Equal-contribution corresponding authors include <span class="verbatim">Mike A. Merrill</span> and <span class="verbatim">Alexander G. Shaw</span>.</li>
-</ul></details>
+</ul>
 </li>
 <li><strong>Task Design:</strong> <span class="verbatim">Terminal-Bench tasks are interactive.</span> Agents explore and manipulate a container to achieve the requested final state.</li>
 <li><strong>Time and Cost:</strong> Author-estimated expert/junior workload; agent runtime and token usage are reported.</li>
@@ -73,6 +72,7 @@ button {font:inherit;font-size:13px;border:1px solid var(--line);background:var(
 <details class="source-excerpts"><summary>Source Excerpts</summary><ul>
 <li>Selection was <span class="verbatim">based on the author’s difficulty assessment and a quality assessment by three experienced human reviewers</span>.</li>
 <li>Software engineering is the largest category (26 tasks), with no majority category; the collection also includes personal-assistant and video-processing work.</li>
+<li><span class="verbatim">Terminal-Bench evaluates whether agents can perform the kind of high-skill work that professionals are paid to do, including configuring legacy systems, reimplementing research papers, and solving general software engineering problems.</span></li>
 </ul></details>
 </li>
 <li>
@@ -81,6 +81,11 @@ button {font:inherit;font-size:13px;border:1px solid var(--line);background:var(
 <li><span class="verbatim">Each task features a unique environment, human-written solution, and comprehensive tests for verification.</span></li>
 <li>The Dockerfile initializes relevant packages/files; instructions define the goal, tests verify completion, and a human-written oracle demonstrates solvability. Tests are injected for verification rather than exposed with the oracle during agent execution.</li>
 <li><span class="verbatim">Claude 4 Opus was used to transform the author-provided task instructions into the abbreviated “Description” in Appendix H.</span> The example below uses the instruction shown in Figure 2.</li>
+</ul></details>
+</li>
+<li>
+<p><strong>Example Tasks:</strong></p>
+<details class="source-excerpts"><summary>Source Excerpts</summary><ul>
 <li>
 <p><strong>Example Task:</strong> Paper: Figure <span class="verbatim">2</span> (COBOL example); dataset: <a href="https://github.com/harbor-framework/terminal-bench-2/blob/2fd12b88aafdd04a52c298e3940bcb189f9766d6/cobol-modernization/instruction.md">cobol-modernization</a> (<code>instruction.md</code>).</p>
 <p class="task-instruction">The task instruction is: <em>“Re-implement the COBOL program located in /app/src/program.cbl, in Python. Your script must produce identical results to the COBOL baseline.”</em></p>

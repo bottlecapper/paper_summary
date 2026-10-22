@@ -744,13 +744,6 @@ Previous statuses: **Covered**, **Partial**, **Title only**, or **Missing**. New
 
     - Transformation reason: Names and fragment labels are retained with their subjects, without citation markers or trailing punctuation. The purpose and evaluation bullets identify the framework, 89-task dataset, and frontier LLM/agent target; the scope bullets retain the four work domains and terminal context.
 
-- **H014 · Bright green · Before: Covered**
-    - Selected text: `Terminal-Bench evaluates whether agents can perform the kind of high- skill work that professionals are paid to do, including configuring legacy systems, reimplementing research papers, and solving general software engineering problems.`
-    - Now represented under **Summary → Scope**.
-
-    - Summary evidence:     - <span class="verbatim">Terminal-Bench evaluates whether agents can perform the kind of high-skill work that professionals are paid to do, including configuring legacy systems, reimplementing research papers, and solving general software engineering problems.</span>
-    - Meaning: Terminal-Bench evaluates whether agents can perform the kind of high- skill work that professionals are paid to do, including configuring legacy systems, reimplementing research papers, and solving general software engineering problems.
-
 - **H001 · Light green · Before: Covered**
     - Selected text: `89 tasks`
     - Now represented under **Summary → Scope**.
@@ -835,6 +828,64 @@ Previous statuses: **Covered**, **Partial**, **Title only**, or **Missing**. New
 
     - Summary evidence: - **Evaluation Method:** Experiments <span class="verbatim">benchmark frontier LLMs and agents</span> using final-state tests, repeated trials, and confidence intervals.
     - Meaning: benchmark frontier LLMs and agents
+
+## Sourcing
+
+**Priority 2 · Dataset Creation**
+
+- **Task Sourcing:** The project <span class="verbatim">crowd-sourced tasks through open-source contributions, with 93 contributors creating 229 tasks.</span> The final dataset contains 89 tasks.
+
+- **H014 · Bright green · Before: Covered**
+    - Selected text: `Terminal-Bench evaluates whether agents can perform the kind of high- skill work that professionals are paid to do, including configuring legacy systems, reimplementing research papers, and solving general software engineering problems.`
+    - Now represented under **Dataset Creation → Sourcing**.
+
+    - Summary evidence:     - <span class="verbatim">Terminal-Bench evaluates whether agents can perform the kind of high-skill work that professionals are paid to do, including configuring legacy systems, reimplementing research papers, and solving general software engineering problems.</span>
+    - Meaning: Terminal-Bench evaluates whether agents can perform the kind of high- skill work that professionals are paid to do, including configuring legacy systems, reimplementing research papers, and solving general software engineering problems.
+
+- **H027 · Light green · Before: Covered**
+    - Selected text: `the process of creating Terminal-Bench 2.0.`
+    - Now represented under **Dataset Creation → Sourcing**.
+
+    - Summary evidence: - **Task Sourcing:** The project <span class="verbatim">crowd-sourced tasks through open-source contributions, with 93 contributors creating 229 tasks.</span> The final dataset contains 89 tasks.
+    - Meaning: the process of creating Terminal-Bench 2.0.
+
+    - Transformation reason: First-person sourcing is rewritten with the project as subject. The lead retains open-source crowd-sourcing, 93 contributors, 229 contributions, and 89 selected tasks; the first source bullet preserves selection by author difficulty and three reviewers, with category diversity in the next bullet.
+
+- **H043 · Light green · Before: Partial**
+    - Selected text: `In order to design a diverse benchmark, we crowd-sourced tasks through open-source contributions, with 93 contributors creating 229 tasks.`
+    - Now represented under **Dataset Creation → Sourcing**.
+
+    - Summary evidence: - **Task Sourcing:** The project <span class="verbatim">crowd-sourced tasks through open-source contributions, with 93 contributors creating 229 tasks.</span> The final dataset contains 89 tasks.
+    - Selection was <span class="verbatim">based on the author’s difficulty assessment and a quality assessment by three experienced human reviewers</span>.
+    - Software engineering is the largest category (26 tasks), with no majority category; the collection also includes personal-assistant and video-processing work.
+    - Meaning: In order to design a diverse benchmark, we crowd-sourced tasks through open-source contributions, with 93 contributors creating 229 tasks.
+
+    - Transformation reason: First-person sourcing is rewritten with the project as subject. The lead retains open-source crowd-sourcing, 93 contributors, 229 contributions, and 89 selected tasks; the first source bullet preserves selection by author difficulty and three reviewers, with category diversity in the next bullet.
+
+- **H044 · Light green · Before: Covered**
+    - Selected text: `we selected 89`
+    - Now represented under **Dataset Creation → Sourcing**.
+
+    - Summary evidence: - **Task Sourcing:** The project <span class="verbatim">crowd-sourced tasks through open-source contributions, with 93 contributors creating 229 tasks.</span> The final dataset contains 89 tasks.
+    - Meaning: we selected 89
+
+    - Transformation reason: First-person sourcing is rewritten with the project as subject. The lead retains open-source crowd-sourcing, 93 contributors, 229 contributions, and 89 selected tasks; the first source bullet preserves selection by author difficulty and three reviewers, with category diversity in the next bullet.
+
+- **H045 · Light green · Before: Covered**
+    - Selected text: `based on the author’s difficulty assessment and a quality assess- ment by three experienced human reviewers`
+    - Now represented under **Dataset Creation → Sourcing**.
+
+    - Summary evidence:     - Selection was <span class="verbatim">based on the author’s difficulty assessment and a quality assessment by three experienced human reviewers</span>.
+    - Meaning: based on the author’s difficulty assessment and a quality assess- ment by three experienced human reviewers
+
+- **H064 · Light green · Before: Covered**
+    - Selected text: `a variety of categories,`
+    - Now represented under **Dataset Creation → Sourcing**.
+
+    - Summary evidence:     - Software engineering is the largest category (26 tasks), with no majority category; the collection also includes personal-assistant and video-processing work.
+    - Meaning: a variety of categories,
+
+    - Transformation reason: First-person sourcing is rewritten with the project as subject. The lead retains open-source crowd-sourcing, 93 contributors, 229 contributions, and 89 selected tasks; the first source bullet preserves selection by author difficulty and three reviewers, with category diversity in the next bullet.
 
 ## Scoring
 
@@ -1515,57 +1566,6 @@ Previous statuses: **Covered**, **Partial**, **Title only**, or **Missing**. New
 
     - Summary evidence:     - <span class="verbatim">Claude 4 Opus was used to transform the author-provided task instructions into the abbreviated “Description” in Appendix H.</span> The example below uses the instruction shown in Figure 2.
     - Meaning: Claude 4 Opus was used to transform the author-provided task instructions into the abbreviated “Description”
-
-## Sourcing
-
-**Priority 3 · Dataset Creation**
-
-- **Task Sourcing:** The project <span class="verbatim">crowd-sourced tasks through open-source contributions, with 93 contributors creating 229 tasks.</span> The final dataset contains 89 tasks.
-
-- **H027 · Light green · Before: Covered**
-    - Selected text: `the process of creating Terminal-Bench 2.0.`
-    - Now represented under **Dataset Creation → Sourcing**.
-
-    - Summary evidence: - **Task Sourcing:** The project <span class="verbatim">crowd-sourced tasks through open-source contributions, with 93 contributors creating 229 tasks.</span> The final dataset contains 89 tasks.
-    - Meaning: the process of creating Terminal-Bench 2.0.
-
-    - Transformation reason: First-person sourcing is rewritten with the project as subject. The lead retains open-source crowd-sourcing, 93 contributors, 229 contributions, and 89 selected tasks; the first source bullet preserves selection by author difficulty and three reviewers, with category diversity in the next bullet.
-
-- **H043 · Light green · Before: Partial**
-    - Selected text: `In order to design a diverse benchmark, we crowd-sourced tasks through open-source contributions, with 93 contributors creating 229 tasks.`
-    - Now represented under **Dataset Creation → Sourcing**.
-
-    - Summary evidence: - **Task Sourcing:** The project <span class="verbatim">crowd-sourced tasks through open-source contributions, with 93 contributors creating 229 tasks.</span> The final dataset contains 89 tasks.
-    - Selection was <span class="verbatim">based on the author’s difficulty assessment and a quality assessment by three experienced human reviewers</span>.
-    - Software engineering is the largest category (26 tasks), with no majority category; the collection also includes personal-assistant and video-processing work.
-    - Meaning: In order to design a diverse benchmark, we crowd-sourced tasks through open-source contributions, with 93 contributors creating 229 tasks.
-
-    - Transformation reason: First-person sourcing is rewritten with the project as subject. The lead retains open-source crowd-sourcing, 93 contributors, 229 contributions, and 89 selected tasks; the first source bullet preserves selection by author difficulty and three reviewers, with category diversity in the next bullet.
-
-- **H044 · Light green · Before: Covered**
-    - Selected text: `we selected 89`
-    - Now represented under **Dataset Creation → Sourcing**.
-
-    - Summary evidence: - **Task Sourcing:** The project <span class="verbatim">crowd-sourced tasks through open-source contributions, with 93 contributors creating 229 tasks.</span> The final dataset contains 89 tasks.
-    - Meaning: we selected 89
-
-    - Transformation reason: First-person sourcing is rewritten with the project as subject. The lead retains open-source crowd-sourcing, 93 contributors, 229 contributions, and 89 selected tasks; the first source bullet preserves selection by author difficulty and three reviewers, with category diversity in the next bullet.
-
-- **H045 · Light green · Before: Covered**
-    - Selected text: `based on the author’s difficulty assessment and a quality assess- ment by three experienced human reviewers`
-    - Now represented under **Dataset Creation → Sourcing**.
-
-    - Summary evidence:     - Selection was <span class="verbatim">based on the author’s difficulty assessment and a quality assessment by three experienced human reviewers</span>.
-    - Meaning: based on the author’s difficulty assessment and a quality assess- ment by three experienced human reviewers
-
-- **H064 · Light green · Before: Covered**
-    - Selected text: `a variety of categories,`
-    - Now represented under **Dataset Creation → Sourcing**.
-
-    - Summary evidence:     - Software engineering is the largest category (26 tasks), with no majority category; the collection also includes personal-assistant and video-processing work.
-    - Meaning: a variety of categories,
-
-    - Transformation reason: First-person sourcing is rewritten with the project as subject. The lead retains open-source crowd-sourcing, 93 contributors, 229 contributions, and 89 selected tasks; the first source bullet preserves selection by author difficulty and three reviewers, with category diversity in the next bullet.
 
 ## Quality Dimensions
 
