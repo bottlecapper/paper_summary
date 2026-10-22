@@ -15,11 +15,17 @@ from markdown.util import AtomicString
 
 
 class VerbatimProcessor(InlineProcessor):
+    css_class = "verbatim"
+
     def handleMatch(self, match, data):
-        element = ElementTree.Element("span", {"class": "verbatim"})
+        element = ElementTree.Element("span", {"class": self.css_class})
         # Keep copied text literal, including any Markdown syntax or HTML in it.
         element.text = AtomicString(html.unescape(match.group(1)))
         return element, match.start(0), match.end(0)
+
+
+class RedLabelProcessor(VerbatimProcessor):
+    css_class = "red-label"
 
 
 class VerbatimExtension(Extension):
@@ -27,6 +33,9 @@ class VerbatimExtension(Extension):
         pattern = r'&lt;span class="verbatim"&gt;(.*?)&lt;/span&gt;'
         # Process after code spans but before Markdown escapes/emphasis/links.
         md.inlinePatterns.register(VerbatimProcessor(pattern, md), "verbatim", 185)
+        md.inlinePatterns.register(
+            RedLabelProcessor(r'&lt;span class="red-label"&gt;(.*?)&lt;/span&gt;', md),
+            "red_label", 185)
 
 
 def protect_verbatim_blocks(source):
@@ -181,6 +190,9 @@ def main():
     if args.collapse_source_excerpts:
         body = collapse_source_lists(body)
     source_control = '<button id="sources">Show Source Excerpts</button>' if args.collapse_source_excerpts else ""
+    style = STYLE
+    if '<span class="red-label">' in body:
+        style += '\n.red-label {color:#b42318}\n'
     document = """<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{title}</title><style>{style}</style></head><body>
@@ -189,7 +201,7 @@ def main():
 </aside><main>{body}<div class="footer">Source Markdown: {filename} · Standalone HTML · Works offline</div></main></div>
 <script>document.getElementById('expand').addEventListener('click',function(){{const t=document.querySelector('.toc');if(t){{t.style.display=t.style.display==='block'?'':'block';}}}});
 const sourceButton=document.getElementById('sources');if(sourceButton){{sourceButton.addEventListener('click',function(){{const excerpts=Array.from(document.querySelectorAll('details.source-excerpts'));const show=excerpts.some(d=>!d.open);excerpts.forEach(d=>d.open=show);sourceButton.textContent=show?'Hide Source Excerpts':'Show Source Excerpts';}});}}</script>
-</body></html>""".format(title=html.escape(title), style=STYLE, toc=converter.toc, body=body, filename=html.escape(args.markdown_file.name), source_control=source_control)
+</body></html>""".format(title=html.escape(title), style=style, toc=converter.toc, body=body, filename=html.escape(args.markdown_file.name), source_control=source_control)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(document, encoding="utf-8")
     print(args.output.resolve())

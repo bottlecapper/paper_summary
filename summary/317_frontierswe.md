@@ -7,6 +7,7 @@
 - **Task Design:** Tasks are <span class="verbatim">extremely difficult and open-ended technical problems that require novel ideas and extensive planning</span>. Academic and industry collaborators help curate problems from their areas of expertise.
 - **Time and Cost:** V2 gives agents <span class="verbatim">a 20-hour budget per task.</span> The highest-scoring model, <span class="verbatim">Claude Fable 5.1</span>, averages <span class="verbatim">11.63</span> hours per trial, including unsuccessful attempts. V2 does not report measured human completion time or task-creation cost.
 - **Evaluation Method:** Task-specific verifiers award partial credit from <span class="verbatim">0</span> to <span class="verbatim">1</span>. V2 reports <span class="verbatim">mean@5 scores across all 34 tasks.</span> This averages scores over five trials per task.
+- **Highlights:** Example Tasks, Prevent Cheating, Visual Reasoning.
 
 ## Dataset Creation
 - **Problem Sourcing:** Academic and industry collaborators curate real problems requiring expert knowledge.
@@ -25,7 +26,7 @@
         - Verification uses <span class="verbatim">1:1 structural mutation</span>. The intended idea is one original case paired with a changed counterpart that checks the same feature.
             - For example, <span class="verbatim">Astronomy Toolkit</span> illustrates this with a copied test campaign: every image gets one new ID and filename; image order and star-catalog rows are shuffled. Pixels and sky positions stay unchanged, and expected answers are relabeled to match the new IDs. A real solver should still find the same positions; a lookup keyed to old image IDs fails. The verifier adds this transformed campaign as an extra check. [Transformation code](https://github.com/Proximal-Labs/frontier-swe-v2/blob/da83f84f8fbcec3cbf0f2b17c98ebc811355c2df/tasks/astronomy-toolkit/environment/tests/metamorphic_campaigns.py#L66-L130) · [Verifier runner](https://github.com/Proximal-Labs/frontier-swe-v2/blob/da83f84f8fbcec3cbf0f2b17c98ebc811355c2df/tasks/astronomy-toolkit/environment/tests/runner.py#L266-L283).
         - The intended result is that <span class="verbatim">agents are never undercredited for implementing a feature the verifier doesn't test while ensuring that hardcoding test results is not a viable strategy to succeed.</span>
-- **Example Tasks:**
+- **<span class="red-label">Example Tasks:</span>**
     - **Example Task:** V1 Implementation - [<span class="verbatim">Git to Zig</span>](https://www.frontierswe.com/v1/git-to-zig) (`git-to-zig`).
     - **Example Task:** V1 Research - [<span class="verbatim">FrogsGame Post-Training</span>](https://www.frontierswe.com/v1/frogsgame-rl) (`frogsgame-rl`).
     - **Example Task:** V1 Research - [<span class="verbatim">Optimizer Design</span>](https://www.frontierswe.com/v1/optimizer-design) (`optimizer-design`).
@@ -101,7 +102,7 @@
     - The six tasks are Astronomy Toolkit, Remotion Video Generation, Vision-only TORCS Racing Bot, SPICE Simulator in Rust, Snooker Prediction, and Music Diarization; this comparison is separate from the all-task model ranking.
 - **System Implementation:** Building the core system is insufficient; edge cases and compatibility expose missing mechanisms.
     - <span class="verbatim">models built the core system successfully but struggled with edge-case and compatibility behaviours. Stronger runs treated these failures as evidence of missing mechanisms rather than isolated test cases.</span>
-- **Visual Reasoning:** <span class="verbatim">Strong runs in Visual Reasoning tasks translate pixels into measurements.</span>
+- **<span class="red-label">Visual Reasoning:</span>** <span class="verbatim">Strong runs in Visual Reasoning tasks translate pixels into measurements.</span>
     - <span class="verbatim">Fable 5.1 instrumented emulator registers, phase, and duty cycle instead of relying only on rendered frames.</span>
     - <span class="verbatim">GLM-5.3, despite lacking native vision, converted screenshots into palette-coded ASCII, pixel bands, and bounding boxes.</span>
     - <span class="verbatim">Native vision helps, but these trajectories show that visual reasoning also depends on creating the right instrumentation.</span>
@@ -116,7 +117,7 @@
     - In the Wan task, <span class="verbatim">six out of 30 trials</span> received zero for cheating; the original comparison concerns those v1 trials, rather than the later v2 leaderboard.
 
 ## Special Design
-- **Preventing Cheating:** A fresh verifier container and non-root execution protect hidden tests and reward files from agent-written code; successful-looking local output cannot substitute for verification.
+- **<span class="red-label">Preventing Cheating:</span>** A fresh verifier container and non-root execution protect hidden tests and reward files from agent-written code; successful-looking local output cannot substitute for verification.
     - <span class="verbatim">Pre-written reward files, mutated binaries, planted tests, background processes: all gone by construction.</span>
 - **Proximus Harness:** Extends mini-swe-agent with compaction, vision, and a submit tool. Safe checkpoints and remaining-time feedback encourage continued work.
     - <span class="verbatim">Proximus is a minimal agent harness built for ultra-long-horizon coding tasks.</span> It builds on <span class="verbatim">mini-swe-agent</span> and adds <span class="verbatim">compaction, vision, and a submit tool.</span>

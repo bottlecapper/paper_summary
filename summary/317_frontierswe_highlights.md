@@ -195,13 +195,13 @@ Previous statuses: **Covered**, **Partial**, **Title only**, or **Missing**. New
 
 **Priority 2 · Key Findings**
 
-- **Visual Reasoning:** <span class="verbatim">Strong runs in Visual Reasoning tasks translate pixels into measurements.</span>
+- **<span class="red-label">Visual Reasoning:</span>** <span class="verbatim">Strong runs in Visual Reasoning tasks translate pixels into measurements.</span>
 
 - **H052 · Bright green · Before: Not assessed**
     - Selected text: `Strong runs in Visual Reasoning tasks translate pixels into measurements.`
     - Now represented under **Key Findings → Visual Reasoning**.
 
-    - Summary evidence: - **Visual Reasoning:** <span class="verbatim">Strong runs in Visual Reasoning tasks translate pixels into measurements.</span>
+    - Summary evidence: - **<span class="red-label">Visual Reasoning:</span>** <span class="verbatim">Strong runs in Visual Reasoning tasks translate pixels into measurements.</span>
     - Meaning: Strong runs in Visual Reasoning tasks translate pixels into measurements.
 
 - **H053 · Bright green · Before: Not assessed**
@@ -356,7 +356,7 @@ Previous statuses: **Covered**, **Partial**, **Title only**, or **Missing**. New
 
 **Priority 3 · Dataset Creation**
 
-- **Example Tasks:**
+- **<span class="red-label">Example Tasks:</span>**
 
 - **H003 · Light green · Before: Not assessed**
     - Selected text: `FrogsGame Post-Training`
