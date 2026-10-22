@@ -3,20 +3,23 @@
 ## Existing Paper Summaries
 
 <table>
-<thead><tr><th>Benchmark</th><th>Size</th><th>Author Lab</th><th>Published</th><th>Paper</th><th colspan="2">Summary</th></tr></thead>
+<thead>
+<tr><th rowspan="2">Benchmark</th><th colspan="2">Size</th><th rowspan="2">Author Lab</th><th rowspan="2">Published</th><th rowspan="2">Paper</th><th colspan="2" rowspan="2">Summary</th></tr>
+<tr><th>Public</th><th>Private</th></tr>
+</thead>
 <tbody>
-<tr><td>DeepSWE</td><td>113</td><td>Datacurve</td><td>Jul 2026</td><td><a href="https://arxiv.org/abs/2607.07946v1">312</a></td><td><a href="summary/312_deepswe.md">Markdown</a></td><td><a href="https://bottlecapper.github.io/paper_summary/html/312_deepswe.html">HTML</a></td></tr>
-<tr><td>AutomationBench</td><td>≥1,200</td><td>Zapier</td><td>Apr 2026</td><td><a href="https://arxiv.org/abs/2604.18934">313</a></td><td><a href="summary/313_automationbench.md">Markdown</a></td><td><a href="https://bottlecapper.github.io/paper_summary/html/313_automationbench.html">HTML</a></td></tr>
-<tr><td>Terminal-Bench 2.0</td><td>89</td><td>Stanford, Laude Institute</td><td>Jan 2026</td><td><a href="https://arxiv.org/abs/2601.11868">314</a></td><td><a href="summary/314_terminal_bench.md">Markdown</a></td><td><a href="https://bottlecapper.github.io/paper_summary/html/314_terminal_bench.html">HTML</a></td></tr>
-<tr><td>GDPval</td><td>1,320</td><td>OpenAI</td><td>Oct 2025</td><td><a href="https://arxiv.org/abs/2510.04374v1">315</a></td><td><a href="summary/315_gdpval.md">Markdown</a></td><td><a href="https://bottlecapper.github.io/paper_summary/html/315_gdpval.html">HTML</a></td></tr>
-<tr><td>OSWorld 2.0</td><td>108</td><td>XLANG Lab</td><td>Jun 2026</td><td><a href="https://arxiv.org/abs/2606.29537v2">316</a></td><td><a href="summary/316_osworld_2_0.md">Markdown</a></td><td><a href="https://bottlecapper.github.io/paper_summary/html/316_osworld_2_0.html">HTML</a></td></tr>
-<tr><td>FrontierSWE v2</td><td>34</td><td>Proximal</td><td>Sep 2026</td><td><a href="https://www.frontierswe.com/blog/v2">317</a></td><td><a href="summary/317_frontierswe.md">Markdown</a></td><td><a href="https://bottlecapper.github.io/paper_summary/html/317_frontierswe.html">HTML</a></td></tr>
+<tr><td>DeepSWE</td><td>113</td><td>—</td><td>Datacurve</td><td>Jul 2026</td><td><a href="https://arxiv.org/abs/2607.07946v1">312</a></td><td><a href="summary/312_deepswe.md">MD</a></td><td><a href="https://bottlecapper.github.io/paper_summary/html/312_deepswe.html">HTML</a></td></tr>
+<tr><td>AutomationBench</td><td>600</td><td>600+</td><td>Zapier</td><td>Apr 2026</td><td><a href="https://arxiv.org/abs/2604.18934">313</a></td><td><a href="summary/313_automationbench.md">MD</a></td><td><a href="https://bottlecapper.github.io/paper_summary/html/313_automationbench.html">HTML</a></td></tr>
+<tr><td>Terminal-Bench 2.0</td><td>89</td><td>—</td><td>Stanford, Laude Institute</td><td>Jan 2026</td><td><a href="https://arxiv.org/abs/2601.11868">314</a></td><td><a href="summary/314_terminal_bench.md">MD</a></td><td><a href="https://bottlecapper.github.io/paper_summary/html/314_terminal_bench.html">HTML</a></td></tr>
+<tr><td>GDPval</td><td>220</td><td>1,100</td><td>OpenAI</td><td>Oct 2025</td><td><a href="https://arxiv.org/abs/2510.04374v1">315</a></td><td><a href="summary/315_gdpval.md">MD</a></td><td><a href="https://bottlecapper.github.io/paper_summary/html/315_gdpval.html">HTML</a></td></tr>
+<tr><td>OSWorld 2.0</td><td>108</td><td>—</td><td>XLANG Lab</td><td>Jun 2026</td><td><a href="https://arxiv.org/abs/2606.29537v2">316</a></td><td><a href="summary/316_osworld_2_0.md">MD</a></td><td><a href="https://bottlecapper.github.io/paper_summary/html/316_osworld_2_0.html">HTML</a></td></tr>
+<tr><td>FrontierSWE v2</td><td>34</td><td>—</td><td>Proximal</td><td>Sep 2026</td><td><a href="https://www.frontierswe.com/blog/v2">317</a></td><td><a href="summary/317_frontierswe.md">MD</a></td><td><a href="https://bottlecapper.github.io/paper_summary/html/317_frontierswe.html">HTML</a></td></tr>
 </tbody>
 </table>
 
 Published month refers to the first arXiv submission or, for blog reports, the linked report's release. Paper links point to the versions used by the summaries, where specified.
 
-Size counts tasks in the listed benchmark version. AutomationBench's total is a lower bound: [600 public tasks plus 600+ private evaluation tasks](https://arxiv.org/html/2604.18934v1#S2). GDPval's [1,320 total tasks include 220 public gold tasks](https://arxiv.org/html/2510.04374v1#S1).
+Size counts tasks in the linked release. Public includes released task sets, including OSWorld 2.0's [gated task files](https://huggingface.co/datasets/xlangai/osworld_v2_tasks); — means no separate private split is reported. [AutomationBench](https://arxiv.org/html/2604.18934v1#S2) reports 600 public and 600+ private evaluation tasks. GDPval's private count is derived: [1,320 total](https://arxiv.org/html/2510.04374v1#S1) − [220 public gold tasks](https://arxiv.org/html/2510.04374v1#S4) = 1,100.
 
 Additional GDPval materials: [regenerated summary](summary/315_gdpval_regenerated.md), [regenerated HTML](https://bottlecapper.github.io/paper_summary/html/315_gdpval_regenerated.html), [highlight audit](summary/315_gdpval_regenerated_highlights.md), and [skill reproduction review](summary/315_gdpval_reproduction_review.md).
 
