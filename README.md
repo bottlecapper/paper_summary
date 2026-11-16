@@ -14,6 +14,7 @@
 <tr><td>GDPval</td><td>220</td><td>1,100</td><td>OpenAI</td><td>Oct 2025</td><td><a href="https://arxiv.org/abs/2510.04374v1">315</a></td><td><a href="summary/315_gdpval.md">MD</a></td><td><a href="https://bottlecapper.github.io/paper_summary/html/315_gdpval.html">HTML</a></td></tr>
 <tr><td>OSWorld 2.0</td><td>108</td><td>—</td><td>XLANG Lab</td><td>Jun 2026</td><td><a href="https://arxiv.org/abs/2606.29537v2">316</a></td><td><a href="summary/316_osworld_2_0.md">MD</a></td><td><a href="https://bottlecapper.github.io/paper_summary/html/316_osworld_2_0.html">HTML</a></td></tr>
 <tr><td>FrontierSWE v2</td><td>34</td><td>—</td><td>Proximal</td><td>Sep 2026</td><td><a href="https://www.frontierswe.com/blog/v2">317</a></td><td><a href="summary/317_frontierswe.md">MD</a></td><td><a href="https://bottlecapper.github.io/paper_summary/html/317_frontierswe.html">HTML</a></td></tr>
+<tr><td>Humanity’s Last Exam</td><td>2,500</td><td>Not reported</td><td>Center for AI Safety, Scale AI</td><td>Jan 2025</td><td><a href="https://arxiv.org/abs/2501.14249v12">318</a></td><td><a href="summary/318_humanitys_last_exam.md">MD</a></td><td><a href="https://bottlecapper.github.io/paper_summary/html/318_humanitys_last_exam.html">HTML</a></td></tr>
 </tbody>
 </table>
 

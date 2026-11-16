@@ -308,6 +308,16 @@
           ]
         }
       }
+    },
+    "318_humanitys_last_exam": {
+      "paper_number": 318,
+      "colors": {
+        "#00AA00": {
+          "name": "Dark green",
+          "meaning": "Benchmark name; excluded by reader confirmation on 2026-11-15",
+          "include_in_summary": false
+        }
+      }
     }
   }
 }

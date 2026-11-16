@@ -1,0 +1,1427 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Humanity’s Last Exam Highlight Audit</title><style>
+:root {color-scheme:light; --paper:#fff; --bg:#f3f5f2; --ink:#21312c; --muted:#5b6e65; --line:#dce4de; --accent:#24634b}
+* {box-sizing:border-box} body {margin:0;background:var(--bg);color:var(--ink);font:17px/1.7 system-ui,-apple-system,sans-serif}
+.layout {max-width:1280px;margin:auto;display:grid;grid-template-columns:235px minmax(0,1fr);gap:32px;padding:36px 24px}
+aside {align-self:start;position:sticky;top:24px;max-height:90vh;overflow:auto;font-size:13px}
+.brand {font-weight:750;letter-spacing:.08em;text-transform:uppercase;margin-bottom:24px;color:var(--accent)}
+.toc ul {padding-left:17px}.toc li {margin:8px 0}.toc a {color:var(--muted);text-decoration:none}
+main {background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:40px 48px;min-width:0}
+h1 {font-size:clamp(26px,3.5vw,40px);line-height:1.2;letter-spacing:-.035em;margin-top:0}
+h2 {font-size:25px;line-height:1.25;margin:28px 0 2px;padding:0} h3 {font-size:19px;line-height:1.3;margin:16px 0 2px;padding:0}
+h4 {font-size:17px;line-height:1.3;margin:10px 0 2px;padding:0}
+main > p, main > ul, main > ol {margin-top:0;margin-bottom:0}
+main li > p {margin-top:0;margin-bottom:0}
+main ul {list-style-type:disc;padding-left:1.5em}
+main ul ul {list-style-type:circle;margin-top:0;margin-bottom:0}
+p,li {max-width:78ch} a {color:var(--accent);text-underline-offset:3px} strong {font-weight:700}
+.verbatim {color:#175cd3}
+.task-instruction {font-size:0.88em;text-align:justify}
+.source-excerpts {margin:0}.source-excerpts > summary {font-size:13px;color:var(--muted);cursor:pointer}
+.source-excerpts ul, .source-excerpts ol {margin-top:0;margin-bottom:0}
+blockquote {margin:24px 0;border-left:4px solid #8eb79b;padding:12px 20px;background:#f0f6f0}
+table {width:100%;border-collapse:collapse;font-size:14px;display:block;overflow-x:auto} th,td {text-align:left;vertical-align:top;padding:12px 14px;border-bottom:1px solid var(--line)} th {background:#edf3ee}
+code {background:#eef2ed;border-radius:4px;padding:2px 5px;font-size:.9em} pre {overflow:auto;padding:16px;background:#eef2ed;border-radius:8px} pre code {padding:0}
+button {font:inherit;font-size:13px;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:7px;padding:8px 12px;cursor:pointer}
+.color-swatch {display:inline-block;width:14px;height:14px;vertical-align:-2px;border:1px solid #9ba99f;border-radius:3px;margin-right:5px}
+.tools {display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}.footer {margin-top:40px;font-size:12px;color:var(--muted)}
+@media(max-width:850px) {.layout {display:block;padding:16px} aside {position:static;max-height:none;margin-bottom:20px}.toc {display:none}main {padding:26px 22px}.tools {margin:8px 0}}
+@media print {body {background:white;font-size:11pt}.layout {display:block;padding:0}aside {display:none}main {border:0;padding:0}h2 {break-after:avoid}a {color:inherit}table {display:table;font-size:10pt}}
+</style></head><body>
+<div class="layout"><aside><div class="brand">Paper summary</div><nav aria-label="Contents"><div class="toc">
+<ul>
+<li><a href="#human-review-instructions">Human Review Instructions</a></li>
+<li><a href="#validity-and-clarity">Validity and Clarity</a></li>
+<li><a href="#answer-judge">Answer Judge</a></li>
+<li><a href="#confidence-calibration">Confidence Calibration</a></li>
+<li><a href="#closed-ended-frontier">Closed-Ended Frontier</a></li>
+<li><a href="#coverage">Coverage</a></li>
+<li><a href="#answer-formats">Answer Formats</a></li>
+<li><a href="#expert-review">Expert Review</a></li>
+<li><a href="#evaluation-landscape">Evaluation Landscape</a></li>
+<li><a href="#expert-sourcing">Expert Sourcing</a></li>
+<li><a href="#submission-contents">Submission Contents</a></li>
+<li><a href="#discouraging-lucky-answers">Discouraging Lucky Answers</a></li>
+<li><a href="#incentives">Incentives</a></li>
+<li><a href="#difficulty-screening">Difficulty Screening</a></li>
+<li><a href="#guessing-and-variability">Guessing and Variability</a></li>
+<li><a href="#headline-results">Headline Results</a></li>
+<li><a href="#limitations">Limitations</a></li>
+<li><a href="#audits-and-corrections">Audits and Corrections</a></li>
+<li><a href="#research-experience">Research Experience</a></li>
+<li><a href="#multiple-choice-interpretation">Multiple-Choice Interpretation</a></li>
+<li><a href="#continued-refinement">Continued Refinement</a></li>
+<li><a href="#time-and-cost">Time and Cost</a></li>
+<li><a href="#genuine-difficulty">Genuine Difficulty</a></li>
+<li><a href="#excluded-and-unclassified">Excluded and Unclassified</a></li>
+</ul>
+</div>
+</nav>
+<div class="tools"><button onclick="window.print()">Print / save PDF</button><button id="expand">Show contents</button></div>
+</aside><main><h1 id="humanitys-last-exam-highlight-audit">Humanity’s Last Exam Highlight Audit</h1>
+<p>All 73 included highlights are mapped to the revised summary. Topics are ordered by their highest highlight priority; selections within each topic are ordered by priority, then paper order.</p>
+<p>Prior-coverage judgments are a manual semantic review. Annotation accounting is checked programmatically. Raw selections retain PDF extraction artifacts; mathematical selections are explained in context in the summary.</p>
+<p>Previous statuses: <strong>Covered</strong>, <strong>Partial</strong>, <strong>Title only</strong>, or <strong>Missing</strong>. New coverage means the highlighted information is represented by a topic lead, source excerpt, definition, or merged equivalent passage—not that every duplicate fragment is repeated verbatim.</p>
+<h2 id="human-review-instructions">Human Review Instructions</h2>
+<p><strong>Priority 1 · Important Sections</strong></p>
+<ul>
+<li>
+<p>C.7 Human Review Instructions</p>
+</li>
+<li>
+<p><strong>H062 · Light cyan · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>C.7 Human Review Instructions</code></li>
+<li>
+<p>Now represented under <strong>Important Sections → Human Review Instructions</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - C.7 Human Review Instructions</p>
+</li>
+<li>
+<p>Meaning: The original section number and title are unchanged; Title Case list presentation is not blue source prose.</p>
+</li>
+<li>
+<p>Transformation reason: The original section number and title are unchanged; Title Case list presentation is not blue source prose.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="validity-and-clarity">Validity and Clarity</h2>
+<p><strong>Priority 2 · Quality Control · Human Review</strong></p>
+<ul>
+<li>
+<p>Validity and Clarity: <span class="verbatim">Questions should be precise, unambiguous, solvable, and non-searchable, ensuring models cannot rely on memorization or simple retrieval methods.</span></p>
+</li>
+<li>
+<p><strong>H021 · Bright green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Questions should be precise, unambiguous, solvable, and non-searchable, ensuring models cannot rely on memorization or simple retrieval methods.</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Validity and Clarity</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - Validity and Clarity: <span class="verbatim">Questions should be precise, unambiguous, solvable, and non-searchable, ensuring models cannot rely on memorization or simple retrieval methods.</span></p>
+</li>
+<li>Meaning: The central quality criterion is retained verbatim. Fragment highlights are expanded into their stated review requirements: references in psychology/philosophy, time-bounded law, explained jargon, no open-ended/subjective/morality questions, max 2–3 decimal numeric answers, image-to-text conversion, and detailed/referenced rationales with requests to expand unclear ones.</li>
+</ul>
+</li>
+<li>
+<p><strong>H025 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>We prohibit open-ended questions, subjective interpretations,</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Validity and Clarity</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:         - Open-ended prompts such as <span class="verbatim">“Give a proof of. . . ”; “Explain why. . . ”; “Provide a theory that explains. . . ”</span> are generally unsuitable. Subjective interpretation and morality/ethics questions are excluded.</p>
+</li>
+<li>
+<p>Meaning: The central quality criterion is retained verbatim. Fragment highlights are expanded into their stated review requirements: references in psychology/philosophy, time-bounded law, explained jargon, no open-ended/subjective/morality questions, max 2–3 decimal numeric answers, image-to-text conversion, and detailed/referenced rationales with requests to expand unclear ones.</p>
+</li>
+<li>
+<p>Transformation reason: The central quality criterion is retained verbatim. Fragment highlights are expanded into their stated review requirements: references in psychology/philosophy, time-bounded law, explained jargon, no open-ended/subjective/morality questions, max 2–3 decimal numeric answers, image-to-text conversion, and detailed/referenced rationales with requests to expand unclear ones.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H063 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>For fields like psychology, philosophy, etc. we usually check if the rationale contains some reference to a book, paper or standard theories.</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Validity and Clarity</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:         - For psychology/philosophy, reviewers check whether <span class="verbatim">the rationale contains some reference to a book, paper or standard theories.</span> <span class="verbatim">Make sure questions about law are time-bounded.</span> An example is <span class="verbatim">“as of 2024”</span>. <span class="verbatim">If there is some non-standard jargon for the topic/field, it needs to be explained.</span></p>
+</li>
+<li>
+<p>Meaning: The central quality criterion is retained verbatim. Fragment highlights are expanded into their stated review requirements: references in psychology/philosophy, time-bounded law, explained jargon, no open-ended/subjective/morality questions, max 2–3 decimal numeric answers, image-to-text conversion, and detailed/referenced rationales with requests to expand unclear ones.</p>
+</li>
+<li>
+<p>Transformation reason: The central quality criterion is retained verbatim. Fragment highlights are expanded into their stated review requirements: references in psychology/philosophy, time-bounded law, explained jargon, no open-ended/subjective/morality questions, max 2–3 decimal numeric answers, image-to-text conversion, and detailed/referenced rationales with requests to expand unclear ones.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H064 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>For fields like law, the question text can be adjusted with “as of 2024”. Make sure questions about law are time-bounded.</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Validity and Clarity</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:         - For psychology/philosophy, reviewers check whether <span class="verbatim">the rationale contains some reference to a book, paper or standard theories.</span> <span class="verbatim">Make sure questions about law are time-bounded.</span> An example is <span class="verbatim">“as of 2024”</span>. <span class="verbatim">If there is some non-standard jargon for the topic/field, it needs to be explained.</span></p>
+</li>
+<li>
+<p>Meaning: The central quality criterion is retained verbatim. Fragment highlights are expanded into their stated review requirements: references in psychology/philosophy, time-bounded law, explained jargon, no open-ended/subjective/morality questions, max 2–3 decimal numeric answers, image-to-text conversion, and detailed/referenced rationales with requests to expand unclear ones.</p>
+</li>
+<li>
+<p>Transformation reason: The central quality criterion is retained verbatim. Fragment highlights are expanded into their stated review requirements: references in psychology/philosophy, time-bounded law, explained jargon, no open-ended/subjective/morality questions, max 2–3 decimal numeric answers, image-to-text conversion, and detailed/referenced rationales with requests to expand unclear ones.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H065 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>If there is some non-standard jargon for the topic/field, it needs to be explained.</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Validity and Clarity</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:         - For psychology/philosophy, reviewers check whether <span class="verbatim">the rationale contains some reference to a book, paper or standard theories.</span> <span class="verbatim">Make sure questions about law are time-bounded.</span> An example is <span class="verbatim">“as of 2024”</span>. <span class="verbatim">If there is some non-standard jargon for the topic/field, it needs to be explained.</span></p>
+</li>
+<li>Meaning: The central quality criterion is retained verbatim. Fragment highlights are expanded into their stated review requirements: references in psychology/philosophy, time-bounded law, explained jargon, no open-ended/subjective/morality questions, max 2–3 decimal numeric answers, image-to-text conversion, and detailed/referenced rationales with requests to expand unclear ones.</li>
+</ul>
+</li>
+<li>
+<p><strong>H069 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Questions like “Give a proof of. . . ”; “Explain why. . . ”; “Provide a theory that explains. . . ” are usually bad because they are not closed-ended and we cannot evaluate them properly.</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Validity and Clarity</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:         - Open-ended prompts such as <span class="verbatim">“Give a proof of. . . ”; “Explain why. . . ”; “Provide a theory that explains. . . ”</span> are generally unsuitable. Subjective interpretation and morality/ethics questions are excluded.</p>
+</li>
+<li>
+<p>Meaning: The central quality criterion is retained verbatim. Fragment highlights are expanded into their stated review requirements: references in psychology/philosophy, time-bounded law, explained jargon, no open-ended/subjective/morality questions, max 2–3 decimal numeric answers, image-to-text conversion, and detailed/referenced rationales with requests to expand unclear ones.</p>
+</li>
+<li>
+<p>Transformation reason: The central quality criterion is retained verbatim. Fragment highlights are expanded into their stated review requirements: references in psychology/philosophy, time-bounded law, explained jargon, no open-ended/subjective/morality questions, max 2–3 decimal numeric answers, image-to-text conversion, and detailed/referenced rationales with requests to expand unclear ones.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H070 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>No questions about morality or what is ethical/unethical.</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Validity and Clarity</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:         - Open-ended prompts such as <span class="verbatim">“Give a proof of. . . ”; “Explain why. . . ”; “Provide a theory that explains. . . ”</span> are generally unsuitable. Subjective interpretation and morality/ethics questions are excluded.</p>
+</li>
+<li>
+<p>Meaning: The central quality criterion is retained verbatim. Fragment highlights are expanded into their stated review requirements: references in psychology/philosophy, time-bounded law, explained jargon, no open-ended/subjective/morality questions, max 2–3 decimal numeric answers, image-to-text conversion, and detailed/referenced rationales with requests to expand unclear ones.</p>
+</li>
+<li>
+<p>Transformation reason: The central quality criterion is retained verbatim. Fragment highlights are expanded into their stated review requirements: references in psychology/philosophy, time-bounded law, explained jargon, no open-ended/subjective/morality questions, max 2–3 decimal numeric answers, image-to-text conversion, and detailed/referenced rationales with requests to expand unclear ones.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H071 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Question with numerical answers should have results approximated to max 2-3 decimals.</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Validity and Clarity</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:         - <span class="verbatim">Question with numerical answers should have results approximated to max 2-3 decimals.</span> <span class="verbatim">Questions that can be converted to text should be</span> converted; clear LaTeX formatting can reveal that a model actually knows the answer. <span class="verbatim">Explanations should include at least some details or reference. If the rationale is unclear or not detailed, ask in the review to expand a bit.</span></p>
+</li>
+<li>Meaning: The central quality criterion is retained verbatim. Fragment highlights are expanded into their stated review requirements: references in psychology/philosophy, time-bounded law, explained jargon, no open-ended/subjective/morality questions, max 2–3 decimal numeric answers, image-to-text conversion, and detailed/referenced rationales with requests to expand unclear ones.</li>
+</ul>
+</li>
+<li>
+<p><strong>H072 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Questions that can be converted to text should be</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Validity and Clarity</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:         - <span class="verbatim">Question with numerical answers should have results approximated to max 2-3 decimals.</span> <span class="verbatim">Questions that can be converted to text should be</span> converted; clear LaTeX formatting can reveal that a model actually knows the answer. <span class="verbatim">Explanations should include at least some details or reference. If the rationale is unclear or not detailed, ask in the review to expand a bit.</span></p>
+</li>
+<li>Meaning: The central quality criterion is retained verbatim. Fragment highlights are expanded into their stated review requirements: references in psychology/philosophy, time-bounded law, explained jargon, no open-ended/subjective/morality questions, max 2–3 decimal numeric answers, image-to-text conversion, and detailed/referenced rationales with requests to expand unclear ones.</li>
+</ul>
+</li>
+<li>
+<p><strong>H073 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Explanations should include at least some details or reference. If the rationale is unclear or not detailed, ask in the review to expand a bit.</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Validity and Clarity</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:         - <span class="verbatim">Question with numerical answers should have results approximated to max 2-3 decimals.</span> <span class="verbatim">Questions that can be converted to text should be</span> converted; clear LaTeX formatting can reveal that a model actually knows the answer. <span class="verbatim">Explanations should include at least some details or reference. If the rationale is unclear or not detailed, ask in the review to expand a bit.</span></p>
+</li>
+<li>Meaning: The central quality criterion is retained verbatim. Fragment highlights are expanded into their stated review requirements: references in psychology/philosophy, time-bounded law, explained jargon, no open-ended/subjective/morality questions, max 2–3 decimal numeric answers, image-to-text conversion, and detailed/referenced rationales with requests to expand unclear ones.</li>
+</ul>
+</li>
+</ul>
+<h2 id="answer-judge">Answer Judge</h2>
+<p><strong>Priority 2 · Model Evaluation · Auto Judge</strong></p>
+<ul>
+<li>
+<p><strong>Answer Judge:</strong> o3-mini checks answer equivalence against the supplied reference.</p>
+</li>
+<li>
+<p><strong>H033 · Bright green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>As the question-answers are precise and close-ended, we use O3-MINI as a judge to verify answer correctness against model predictions while accounting for equivalent formats (e.g., decimals vs. fractions or estimations).</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Answer Judge</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - The judge accounts for <span class="verbatim">equivalent formats (e.g., decimals vs. fractions or estimations).</span> It compares answers rather than independently re-solving the problem. Correctness is yes/no, allowing small numerical error; no final answer extracts as None, and missing confidence defaults to <span class="verbatim">100</span>.</p>
+</li>
+<li>
+<p>Meaning: The author-voice setup and highlighted prompt-introduction sentences are replaced with their concrete operation: evaluation and judge prompts, model-without-system-prompt handling, structured extracted answer/reasoning/correct/confidence fields, and the displayed trigonometric equivalence example. Equivalent decimal/fraction/estimate formats remain exact. The original extracted_final_answer identifier is retained.</p>
+</li>
+<li>
+<p>Transformation reason: The author-voice setup and highlighted prompt-introduction sentences are replaced with their concrete operation: evaluation and judge prompts, model-without-system-prompt handling, structured extracted answer/reasoning/correct/confidence fields, and the displayed trigonometric equivalence example. Equivalent decimal/fraction/estimate formats remain exact. The original extracted_final_answer identifier is retained.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H057 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>We use the following system prompt for evaluating LLMs on HLE questions.</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Answer Judge</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - The evaluation prompt requests explanation, final answer, and confidence. Models without system-prompt support receive it as a separate user prompt. The judge is <span class="verbatim">o3-mini-2025-01-31</span> with structured decoding; it extracts <span class="verbatim">extracted_final_answer,</span> reasoning, correctness, and confidence.</p>
+</li>
+<li>
+<p>Meaning: The author-voice setup and highlighted prompt-introduction sentences are replaced with their concrete operation: evaluation and judge prompts, model-without-system-prompt handling, structured extracted answer/reasoning/correct/confidence fields, and the displayed trigonometric equivalence example. Equivalent decimal/fraction/estimate formats remain exact. The original extracted_final_answer identifier is retained.</p>
+</li>
+<li>
+<p>Transformation reason: The author-voice setup and highlighted prompt-introduction sentences are replaced with their concrete operation: evaluation and judge prompts, model-without-system-prompt handling, structured extracted answer/reasoning/correct/confidence fields, and the displayed trigonometric equivalence example. Equivalent decimal/fraction/estimate formats remain exact. The original extracted_final_answer identifier is retained.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H058 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>We use the following system prompt to judge the model answers against the correct answers</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Answer Judge</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - The evaluation prompt requests explanation, final answer, and confidence. Models without system-prompt support receive it as a separate user prompt. The judge is <span class="verbatim">o3-mini-2025-01-31</span> with structured decoding; it extracts <span class="verbatim">extracted_final_answer,</span> reasoning, correctness, and confidence.</p>
+</li>
+<li>
+<p>Meaning: The author-voice setup and highlighted prompt-introduction sentences are replaced with their concrete operation: evaluation and judge prompts, model-without-system-prompt handling, structured extracted answer/reasoning/correct/confidence fields, and the displayed trigonometric equivalence example. Equivalent decimal/fraction/estimate formats remain exact. The original extracted_final_answer identifier is retained.</p>
+</li>
+<li>
+<p>Transformation reason: The author-voice setup and highlighted prompt-introduction sentences are replaced with their concrete operation: evaluation and judge prompts, model-without-system-prompt handling, structured extracted answer/reasoning/correct/confidence fields, and the displayed trigonometric equivalence example. Equivalent decimal/fraction/estimate formats remain exact. The original extracted_final_answer identifier is retained.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H059 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>extracted_final_answer,</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Answer Judge</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - The evaluation prompt requests explanation, final answer, and confidence. Models without system-prompt support receive it as a separate user prompt. The judge is <span class="verbatim">o3-mini-2025-01-31</span> with structured decoding; it extracts <span class="verbatim">extracted_final_answer,</span> reasoning, correctness, and confidence.</p>
+</li>
+<li>Meaning: The author-voice setup and highlighted prompt-introduction sentences are replaced with their concrete operation: evaluation and judge prompts, model-without-system-prompt handling, structured extracted answer/reasoning/correct/confidence fields, and the displayed trigonometric equivalence example. Equivalent decimal/fraction/estimate formats remain exact. The original extracted_final_answer identifier is retained.</li>
+</ul>
+</li>
+<li>
+<p><strong>H060 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>an example of a structured response using LLM judge:</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Answer Judge</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - The structured-response example in Section C.1.1 uses a half-angle identity to establish equivalence between two trigonometric forms and returns yes.</p>
+</li>
+<li>
+<p>Meaning: The author-voice setup and highlighted prompt-introduction sentences are replaced with their concrete operation: evaluation and judge prompts, model-without-system-prompt handling, structured extracted answer/reasoning/correct/confidence fields, and the displayed trigonometric equivalence example. Equivalent decimal/fraction/estimate formats remain exact. The original extracted_final_answer identifier is retained.</p>
+</li>
+<li>
+<p>Transformation reason: The author-voice setup and highlighted prompt-introduction sentences are replaced with their concrete operation: evaluation and judge prompts, model-without-system-prompt handling, structured extracted answer/reasoning/correct/confidence fields, and the displayed trigonometric equivalence example. Equivalent decimal/fraction/estimate formats remain exact. The original extracted_final_answer identifier is retained.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="confidence-calibration">Confidence Calibration</h2>
+<p><strong>Priority 2 · Model Evaluation · Auto Judge</strong></p>
+<ul>
+<li>
+<p><strong>Confidence Calibration:</strong> <span class="verbatim">Models frequently provide incorrect answers with high confidence on HLE, failing to recognize when questions exceed their capabilities.</span></p>
+</li>
+<li>
+<p><strong>H039 · Bright green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Models frequently provide incorrect answers with high confidence on HLE, failing to recognize when questions exceed their capabilities.</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Confidence Calibration</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Confidence Calibration:</strong> <span class="verbatim">Models frequently provide incorrect answers with high confidence on HLE, failing to recognize when questions exceed their capabilities.</span></p>
+</li>
+<li>Meaning: The prompt’s author framing is removed while answer-plus-confidence elicitation is retained. The full calibration definition/example and the high-confidence-error finding are quoted exactly.</li>
+</ul>
+</li>
+<li>
+<p><strong>H036 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>To measure calibration, we prompt models to provide both an answer and their confidence from 0% to 100%</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Confidence Calibration</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - Models give confidence <span class="verbatim">from 0% to 100%</span>. <span class="verbatim">A well-calibrated model’s stated confidence should match its actual accuracy – for example, achieving 50% accuracy on questions where it claims 50% confidence.</span></p>
+</li>
+<li>
+<p>Meaning: The prompt’s author framing is removed while answer-plus-confidence elicitation is retained. The full calibration definition/example and the high-confidence-error finding are quoted exactly.</p>
+</li>
+<li>
+<p>Transformation reason: The prompt’s author framing is removed while answer-plus-confidence elicitation is retained. The full calibration definition/example and the high-confidence-error finding are quoted exactly.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H037 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>A well-calibrated model’s stated confidence should match its actual accuracy – for example, achieving 50% accuracy on questions where it claims 50% confidence.</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Confidence Calibration</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - Models give confidence <span class="verbatim">from 0% to 100%</span>. <span class="verbatim">A well-calibrated model’s stated confidence should match its actual accuracy – for example, achieving 50% accuracy on questions where it claims 50% confidence.</span></p>
+</li>
+<li>Meaning: The prompt’s author framing is removed while answer-plus-confidence elicitation is retained. The full calibration definition/example and the high-confidence-error finding are quoted exactly.</li>
+</ul>
+</li>
+</ul>
+<h2 id="closed-ended-frontier">Closed-Ended Frontier</h2>
+<p><strong>Priority 3 · Special Design</strong></p>
+<ul>
+<li>
+<p><strong>Closed-Ended Frontier:</strong> Known, verifiable answers permit automated grading at unusually advanced knowledge levels.</p>
+</li>
+<li>
+<p><strong>H001 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>HUMANITY’S LAST EXAM (HLE), a multi-modal bench- mark at the frontier of human knowledge, designed to be the final closed-ended academic benchmark of its kind with broad subject coverage.</code></li>
+<li>
+<p>Now represented under <strong>Special Design → Closed-Ended Frontier</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - HLE is designed as <span class="verbatim">a multi-modal benchmark at the frontier of human knowledge, designed to be the final closed-ended academic benchmark of its kind with broad subject coverage.</span> <span class="verbatim">Each question has a known solution that is unambiguous and easily verifiable, but cannot be quickly answered</span> via internet retrieval.</p>
+</li>
+<li>
+<p>Meaning: The repeated benchmark-name and closed-ended fragments are merged into the design description. The frontier-of-human-knowledge intent, broad coverage, verifiable known solution, and resistance to quick retrieval are preserved; the “final” description is attributed as a design aim.</p>
+</li>
+<li>
+<p>Transformation reason: The repeated benchmark-name and closed-ended fragments are merged into the design description. The frontier-of-human-knowledge intent, broad coverage, verifiable known solution, and resistance to quick retrieval are preserved; the “final” description is attributed as a design aim.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H004 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Each question has a known solution that is unambiguous and easily verifiable, but cannot be quickly answered</code></li>
+<li>
+<p>Now represented under <strong>Special Design → Closed-Ended Frontier</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - HLE is designed as <span class="verbatim">a multi-modal benchmark at the frontier of human knowledge, designed to be the final closed-ended academic benchmark of its kind with broad subject coverage.</span> <span class="verbatim">Each question has a known solution that is unambiguous and easily verifiable, but cannot be quickly answered</span> via internet retrieval.</p>
+</li>
+<li>Meaning: The repeated benchmark-name and closed-ended fragments are merged into the design description. The frontier-of-human-knowledge intent, broad coverage, verifiable known solution, and resistance to quick retrieval are preserved; the “final” description is attributed as a design aim.</li>
+</ul>
+</li>
+<li>
+<p><strong>H005 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>closed-ended</code></li>
+<li>
+<p>Now represented under <strong>Special Design → Closed-Ended Frontier</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - HLE is designed as <span class="verbatim">a multi-modal benchmark at the frontier of human knowledge, designed to be the final closed-ended academic benchmark of its kind with broad subject coverage.</span> <span class="verbatim">Each question has a known solution that is unambiguous and easily verifiable, but cannot be quickly answered</span> via internet retrieval.</p>
+</li>
+<li>Meaning: The repeated benchmark-name and closed-ended fragments are merged into the design description. The frontier-of-human-knowledge intent, broad coverage, verifiable known solution, and resistance to quick retrieval are preserved; the “final” description is attributed as a design aim.</li>
+</ul>
+</li>
+</ul>
+<h2 id="coverage">Coverage</h2>
+<p><strong>Priority 3 · Dataset Creation</strong></p>
+<ul>
+<li>
+<p><strong>Coverage:</strong> Questions cover mathematics, sciences, humanities, and specialized fields.</p>
+</li>
+<li>
+<p><strong>H002 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>HLE consists of 2,500 questions across dozens of subjects, including mathematics, humanities, and the natural sciences.</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Coverage</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:         - The abstract describes <span class="verbatim">2,500 questions across dozens of subjects, including mathematics, humanities, and the natural sciences.</span> Section B.4 introduces its list as <span class="verbatim">the top fifty most popular subjects in HLE</span>: <span class="verbatim">Economies, Ecology, Artificial Intelligence, Musicology, Philosophy, Neuroscience, Law, Art History, Biochemistry, Astronomy, Classics, Chess, Chemical Engineering, Microbiology, Classical Ballet, Materials Science, Poetry, Quantum Mechanics, Aerospace Engineering, Civil Engineering, Mechanical Engineering, Geography, Robotics, Data Science, Molecular Biology, Statistics, Immunology, Education, Logic, Computational Biology, Psychology, English Literature, Machine Learning, Puzzle, Cultural Studies, Marine Biology, Archaeology, and Biophysics.</span></p>
+</li>
+<li>
+<p>Meaning: Repeated dataset-size descriptions are consolidated, retaining the abstract’s broad disciplines and Section 3’s more detailed subject count. The highlighted subject-list introduction and every listed subject remain in Source Excerpts, including the paper’s spelling “Economies.”</p>
+</li>
+<li>
+<p>Transformation reason: Repeated dataset-size descriptions are consolidated, retaining the abstract’s broad disciplines and Section 3’s more detailed subject count. The highlighted subject-list introduction and every listed subject remain in Source Excerpts, including the paper’s spelling “Economies.”</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H016 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>HUMANITY’S LAST EXAM (HLE) consists of 2,500 challenging questions across over a hundred subjects.</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Coverage</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:         - <span class="verbatim">HUMANITY’S LAST EXAM (HLE) consists of 2,500 challenging questions across over a hundred subjects.</span></p>
+</li>
+<li>Meaning: Repeated dataset-size descriptions are consolidated, retaining the abstract’s broad disciplines and Section 3’s more detailed subject count. The highlighted subject-list introduction and every listed subject remain in Source Excerpts, including the paper’s spelling “Economies.”</li>
+</ul>
+</li>
+<li>
+<p><strong>H055 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>the top fifty most popular subjects in HLE</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Coverage</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:         - The abstract describes <span class="verbatim">2,500 questions across dozens of subjects, including mathematics, humanities, and the natural sciences.</span> Section B.4 introduces its list as <span class="verbatim">the top fifty most popular subjects in HLE</span>: <span class="verbatim">Economies, Ecology, Artificial Intelligence, Musicology, Philosophy, Neuroscience, Law, Art History, Biochemistry, Astronomy, Classics, Chess, Chemical Engineering, Microbiology, Classical Ballet, Materials Science, Poetry, Quantum Mechanics, Aerospace Engineering, Civil Engineering, Mechanical Engineering, Geography, Robotics, Data Science, Molecular Biology, Statistics, Immunology, Education, Logic, Computational Biology, Psychology, English Literature, Machine Learning, Puzzle, Cultural Studies, Marine Biology, Archaeology, and Biophysics.</span></p>
+</li>
+<li>Meaning: Repeated dataset-size descriptions are consolidated, retaining the abstract’s broad disciplines and Section 3’s more detailed subject count. The highlighted subject-list introduction and every listed subject remain in Source Excerpts, including the paper’s spelling “Economies.”</li>
+</ul>
+</li>
+<li>
+<p><strong>H056 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Economies, Ecology, Artificial Intelligence, Musicology, Philosophy, Neuroscience, Law, Art History, Biochemistry, Astronomy, Classics, Chess, Chemical Engineering, Microbiology, Classical Ballet, Materials Science, Poetry, Quantum Mechanics, Aerospace Engineering, Civil Engineering, Mechanical Engineering, Geography, Robotics, Data Science, Molecular Biology, Statistics, Immunology, Education, Logic, Computational Biology, Psychology, English Literature, Machine Learning, Puzzle, Cultural Studies, Marine Biology, Archaeology, and Biophysics.</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Coverage</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:         - The abstract describes <span class="verbatim">2,500 questions across dozens of subjects, including mathematics, humanities, and the natural sciences.</span> Section B.4 introduces its list as <span class="verbatim">the top fifty most popular subjects in HLE</span>: <span class="verbatim">Economies, Ecology, Artificial Intelligence, Musicology, Philosophy, Neuroscience, Law, Art History, Biochemistry, Astronomy, Classics, Chess, Chemical Engineering, Microbiology, Classical Ballet, Materials Science, Poetry, Quantum Mechanics, Aerospace Engineering, Civil Engineering, Mechanical Engineering, Geography, Robotics, Data Science, Molecular Biology, Statistics, Immunology, Education, Logic, Computational Biology, Psychology, English Literature, Machine Learning, Puzzle, Cultural Studies, Marine Biology, Archaeology, and Biophysics.</span></p>
+</li>
+<li>Meaning: Repeated dataset-size descriptions are consolidated, retaining the abstract’s broad disciplines and Section 3’s more detailed subject count. The highlighted subject-list introduction and every listed subject remain in Source Excerpts, including the paper’s spelling “Economies.”</li>
+</ul>
+</li>
+</ul>
+<h2 id="answer-formats">Answer Formats</h2>
+<p><strong>Priority 3 · Dataset Creation</strong></p>
+<ul>
+<li>
+<p><strong>Answer Formats:</strong> Use short exact-match answers or at least <span class="verbatim">five</span> multiple-choice options; questions usually require <span class="verbatim">graduate-level expertise</span>.</p>
+</li>
+<li>
+<p><strong>H003 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>multiple-choice and short-answer questions suitable for automated grading.</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Answer Formats</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:         - <span class="verbatim">Answers are kept short and easily verifiable for exact-match questions to support automatic grading.</span> Both formats are <span class="verbatim">suitable for automated grading.</span></p>
+</li>
+<li>
+<p>Meaning: The two highlighted format names are merged into one design element. The exact original multi-modal description, short verifiable answer requirement, automated grading, and graduate-level expertise are retained; neutral connective wording replaces clipped fragments.</p>
+</li>
+<li>
+<p>Transformation reason: The two highlighted format names are merged into one design element. The exact original multi-modal description, short verifiable answer requirement, automated grading, and graduate-level expertise are retained; neutral connective wording replaces clipped fragments.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H008 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>HLE is multi-modal, featuring questions that are either text-only or accompanied by an image reference, and includes both multiple-choice and exact-match questions for automated answer verification.</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Answer Formats</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:         - HLE is <span class="verbatim">multi-modal, featuring questions that are either text-only or accompanied by an image reference, and includes both multiple-choice and exact-match questions for automated answer verification.</span></p>
+</li>
+<li>
+<p>Meaning: The two highlighted format names are merged into one design element. The exact original multi-modal description, short verifiable answer requirement, automated grading, and graduate-level expertise are retained; neutral connective wording replaces clipped fragments.</p>
+</li>
+<li>
+<p>Transformation reason: The two highlighted format names are merged into one design element. The exact original multi-modal description, short verifiable answer requirement, automated grading, and graduate-level expertise are retained; neutral connective wording replaces clipped fragments.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H018 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>exact-match questions</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Answer Formats</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - <strong>Answer Formats:</strong> Use short exact-match answers or at least <span class="verbatim">five</span> multiple-choice options; questions usually require <span class="verbatim">graduate-level expertise</span>.</p>
+</li>
+<li>Meaning: The two highlighted format names are merged into one design element. The exact original multi-modal description, short verifiable answer requirement, automated grading, and graduate-level expertise are retained; neutral connective wording replaces clipped fragments.</li>
+</ul>
+</li>
+<li>
+<p><strong>H019 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>multiple-choice questions</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Answer Formats</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - <strong>Answer Formats:</strong> Use short exact-match answers or at least <span class="verbatim">five</span> multiple-choice options; questions usually require <span class="verbatim">graduate-level expertise</span>.</p>
+</li>
+<li>Meaning: The two highlighted format names are merged into one design element. The exact original multi-modal description, short verifiable answer requirement, automated grading, and graduate-level expertise are retained; neutral connective wording replaces clipped fragments.</li>
+</ul>
+</li>
+<li>
+<p><strong>H022 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>graduate-level expertise</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Answer Formats</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - <strong>Answer Formats:</strong> Use short exact-match answers or at least <span class="verbatim">five</span> multiple-choice options; questions usually require <span class="verbatim">graduate-level expertise</span>.</p>
+</li>
+<li>Meaning: The two highlighted format names are merged into one design element. The exact original multi-modal description, short verifiable answer requirement, automated grading, and graduate-level expertise are retained; neutral connective wording replaces clipped fragments.</li>
+</ul>
+</li>
+<li>
+<p><strong>H024 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Answers are kept short and easily verifiable for exact-match questions to support automatic grading.</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Answer Formats</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:         - <span class="verbatim">Answers are kept short and easily verifiable for exact-match questions to support automatic grading.</span> Both formats are <span class="verbatim">suitable for automated grading.</span></p>
+</li>
+<li>Meaning: The two highlighted format names are merged into one design element. The exact original multi-modal description, short verifiable answer requirement, automated grading, and graduate-level expertise are retained; neutral connective wording replaces clipped fragments.</li>
+</ul>
+</li>
+</ul>
+<h2 id="expert-review">Expert Review</h2>
+<p><strong>Priority 3 · Quality Control · Human Review</strong></p>
+<ul>
+<li>
+<p>First-round refinement: Graduate-qualified experts use standardized rubrics, provide feedback, and iteratively revise questions; each receives <span class="verbatim">1-3 reviews</span>. Scores range from <span class="verbatim">0</span> to <span class="verbatim">5</span>, with an unsure option.</p>
+</li>
+<li>
+<p><strong>H009 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>We employ a multi-stage review process to thoroughly ensure question difficulty and quality</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Expert Review</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - First-round refinement: Graduate-qualified experts use standardized rubrics, provide feedback, and iteratively revise questions; each receives <span class="verbatim">1-3 reviews</span>. Scores range from <span class="verbatim">0</span> to <span class="verbatim">5</span>, with an unsure option.</p>
+<ul>
+<li>Reviewers <span class="verbatim">possess a graduate degree (eg. Master’s, PhD, JD, etc.) in their fields.</span> They <span class="verbatim">select submissions in their domain, grading them against standardized rubrics and offering feedback when applicable.</span></li>
+<li>The first round focuses <span class="verbatim">on iteratively refining submissions, with each question receiving between 1-3 reviews.</span> Experts score questions, provide feedback, and help authors improve them, similar to academic peer review. Round-one scores run from <span class="verbatim">0</span> (discard) to <span class="verbatim">5</span> (top-notch), with an unsure option.</li>
+</ul>
+</li>
+<li>Second-round approval: Organizers and trained reviewers consider questions and prior feedback, then approve the best submissions. Scores range from <span class="verbatim">0</span> to <span class="verbatim">6</span>.<ul>
+<li><span class="verbatim">In the second round, good and outstanding questions from the first round are identified and approved by organizers and reviewers to be included in the final HLE dataset.</span> Organizers train reviewers selected for thorough first-round feedback; <span class="verbatim">reviewers are asked to grade both the question and look at feedback from round 1 reviewers.</span> Round-two scores run from <span class="verbatim">0</span> to <span class="verbatim">6</span>.</li>
+<li>Figure 4 summarizes model-failure filtering, iterative expert refinement, and individual manual approval.</li>
+</ul>
+</li>
+<li>
+<p>Meaning: Author-voice descriptions and overlapping multi-stage/two-stage review fragments are merged. Graduate qualifications, domain selection, standardized rubrics, feedback, 1–3 first-round reviews, organizer-trained second-round reviewers, review of prior feedback, final manual approval, and public review are each retained in supporting sentences.</p>
+</li>
+<li>
+<p>Transformation reason: Author-voice descriptions and overlapping multi-stage/two-stage review fragments are merged. Graduate qualifications, domain selection, standardized rubrics, feedback, 1–3 first-round reviews, organizer-trained second-round reviewers, review of prior feedback, final manual approval, and public review are each retained in supporting sentences.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H010 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>a public review period,</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Expert Review</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - Community feedback: A public review and bug bounty identify label and major question-statement errors; organizers verify reports with author input.</p>
+</li>
+<li>
+<p>Meaning: Author-voice descriptions and overlapping multi-stage/two-stage review fragments are merged. Graduate qualifications, domain selection, standardized rubrics, feedback, 1–3 first-round reviews, organizer-trained second-round reviewers, review of prior feedback, final manual approval, and public review are each retained in supporting sentences.</p>
+</li>
+<li>
+<p>Transformation reason: Author-voice descriptions and overlapping multi-stage/two-stage review fragments are merged. Graduate qualifications, domain selection, standardized rubrics, feedback, 1–3 first-round reviews, organizer-trained second-round reviewers, review of prior feedback, final manual approval, and public review are each retained in supporting sentences.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H011 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>a two-stage reviewing process:</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Expert Review</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - First-round refinement: Graduate-qualified experts use standardized rubrics, provide feedback, and iteratively revise questions; each receives <span class="verbatim">1-3 reviews</span>. Scores range from <span class="verbatim">0</span> to <span class="verbatim">5</span>, with an unsure option.</p>
+<ul>
+<li>Reviewers <span class="verbatim">possess a graduate degree (eg. Master’s, PhD, JD, etc.) in their fields.</span> They <span class="verbatim">select submissions in their domain, grading them against standardized rubrics and offering feedback when applicable.</span></li>
+<li>The first round focuses <span class="verbatim">on iteratively refining submissions, with each question receiving between 1-3 reviews.</span> Experts score questions, provide feedback, and help authors improve them, similar to academic peer review. Round-one scores run from <span class="verbatim">0</span> (discard) to <span class="verbatim">5</span> (top-notch), with an unsure option.</li>
+</ul>
+</li>
+<li>Second-round approval: Organizers and trained reviewers consider questions and prior feedback, then approve the best submissions. Scores range from <span class="verbatim">0</span> to <span class="verbatim">6</span>.<ul>
+<li><span class="verbatim">In the second round, good and outstanding questions from the first round are identified and approved by organizers and reviewers to be included in the final HLE dataset.</span> Organizers train reviewers selected for thorough first-round feedback; <span class="verbatim">reviewers are asked to grade both the question and look at feedback from round 1 reviewers.</span> Round-two scores run from <span class="verbatim">0</span> to <span class="verbatim">6</span>.</li>
+<li>Figure 4 summarizes model-failure filtering, iterative expert refinement, and individual manual approval.</li>
+</ul>
+</li>
+<li>
+<p>Meaning: Author-voice descriptions and overlapping multi-stage/two-stage review fragments are merged. Graduate qualifications, domain selection, standardized rubrics, feedback, 1–3 first-round reviews, organizer-trained second-round reviewers, review of prior feedback, final manual approval, and public review are each retained in supporting sentences.</p>
+</li>
+<li>
+<p>Transformation reason: Author-voice descriptions and overlapping multi-stage/two-stage review fragments are merged. Graduate qualifications, domain selection, standardized rubrics, feedback, 1–3 first-round reviews, organizer-trained second-round reviewers, review of prior feedback, final manual approval, and public review are each retained in supporting sentences.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H028 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Our human reviewers possess a graduate degree (eg. Master’s, PhD, JD, etc.) in their fields. Reviewers select submissions in their domain, grading them against standardized rubrics and offering feedback when applicable.</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Expert Review</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:         - Reviewers <span class="verbatim">possess a graduate degree (eg. Master’s, PhD, JD, etc.) in their fields.</span> They <span class="verbatim">select submissions in their domain, grading them against standardized rubrics and offering feedback when applicable.</span></p>
+</li>
+<li>
+<p>Meaning: Author-voice descriptions and overlapping multi-stage/two-stage review fragments are merged. Graduate qualifications, domain selection, standardized rubrics, feedback, 1–3 first-round reviews, organizer-trained second-round reviewers, review of prior feedback, final manual approval, and public review are each retained in supporting sentences.</p>
+</li>
+<li>
+<p>Transformation reason: Author-voice descriptions and overlapping multi-stage/two-stage review fragments are merged. Graduate qualifications, domain selection, standardized rubrics, feedback, 1–3 first-round reviews, organizer-trained second-round reviewers, review of prior feedback, final manual approval, and public review are each retained in supporting sentences.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H029 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>There are two rounds of reviews. The first round focuses</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Expert Review</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - First-round refinement: Graduate-qualified experts use standardized rubrics, provide feedback, and iteratively revise questions; each receives <span class="verbatim">1-3 reviews</span>. Scores range from <span class="verbatim">0</span> to <span class="verbatim">5</span>, with an unsure option.</p>
+<ul>
+<li>Reviewers <span class="verbatim">possess a graduate degree (eg. Master’s, PhD, JD, etc.) in their fields.</span> They <span class="verbatim">select submissions in their domain, grading them against standardized rubrics and offering feedback when applicable.</span></li>
+<li>The first round focuses <span class="verbatim">on iteratively refining submissions, with each question receiving between 1-3 reviews.</span> Experts score questions, provide feedback, and help authors improve them, similar to academic peer review. Round-one scores run from <span class="verbatim">0</span> (discard) to <span class="verbatim">5</span> (top-notch), with an unsure option.</li>
+</ul>
+</li>
+<li>Second-round approval: Organizers and trained reviewers consider questions and prior feedback, then approve the best submissions. Scores range from <span class="verbatim">0</span> to <span class="verbatim">6</span>.<ul>
+<li><span class="verbatim">In the second round, good and outstanding questions from the first round are identified and approved by organizers and reviewers to be included in the final HLE dataset.</span> Organizers train reviewers selected for thorough first-round feedback; <span class="verbatim">reviewers are asked to grade both the question and look at feedback from round 1 reviewers.</span> Round-two scores run from <span class="verbatim">0</span> to <span class="verbatim">6</span>.</li>
+<li>Figure 4 summarizes model-failure filtering, iterative expert refinement, and individual manual approval.</li>
+</ul>
+</li>
+<li>
+<p>Meaning: Author-voice descriptions and overlapping multi-stage/two-stage review fragments are merged. Graduate qualifications, domain selection, standardized rubrics, feedback, 1–3 first-round reviews, organizer-trained second-round reviewers, review of prior feedback, final manual approval, and public review are each retained in supporting sentences.</p>
+</li>
+<li>
+<p>Transformation reason: Author-voice descriptions and overlapping multi-stage/two-stage review fragments are merged. Graduate qualifications, domain selection, standardized rubrics, feedback, 1–3 first-round reviews, organizer-trained second-round reviewers, review of prior feedback, final manual approval, and public review are each retained in supporting sentences.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H030 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>on iteratively refining submissions, with each question receiving between 1-3 reviews.</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Expert Review</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:         - The first round focuses <span class="verbatim">on iteratively refining submissions, with each question receiving between 1-3 reviews.</span> Experts score questions, provide feedback, and help authors improve them, similar to academic peer review. Round-one scores run from <span class="verbatim">0</span> (discard) to <span class="verbatim">5</span> (top-notch), with an unsure option.</p>
+</li>
+<li>Meaning: Author-voice descriptions and overlapping multi-stage/two-stage review fragments are merged. Graduate qualifications, domain selection, standardized rubrics, feedback, 1–3 first-round reviews, organizer-trained second-round reviewers, review of prior feedback, final manual approval, and public review are each retained in supporting sentences.</li>
+</ul>
+</li>
+<li>
+<p><strong>H031 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>In the second round, good and outstanding questions from the first round are identified and approved by organizers and reviewers to be included in the final HLE dataset.</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Expert Review</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:         - <span class="verbatim">In the second round, good and outstanding questions from the first round are identified and approved by organizers and reviewers to be included in the final HLE dataset.</span> Organizers train reviewers selected for thorough first-round feedback; <span class="verbatim">reviewers are asked to grade both the question and look at feedback from round 1 reviewers.</span> Round-two scores run from <span class="verbatim">0</span> to <span class="verbatim">6</span>.</p>
+</li>
+<li>Meaning: Author-voice descriptions and overlapping multi-stage/two-stage review fragments are merged. Graduate qualifications, domain selection, standardized rubrics, feedback, 1–3 first-round reviews, organizer-trained second-round reviewers, review of prior feedback, final manual approval, and public review are each retained in supporting sentences.</li>
+</ul>
+</li>
+<li>
+<p><strong>H032 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Dataset creation pipeline. We accept questions that make frontier LLMs fail, then iteratively refine them with the help of expert peer reviewers. Each question is then manually approved by organizers or expert reviewers trained by organizers.</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Expert Review</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - First-round refinement: Graduate-qualified experts use standardized rubrics, provide feedback, and iteratively revise questions; each receives <span class="verbatim">1-3 reviews</span>. Scores range from <span class="verbatim">0</span> to <span class="verbatim">5</span>, with an unsure option.</p>
+<ul>
+<li>Reviewers <span class="verbatim">possess a graduate degree (eg. Master’s, PhD, JD, etc.) in their fields.</span> They <span class="verbatim">select submissions in their domain, grading them against standardized rubrics and offering feedback when applicable.</span></li>
+<li>The first round focuses <span class="verbatim">on iteratively refining submissions, with each question receiving between 1-3 reviews.</span> Experts score questions, provide feedback, and help authors improve them, similar to academic peer review. Round-one scores run from <span class="verbatim">0</span> (discard) to <span class="verbatim">5</span> (top-notch), with an unsure option.</li>
+</ul>
+</li>
+<li>Second-round approval: Organizers and trained reviewers consider questions and prior feedback, then approve the best submissions. Scores range from <span class="verbatim">0</span> to <span class="verbatim">6</span>.<ul>
+<li><span class="verbatim">In the second round, good and outstanding questions from the first round are identified and approved by organizers and reviewers to be included in the final HLE dataset.</span> Organizers train reviewers selected for thorough first-round feedback; <span class="verbatim">reviewers are asked to grade both the question and look at feedback from round 1 reviewers.</span> Round-two scores run from <span class="verbatim">0</span> to <span class="verbatim">6</span>.</li>
+<li>Figure 4 summarizes model-failure filtering, iterative expert refinement, and individual manual approval.</li>
+</ul>
+</li>
+<li>
+<p>Meaning: Author-voice descriptions and overlapping multi-stage/two-stage review fragments are merged. Graduate qualifications, domain selection, standardized rubrics, feedback, 1–3 first-round reviews, organizer-trained second-round reviewers, review of prior feedback, final manual approval, and public review are each retained in supporting sentences.</p>
+</li>
+<li>
+<p>Transformation reason: Author-voice descriptions and overlapping multi-stage/two-stage review fragments are merged. Graduate qualifications, domain selection, standardized rubrics, feedback, 1–3 first-round reviews, organizer-trained second-round reviewers, review of prior feedback, final manual approval, and public review are each retained in supporting sentences.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H061 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>We recruit human subject expert reviewers to score, provide feedback, and iteratively refine all user submitted questions. This is similar to the peer review process in academic research, where reviewers give feedback to help question submitters create better questions.</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Expert Review</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - First-round refinement: Graduate-qualified experts use standardized rubrics, provide feedback, and iteratively revise questions; each receives <span class="verbatim">1-3 reviews</span>. Scores range from <span class="verbatim">0</span> to <span class="verbatim">5</span>, with an unsure option.</p>
+<ul>
+<li>Reviewers <span class="verbatim">possess a graduate degree (eg. Master’s, PhD, JD, etc.) in their fields.</span> They <span class="verbatim">select submissions in their domain, grading them against standardized rubrics and offering feedback when applicable.</span></li>
+<li>The first round focuses <span class="verbatim">on iteratively refining submissions, with each question receiving between 1-3 reviews.</span> Experts score questions, provide feedback, and help authors improve them, similar to academic peer review. Round-one scores run from <span class="verbatim">0</span> (discard) to <span class="verbatim">5</span> (top-notch), with an unsure option.</li>
+</ul>
+</li>
+<li>Second-round approval: Organizers and trained reviewers consider questions and prior feedback, then approve the best submissions. Scores range from <span class="verbatim">0</span> to <span class="verbatim">6</span>.<ul>
+<li><span class="verbatim">In the second round, good and outstanding questions from the first round are identified and approved by organizers and reviewers to be included in the final HLE dataset.</span> Organizers train reviewers selected for thorough first-round feedback; <span class="verbatim">reviewers are asked to grade both the question and look at feedback from round 1 reviewers.</span> Round-two scores run from <span class="verbatim">0</span> to <span class="verbatim">6</span>.</li>
+<li>Figure 4 summarizes model-failure filtering, iterative expert refinement, and individual manual approval.</li>
+</ul>
+</li>
+<li>
+<p>Meaning: Author-voice descriptions and overlapping multi-stage/two-stage review fragments are merged. Graduate qualifications, domain selection, standardized rubrics, feedback, 1–3 first-round reviews, organizer-trained second-round reviewers, review of prior feedback, final manual approval, and public review are each retained in supporting sentences.</p>
+</li>
+<li>
+<p>Transformation reason: Author-voice descriptions and overlapping multi-stage/two-stage review fragments are merged. Graduate qualifications, domain selection, standardized rubrics, feedback, 1–3 first-round reviews, organizer-trained second-round reviewers, review of prior feedback, final manual approval, and public review are each retained in supporting sentences.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H067 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>To thoroughly refine our dataset, we train a set of reviewers along with organizers to pick the best questions.</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Expert Review</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - First-round refinement: Graduate-qualified experts use standardized rubrics, provide feedback, and iteratively revise questions; each receives <span class="verbatim">1-3 reviews</span>. Scores range from <span class="verbatim">0</span> to <span class="verbatim">5</span>, with an unsure option.</p>
+<ul>
+<li>Reviewers <span class="verbatim">possess a graduate degree (eg. Master’s, PhD, JD, etc.) in their fields.</span> They <span class="verbatim">select submissions in their domain, grading them against standardized rubrics and offering feedback when applicable.</span></li>
+<li>The first round focuses <span class="verbatim">on iteratively refining submissions, with each question receiving between 1-3 reviews.</span> Experts score questions, provide feedback, and help authors improve them, similar to academic peer review. Round-one scores run from <span class="verbatim">0</span> (discard) to <span class="verbatim">5</span> (top-notch), with an unsure option.</li>
+</ul>
+</li>
+<li>Second-round approval: Organizers and trained reviewers consider questions and prior feedback, then approve the best submissions. Scores range from <span class="verbatim">0</span> to <span class="verbatim">6</span>.<ul>
+<li><span class="verbatim">In the second round, good and outstanding questions from the first round are identified and approved by organizers and reviewers to be included in the final HLE dataset.</span> Organizers train reviewers selected for thorough first-round feedback; <span class="verbatim">reviewers are asked to grade both the question and look at feedback from round 1 reviewers.</span> Round-two scores run from <span class="verbatim">0</span> to <span class="verbatim">6</span>.</li>
+<li>Figure 4 summarizes model-failure filtering, iterative expert refinement, and individual manual approval.</li>
+</ul>
+</li>
+<li>
+<p>Meaning: Author-voice descriptions and overlapping multi-stage/two-stage review fragments are merged. Graduate qualifications, domain selection, standardized rubrics, feedback, 1–3 first-round reviews, organizer-trained second-round reviewers, review of prior feedback, final manual approval, and public review are each retained in supporting sentences.</p>
+</li>
+<li>
+<p>Transformation reason: Author-voice descriptions and overlapping multi-stage/two-stage review fragments are merged. Graduate qualifications, domain selection, standardized rubrics, feedback, 1–3 first-round reviews, organizer-trained second-round reviewers, review of prior feedback, final manual approval, and public review are each retained in supporting sentences.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H068 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>reviewers are asked to grade both the question and look at feedback from round 1 reviewers.</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Expert Review</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:         - <span class="verbatim">In the second round, good and outstanding questions from the first round are identified and approved by organizers and reviewers to be included in the final HLE dataset.</span> Organizers train reviewers selected for thorough first-round feedback; <span class="verbatim">reviewers are asked to grade both the question and look at feedback from round 1 reviewers.</span> Round-two scores run from <span class="verbatim">0</span> to <span class="verbatim">6</span>.</p>
+</li>
+<li>Meaning: Author-voice descriptions and overlapping multi-stage/two-stage review fragments are merged. Graduate qualifications, domain selection, standardized rubrics, feedback, 1–3 first-round reviews, organizer-trained second-round reviewers, review of prior feedback, final manual approval, and public review are each retained in supporting sentences.</li>
+</ul>
+</li>
+</ul>
+<h2 id="evaluation-landscape">Evaluation Landscape</h2>
+<p><strong>Priority 3 · Key Findings</strong></p>
+<ul>
+<li>
+<p><strong>Evaluation Landscape:</strong> HLE combines broad coverage with expert authorship and difficult questions.</p>
+</li>
+<li>
+<p><strong>H012 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>scientific</code></li>
+<li>
+<p>Now represented under <strong>Key Findings → Evaluation Landscape</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - Related work spans <span class="verbatim">scientific</span> and <span class="verbatim">mathematical reasoning</span>, <span class="verbatim">code generation</span>, and <span class="verbatim">general-purpose human assistance</span>. HLE complements open-ended evaluations. Reasoning models improve accuracy using substantially more completion tokens; token counts measure compute, not wall-clock time.</p>
+</li>
+<li>Meaning: The four selected related-work capability categories are preserved together and identified as background, rather than all being asserted as HLE task types.</li>
+</ul>
+</li>
+<li>
+<p><strong>H013 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>mathematical reasoning</code></li>
+<li>
+<p>Now represented under <strong>Key Findings → Evaluation Landscape</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - Related work spans <span class="verbatim">scientific</span> and <span class="verbatim">mathematical reasoning</span>, <span class="verbatim">code generation</span>, and <span class="verbatim">general-purpose human assistance</span>. HLE complements open-ended evaluations. Reasoning models improve accuracy using substantially more completion tokens; token counts measure compute, not wall-clock time.</p>
+</li>
+<li>Meaning: The four selected related-work capability categories are preserved together and identified as background, rather than all being asserted as HLE task types.</li>
+</ul>
+</li>
+<li>
+<p><strong>H014 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>code generation</code></li>
+<li>
+<p>Now represented under <strong>Key Findings → Evaluation Landscape</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - Related work spans <span class="verbatim">scientific</span> and <span class="verbatim">mathematical reasoning</span>, <span class="verbatim">code generation</span>, and <span class="verbatim">general-purpose human assistance</span>. HLE complements open-ended evaluations. Reasoning models improve accuracy using substantially more completion tokens; token counts measure compute, not wall-clock time.</p>
+</li>
+<li>Meaning: The four selected related-work capability categories are preserved together and identified as background, rather than all being asserted as HLE task types.</li>
+</ul>
+</li>
+<li>
+<p><strong>H015 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>general-purpose human assis- tance</code></li>
+<li>
+<p>Now represented under <strong>Key Findings → Evaluation Landscape</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - Related work spans <span class="verbatim">scientific</span> and <span class="verbatim">mathematical reasoning</span>, <span class="verbatim">code generation</span>, and <span class="verbatim">general-purpose human assistance</span>. HLE complements open-ended evaluations. Reasoning models improve accuracy using substantially more completion tokens; token counts measure compute, not wall-clock time.</p>
+</li>
+<li>Meaning: The four selected related-work capability categories are preserved together and identified as background, rather than all being asserted as HLE task types.</li>
+</ul>
+</li>
+</ul>
+<h2 id="expert-sourcing">Expert Sourcing</h2>
+<p><strong>Priority 3 · Dataset Creation</strong></p>
+<ul>
+<li>
+<p><strong>Expert Sourcing:</strong> Nearly <span class="verbatim">1000</span> experts from <span class="verbatim">over 500 institutions across 50 countries</span> contribute; most are professors, researchers, or graduate degree holders.</p>
+</li>
+<li>
+<p><strong>H017 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>HLE is a global collaborative effort, with questions from nearly 1000 subject expert contributors affiliated with over 500 institutions across 50 countries – comprised mostly of professors, researchers, and graduate degree holders.</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Expert Sourcing</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - <span class="verbatim">HLE is a global collaborative effort, with questions from nearly 1000 subject expert contributors affiliated with over 500 institutions across 50 countries – comprised mostly of professors, researchers, and graduate degree holders.</span></p>
+</li>
+<li>Meaning: The full selected sentence or clause is retained exactly; surrounding prose identifies its source context.</li>
+</ul>
+</li>
+</ul>
+<h2 id="submission-contents">Submission Contents</h2>
+<p><strong>Priority 3 · Dataset Creation</strong></p>
+<ul>
+<li>
+<p><strong>Submission Contents:</strong> Submit the question, answer specification, detailed solution, subject, and contributor identity.</p>
+</li>
+<li>
+<p><strong>H020 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Each question submission includes several required components: the question text itself, answer specifications (either an an exact-match answer, or multiple-choice options with the correct answer marked), detailed rationale explaining the solution, academic subject, and contributor name and institutional affiliation to maintain accountability and accuracy.</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Submission Contents</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:         - <span class="verbatim">Each question submission includes several required components: the question text itself, answer specifications (either an an exact-match answer, or multiple-choice options with the correct answer marked), detailed rationale explaining the solution, academic subject, and contributor name and institutional affiliation to maintain accountability and accuracy.</span></p>
+</li>
+<li>Meaning: The full selected sentence or clause is retained exactly; surrounding prose identifies its source context.</li>
+</ul>
+</li>
+</ul>
+<h2 id="discouraging-lucky-answers">Discouraging Lucky Answers</h2>
+<p><strong>Priority 3 · Special Design</strong></p>
+<ul>
+<li>
+<p><strong>Discouraging Lucky Answers:</strong> Adjust question parameters to reduce correct guesses with faulty reasoning.</p>
+</li>
+<li>
+<p><strong>H023 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>When LLMs provide correct answers with faulty reasoning, authors are encouraged to modify question parameters, such as the number of answer choices, to discourage false positives.</code></li>
+<li>
+<p>Now represented under <strong>Special Design → Discouraging Lucky Answers</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - <span class="verbatim">When LLMs provide correct answers with faulty reasoning, authors are encouraged to modify question parameters, such as the number of answer choices, to discourage false positives.</span></p>
+</li>
+<li>Meaning: The full selected sentence or clause is retained exactly; surrounding prose identifies its source context.</li>
+</ul>
+</li>
+</ul>
+<h2 id="incentives">Incentives</h2>
+<p><strong>Priority 3 · Dataset Creation</strong></p>
+<ul>
+<li>
+<p><strong>Incentives:</strong> Accepted questions earn co-authorship; prizes encourage expert participation.</p>
+</li>
+<li>
+<p><strong>H026 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>To attract high-quality submissions, we establish a $500,000 USD prize pool, with prizes of $5,000 USD for each of the top 50 questions and $500 USD for each of the next 500 questions, as determined by organizers.</code></li>
+<li>
+<p>Now represented under <strong>Dataset Creation → Incentives</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - The <span class="verbatim">$500,000 USD</span> pool awards <span class="verbatim">$5,000 USD for each of the top 50 questions and $500 USD for each of the next 500 questions, as determined by organizers.</span></p>
+</li>
+<li>
+<p>Meaning: Author framing is removed; the total pool, both prize amounts, both recipient counts, and organizer selection are preserved. The total also appears in Summary.</p>
+</li>
+<li>
+<p>Transformation reason: Author framing is removed; the total pool, both prize amounts, both recipient counts, and organizer selection are preserved. The total also appears in Summary.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="difficulty-screening">Difficulty Screening</h2>
+<p><strong>Priority 3 · Quality Control · Auto Judge</strong></p>
+<ul>
+<li>
+<p><strong>Difficulty Screening:</strong> Exact-match candidates must stump all screening models; multiple-choice candidates may be solved by at most one. GPT-4o judges screening answers; search-assisted successes trigger manual searchability checks.</p>
+</li>
+<li>
+<p><strong>H027 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>If the LLMs cannot solve the question (or in the case of multiple choices, if the models on average do worse than random guessing), the question proceeds to the next stage: human expert review.</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Auto Judge → Difficulty Screening</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - Section B.1 specifies that <span class="verbatim">exact-match questions must stump all models, while multiple-choice questions must stump all but one model to account for potential lucky guesses.</span> Section 3.2 describes the multiple-choice goal as models averaging below random guessing.</p>
+</li>
+<li>
+<p>Meaning: The general main-text screening description and appendix’s operational all/all-but-one rule are preserved with their respective locations. Standardized response formatting, GPT-4o screening judge, and the with-search versus without-search searchability definition remain; automated flags are distinguished from manual removals.</p>
+</li>
+<li>
+<p>Transformation reason: The general main-text screening description and appendix’s operational all/all-but-one rule are preserved with their respective locations. Standardized response formatting, GPT-4o screening judge, and the with-search versus without-search searchability definition remain; automated flags are distinguished from manual removals.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H041 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>We use different submission criteria by question type: exact-match questions must stump all models, while multiple-choice questions must stump all but one model to account for potential lucky guesses.</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Auto Judge → Difficulty Screening</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - Section B.1 specifies that <span class="verbatim">exact-match questions must stump all models, while multiple-choice questions must stump all but one model to account for potential lucky guesses.</span> Section 3.2 describes the multiple-choice goal as models averaging below random guessing.</p>
+</li>
+<li>
+<p>Meaning: The general main-text screening description and appendix’s operational all/all-but-one rule are preserved with their respective locations. Standardized response formatting, GPT-4o screening judge, and the with-search versus without-search searchability definition remain; automated flags are distinguished from manual removals.</p>
+</li>
+<li>
+<p>Transformation reason: The general main-text screening description and appendix’s operational all/all-but-one rule are preserved with their respective locations. Standardized response formatting, GPT-4o screening judge, and the with-search versus without-search searchability definition remain; automated flags are distinguished from manual removals.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H042 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>We use a standardized system prompt (Section C.1.1) to structure model responses into “Reasoning” and “Final Answer” formatting, and employ an automated GPT-4O judge to evaluate response correctness against the provided answers.</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Auto Judge → Difficulty Screening</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - Screening uses <span class="verbatim">“Reasoning” and “Final Answer”</span> response formatting and an <span class="verbatim">automated GPT-4O judge</span> against submitted answers. More than <span class="verbatim">70,000 attempts</span> yield approximately <span class="verbatim">13,000 questions</span> for human review.</p>
+</li>
+<li>
+<p>Meaning: The general main-text screening description and appendix’s operational all/all-but-one rule are preserved with their respective locations. Standardized response formatting, GPT-4o screening judge, and the with-search versus without-search searchability definition remain; automated flags are distinguished from manual removals.</p>
+</li>
+<li>
+<p>Transformation reason: The general main-text screening description and appendix’s operational all/all-but-one rule are preserved with their respective locations. Standardized response formatting, GPT-4o screening judge, and the with-search versus without-search searchability definition remain; automated flags are distinguished from manual removals.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H045 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Searchable Questions: A question is potentially searchable if a model with search tools answered correctly, but answered incorrectly without search.</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Auto Judge → Difficulty Screening</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - <span class="verbatim">A question is potentially searchable if a model with search tools answered correctly, but answered incorrectly without search.</span> GPT-4o mini/GPT-4o search and Perplexity Sonar supply this signal; human auditors make removal decisions.</p>
+</li>
+<li>
+<p>Meaning: The general main-text screening description and appendix’s operational all/all-but-one rule are preserved with their respective locations. Standardized response formatting, GPT-4o screening judge, and the with-search versus without-search searchability definition remain; automated flags are distinguished from manual removals.</p>
+</li>
+<li>
+<p>Transformation reason: The general main-text screening description and appendix’s operational all/all-but-one rule are preserved with their respective locations. Standardized response formatting, GPT-4o screening judge, and the with-search versus without-search searchability definition remain; automated flags are distinguished from manual removals.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="guessing-and-variability">Guessing and Variability</h2>
+<p><strong>Priority 3 · Key Findings</strong></p>
+<ul>
+<li>
+<p><strong>Guessing and Variability:</strong> Small score changes near zero need caution.</p>
+</li>
+<li>
+<p><strong>H034 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>models can inconsistently guess the right answer or guess worse than random chance for multiple choice questions.</code></li>
+<li>
+<p>Now represented under <strong>Key Findings → Guessing and Variability</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - <span class="verbatim">models can inconsistently guess the right answer or guess worse than random chance for multiple choice questions.</span> Such questions remain rather than being repeatedly filtered; low non-zero accuracy partly reflects inference randomness and the multiple-choice floor.</p>
+</li>
+<li>Meaning: The full selected sentence or clause is retained exactly; surrounding prose identifies its source context.</li>
+</ul>
+</li>
+</ul>
+<h2 id="headline-results">Headline Results</h2>
+<p><strong>Priority 3 · Model Evaluation · Auto Judge</strong></p>
+<ul>
+<li>
+<p><strong>Headline Results:</strong> In the paper’s early-2025 text-only evaluation, o3-mini (high) scores <span class="verbatim">13.4</span>% accuracy, DeepSeek-R1 <span class="verbatim">8.5</span>%, o1 <span class="verbatim">7.8</span>%, and GPT-4o <span class="verbatim">2.3</span>%. <a href="https://huggingface.co/datasets/cais/hle#leaderboard">Current leaderboard</a>.</p>
+</li>
+<li>
+<p><strong>H035 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>All frontier models achieve low accuracy on HLE (Table 1), highlighting significant room for improvement in narrowing the gap between current LLMs and expert-level academic capabilities on closed-ended questions.</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Headline Results</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - Table 1 accuracy / RMS calibration error (%): GPT-4o <span class="verbatim">2.7</span> / <span class="verbatim">89</span>; Grok 2 <span class="verbatim">3.0</span> / <span class="verbatim">87</span>; Claude 3.5 Sonnet <span class="verbatim">4.1</span> / <span class="verbatim">84</span>; Gemini 1.5 Pro <span class="verbatim">4.6</span> / <span class="verbatim">88</span>; Gemini 2.0 Flash Thinking <span class="verbatim">6.6</span> / <span class="verbatim">82</span>; o1 <span class="verbatim">8.0</span> / <span class="verbatim">83</span>. Text-only DeepSeek-R1 scores <span class="verbatim">8.5</span> / <span class="verbatim">73</span>; text-only o3-mini (high) scores <span class="verbatim">13.4</span> / <span class="verbatim">80</span>. The text-only rows use a different population from full-dataset rows.</p>
+</li>
+<li>
+<p>Meaning: The claims of low accuracy and poor calibration are contextualized as the paper’s early-2025 evaluations, with every Table 1 baseline retained in source detail. Text-only models and populations are explicit, with Table 2 supporting a like-for-like comparison; current leaderboard scores are not substituted for paper results.</p>
+</li>
+<li>
+<p>Transformation reason: The claims of low accuracy and poor calibration are contextualized as the paper’s early-2025 evaluations, with every Table 1 baseline retained in source detail. Text-only models and populations are explicit, with Table 2 supporting a like-for-like comparison; current leaderboard scores are not substituted for paper results.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H038 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>poor calibration across all models,</code></li>
+<li>
+<p>Now represented under <strong>Model Evaluation → Auto Judge → Headline Results</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - Table 1 accuracy / RMS calibration error (%): GPT-4o <span class="verbatim">2.7</span> / <span class="verbatim">89</span>; Grok 2 <span class="verbatim">3.0</span> / <span class="verbatim">87</span>; Claude 3.5 Sonnet <span class="verbatim">4.1</span> / <span class="verbatim">84</span>; Gemini 1.5 Pro <span class="verbatim">4.6</span> / <span class="verbatim">88</span>; Gemini 2.0 Flash Thinking <span class="verbatim">6.6</span> / <span class="verbatim">82</span>; o1 <span class="verbatim">8.0</span> / <span class="verbatim">83</span>. Text-only DeepSeek-R1 scores <span class="verbatim">8.5</span> / <span class="verbatim">73</span>; text-only o3-mini (high) scores <span class="verbatim">13.4</span> / <span class="verbatim">80</span>. The text-only rows use a different population from full-dataset rows.</p>
+</li>
+<li>
+<p>Meaning: The claims of low accuracy and poor calibration are contextualized as the paper’s early-2025 evaluations, with every Table 1 baseline retained in source detail. Text-only models and populations are explicit, with Table 2 supporting a like-for-like comparison; current leaderboard scores are not substituted for paper results.</p>
+</li>
+<li>
+<p>Transformation reason: The claims of low accuracy and poor calibration are contextualized as the paper’s early-2025 evaluations, with every Table 1 baseline retained in source detail. Text-only models and populations are explicit, with Table 2 supporting a like-for-like comparison; current leaderboard scores are not substituted for paper results.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="limitations">Limitations</h2>
+<p><strong>Priority 3 · Impact</strong></p>
+<ul>
+<li>
+<p><strong>Limitations:</strong> <span class="verbatim">HLE tests structured academic problems rather than open-ended research or creative problem-solving abilities, making it a focused measure of technical knowledge and reasoning.</span></p>
+</li>
+<li>
+<p><strong>H040 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>HLE tests structured academic problems rather than open-ended research or creative problem-solving abilities, making it a focused measure of technical knowledge and reasoning.</code></li>
+<li>
+<p>Now represented under <strong>Impact → Limitations</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Limitations:</strong> <span class="verbatim">HLE tests structured academic problems rather than open-ended research or creative problem-solving abilities, making it a focused measure of technical knowledge and reasoning.</span></p>
+</li>
+<li>Meaning: The full selected sentence or clause is retained exactly; surrounding prose identifies its source context.</li>
+</ul>
+</li>
+</ul>
+<h2 id="audits-and-corrections">Audits and Corrections</h2>
+<p><strong>Priority 3 · Quality Control · Human Review</strong></p>
+<ul>
+<li>
+<p>Sample-solving audits: Students solve questions fully; organizers, authors, and auditors resolve flagged errors by consensus.</p>
+</li>
+<li>
+<p><strong>H043 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Due to the advanced, specialized nature of many submissions, reviewers were not expected to verify the full accuracy of each provided solution rationale if it would take more than five minutes, instead focusing on whether the question aligns with guidelines.</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Audits and Corrections</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:         - Following release, public review solicits community corrections. Initial reviewers <span class="verbatim">were not expected to verify the full accuracy of each provided solution rationale if it would take more than five minutes, instead focusing on whether the question aligns with guidelines.</span></p>
+</li>
+<li>
+<p>Meaning: Author voice is removed; the full highlighted limitation is retained as an exact clause in the community-feedback review method.</p>
+</li>
+<li>
+<p>Transformation reason: Author voice is removed; the full highlighted limitation is retained as an exact clause in the community-feedback review method.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H044 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Audit: We recruited students from top universities in the United States to fully solve a sample of questions from HLE. Errors flagged were routed between organizers, original question authors, and auditors and until consensus was reached. We used data from these audits to further refine our dataset.</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Audits and Corrections</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:         - Students from top US universities fully solve a sample. Flagged errors are routed among organizers, original question authors, and auditors until consensus. These audits inform dataset refinement. Search-flagged questions are manually checked and removed if easily found online.</p>
+</li>
+<li>
+<p>Meaning: Author-voice audit descriptions are restated neutrally. Full sample solving, participants, consensus routing, resulting refinement, search removals, US university experts, author rebuttal, 15.4% public-set disagreement, higher health-domain disagreement, and the need for multiple experts all remain. The five-minute rationale-verification limit is quoted exactly; disagreement is not relabeled as a proven error rate.</p>
+</li>
+<li>
+<p>Transformation reason: Author-voice audit descriptions are restated neutrally. Full sample solving, participants, consensus routing, resulting refinement, search removals, US university experts, author rebuttal, 15.4% public-set disagreement, higher health-domain disagreement, and the need for multiple experts all remain. The five-minute rationale-verification limit is quoted exactly; disagreement is not relabeled as a proven error rate.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H046 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Each of these potentially searchable questions was then manually audited, removing any that were easily found via web search.</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Audits and Corrections</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:         - Students from top US universities fully solve a sample. Flagged errors are routed among organizers, original question authors, and auditors until consensus. These audits inform dataset refinement. Search-flagged questions are manually checked and removed if easily found online.</p>
+</li>
+<li>
+<p>Meaning: Author-voice audit descriptions are restated neutrally. Full sample solving, participants, consensus routing, resulting refinement, search removals, US university experts, author rebuttal, 15.4% public-set disagreement, higher health-domain disagreement, and the need for multiple experts all remain. The five-minute rationale-verification limit is quoted exactly; disagreement is not relabeled as a proven error rate.</p>
+</li>
+<li>
+<p>Transformation reason: Author-voice audit descriptions are restated neutrally. Full sample solving, participants, consensus routing, resulting refinement, search removals, US university experts, author rebuttal, 15.4% public-set disagreement, higher health-domain disagreement, and the need for multiple experts all remain. The five-minute rationale-verification limit is quoted exactly; disagreement is not relabeled as a proven error rate.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H047 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Our process involved expert reviewers from leading research universities in the United States, with a rebuttal phase from the original question authors for any disagreements.</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Audits and Corrections</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:         - The audits involve <span class="verbatim">expert reviewers from leading research universities in the United States, with a rebuttal phase from the original question authors for any disagreements.</span> The first audit identifies patterns of imprecision; similar questions are revised or removed before a new sample is audited.</p>
+</li>
+<li>
+<p>Meaning: Author-voice audit descriptions are restated neutrally. Full sample solving, participants, consensus routing, resulting refinement, search removals, US university experts, author rebuttal, 15.4% public-set disagreement, higher health-domain disagreement, and the need for multiple experts all remain. The five-minute rationale-verification limit is quoted exactly; disagreement is not relabeled as a proven error rate.</p>
+</li>
+<li>
+<p>Transformation reason: Author-voice audit descriptions are restated neutrally. Full sample solving, participants, consensus routing, resulting refinement, search removals, US university experts, author rebuttal, 15.4% public-set disagreement, higher health-domain disagreement, and the need for multiple experts all remain. The five-minute rationale-verification limit is quoted exactly; disagreement is not relabeled as a proven error rate.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H048 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>expert disagreement rate of 15.4%</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Audits and Corrections</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - Expert disagreement: Two samples of <span class="verbatim">200 questions</span> each, with author rebuttals, support revisions. Estimated public-set disagreement is <span class="verbatim">15.4%</span>; a targeted biology/chemistry/health review finds approximately <span class="verbatim">18%</span>.</p>
+</li>
+<li>
+<p>Meaning: Author-voice audit descriptions are restated neutrally. Full sample solving, participants, consensus routing, resulting refinement, search removals, US university experts, author rebuttal, 15.4% public-set disagreement, higher health-domain disagreement, and the need for multiple experts all remain. The five-minute rationale-verification limit is quoted exactly; disagreement is not relabeled as a proven error rate.</p>
+</li>
+<li>
+<p>Transformation reason: Author-voice audit descriptions are restated neutrally. Full sample solving, participants, consensus routing, resulting refinement, search removals, US university experts, author rebuttal, 15.4% public-set disagreement, higher health-domain disagreement, and the need for multiple experts all remain. The five-minute rationale-verification limit is quoted exactly; disagreement is not relabeled as a proven error rate.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H049 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Disagreement rates are often higher in domains like health and medicine.</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Audits and Corrections</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - Expert disagreement: Two samples of <span class="verbatim">200 questions</span> each, with author rebuttals, support revisions. Estimated public-set disagreement is <span class="verbatim">15.4%</span>; a targeted biology/chemistry/health review finds approximately <span class="verbatim">18%</span>.</p>
+</li>
+<li>
+<p>Meaning: Author-voice audit descriptions are restated neutrally. Full sample solving, participants, consensus routing, resulting refinement, search removals, US university experts, author rebuttal, 15.4% public-set disagreement, higher health-domain disagreement, and the need for multiple experts all remain. The five-minute rationale-verification limit is quoted exactly; disagreement is not relabeled as a proven error rate.</p>
+</li>
+<li>
+<p>Transformation reason: Author-voice audit descriptions are restated neutrally. Full sample solving, participants, consensus routing, resulting refinement, search removals, US university experts, author rebuttal, 15.4% public-set disagreement, higher health-domain disagreement, and the need for multiple experts all remain. The five-minute rationale-verification limit is quoted exactly; disagreement is not relabeled as a proven error rate.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>H050 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>The Need for Multiple Experts:</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Audits and Corrections</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:         - The highlighted <span class="verbatim">The Need for Multiple Experts:</span> explains why multiple reviewers and author rebuttals matter: specialized evidence, such as an old paper, can resolve a dissent. On the health-focused subset, flagging any single dissent raises disagreement from <span class="verbatim">18% to 25%</span>. Disagreement is not a confirmed error rate.</p>
+</li>
+<li>Meaning: Author-voice audit descriptions are restated neutrally. Full sample solving, participants, consensus routing, resulting refinement, search removals, US university experts, author rebuttal, 15.4% public-set disagreement, higher health-domain disagreement, and the need for multiple experts all remain. The five-minute rationale-verification limit is quoted exactly; disagreement is not relabeled as a proven error rate.</li>
+</ul>
+</li>
+</ul>
+<h2 id="research-experience">Research Experience</h2>
+<p><strong>Priority 3 · Special Design</strong></p>
+<ul>
+<li>
+<p><strong>Research Experience:</strong> Contributor experiments supply knowledge beyond easily indexed sources.</p>
+</li>
+<li>
+<p><strong>H051 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>HLE is intentionally designed to include questions based on insights from the direct, hands-on experiments of its contributors. This design captures knowledge gained from direct research experiences, which is often difficult to verify through standard literature searches or by external reviewers.</code></li>
+<li>
+<p>Now represented under <strong>Special Design → Research Experience</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - <span class="verbatim">HLE is intentionally designed to include questions based on insights from the direct, hands-on experiments of its contributors. This design captures knowledge gained from direct research experiences, which is often difficult to verify through standard literature searches or by external reviewers.</span></p>
+</li>
+<li>Meaning: The full selected sentence or clause is retained exactly; surrounding prose identifies its source context.</li>
+</ul>
+</li>
+</ul>
+<h2 id="multiple-choice-interpretation">Multiple-Choice Interpretation</h2>
+<p><strong>Priority 3 · Quality Control · Human Review</strong></p>
+<ul>
+<li>
+<p>Multiple-Choice Interpretation: Judge the most plausible provided option, rather than demand an open-ended perfect solution.</p>
+</li>
+<li>
+<p><strong>H052 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>leverage the multiple-choice format with the objective of identifying the most plausible answer among the provided options.</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Multiple-Choice Interpretation</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:         - Researchers <span class="verbatim">leverage the multiple-choice format with the objective of identifying the most plausible answer among the provided options.</span> Reviewers compare relative merits <span class="verbatim">rather than treating the task as an open-ended search for a perfect solution.</span></p>
+</li>
+<li>Meaning: The full selected sentence or clause is retained exactly; surrounding prose identifies its source context.</li>
+</ul>
+</li>
+<li>
+<p><strong>H053 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>rather than treating the task as an open-ended search for a perfect solution.</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Multiple-Choice Interpretation</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:         - Researchers <span class="verbatim">leverage the multiple-choice format with the objective of identifying the most plausible answer among the provided options.</span> Reviewers compare relative merits <span class="verbatim">rather than treating the task as an open-ended search for a perfect solution.</span></p>
+</li>
+<li>Meaning: The full selected sentence or clause is retained exactly; surrounding prose identifies its source context.</li>
+</ul>
+</li>
+</ul>
+<h2 id="continued-refinement">Continued Refinement</h2>
+<p><strong>Priority 3 · Impact</strong></p>
+<ul>
+<li>
+<p><strong>Continued Refinement:</strong> The paper proposes <span class="verbatim">HLE-ROLLING</span> as a dynamic fork.</p>
+</li>
+<li>
+<p><strong>H054 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>HLE-ROLLING. This version will be regularly updated to address community feedback and integrate new questions.</code></li>
+<li>
+<p>Now represented under <strong>Impact → Continued Refinement</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:     - <span class="verbatim">This version will be regularly updated to address community feedback and integrate new questions.</span></p>
+</li>
+<li>
+<p>Meaning: The future-facing HLE-Rolling proposal is retained as the paper’s proposal, with both community-feedback revisions and new-question additions preserved. Its status is not silently updated to a later dataset release.</p>
+</li>
+<li>
+<p>Transformation reason: The future-facing HLE-Rolling proposal is retained as the paper’s proposal, with both community-feedback revisions and new-question additions preserved. Its status is not silently updated to a later dataset release.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="time-and-cost">Time and Cost</h2>
+<p><strong>Priority 3 · Summary</strong></p>
+<ul>
+<li>
+<p><strong>Time and Cost:</strong> The prize pool is <span class="verbatim">$500,000 USD</span>. Estimated question-review effort is <span class="verbatim">3-5 minutes</span>; human solving time and highest-scoring-model wall-clock runtime are not reported.</p>
+</li>
+<li>
+<p><strong>H066 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>The average time estimated to review a question 3-5 minutes.</code></li>
+<li>
+<p>Now represented under <strong>Summary → Time and Cost</strong>.</p>
+</li>
+<li>
+<p>Summary evidence: - <strong>Time and Cost:</strong> The prize pool is <span class="verbatim">$500,000 USD</span>. Estimated question-review effort is <span class="verbatim">3-5 minutes</span>; human solving time and highest-scoring-model wall-clock runtime are not reported.</p>
+</li>
+<li>
+<p>Meaning: The original grammatically incomplete sentence becomes a neutral statement of estimated question-review effort, retaining 3-5 minutes; this is not treated as a measured solving-time statistic.</p>
+</li>
+<li>
+<p>Transformation reason: The original grammatically incomplete sentence becomes a neutral statement of estimated question-review effort, retaining 3-5 minutes; this is not treated as a measured solving-time statistic.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="genuine-difficulty">Genuine Difficulty</h2>
+<p><strong>Priority 3 · Quality Control · Human Review</strong></p>
+<ul>
+<li>
+<p>Genuine Difficulty: Reject easy questions missed by models and artificial difficulty caused by unavailable calculator/code tools.</p>
+</li>
+<li>
+<p><strong>H074 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>arti- ficially difficult</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Genuine Difficulty</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:         - The second rubric labels a category <span class="verbatim">Easy questions models got wrong</span>. It includes basic/searchable questions and questions that are <span class="verbatim">artificially difficult</span> because of large calculator-dependent computations or running/rendering code. Evaluated models lack those tools, creating an artificial difficulty bar. Research papers, journals, and books are acceptable sources; simple online lookup is the exclusion criterion.</p>
+</li>
+<li>Meaning: The two highlighted rubric labels are retained and explained with their actual category meaning. Artificial difficulty refers to unavailable calculator/code tools, rather than a task-hardening technique to encourage.</li>
+</ul>
+</li>
+<li>
+<p><strong>H075 · Light green · Before: Not assessed</strong></p>
+<ul>
+<li>Selected text: <code>Easy questions models got wrong</code></li>
+<li>
+<p>Now represented under <strong>Quality Control → Human Review → Genuine Difficulty</strong>.</p>
+</li>
+<li>
+<p>Summary evidence:         - The second rubric labels a category <span class="verbatim">Easy questions models got wrong</span>. It includes basic/searchable questions and questions that are <span class="verbatim">artificially difficult</span> because of large calculator-dependent computations or running/rendering code. Evaluated models lack those tools, creating an artificial difficulty bar. Research papers, journals, and books are acceptable sources; simple online lookup is the exclusion criterion.</p>
+</li>
+<li>Meaning: The two highlighted rubric labels are retained and explained with their actual category meaning. Artificial difficulty refers to unavailable calculator/code tools, rather than a task-hardening technique to encourage.</li>
+</ul>
+</li>
+</ul>
+<h2 id="excluded-and-unclassified">Excluded and Unclassified</h2>
+<ul>
+<li>H006: Dark green highlight, excluded by your color preferences.</li>
+<li>H007: Dark green highlight, excluded by your color preferences.</li>
+</ul><div class="footer">Source Markdown: 318_humanitys_last_exam_highlights.md · Standalone HTML · Works offline</div></main></div>
+<script>document.getElementById('expand').addEventListener('click',function(){const t=document.querySelector('.toc');if(t){t.style.display=t.style.display==='block'?'':'block';}});
+const sourceButton=document.getElementById('sources');if(sourceButton){sourceButton.addEventListener('click',function(){const excerpts=Array.from(document.querySelectorAll('details.source-excerpts'));const show=excerpts.some(d=>!d.open);excerpts.forEach(d=>d.open=show);sourceButton.textContent=show?'Hide Source Excerpts':'Show Source Excerpts';});}</script>
+</body></html>
